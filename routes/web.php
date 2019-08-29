@@ -15,10 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('user/test', function () {
-//    return 'test';
-//});
 
-Route::any('user/test', ['as' => 'user','uses' => 'UserController@test'], function () {
-    return '123';
-});
+Route::any('user/test', ['as' => 'user','uses' => 'UserController@test']);
