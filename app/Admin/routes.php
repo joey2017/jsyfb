@@ -11,5 +11,10 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('admin.home');
-
+    $router->resources([
+        'infoassets' => InfoassetsController::class,
+    ]);
+    $router->resource('laywers', LaywerController::class);
+    $router->get('forms/settings', 'FormController@settings');
+    $router->get('forms/register', 'FormController@register');
 });
