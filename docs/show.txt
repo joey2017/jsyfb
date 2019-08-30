@@ -1,0 +1,69 @@
+详情组件
+分隔线
+如果要在字段之间添加一条分隔线：
+
+$show->divider();
+修改显示内容
+用下面的方法修改显示内容
+
+$show->title()->as(function ($title) {
+    return "<{$title}>";
+});
+
+$show->contents()->as(function ($content) {
+    return "<pre>{$content}</pre>";
+});
+下面是通过as方法内置实现的几个常用的显示样式.
+
+image
+字段avatar的内容是图片的路径或者url，可以将它显示为图片：
+
+$show->avatar()->image();
+image()方法的参数参考Field::image()
+
+file
+字段document的内容是文件的路径或者url，可以将它显示为文件：
+
+$show->avatar()->file();
+file()方法的参数参考Field::file()
+
+link
+字段homepage的内容是url链接，可以将它显示为HTML链接：
+
+$show->homepage()->link();
+link()方法的参数参考Field::link()
+
+label
+将字段tag的内容显示为label：
+
+$show->tag()->label();
+label()方法的参数参考Field::label()
+
+badge
+将字段rate的内容显示为badge：
+
+$show->rate()->badge();
+badge()方法的参数参考Field::badge()
+
+json
+将字段extra的内容显示为json格式输出：
+
+$show->extra()->json();
+json()方法的参数参考Field::json()
+
+using
+如果字段gender的取值为f、m，分别需要用女、男来显示
+
+$show->gender()->using(['f' => '女', 'm' => '男']);
+图片轮播
+如果字段值为图片数组，可以用下面的调用显示为图片轮播组件
+
+$show->field('images')->carousel();
+
+// 设置显示尺寸和图片服务器
+$show->field('images')->carousel($width = 300, int $height = 200, $server);
+显示文件尺寸
+如果字段数据是表示文件大小的字节数，可以通过调用filezise方法来显示更有可读性的文字
+
+$show->field('file_size')->filesize();
+这样数值199812019将会显示为190.56 MB
