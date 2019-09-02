@@ -26,11 +26,14 @@ use App\Admin\Extensions\Nav;
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Grid\Column;
+use App\Admin\Extensions\WangEditor;
+
 
 Form::forget(['map', 'editor']);
 
 Form::extend('json', \Encore\JsEditor\Json::class);
 Form::extend('jsonEditor', \Jxlwqq\JsonEditor\Editor::class);
+Form::extend('editor', WangEditor::class);
 
 //Admin::css('/vendor/prism/prism.css');
 //Admin::js('/vendor/prism/prism.js');

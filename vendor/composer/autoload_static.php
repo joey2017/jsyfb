@@ -18,11 +18,11 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '4e8671d7be9056dcd04ddd9e8e15f9cc' => __DIR__ . '/..' . '/encore/laravel-admin/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
-        '4e8671d7be9056dcd04ddd9e8e15f9cc' => __DIR__ . '/..' . '/encore/laravel-admin/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -115,6 +115,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         ),
         'E' => 
         array (
+            'Encore\\WangEditor\\' => 18,
             'Encore\\Admin\\' => 13,
             'Egulias\\EmailValidator\\' => 23,
         ),
@@ -329,6 +330,10 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
+        'Encore\\WangEditor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src',
+        ),
         'Encore\\Admin\\' => 
         array (
             0 => __DIR__ . '/..' . '/encore/laravel-admin/src',
@@ -450,7 +455,10 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
         'App\\Admin\\Controllers\\FormController' => __DIR__ . '/../..' . '/app/Admin/Controllers/FormController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
+        'App\\Admin\\Controllers\\HotacticleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HotacticleController.php',
         'App\\Admin\\Controllers\\InfoassetsController' => __DIR__ . '/../..' . '/app/Admin/Controllers/InfoassetsController.php',
+        'App\\Admin\\Controllers\\LaywerController' => __DIR__ . '/../..' . '/app/Admin/Controllers/LaywerController.php',
+        'App\\Admin\\Controllers\\SpecialistController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SpecialistController.php',
         'App\\Admin\\Extensions\\Column\\FloatBar' => __DIR__ . '/../..' . '/app/Admin/Extensions/Column/FloatBar.php',
         'App\\Admin\\Extensions\\Column\\OpenMap' => __DIR__ . '/../..' . '/app/Admin/Extensions/Column/OpenMap.php',
         'App\\Admin\\Extensions\\Column\\UrlWrapper' => __DIR__ . '/../..' . '/app/Admin/Extensions/Column/UrlWrapper.php',
@@ -488,12 +496,14 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Hotacticle' => __DIR__ . '/../..' . '/app/Hotacticle.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HotacticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/HotacticleController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -504,6 +514,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Infoassets' => __DIR__ . '/../..' . '/app/Infoassets.php',
+        'App\\Laywer' => __DIR__ . '/../..' . '/app/Laywer.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -1302,6 +1313,9 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Encore\\Admin\\Widgets\\Tab' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Tab.php',
         'Encore\\Admin\\Widgets\\Table' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Table.php',
         'Encore\\Admin\\Widgets\\Widget' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Widget.php',
+        'Encore\\WangEditor\\Editor' => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src/Editor.php',
+        'Encore\\WangEditor\\WangEditor' => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src/WangEditor.php',
+        'Encore\\WangEditor\\WangEditorServiceProvider' => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src/WangEditorServiceProvider.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
