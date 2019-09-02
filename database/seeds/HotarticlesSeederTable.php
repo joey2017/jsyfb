@@ -23,7 +23,7 @@ class HotarticlesSeederTable extends Seeder
                 'like_count'     => $faker->numberBetween(200, 1000),
                 'comments_count' => $faker->numberBetween(200, 1000),
                 'created_at'     => \Carbon\Carbon::now(),
-                'Updated_at'     => \Carbon\Carbon::now(),
+                'updated_at'     => \Carbon\Carbon::now(),
             ]);
         }
     }

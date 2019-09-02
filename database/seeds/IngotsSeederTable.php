@@ -20,7 +20,7 @@ class IngotsSeederTable extends Seeder
                 'quantity'    => $faker->numberBetween(1, 200),
                 'expire_time' => \Carbon\Carbon::now(),
                 'created_at'  => \Carbon\Carbon::now(),
-                'Updated_at'  => \Carbon\Carbon::now(),
+                'updated_at'  => \Carbon\Carbon::now(),
             ]);
         }
     }

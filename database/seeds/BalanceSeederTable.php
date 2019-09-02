@@ -20,7 +20,7 @@ class BalanceSeederTable extends Seeder
                 'user_id'    => $faker->numberBetween(1, 500),
                 'amount'    => $faker->randomFloat(2, 200,5000),
                 'created_at' => \Carbon\Carbon::now(),
-                'Updated_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ]);
         }
     }

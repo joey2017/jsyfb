@@ -21,7 +21,7 @@ class AttentionSeederTable extends Seeder
                 'role_id'    => $faker->numberBetween(1, 20),
                 'role'       => $faker->randomLetter,
                 'created_at' => \Carbon\Carbon::now(),
-                'Updated_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
             ]);
         }
     }

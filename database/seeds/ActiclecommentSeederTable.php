@@ -21,7 +21,7 @@ class ActiclecommentSeederTable extends Seeder
                 'interpretation' => $faker->sentence(),
                 'measures'       => $faker->sentence(),
                 'created_at'     => \Carbon\Carbon::now(),
-                'Updated_at'     => \Carbon\Carbon::now(),
+                'updated_at'     => \Carbon\Carbon::now(),
             ]);
         }
     }
