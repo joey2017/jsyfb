@@ -113,4 +113,8 @@ return [
     'like_count'            => '点赞数',
     'comments_count'        => '评论数',
     'userTitle'             => '职位',
+    'userTitle'             => '职位',
+    'expire_time'           => '到期时间',
+    'quantity'              => '数量',
+    'user_id'               => '用户id',
 ];
