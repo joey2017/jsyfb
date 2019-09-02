@@ -18,11 +18,11 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '4e8671d7be9056dcd04ddd9e8e15f9cc' => __DIR__ . '/..' . '/encore/laravel-admin/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
+        '4e8671d7be9056dcd04ddd9e8e15f9cc' => __DIR__ . '/..' . '/encore/laravel-admin/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -115,7 +115,6 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         ),
         'E' => 
         array (
-            'Encore\\WangEditor\\' => 18,
             'Encore\\Admin\\' => 13,
             'Egulias\\EmailValidator\\' => 23,
         ),
@@ -330,10 +329,6 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
-        'Encore\\WangEditor\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src',
-        ),
         'Encore\\Admin\\' => 
         array (
             0 => __DIR__ . '/..' . '/encore/laravel-admin/src',
@@ -422,6 +417,8 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
     );
 
     public static $classMap = array (
+        'ActiclecommentSeederTable' => __DIR__ . '/../..' . '/database/seeds/ActiclecommentSeederTable.php',
+        'App\\Acticlecomment' => __DIR__ . '/../..' . '/app/Acticlecomment.php',
         'App\\Admin\\Actions\\ClearCache' => __DIR__ . '/../..' . '/app/Admin/Actions/ClearCache.php',
         'App\\Admin\\Actions\\Document\\CloneDocument' => __DIR__ . '/../..' . '/app/Admin/Actions/Document/CloneDocument.php',
         'App\\Admin\\Actions\\Document\\CopyDocuments' => __DIR__ . '/../..' . '/app/Admin/Actions/Document/CopyDocuments.php',
@@ -452,6 +449,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Admin\\Actions\\UserStory\\MoveUp' => __DIR__ . '/../..' . '/app/Admin/Actions/UserStory/MoveUp.php',
         'App\\Admin\\Actions\\UserStory\\Replicate' => __DIR__ . '/../..' . '/app/Admin/Actions/UserStory/Replicate.php',
         'App\\Admin\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AuthController.php',
+        'App\\Admin\\Controllers\\BalanceController' => __DIR__ . '/../..' . '/app/Admin/Controllers/BalanceController.php',
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
         'App\\Admin\\Controllers\\FormController' => __DIR__ . '/../..' . '/app/Admin/Controllers/FormController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
@@ -484,6 +482,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Admin\\Extensions\\Tools\\ShowSelected' => __DIR__ . '/../..' . '/app/Admin/Extensions/Tools/ShowSelected.php',
         'App\\Admin\\Extensions\\Tools\\Trashed' => __DIR__ . '/../..' . '/app/Admin/Extensions/Tools/Trashed.php',
         'App\\Admin\\Extensions\\Tools\\UserGender' => __DIR__ . '/../..' . '/app/Admin/Extensions/Tools/UserGender.php',
+        'App\\Admin\\Extensions\\WangEditor' => __DIR__ . '/../..' . '/app/Admin/Extensions/WangEditor.php',
         'App\\Admin\\Forms\\Settings\\Basic' => __DIR__ . '/../..' . '/app/Admin/Forms/Settings/Basic.php',
         'App\\Admin\\Forms\\Settings\\Cache' => __DIR__ . '/../..' . '/app/Admin/Forms/Settings/Cache.php',
         'App\\Admin\\Forms\\Settings\\Database' => __DIR__ . '/../..' . '/app/Admin/Forms/Settings/Database.php',
@@ -494,6 +493,8 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Admin\\Forms\\Steps\\Password' => __DIR__ . '/../..' . '/app/Admin/Forms/Steps/Password.php',
         'App\\Admin\\Forms\\Steps\\Profile' => __DIR__ . '/../..' . '/app/Admin/Forms/Steps/Profile.php',
         'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
+        'App\\Attention' => __DIR__ . '/../..' . '/app/Attention.php',
+        'App\\Balance' => __DIR__ . '/../..' . '/app/Balance.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Hotacticle' => __DIR__ . '/../..' . '/app/Hotacticle.php',
@@ -521,6 +522,8 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'AttentionSeederTable' => __DIR__ . '/../..' . '/database/seeds/AttentionSeederTable.php',
+        'BalanceSeederTable' => __DIR__ . '/../..' . '/database/seeds/BalanceSeederTable.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
         'Barryvdh\\Debugbar\\Controllers\\BaseController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/BaseController.php',
@@ -569,6 +572,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Carbon\\CarbonPeriod' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriod.php',
         'Carbon\\CarbonTimeZone' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonTimeZone.php',
         'Carbon\\Cli\\Invoker' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Cli/Invoker.php',
+        'Carbon\\Exceptions\\BadUnitException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadUnitException.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Exceptions\\NotAPeriodException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/NotAPeriodException.php',
         'Carbon\\Factory' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Factory.php',
@@ -1166,6 +1170,8 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Encore\\Admin\\Form\\Field\\Year' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/Field/Year.php',
         'Encore\\Admin\\Form\\Footer' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/Footer.php',
         'Encore\\Admin\\Form\\HasHooks' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/HasHooks.php',
+        'Encore\\Admin\\Form\\Layout\\Column' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/Layout/Column.php',
+        'Encore\\Admin\\Form\\Layout\\Layout' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/Layout/Layout.php',
         'Encore\\Admin\\Form\\NestedForm' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/NestedForm.php',
         'Encore\\Admin\\Form\\Row' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/Row.php',
         'Encore\\Admin\\Form\\Tab' => __DIR__ . '/..' . '/encore/laravel-admin/src/Form/Tab.php',
@@ -1192,6 +1198,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Encore\\Admin\\Grid\\Concerns\\HasHotKeys' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Concerns/HasHotKeys.php',
         'Encore\\Admin\\Grid\\Concerns\\HasQuickCreate' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Concerns/HasQuickCreate.php',
         'Encore\\Admin\\Grid\\Concerns\\HasQuickSearch' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Concerns/HasQuickSearch.php',
+        'Encore\\Admin\\Grid\\Concerns\\HasSelector' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Concerns/HasSelector.php',
         'Encore\\Admin\\Grid\\Concerns\\HasTools' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Concerns/HasTools.php',
         'Encore\\Admin\\Grid\\Concerns\\HasTotalRow' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Concerns/HasTotalRow.php',
         'Encore\\Admin\\Grid\\Displayers\\AbstractDisplayer' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/AbstractDisplayer.php',
@@ -1200,6 +1207,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Encore\\Admin\\Grid\\Displayers\\Button' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/Button.php',
         'Encore\\Admin\\Grid\\Displayers\\Carousel' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/Carousel.php',
         'Encore\\Admin\\Grid\\Displayers\\Checkbox' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/Checkbox.php',
+        'Encore\\Admin\\Grid\\Displayers\\ContextMenuActions' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/ContextMenuActions.php',
         'Encore\\Admin\\Grid\\Displayers\\Copyable' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/Copyable.php',
         'Encore\\Admin\\Grid\\Displayers\\Downloadable' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/Downloadable.php',
         'Encore\\Admin\\Grid\\Displayers\\DropdownActions' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Displayers/DropdownActions.php',
@@ -1273,6 +1281,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Encore\\Admin\\Grid\\Tools\\PerPageSelector' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/PerPageSelector.php',
         'Encore\\Admin\\Grid\\Tools\\QuickCreate' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/QuickCreate.php',
         'Encore\\Admin\\Grid\\Tools\\QuickSearch' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/QuickSearch.php',
+        'Encore\\Admin\\Grid\\Tools\\Selector' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/Selector.php',
         'Encore\\Admin\\Grid\\Tools\\TotalRow' => __DIR__ . '/..' . '/encore/laravel-admin/src/Grid/Tools/TotalRow.php',
         'Encore\\Admin\\Layout\\Buildable' => __DIR__ . '/..' . '/encore/laravel-admin/src/Layout/Buildable.php',
         'Encore\\Admin\\Layout\\Column' => __DIR__ . '/..' . '/encore/laravel-admin/src/Layout/Column.php',
@@ -1313,9 +1322,6 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Encore\\Admin\\Widgets\\Tab' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Tab.php',
         'Encore\\Admin\\Widgets\\Table' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Table.php',
         'Encore\\Admin\\Widgets\\Widget' => __DIR__ . '/..' . '/encore/laravel-admin/src/Widgets/Widget.php',
-        'Encore\\WangEditor\\Editor' => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src/Editor.php',
-        'Encore\\WangEditor\\WangEditor' => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src/WangEditor.php',
-        'Encore\\WangEditor\\WangEditorServiceProvider' => __DIR__ . '/..' . '/laravel-admin-ext/wang-editor/src/WangEditorServiceProvider.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Inn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Inn.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
@@ -1830,6 +1836,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'HotarticlesSeederTable' => __DIR__ . '/../..' . '/database/seeds/HotarticlesSeederTable.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',
         'Illuminate\\Auth\\Access\\HandlesAuthorization' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/HandlesAuthorization.php',
@@ -2659,6 +2666,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'IngotsSeederTable' => __DIR__ . '/../..' . '/database/seeds/IngotsSeederTable.php',
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
@@ -2667,6 +2675,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'LaywersSeederTable' => __DIR__ . '/../..' . '/database/seeds/LaywersSeederTable.php',
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',

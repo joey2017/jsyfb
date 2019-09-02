@@ -112,4 +112,5 @@ return [
     'content'               => '内容',
     'like_count'            => '点赞数',
     'comments_count'        => '评论数',
+    'userTitle'             => '职位',
 ];

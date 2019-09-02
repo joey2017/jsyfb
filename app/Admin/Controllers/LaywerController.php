@@ -30,7 +30,7 @@ class LaywerController extends AdminController
         $grid->column('name', trans('admin.name'));
         $grid->column('class_id', trans('admin.class_id'));
         $grid->column('level', trans('admin.level'));
-        $grid->column('title', trans('admin.title'));
+        $grid->column('title', trans('admin.userTitle'));
         $grid->column('status', trans('admin.status'));
         $grid->column('is_deleted', trans('admin.is_deleted'));
         $grid->column('created_at', trans('admin.created_at'));
@@ -53,7 +53,7 @@ class LaywerController extends AdminController
         $show->field('name', trans('admin.name'));
         $show->field('class_id', trans('admin.class_id'));
         $show->field('level', trans('admin.level'));
-        $show->field('title', trans('admin.title'));
+        $show->field('title', trans('admin.userTitle'));
         $show->field('status', trans('admin.status'));
         $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
@@ -74,7 +74,7 @@ class LaywerController extends AdminController
         $form->text('name', trans('admin.name'));
         $form->number('class_id', trans('admin.class_id'));
         $form->number('level', trans('admin.level'));
-        $form->text('title', trans('admin.title'));
+        $form->text('title', trans('admin.userTitle'));
         $form->switch('status', trans('admin.status'))->default(1);
         $form->switch('is_deleted', trans('admin.is_deleted'));
 

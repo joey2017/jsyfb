@@ -1,0 +1,31 @@
+1.composer require fzaninotto/faker
+2.php artisan make:model Article -m
+public function up()
+    {
+        Schema::create('articles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('description');
+            $table->text('body');
+            $table->timestamps();
+        });
+    }
+php artisan migrate
+3.php artisan make:seeder ArticlesSeederTable
+
+public function run()
+    {
+        $faker = Faker::create('App\Article');
+        for($i = 1 ; $i <= 10 ; $i++){
+        	DB::table('articles')->insert([
+        	'title' => $faker->sentence(),
+        	'description' => $faker->sentence(),
+        	'body' => $faker->paragraph(),
+        	'created_at' => \Carbon\Carbon::now(),
+        	'Updated_at' => \Carbon\Carbon::now(),
+        	]);
+        }
+
+    }
+
+php artisan db:seed --class=ArticlesSeederTable

@@ -779,17 +779,17 @@
     },
     {
         "name": "encore/laravel-admin",
-        "version": "v1.7.5",
-        "version_normalized": "1.7.5.0",
+        "version": "v1.7.6",
+        "version_normalized": "1.7.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/z-song/laravel-admin.git",
-            "reference": "1696ae76863fc7b60ed2c717caef547dc39c30d3"
+            "reference": "06b6daf94697089620d6eb8c93b20bc4165e9756"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/1696ae76863fc7b60ed2c717caef547dc39c30d3",
-            "reference": "1696ae76863fc7b60ed2c717caef547dc39c30d3",
+            "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/06b6daf94697089620d6eb8c93b20bc4165e9756",
+            "reference": "06b6daf94697089620d6eb8c93b20bc4165e9756",
             "shasum": "",
             "mirrors": [
                 {
@@ -816,7 +816,7 @@
             "intervention/image": "Required to handling and manipulation upload images (~2.3).",
             "spatie/eloquent-sortable": "Required to built orderable gird."
         },
-        "time": "2019-07-24T03:27:03+00:00",
+        "time": "2019-08-27T11:00:45+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -1258,67 +1258,6 @@
             }
         ],
         "description": "Highlight PHP code in terminal"
-    },
-    {
-        "name": "laravel-admin-ext/wang-editor",
-        "version": "v1.1",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/laravel-admin-extensions/wangEditor.git",
-            "reference": "c5f3d5688ef1a84e6966a63e5ec3e39d0afb0f3b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/laravel-admin-extensions/wangEditor/zipball/c5f3d5688ef1a84e6966a63e5ec3e39d0afb0f3b",
-            "reference": "c5f3d5688ef1a84e6966a63e5ec3e39d0afb0f3b",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "encore/laravel-admin": "~1.6",
-            "php": ">=7.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~6.0"
-        },
-        "time": "2019-06-20T08:53:59+00:00",
-        "type": "library",
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "Encore\\WangEditor\\WangEditorServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Encore\\WangEditor\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "song",
-                "email": "zosong@126.com"
-            }
-        ],
-        "description": "wangEditor extension for laravel-admin",
-        "homepage": "https://github.com/laravel-admin-extensions/wangEditor",
-        "keywords": [
-            "editor",
-            "extension",
-            "laravel-admin"
-        ]
     },
     {
         "name": "laravel/framework",
@@ -1924,17 +1863,17 @@
     },
     {
         "name": "nesbot/carbon",
-        "version": "2.23.1",
-        "version_normalized": "2.23.1.0",
+        "version": "2.24.0",
+        "version_normalized": "2.24.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/briannesbitt/Carbon.git",
-            "reference": "767617a047e5b8b8b3b0b6023a2650847ed7df02"
+            "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/767617a047e5b8b8b3b0b6023a2650847ed7df02",
-            "reference": "767617a047e5b8b8b3b0b6023a2650847ed7df02",
+            "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/934459c5ac0658bc765ad1e53512c7c77adcac29",
+            "reference": "934459c5ac0658bc765ad1e53512c7c77adcac29",
             "shasum": "",
             "mirrors": [
                 {
@@ -1956,7 +1895,7 @@
             "phpunit/phpunit": "^7.5 || ^8.0",
             "squizlabs/php_codesniffer": "^3.4"
         },
-        "time": "2019-08-17T13:57:34+00:00",
+        "time": "2019-08-31T16:37:55+00:00",
         "bin": [
             "bin/carbon"
         ],
@@ -1999,17 +1938,17 @@
     },
     {
         "name": "nikic/php-parser",
-        "version": "v4.2.3",
-        "version_normalized": "4.2.3.0",
+        "version": "v4.2.4",
+        "version_normalized": "4.2.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "e612609022e935f3d0337c1295176505b41188c8"
+            "reference": "97e59c7a16464196a8b9c77c47df68e4a39a45c4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/e612609022e935f3d0337c1295176505b41188c8",
-            "reference": "e612609022e935f3d0337c1295176505b41188c8",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/97e59c7a16464196a8b9c77c47df68e4a39a45c4",
+            "reference": "97e59c7a16464196a8b9c77c47df68e4a39a45c4",
             "shasum": "",
             "mirrors": [
                 {
@@ -2025,7 +1964,7 @@
         "require-dev": {
             "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
         },
-        "time": "2019-08-12T20:17:41+00:00",
+        "time": "2019-09-01T07:51:21+00:00",
         "bin": [
             "bin/php-parse"
         ],
