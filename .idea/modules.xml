@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../demo.laravel-admin.org/.idea/demo.laravel-admin.org.iml" filepath="$PROJECT_DIR$/../demo.laravel-admin.org/.idea/demo.laravel-admin.org.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/jsyfb.iml" filepath="$PROJECT_DIR$/.idea/jsyfb.iml" />
     </modules>
   </component>

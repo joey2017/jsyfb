@@ -1260,6 +1260,254 @@
         "description": "Highlight PHP code in terminal"
     },
     {
+        "name": "laravel-admin-ext/api-tester",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel-admin-extensions/api-tester.git",
+            "reference": "91157898c9e8a3c27e45d60c09badd79479333c8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel-admin-extensions/api-tester/zipball/91157898c9e8a3c27e45d60c09badd79479333c8",
+            "reference": "91157898c9e8a3c27e45d60c09badd79479333c8",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "encore/laravel-admin": "~1.5",
+            "laravel/framework": "~5.5",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "laravel/laravel": "~5.5",
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2019-04-12T09:20:14+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Encore\\Admin\\ApiTester\\ApiTesterServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Encore\\Admin\\ApiTester\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "z-song",
+                "email": "zosong@126.com"
+            }
+        ],
+        "description": "Api tester for laravel",
+        "homepage": "https://github.com/laravel-admin-extensions/api-tester",
+        "keywords": [
+            "api",
+            "laravel-admin",
+            "tester"
+        ]
+    },
+    {
+        "name": "laravel-admin-ext/log-viewer",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel-admin-extensions/log-viewer.git",
+            "reference": "742a2550746c9346d463249ba16b8fba9ac9cf97"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel-admin-extensions/log-viewer/zipball/742a2550746c9346d463249ba16b8fba9ac9cf97",
+            "reference": "742a2550746c9346d463249ba16b8fba9ac9cf97",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "encore/laravel-admin": "~1.6",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2018-11-13T17:17:36+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Encore\\Admin\\LogViewer\\LogViewerServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Encore\\Admin\\LogViewer\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "z-song",
+                "email": "zosong@126.com"
+            }
+        ],
+        "description": "Log viewer for laravel",
+        "homepage": "https://github.com/laravel-admin-extensions/log-viewer",
+        "keywords": [
+            "Viewer",
+            "laravel-admin",
+            "log"
+        ]
+    },
+    {
+        "name": "laravel-admin-ext/reporter",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel-admin-extensions/reporter.git",
+            "reference": "32c97a3cc090a97651e658930f9361850ae59488"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel-admin-extensions/reporter/zipball/32c97a3cc090a97651e658930f9361850ae59488",
+            "reference": "32c97a3cc090a97651e658930f9361850ae59488",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "encore/laravel-admin": "~1.5",
+            "laravel/framework": "~5.5",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "laravel/laravel": "~5.5",
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2019-05-16T10:37:18+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Encore\\Admin\\Reporter\\ReporterServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Encore\\Admin\\Reporter\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "z-song",
+                "email": "zosong@126.com"
+            }
+        ],
+        "description": "Exception reporter for laravel",
+        "homepage": "https://github.com/laravel-admin-extensions/reporter",
+        "keywords": [
+            "exception",
+            "laravel-admin",
+            "reporter"
+        ]
+    },
+    {
+        "name": "laravel-admin-ext/wang-editor",
+        "version": "v1.1",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel-admin-extensions/wangEditor.git",
+            "reference": "c5f3d5688ef1a84e6966a63e5ec3e39d0afb0f3b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel-admin-extensions/wangEditor/zipball/c5f3d5688ef1a84e6966a63e5ec3e39d0afb0f3b",
+            "reference": "c5f3d5688ef1a84e6966a63e5ec3e39d0afb0f3b",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "encore/laravel-admin": "~1.6",
+            "php": ">=7.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~6.0"
+        },
+        "time": "2019-06-20T08:53:59+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Encore\\WangEditor\\WangEditorServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Encore\\WangEditor\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "song",
+                "email": "zosong@126.com"
+            }
+        ],
+        "description": "wangEditor extension for laravel-admin",
+        "homepage": "https://github.com/laravel-admin-extensions/wangEditor",
+        "keywords": [
+            "editor",
+            "extension",
+            "laravel-admin"
+        ]
+    },
+    {
         "name": "laravel/framework",
         "version": "v5.8.34",
         "version_normalized": "5.8.34.0",
@@ -2069,17 +2317,17 @@
     },
     {
         "name": "opis/closure",
-        "version": "3.3.1",
-        "version_normalized": "3.3.1.0",
+        "version": "3.4.0",
+        "version_normalized": "3.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/opis/closure.git",
-            "reference": "92927e26d7fc3f271efe1f55bdbb073fbb2f0722"
+            "reference": "60a97fff133b1669a5b1776aa8ab06db3f3962b7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/opis/closure/zipball/92927e26d7fc3f271efe1f55bdbb073fbb2f0722",
-            "reference": "92927e26d7fc3f271efe1f55bdbb073fbb2f0722",
+            "url": "https://api.github.com/repos/opis/closure/zipball/60a97fff133b1669a5b1776aa8ab06db3f3962b7",
+            "reference": "60a97fff133b1669a5b1776aa8ab06db3f3962b7",
             "shasum": "",
             "mirrors": [
                 {
@@ -2095,7 +2343,7 @@
             "jeremeamia/superclosure": "^2.0",
             "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
         },
-        "time": "2019-07-09T21:58:11+00:00",
+        "time": "2019-09-02T21:07:33+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

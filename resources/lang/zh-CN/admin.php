@@ -117,4 +117,8 @@ return [
     'expire_time'           => '到期时间',
     'quantity'              => '数量',
     'user_id'               => '用户id',
+    'article_id'            => '文章id',
+    'parent_id'             => '父级id',
+    'article_id'            => '文章id',
+    'path'                  => '路径',
 ];
