@@ -12,24 +12,36 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->resources([
-        'infoassets'            => InfoassetsController::class,
-        'laywers'               => LaywerController::class,
-        'hotacticles'           => HotacticleController::class,
-        'balances'              => BalanceController::class,
-        'specialists'           => SpecialistController::class,
-        'funds/balances'        => BalanceController::class,
-        'funds/ingots'          => IngotsController::class,
-        'usercenter/collects'   => CollectController::class,
-        'usercenter/attentions' => AttentionController::class,
-        'usercenter/comments'   => ActiclecommentController::class,
-        'legals/category'       => LegalBookCategoryController::class,
+        'infoassets'              => InfoassetsController::class,
+        'personnel/laywers'       => LaywerController::class,
+        'personnel/specialists'   => SpecialistController::class,
+        'personnel/categorys'     => BusinessCategoryController::class,
+        //'acticles'                => ActicleController::class,
+        'balances'                => BalanceController::class,
+        'funds/balances'          => BalanceController::class,
+        'funds/ingots'            => IngotsController::class,
+        'usercenter/collects'     => CollectController::class,
+        'usercenter/attentions'   => AttentionController::class,
+        'usercenter/comments'     => ActicleCommentController::class,
+        'usercenter/lists'        => UserController::class,
+        'legals/books'            => LegalBookController::class,
+        'legals/columns'          => ColumnController::class,
+        'acticles/browse-history' => BrowseHistoryController::class,
+        'acticles/comments'       => ActicleCommentController::class,
+        'acticles/likes'          => ActicleLikeController::class,
+        'answers/lists'           => AnswerListController::class,
+        'answers/records'         => AnswerRecordController::class,
+        'messages'                => MessageController::class,
+        'notices'                 => NoticeController::class,
+        'members'                 => MemberController::class,
+        'banners'                 => BannerController::class,
     ]);
-    $router->get('forms/settings', 'FormController@settings');
-    $router->get('forms/register', 'FormController@register');
+    $router->get('forms / settings', 'FormController@settings');
+    $router->get('forms / register', 'FormController@register');
 
-    $router->get('/admin/logs', 'Encore\Admin\LogViewer\LogController@index')->name('log-viewer-index');
-    $router->get('/admin/logs/{file}', 'Encore\Admin\LogViewer\LogController@index')->name('log-viewer-file');
-    $router->get('/admin/logs/{file}/tail', 'Encore\Admin\LogViewer\LogController@tail')->name('log-viewer-tail');
+    $router->get('/admin/logs', 'Encore\Admin\LogViewer\LogController@index')->name('log - viewer - index');
+    $router->get('/admin/logs/{file}', 'Encore\Admin\LogViewer\LogController@index')->name('log - viewer - file');
+    $router->get('/admin/logs/{file}/tail', 'Encore\Admin\LogViewer\LogController@tail')->name('log - viewer - tail');
 
 
 });

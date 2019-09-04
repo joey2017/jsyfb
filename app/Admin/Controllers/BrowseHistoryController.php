@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Laywer;
+use App\BrowseHistory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class LaywerController extends AdminController
+class BrowseHistoryController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = '律师';
+    protected $title = '浏览记录';
 
     /**
      * Make a grid builder.
@@ -24,13 +24,11 @@ class LaywerController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Laywer);
+        $grid = new Grid(new BrowseHistory);
 
         $grid->column('id', __('Id'));
-        $grid->column('name', trans('admin.name'));
-        $grid->column('class_id', trans('admin.class_id'));
-        $grid->column('level', trans('admin.level'));
-        $grid->column('title', trans('admin.user_title'));
+        $grid->column('user_id', trans('admin.user_id'));
+        $grid->column('article_id', trans('admin.article_id'));
         $grid->column('status', trans('admin.status'));
         $grid->column('is_deleted', trans('admin.is_deleted'));
         $grid->column('created_at', trans('admin.created_at'));
@@ -47,13 +45,11 @@ class LaywerController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Laywer::findOrFail($id));
+        $show = new Show(BrowseHistory::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', trans('admin.name'));
-        $show->field('class_id', trans('admin.class_id'));
-        $show->field('level', trans('admin.level'));
-        $show->field('title', trans('admin.user_title'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('article_id', trans('admin.article_id'));
         $show->field('status', trans('admin.status'));
         $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
@@ -69,12 +65,10 @@ class LaywerController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Laywer);
+        $form = new Form(new BrowseHistory);
 
-        $form->text('name', trans('admin.name'));
-        $form->number('class_id', trans('admin.class_id'));
-        $form->number('level', trans('admin.level'));
-        $form->text('title', trans('admin.user_title'));
+        $form->number('user_id', trans('admin.user_id'));
+        $form->number('article_id', trans('admin.article_id'));
         $form->switch('status', trans('admin.status'))->default(1);
         $form->switch('is_deleted', trans('admin.is_deleted'));
 

@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Infoassets extends Model
+class Notice extends Model
 {
     //
-    protected $table = 'users';
+    protected $table = 'jsyfb_notice';
 }

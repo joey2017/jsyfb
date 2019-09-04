@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Laywer;
+use App\Banner;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class LaywerController extends AdminController
+class BannerController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = '律师';
+    protected $title = '轮播图';
 
     /**
      * Make a grid builder.
@@ -24,13 +24,12 @@ class LaywerController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Laywer);
+        $grid = new Grid(new Banner);
 
         $grid->column('id', __('Id'));
-        $grid->column('name', trans('admin.name'));
-        $grid->column('class_id', trans('admin.class_id'));
-        $grid->column('level', trans('admin.level'));
-        $grid->column('title', trans('admin.user_title'));
+        $grid->column('picname', trans('admin.picname'));
+        $grid->column('image_path',trans('admin.image_path'));
+        $grid->column('sort', trans('admin.sort'));
         $grid->column('status', trans('admin.status'));
         $grid->column('is_deleted', trans('admin.is_deleted'));
         $grid->column('created_at', trans('admin.created_at'));
@@ -47,13 +46,12 @@ class LaywerController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Laywer::findOrFail($id));
+        $show = new Show(Banner::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', trans('admin.name'));
-        $show->field('class_id', trans('admin.class_id'));
-        $show->field('level', trans('admin.level'));
-        $show->field('title', trans('admin.user_title'));
+        $show->field('picname', trans('admin.picname'));
+        $show->field('image_path', trans('admin.image_path'));
+        $show->field('sort', trans('admin.sort'));
         $show->field('status', trans('admin.status'));
         $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
@@ -69,12 +67,11 @@ class LaywerController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Laywer);
+        $form = new Form(new Banner);
 
-        $form->text('name', trans('admin.name'));
-        $form->number('class_id', trans('admin.class_id'));
-        $form->number('level', trans('admin.level'));
-        $form->text('title', trans('admin.user_title'));
+        $form->text('picname', trans('admin.picname'));
+        $form->text('image_path', trans('admin.image_path'));
+        $form->switch('sort', trans('admin.sort'));
         $form->switch('status', trans('admin.status'))->default(1);
         $form->switch('is_deleted', trans('admin.is_deleted'));
 

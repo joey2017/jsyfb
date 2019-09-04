@@ -29,8 +29,9 @@ class LegalBookCategoryController extends AdminController
     {
         return LegalBookCategory::tree(function (Tree $tree) {
             $tree->branch(function ($branch) {
-                $src  = config('admin.upload.host') . '/' . $branch['logo'];
-                $logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
+                //$src  = config('admin.upload.host') . '/' . $branch['logo'];
+                //$logo = "<img src='$src' style='max-width:30px;max-height:30px' class='img'/>";
+                $logo = '';
                 return "{$branch['id']} - {$branch['title']} $logo";
             });
         });

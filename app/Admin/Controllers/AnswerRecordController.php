@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Acticlecomment;
+use App\AnswerRecord;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ActiclecommentController extends AdminController
+class AnswerRecordController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = '评论';
+    protected $title = '每日答题';
 
     /**
      * Make a grid builder.
@@ -24,14 +24,14 @@ class ActiclecommentController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Acticlecomment);
+        $grid = new Grid(new AnswerRecord);
 
         $grid->column('id', __('Id'));
         $grid->column('user_id', __('User id'));
-        $grid->column('acticle_id', __('Acticle id'));
-        $grid->column('interpretation', __('Interpretation'));
-        $grid->column('measures', __('Measures'));
-        $grid->column('content', __('Content'));
+        $grid->column('answer_list_id', __('Answer list id'));
+        $grid->column('date', __('Date'));
+        $grid->column('question', __('Question'));
+        $grid->column('answer', __('Answer'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -46,14 +46,14 @@ class ActiclecommentController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Acticlecomment::findOrFail($id));
+        $show = new Show(AnswerRecord::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('user_id', __('User id'));
-        $show->field('acticle_id', __('Acticle id'));
-        $show->field('interpretation', __('Interpretation'));
-        $show->field('measures', __('Measures'));
-        $show->field('content', __('Content'));
+        $show->field('answer_list_id', __('Answer list id'));
+        $show->field('date', __('Date'));
+        $show->field('question', __('Question'));
+        $show->field('answer', __('Answer'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -67,13 +67,13 @@ class ActiclecommentController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Acticlecomment);
+        $form = new Form(new AnswerRecord);
 
         $form->number('user_id', __('User id'));
-        $form->number('acticle_id', __('Acticle id'));
-        $form->textarea('interpretation', __('Interpretation'));
-        $form->textarea('measures', __('Measures'));
-        $form->textarea('content', __('Content'));
+        $form->number('answer_list_id', __('Answer list id'));
+        $form->datetime('date', __('Date'))->default(date('Y-m-d H:i:s'));
+        $form->text('question', __('Question'));
+        $form->text('answer', __('Answer'));
 
         return $form;
     }

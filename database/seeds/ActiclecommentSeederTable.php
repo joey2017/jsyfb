@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ActiclecommentSeederTable extends Seeder
+class ActicleCommentSeederTable extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class ActiclecommentSeederTable extends Seeder
     public function run()
     {
         //
-        $faker = \Faker\Factory::create('App\Acticlecomment');
+        $faker = \Faker\Factory::create('App\ActicleComment');
 
         for ($i = 1; $i <= 100; $i++) {
             DB::table('jsyfb_acticle_comment')->insert([

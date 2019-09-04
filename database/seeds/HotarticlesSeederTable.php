@@ -13,7 +13,7 @@ class HotarticlesSeederTable extends Seeder
     public function run()
     {
         //
-        $faker = Faker::create('App\Hotacticle');
+        $faker = Faker::create('App\Acticle');
 
         for($i = 1 ; $i <= 100 ; $i++){
             DB::table('jsyfb_hot_acticle')->insert([
