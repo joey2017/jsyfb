@@ -438,7 +438,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
 
     public static $classMap = array (
         'ActicleCommentSeederTable' => __DIR__ . '/../..' . '/database/seeds/ActicleCommentActicleCommentSeederTable.php',
-        'App\\ActicleComment' => __DIR__ . '/../..' . '/app/ActicleComment.php',
+        'App\\ActicleComment' => __DIR__ . '/../..',
         'App\\Admin\\Actions\\ClearCache' => __DIR__ . '/../..' . '/app/Admin/Actions/ClearCache.php',
         'App\\Admin\\Actions\\Document\\CloneDocument' => __DIR__ . '/../..' . '/app/Admin/Actions/Document/CloneDocument.php',
         'App\\Admin\\Actions\\Document\\CopyDocuments' => __DIR__ . '/../..' . '/app/Admin/Actions/Document/CopyDocuments.php',

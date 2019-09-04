@@ -29,12 +29,30 @@ class LegalBookController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', trans('admin.book_title'));
-        $grid->column('cate_id','分类')->display(function($cate_id){
+        /*$grid->column('cate_id','分类')->display(function($cate_id){
             return LegalBookCategory::find($cate_id)->title;
-        });
+        });*/
+        $grid->column('legalBookCategory.title','分类');
+        //$grid->legalBookCategory()->title();
         $grid->column('detail', trans('admin.detail'));
-        $grid->column('status', trans('admin.status'));
-        $grid->column('is_deleted', trans('admin.is_deleted'));
+        $grid->column('status', trans('admin.status'))->using(['0' => '禁用','1' => '正常'])->label(['0' => 'danger','1'=>'primary']);
+        /*$grid->column('status', trans('admin.status'))->using(['0' => '禁用','1' => '正常'])->icon([
+            0 => 'toggle-off',
+            1 => 'toggle-on',
+        ], $default = '');*/
+        //$grid->column('status')->loading([0, 1, 2, 3]);
+        //$grid->column('is_deleted', trans('admin.is_deleted'));
+
+
+        $grid->filter(function ($filter){
+            /*$filter->scope('title', '最近修改')
+                ->whereDate('created_at', date('Y-m-d'))
+                ->orWhere('updated_at', date('Y-m-d'));
+            */
+            
+        });
+
+
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
