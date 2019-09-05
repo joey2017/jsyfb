@@ -126,4 +126,5 @@ return [
     'picname'               => '图片名称',
     'sort'                  => '排序',
     'descr'                 => '描述',
+    'mobile'                => '手机号码',
 ];

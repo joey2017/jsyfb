@@ -29,13 +29,13 @@ class NoticeController extends AdminController
         $grid->disableCreateButton();
         $grid->disableExport();
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('cate_id', __('Cate id'));
-        $grid->column('title', __('Title'));
-        $grid->column('content', __('Content'));
-        $grid->column('status', __('Status'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user_id', trans('admin.user_id'));
+        $grid->column('cate_id', trans('admin.cate_id'));
+        $grid->column('title', trans('admin.title'));
+        $grid->column('content', trans('admin.content'));
+        $grid->column('status', trans('admin.status'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -51,13 +51,13 @@ class NoticeController extends AdminController
         $show = new Show(Notice::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('cate_id', __('Cate id'));
-        $show->field('title', __('Title'));
-        $show->field('content', __('Content'));
-        $show->field('status', __('Status'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('cate_id', trans('admin.cate_id'));
+        $show->field('title', trans('admin.title'));
+        $show->field('content', trans('admin.content'));
+        $show->field('status', trans('admin.status'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -71,11 +71,11 @@ class NoticeController extends AdminController
     {
         $form = new Form(new Notice);
 
-        $form->number('user_id', __('User id'));
-        $form->number('cate_id', __('Cate id'));
-        $form->text('title', __('Title'));
-        $form->textarea('content', __('Content'));
-        $form->switch('status', __('Status'));
+        $form->number('user_id', trans('admin.user_id'));
+        $form->number('cate_id', trans('admin.cate_id'));
+        $form->text('title', trans('admin.title'));
+        $form->textarea('content', trans('admin.content'));
+        $form->switch('status', trans('admin.status'));
 
         return $form;
     }
