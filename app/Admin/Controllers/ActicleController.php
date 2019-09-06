@@ -17,7 +17,6 @@ class ActicleController extends AdminController
      * @var string
      */
     protected $title = '热门文章';
-
     /**
      * Make a grid builder.
      *
@@ -28,18 +27,28 @@ class ActicleController extends AdminController
         $grid = new Grid(new Acticle);
 
         $grid->column('id', __('Id'));
-        $grid->column('title', trans('admin.title'))->expand(function($model){
-            dd($model->acticlecomments()->take(10)->getResults());
-            $comments = $model->acticlecomments()->take(10)->map(function($comment){
-                return $comment->only(['id','content','created_at']);
+        $grid->column('title', trans('admin.title'))->expand(function ($model) {
+            //dd($model->acticlecomments()->take(10)->get());
+            $comments = $model->acticleComments()->take(10)->get()->map(function ($comment) {
+                return $comment->only(['id', 'user', 'interpretation', 'measures', 'content', 'created_at']);
             });
-            return new Table(['ID','内容','发布时间'],$comments->toArray());
-        });
-        $grid->column('keyword', trans('admin.keyword'));
+            return new Table(['ID', '用户', '专家点评', '措施', '内容', '评论时间'], $comments->toArray());
+        })->width(300);
+        $grid->column('keyword', trans('admin.keyword'))->width(200);
         $grid->column('content', trans('admin.content'));
         $grid->column('like_count', trans('admin.like_count'));
         $grid->column('comments_count', trans('admin.comments_count'));
-        $grid->column('status', trans('admin.status'));
+        /*
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
+            $statuses = ['禁用', '正常'];
+            $labels   = ['warning', 'info'];
+            return "<span class='label label-{$labels[$status]}'>" . $statuses[$status] . "</span>";
+        });
+        */
+        $grid->column('status',trans('admin.status'))->display(function($status){
+            return Acticle::$_statuses[$status];
+        })->label(['warning', 'primary']);
+
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 

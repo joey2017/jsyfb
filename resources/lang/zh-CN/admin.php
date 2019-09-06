@@ -127,4 +127,6 @@ return [
     'sort'                  => '排序',
     'descr'                 => '描述',
     'mobile'                => '手机号码',
+    'register'              => '注册',
+    'forgot_your_password'  => '忘记密码',
 ];
