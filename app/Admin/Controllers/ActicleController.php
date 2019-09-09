@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Acticle;
+use App\Specialist;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -26,18 +27,23 @@ class ActicleController extends AdminController
     {
         $grid = new Grid(new Acticle);
 
-        $grid->column('id', __('Id'));
-        $grid->column('title', trans('admin.title'))->expand(function ($model) {
+        $grid->column('id', __('Id'))->sortable();
+        /*
+        $grid->column('content', trans('admin.content'))->expand(function ($model) {
             //dd($model->acticlecomments()->take(10)->get());
             $comments = $model->acticleComments()->take(10)->get()->map(function ($comment) {
-                return $comment->only(['id', 'user', 'interpretation', 'measures', 'content', 'created_at']);
+                //dd($comment->user());
+                return $comment->only(['id', 'user_id', 'interpretation', 'measures', 'content', 'created_at']);
             });
             return new Table(['ID', '用户', '专家点评', '措施', '内容', '评论时间'], $comments->toArray());
-        })->width(300);
-        $grid->column('keyword', trans('admin.keyword'))->width(200);
+        });
+        */
         $grid->column('content', trans('admin.content'));
+        $grid->column('specialist.name', trans('admin.specialist'));
+        $grid->column('interpretation',trans('admin.interpretation'));
+        $grid->column('measures',trans('admin.measures'));
         $grid->column('like_count', trans('admin.like_count'));
-        $grid->column('comments_count', trans('admin.comments_count'));
+        //$grid->column('comments_count', trans('admin.comments_count'));
         /*
         $grid->column('status', trans('admin.status'))->display(function ($status) {
             $statuses = ['禁用', '正常'];
@@ -66,12 +72,11 @@ class ActicleController extends AdminController
         $show = new Show(Acticle::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('title', trans('admin.title'));
-        $show->field('keyword', trans('admin.keyword'));
         $show->field('content', trans('admin.content'));
+        $show->field('interpretation', trans('admin.interpretation'));
+        $show->field('measures', trans('admin.measures'));
         $show->field('like_count', trans('admin.like_count'));
-        $show->field('comments_count', trans('admin.comments_count'));
-        $show->field('status', trans('admin.status'));
+        //$show->field('status', trans('admin.status'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -87,12 +92,10 @@ class ActicleController extends AdminController
     {
         $form = new Form(new Acticle);
 
-        $form->text('title', trans('admin.title'));
-        $form->text('keyword', trans('admin.keyword'));
-        $form->textarea('content', trans('admin.content'));
-        $form->number('like_count', trans('admin.like_count'));
-        $form->number('comments_count', trans('admin.comments_count'));
-        $form->switch('status', trans('admin.status'))->default(1);
+        //$specs = Specialist::all()->pluck('name','id')->toArray();
+        $specs = Specialist::where('status',1)->pluck('name','id')->toArray();
+        $form->select('spec_id', '咨询专家')->options($specs);
+        $form->textarea('content', '咨询内容');
 
         return $form;
     }

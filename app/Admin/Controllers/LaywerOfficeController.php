@@ -27,20 +27,19 @@ class LaywerOfficeController extends AdminController
         $grid = new Grid(new LaywerOffice);
 
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('title', __('Title'));
-        $grid->column('mobile', __('Mobile'));
-        $grid->column('telephone', __('Telephone'));
-        $grid->column('email', __('Email'));
-        $grid->column('qq', __('Qq'));
-        $grid->column('wechat', __('Wechat'));
-        $grid->column('company', __('Company'));
-        $grid->column('cate_id', __('Cate id'));
-        $grid->column('descr', __('Descr'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('name', trans('admin.name'));
+        $grid->column('title', trans('admin.user_title'));
+        $grid->column('mobile', trans('admin.mobile'));
+        $grid->column('telephone', trans('admin.telephone'));
+        $grid->column('email', trans('admin.email'));
+        //$grid->column('qq','qq');
+        //$grid->column('wechat', trans('admin.wechat'));
+        $grid->column('company', trans('admin.company'));
+        $grid->column('cate_id', trans('admin.cate_id'));
+        //$grid->column('descr', trans('admin.descr'));
+        $grid->column('status', trans('admin.status'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -56,20 +55,19 @@ class LaywerOfficeController extends AdminController
         $show = new Show(LaywerOffice::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('title', __('Title'));
-        $show->field('mobile', __('Mobile'));
-        $show->field('telephone', __('Telephone'));
-        $show->field('email', __('Email'));
-        $show->field('qq', __('Qq'));
-        $show->field('wechat', __('Wechat'));
-        $show->field('company', __('Company'));
-        $show->field('cate_id', __('Cate id'));
-        $show->field('descr', __('Descr'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('name', trans('admin.name'));
+        $show->field('title', trans('admin.user_title'));
+        $show->field('mobile', trans('admin.mobile'));
+        $show->field('telephone', trans('admin.telephone'));
+        $show->field('email', trans('admin.email'));
+        //$show->field('qq', trans('admin.qq'));
+        //$show->field('wechat', trans('admin.wechat'));
+        $show->field('company', trans('admin.company'));
+        $show->field('cate_id', trans('admin.cate_id'));
+        //$show->field('descr', trans('admin.descr'));
+        $show->field('status', trans('admin.status'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -83,18 +81,16 @@ class LaywerOfficeController extends AdminController
     {
         $form = new Form(new LaywerOffice);
 
-        $form->text('name', __('Name'));
-        $form->text('title', __('Title'));
-        $form->mobile('mobile', __('Mobile'));
-        $form->text('telephone', __('Telephone'));
-        $form->email('email', __('Email'));
-        $form->text('qq', __('Qq'));
-        $form->text('wechat', __('Wechat'));
-        $form->text('company', __('Company'));
-        $form->number('cate_id', __('Cate id'));
-        $form->text('descr', __('Descr'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->text('name', trans('admin.name'));
+        $form->text('title', trans('admin.user_title'));
+        $form->mobile('mobile', trans('admin.mobile'));
+        $form->text('telephone', trans('admin.telephone'));
+        //$form->email('email', trans('admin.email'));
+        //$form->text('qq', trans('admin.qq'));
+        //$form->text('wechat', trans('admin.wechat'));
+        $form->text('company', trans('admin.company'));
+        $form->number('cate_id', trans('admin.cate_id'));
+        $form->text('descr', trans('admin.descr'));
 
         return $form;
     }

@@ -15,4 +15,9 @@ class Acticle extends Model
     {
         return $this->hasMany(ActicleComment::class,'acticle_id');
     }
+
+    public function specialist()
+    {
+        return $this->belongsTo(Specialist::class,'spec_id');
+    }
 }

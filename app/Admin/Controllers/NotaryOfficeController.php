@@ -27,18 +27,17 @@ class NotaryOfficeController extends AdminController
         $grid = new Grid(new NotaryOffice);
 
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('mobile', __('Mobile'));
-        $grid->column('telephone', __('Telephone'));
-        $grid->column('email', __('Email'));
-        $grid->column('qq', __('Qq'));
-        $grid->column('wechat', __('Wechat'));
-        $grid->column('lng', __('Lng'));
-        $grid->column('lat', __('Lat'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('name', trans('admin.name'));
+        $grid->column('mobile', trans('admin.mobile'));
+        $grid->column('telephone', trans('admin.telephone'));
+        $grid->column('email', trans('admin.email'));
+        $grid->column('qq', 'qq');
+        $grid->column('wechat', trans('admin.wechat'));
+        $grid->column('lng', trans('admin.lng'));
+        $grid->column('lat', trans('admin.lat'));
+        $grid->column('status', trans('admin.status'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -54,18 +53,17 @@ class NotaryOfficeController extends AdminController
         $show = new Show(NotaryOffice::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('mobile', __('Mobile'));
-        $show->field('telephone', __('Telephone'));
-        $show->field('email', __('Email'));
-        $show->field('qq', __('Qq'));
-        $show->field('wechat', __('Wechat'));
-        $show->field('lng', __('Lng'));
-        $show->field('lat', __('Lat'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('name', trans('admin.name'));
+        $show->field('mobile', trans('admin.mobile'));
+        $show->field('telephone', trans('admin.telephone'));
+        $show->field('email', trans('admin.email'));
+        $show->field('qq', 'qq');
+        $show->field('wechat', trans('admin.wechat'));
+        $show->field('lng', trans('admin.lng'));
+        $show->field('lat', trans('admin.lat'));
+        $show->field('status', trans('admin.status'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -79,16 +77,14 @@ class NotaryOfficeController extends AdminController
     {
         $form = new Form(new NotaryOffice);
 
-        $form->text('name', __('Name'));
-        $form->mobile('mobile', __('Mobile'));
-        $form->text('telephone', __('Telephone'));
-        $form->email('email', __('Email'));
-        $form->text('qq', __('Qq'));
-        $form->text('wechat', __('Wechat'));
-        $form->decimal('lng', __('Lng'));
-        $form->decimal('lat', __('Lat'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->text('name', trans('admin.name'));
+        $form->mobile('mobile', trans('admin.mobile'));
+        $form->text('telephone', trans('admin.telephone'));
+        $form->email('email', trans('admin.email'));
+        $form->text('qq', 'qq');
+        $form->text('wechat', trans('admin.wechat'));
+        $form->text('lng', trans('admin.lng'));
+        $form->text('lat', trans('admin.lat'));
 
         return $form;
     }

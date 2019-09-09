@@ -27,13 +27,13 @@ class ActicleCommentController extends AdminController
         $grid = new Grid(new ActicleComment);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('acticle_id', __('Acticle id'));
-        $grid->column('interpretation', __('Interpretation'));
-        $grid->column('measures', __('Measures'));
-        $grid->column('content', __('Content'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user_id', trans('admin.user_id'));
+        $grid->column('acticle_id', trans('admin.acticle_id'));
+        $grid->column('interpretation', trans('admin.interpretation'));
+        $grid->column('measures', trans('admin.measures'));
+        $grid->column('content', trans('admin.content'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -49,13 +49,13 @@ class ActicleCommentController extends AdminController
         $show = new Show(ActicleComment::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('acticle_id', __('Acticle id'));
-        $show->field('interpretation', __('Interpretation'));
-        $show->field('measures', __('Measures'));
-        $show->field('content', __('Content'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('acticle_id', trans('admin.acticle_id'));
+        $show->field('interpretation', trans('admin.interpretation'));
+        $show->field('measures', trans('admin.measures'));
+        $show->field('content', trans('admin.content'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -69,11 +69,11 @@ class ActicleCommentController extends AdminController
     {
         $form = new Form(new ActicleComment);
 
-        $form->number('user_id', __('User id'));
-        $form->number('acticle_id', __('Acticle id'));
-        $form->textarea('interpretation', __('Interpretation'));
-        $form->textarea('measures', __('Measures'));
-        $form->textarea('content', __('Content'));
+        $form->number('user_id', trans('admin.user_id'));
+        $form->number('acticle_id', trans('admin.acticle_id'));
+        $form->textarea('interpretation', trans('admin.interpretation'));
+        $form->textarea('measures', trans('admin.measures'));
+        $form->textarea('content', trans('admin.content'));
 
         return $form;
     }

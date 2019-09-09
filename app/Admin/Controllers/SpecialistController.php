@@ -30,9 +30,13 @@ class SpecialistController extends AdminController
         $grid->column('name', trans('admin.name'));
         $grid->column('class_id', trans('admin.class_id'));
         $grid->column('level', trans('admin.level'));
-        $grid->column('title', trans('admin.title'));
+        $grid->column('title', trans('admin.user_title'));
         $grid->column('status', trans('admin.status'));
-        $grid->column('is_deleted', trans('admin.is_deleted'));
+        $grid->column('expertise', trans('admin.expertise'));
+        $grid->column('mobile', trans('admin.mobile'));
+        $grid->column('telephone', trans('admin.telephone'));
+        $grid->column('company', trans('admin.company'));
+        $grid->column('descr', trans('admin.descr'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -53,9 +57,13 @@ class SpecialistController extends AdminController
         $show->field('name', trans('admin.name'));
         $show->field('class_id', trans('admin.class_id'));
         $show->field('level', trans('admin.level'));
-        $show->field('title', trans('admin.title'));
+        $show->field('title', trans('admin.user_title'));
+        $show->field('expertise', trans('admin.expertise'));
+        $show->field('mobile', trans('admin.mobile'));
+        $show->field('telephone', trans('admin.telephone'));
+        $show->field('company', trans('admin.company'));
+        $show->field('descr', trans('admin.descr'));
         $show->field('status', trans('admin.status'));
-        $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -71,12 +79,16 @@ class SpecialistController extends AdminController
     {
         $form = new Form(new Specialist);
 
-        $form->text('name', __('Name'));
-        $form->number('class_id', trans('admin.class_id'));
+        $form->text('name', trans('admin.name'));
+        //$form->number('class_id', trans('admin.class_id'));
         $form->number('level', trans('admin.level'));
-        $form->text('title', trans('admin.title'));
+        $form->text('title', trans('admin.user_title'));
+        $form->text('expertise', trans('admin.expertise'));
+        $form->mobile('mobile', trans('admin.mobile'));
+        $form->text('telephone', trans('admin.telephone'));
+        $form->text('company', trans('admin.company'));
+        $form->text('descr', trans('admin.descr'));
         $form->switch('status', trans('admin.status'))->default(1);
-        $form->switch('is_deleted', trans('admin.is_deleted'));
 
         return $form;
     }

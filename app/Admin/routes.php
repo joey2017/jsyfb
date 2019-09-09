@@ -23,6 +23,7 @@ Route::group([
         'usercenter/attentions'   => AttentionController::class,
         'usercenter/comments'     => ActicleCommentController::class,
         'usercenter/lists'        => UserController::class,
+        'usercenter/signs'        => UserSignController::class,
         'legals/books'            => LegalBookController::class,
         'legals/columns'          => ColumnController::class,
         'acticles/browse-history' => BrowseHistoryController::class,
@@ -38,13 +39,15 @@ Route::group([
         'coupons/grants'          => CouponGrantController::class,
         'coupons'                 => CouponController::class,
         'questions'               => QuestionController::class,
-        'laywer-offices'          => LaywerOfficeController::class,
-        'notary-offices'          => NotaryOfficeController::class,
+        //'tools/laywers'           => LaywerOfficeController::class,
+        'tools/laywers'           => SpecialistController::class,
+        'tools/notarys'           => NotaryOfficeController::class,
         'wechat-attentions'       => WechatAttentionController::class,
         'ingots-use-logs'         => IngotsUseLogController::class,
         'expert-advices'          => ExpertAdviceController::class,
         'exclusive-legal-advices' => ExclusiveLegalAdviceController::class,
         'balance-logs'            => BalanceLogController::class,
+        'user-signs'              => UserSiginController::class,
     ]);
 
     $router->get('forms/settings', 'FormController@settings');

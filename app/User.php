@@ -61,7 +61,7 @@ class User extends Authenticatable
     */
     public function setUsernameAttribute($value)
     {
-        $this->attributes['username'] = strtolower($value);
+        //$this->attributes['username'] = strtolower($value);
     }
 
     /**
@@ -69,5 +69,15 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $visible = ['first_name', 'last_name'];
+    //protected $visible = ['first_name', 'last_name'];
+
+
+    public function userSign(){
+        return $this->hasOne(UserSign::class,'user_id');
+    }
+
+    public function notice()
+    {
+        return $this->hasOne(Notice::class,'user_id');
+    }
 }

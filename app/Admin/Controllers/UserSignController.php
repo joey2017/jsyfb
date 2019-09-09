@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Notice;
+use App\UserSign;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class NoticeController extends AdminController
+class UserSignController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = '消息';
+    protected $title = '签到';
 
     /**
      * Make a grid builder.
@@ -24,17 +24,14 @@ class NoticeController extends AdminController
      */
     protected function grid()
     {
+        $grid = new Grid(new UserSign);
 
-        $grid = new Grid(new Notice);
-
-        $grid->disableCreateButton();
-        $grid->disableExport();
         $grid->column('id', __('Id'));
+        //$grid->user()->username(trans('admin.username'));
         $grid->column('user.username',trans('admin.username'));
-        $grid->column('cate_id', trans('admin.cate_id'));
-        $grid->column('title', trans('admin.title'));
-        $grid->column('content', trans('admin.content'));
-        $grid->column('status', trans('admin.status'));
+        $grid->column('sign_count', trans('admin.sign_count'));
+        $grid->column('count', trans('admin.count'));
+        $grid->column('last_sign_time', trans('admin.last_sign_time'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -49,14 +46,13 @@ class NoticeController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Notice::findOrFail($id));
+        $show = new Show(UserSign::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
-        $show->field('cate_id', trans('admin.cate_id'));
-        $show->field('title', trans('admin.title'));
-        $show->field('content', trans('admin.content'));
-        $show->field('status', trans('admin.status'));
+        $show->field('sign_count', trans('admin.sign_count'));
+        $show->field('count', trans('admin.count'));
+        $show->field('last_sign_time', trans('admin.last_sign_time'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -70,13 +66,12 @@ class NoticeController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Notice);
+        $form = new Form(new UserSign);
 
         $form->number('user_id', trans('admin.user_id'));
-        $form->number('cate_id', trans('admin.cate_id'));
-        $form->text('title', trans('admin.title'));
-        $form->textarea('content', trans('admin.content'));
-        $form->switch('status', trans('admin.status'));
+        $form->number('sign_count', trans('admin.user_id'));
+        $form->number('count', trans('admin.user_id'));
+        $form->datetime('last_sign_time', trans('admin.user_id'))->default(date('Y-m-d H:i:s'));
 
         return $form;
     }
