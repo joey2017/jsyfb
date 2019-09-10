@@ -27,12 +27,15 @@ class QuestionController extends AdminController
         $grid = new Grid(new Question);
 
         $grid->column('id', __('Id'));
-        $grid->column('title', __('Title'));
-        $grid->column('detail', __('Detail'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('title', trans('admin.title'));
+        $grid->column('question', trans('admin.question'));
+        $grid->column('answer', trans('admin.answer'));
+        //$grid->column('status', trans('admin.status'));
+        $grid->column('status',trans('admin.status'))->display(function($status){
+            return Question::$_statuses[$status];
+        })->label(['warning', 'primary']);
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -48,12 +51,11 @@ class QuestionController extends AdminController
         $show = new Show(Question::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('title', __('Title'));
-        $show->field('detail', __('Detail'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('title', trans('admin.title'));
+        $show->field('question', trans('admin.question'));
+        $show->field('answer', trans('admin.answer'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -67,10 +69,9 @@ class QuestionController extends AdminController
     {
         $form = new Form(new Question);
 
-        $form->text('title', __('Title'));
-        $form->textarea('detail', __('Detail'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->text('title', trans('admin.title'));
+        $form->textarea('question', trans('admin.question'));
+        $form->textarea('answer', trans('admin.answer'));
 
         return $form;
     }

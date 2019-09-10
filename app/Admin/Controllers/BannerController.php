@@ -30,7 +30,9 @@ class BannerController extends AdminController
         $grid->column('picname', trans('admin.picname'));
         $grid->column('image_path',trans('admin.image_path'));
         $grid->column('sort', trans('admin.sort'));
-        $grid->column('status', trans('admin.status'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Banner::$_statuses[$status];
+        })->label(['warning','primary']);
         $grid->column('is_deleted', trans('admin.is_deleted'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -70,10 +72,8 @@ class BannerController extends AdminController
         $form = new Form(new Banner);
 
         $form->text('picname', trans('admin.picname'));
-        $form->text('image_path', trans('admin.image_path'));
-        $form->switch('sort', trans('admin.sort'));
-        $form->switch('status', trans('admin.status'))->default(1);
-        $form->switch('is_deleted', trans('admin.is_deleted'));
+        $form->image('image_path', trans('admin.image_path'));
+        $form->text('sort', trans('admin.sort'));
 
         return $form;
     }

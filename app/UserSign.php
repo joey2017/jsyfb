@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notice extends Model
+class UserSign extends Model
 {
     //
-    protected $table = 'jsyfb_notice';
+    protected $table = 'jsyfb_user_sign';
 
     public function user()
     {
