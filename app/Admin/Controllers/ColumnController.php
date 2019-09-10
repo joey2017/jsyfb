@@ -29,12 +29,13 @@ class ColumnController extends AdminController
         $grid->disableCreateButton();
         $grid->disableExport();
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('book_cate_id', __('Book cate id'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user.username', trans('admin.username'));
+        $grid->column('legalBookCategory.title', '专栏分类');
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Column::$_statuses[$status];
+        })->label(['warning','primary']);
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -50,12 +51,11 @@ class ColumnController extends AdminController
         $show = new Show(Column::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('book_cate_id', __('Book cate id'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('book_cate_id', trans('admin.cate_id'));
+        $show->field('status', trans('admin.status'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -69,10 +69,9 @@ class ColumnController extends AdminController
     {
         $form = new Form(new Column);
 
-        $form->number('user_id', __('User id'));
-        $form->number('book_cate_id', __('Book cate id'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->number('user_id', trans('admin.user_id'));
+        $form->number('book_cate_id', trans('admin.cate_id'));
+        $form->switch('status', trans('admin.status'))->default(1);
 
         return $form;
     }

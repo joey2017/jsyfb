@@ -27,15 +27,17 @@ class AnswerListController extends AdminController
         $grid = new Grid(new AnswerList);
 
         $grid->column('id', __('Id'));
-        $grid->column('title', __('Title'));
-        $grid->column('option1', __('Option1'));
-        $grid->column('option2', __('Option2'));
-        $grid->column('option3', __('Option3'));
-        $grid->column('option4', __('Option4'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('title', '题目');
+        $grid->column('option1', trans('admin.option1'));
+        $grid->column('option2', trans('admin.option2'));
+        $grid->column('option3', trans('admin.option3'));
+        $grid->column('option4', trans('admin.option4'));
+        $grid->column('correct', trans('admin.correct'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return AnswerList::$_statuses[$status];
+        })->label(['warning','primary']);
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -51,15 +53,15 @@ class AnswerListController extends AdminController
         $show = new Show(AnswerList::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('title', __('Title'));
-        $show->field('option1', __('Option1'));
-        $show->field('option2', __('Option2'));
-        $show->field('option3', __('Option3'));
-        $show->field('option4', __('Option4'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('title', trans('admin.title'));
+        $show->field('option1', trans('admin.option1'));
+        $show->field('option2', trans('admin.option2'));
+        $show->field('option3', trans('admin.option3'));
+        $show->field('option4', trans('admin.option4'));
+        $show->field('correct', trans('admin.correct'));
+        $show->field('status', trans('admin.status'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -73,13 +75,13 @@ class AnswerListController extends AdminController
     {
         $form = new Form(new AnswerList);
 
-        $form->text('title', __('Title'));
-        $form->text('option1', __('Option1'));
-        $form->text('option2', __('Option2'));
-        $form->text('option3', __('Option3'));
-        $form->text('option4', __('Option4'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->text('title', trans('admin.title'));
+        $form->text('option1', trans('admin.option1'));
+        $form->text('option2', trans('admin.option2'));
+        $form->text('option3', trans('admin.option3'));
+        $form->text('option4', trans('admin.option4'));
+        $form->text('correct', trans('admin.correct'));
+        $form->switch('status', trans('admin.status'))->default(1);
 
         return $form;
     }
