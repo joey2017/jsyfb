@@ -15,8 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('/home',function(){
-    return '123456';
-});
+//Route::any('user/test', ['as' => 'user','uses' => 'UserController@test']);
+Auth::routes();
 
-Route::any('user/test', ['as' => 'user','uses' => 'UserController@test']);
+Route::get('/home', 'HomeController@index')->name('home');

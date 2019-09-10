@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema; //add fixed sql
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //监听查询事件
+        DB::listen(function ($query) {
+             $query->sql;
+            // $query->bindings
+            // $query->time
+        });
     }
 }

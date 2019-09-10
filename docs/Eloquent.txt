@@ -1,0 +1,138 @@
+
+Eloquent 返回的所有多结果集都是 Illuminate\Database\Eloquent\Collection 对象的实例，包括通过 get 方法检索或通过访问关联关系获取到的结果。 Eloquent 的集合对象继承了 Laravel 的 集合基类，因此它自然也继承了数十种能优雅地处理 Eloquent 模型底层数组的方法。
+
+$users = App\User::where('active', 1)->get();
+
+foreach ($users as $user) {
+    echo $user->name;
+}
+
+
+不过，集合比数组更加强大，它通过更加直观的接口暴露出可链式调用的 map /reduce 等操作。例如，让我们移除所有未激活的用户并收集剩余用户的名字：
+
+$users = App\User::all();
+
+$names = $users->reject(function ($user) {
+    return $user->active === false;
+})
+->map(function ($user) {
+    return $user->name;
+});
+
+注意：大多数 Eloquent 集合方法会返回新的 Eloquent 集合实例，但是 pluck, keys, zip, collapse, flatten 和 flip 方法除外，它们会返回一个 集合基类 实例。同样，如果 map 操作返回的集合不包括任何 Eloquent 模型，那么它会被自动转换成集合基类。
+
+
+集合基类
+所有 Eloquent 都继承了基础的 Laravel 集合 对象；因此，它们也继承了所有集合基类提供的强大的方法：
+
+all
+average
+avg
+chunk
+collapse
+combine
+concat
+contains
+containsStrict
+count
+crossJoin
+dd
+diff
+diffKeys
+dump
+each
+eachSpread
+every
+except
+filter
+first
+flatMap
+flatten
+flip
+forget
+forPage
+get
+groupBy
+has
+implode
+intersect
+isEmpty
+isNotEmpty
+keyBy
+keys
+last
+map
+mapInto
+mapSpread
+mapToGroups
+mapWithKeys
+max
+median
+merge
+min
+mode
+nth
+only
+pad
+partition
+pipe
+pluck
+pop
+prepend
+pull
+push
+put
+random
+reduce
+reject
+reverse
+search
+shift
+shuffle
+slice
+some
+sort
+sortBy
+sortByDesc
+splice
+split
+sum
+take
+tap
+toArray
+toJson
+transform
+union
+unique
+uniqueStrict
+unless
+values
+when
+where
+whereStrict
+whereIn
+whereInStrict
+whereNotIn
+whereNotInStrict
+zip
+
+
+序列化为数组
+$user = App\User::with('roles')->first();
+
+return $user->toArray();
+
+也可以转化整个模型 集合 为数组：
+
+$users = App\User::all();
+
+return $users->toArray();
+
+序列化为 JSON
+$user = App\User::find(1);
+
+return $user->toJson();
+
+return $user->toJson(JSON_PRETTY_PRINT);
+
+
