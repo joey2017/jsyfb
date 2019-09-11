@@ -33,7 +33,6 @@ class BannerController extends AdminController
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Banner::$_statuses[$status];
         })->label(['warning','primary']);
-        $grid->column('is_deleted', trans('admin.is_deleted'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -55,7 +54,6 @@ class BannerController extends AdminController
         $show->field('image_path', trans('admin.image_path'));
         $show->field('sort', trans('admin.sort'));
         $show->field('status', trans('admin.status'));
-        $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

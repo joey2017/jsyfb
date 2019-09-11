@@ -149,10 +149,12 @@ return [
     'address'               => '地址',
     'score'                 => '分数',
     'option1'               => '选项A',
+    'option1'               => '选项A',
     'option2'               => '选项B',
     'option3'               => '选项C',
     'option4'               => '选项D',
     'correct'               => '正确答案',
     'share_count'           => '分享次数',
     'appointment'           => '约定时间',
+    'amount'                => '金额大小',
 ];

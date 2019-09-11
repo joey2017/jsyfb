@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Balance;
+use function App\Helpers\getAllUsersIdAndUsername;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -27,10 +28,11 @@ class BalanceController extends AdminController
         $grid = new Grid(new Balance);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', '用户id');
-        $grid->column('amount', '金额大小');
-        $grid->column('status', trans('admin.status'));
-        $grid->column('is_deleted', trans('admin.is_deleted'));
+        $grid->column('user.username', trans('admin.username'));
+        $grid->column('amount', trans('admin.amount'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Balance::$_statuses[$status];
+        })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -48,12 +50,10 @@ class BalanceController extends AdminController
         $show = new Show(Balance::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('amount', __('Amount'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('amount', trans('admin.amount'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -66,11 +66,8 @@ class BalanceController extends AdminController
     protected function form()
     {
         $form = new Form(new Balance);
-
-        $form->switch('user_id', __('User id'));
-        $form->decimal('amount', __('Amount'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername())->rules('required');
+        $form->number('amount', trans('admin.amount'));
 
         return $form;
     }
