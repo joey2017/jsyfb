@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notice extends Model
 {
     //
-    protected $table = 'jsyfb_notice';
+    protected $table = 'jyfb_notice';
 
     public function user()
     {

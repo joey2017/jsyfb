@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Question;
+use App\QuestionCategory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -28,8 +29,8 @@ class QuestionController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', trans('admin.title'));
-        $grid->column('question', trans('admin.question'));
-        $grid->column('answer', trans('admin.answer'));
+        $grid->column('questionCategory.title', '分类');
+        $grid->column('answer', trans('admin.answer'))->width(600);
         //$grid->column('status', trans('admin.status'));
         $grid->column('status',trans('admin.status'))->display(function($status){
             return Question::$_statuses[$status];
@@ -52,7 +53,6 @@ class QuestionController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('title', trans('admin.title'));
-        $show->field('question', trans('admin.question'));
         $show->field('answer', trans('admin.answer'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
@@ -70,7 +70,7 @@ class QuestionController extends AdminController
         $form = new Form(new Question);
 
         $form->text('title', trans('admin.title'));
-        $form->textarea('question', trans('admin.question'));
+        $form->select('cate_id', trans('admin.cate_id'))->options(QuestionCategory::where('status',1)->pluck('title','id')->toArray());
         $form->textarea('answer', trans('admin.answer'));
 
         return $form;

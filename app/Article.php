@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    protected $table = 'jsyfb_hot_article';
+    protected $table = 'jyfb_hot_article';
 
     // 状态
     public static $_statuses = ['禁用', '正常'];

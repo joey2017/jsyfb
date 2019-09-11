@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class NotaryOfficeComment extends Model
 {
     //
-    protected $table = 'jsyfb_notary_office_comment';
+    protected $table = 'jyfb_notary_office_comment';
 
     public function user()
     {

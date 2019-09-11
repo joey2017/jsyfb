@@ -10,7 +10,7 @@ class QuestionCategory extends Model
 {
     use ModelTree, AdminBuilder;
     //
-    protected $table = 'jsyfb_hot_question_category';
+    protected $table = 'jyfb_hot_question_category';
 
     public function question()
     {

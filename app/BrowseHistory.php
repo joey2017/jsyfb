@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BrowseHistory extends Model
 {
     //
-    protected $table = 'jsyfb_browse_history';
+    protected $table = 'jyfb_browse_history';
 
     // 状态
     public static $_statuses = ['禁用', '正常'];

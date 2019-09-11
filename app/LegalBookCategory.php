@@ -10,7 +10,7 @@ class LegalBookCategory extends Model
 {
     use ModelTree, AdminBuilder;
     //
-    protected $table = 'jsyfb_legal_book_category';
+    protected $table = 'jyfb_legal_book_category';
 
     public function legalBook()
     {

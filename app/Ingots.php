@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ingots extends Model
 {
     //
-    protected $table = 'jsyfb_ingots';
+    protected $table = 'jyfb_ingots';
 
     //TODO;
     // 状态

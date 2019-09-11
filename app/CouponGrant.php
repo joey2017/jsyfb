@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class CouponGrant extends Model
 {
     //
-    protected $table = 'jsyfb_coupon_grant';
+    protected $table = 'jyfb_coupon_grant';
 }

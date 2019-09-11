@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserSign extends Model
 {
     //
-    protected $table = 'jsyfb_user_sign';
+    protected $table = 'jyfb_user_sign';
 
     public function user()
     {

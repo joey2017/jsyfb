@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class ExpertAdvice extends Model
 {
     //
-    protected $table = 'jsyfb_expert_advice';
+    protected $table = 'jyfb_expert_advice';
 }

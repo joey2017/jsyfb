@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Attention extends Model
 {
     //
-    protected $table = 'jsyfb_attention';
+    protected $table = 'jyfb_attention';
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Column extends Model
 {
     //
-    protected $table = 'jsyfb_column';
+    protected $table = 'jyfb_column';
 
     // 状态
     public static $_statuses = ['禁用', '正常'];

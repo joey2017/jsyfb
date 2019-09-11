@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleComment extends Model
 {
     //
-    protected $table = 'jsyfb_article_comment';
+    protected $table = 'jyfb_article_comment';
 
     public function article()
     {

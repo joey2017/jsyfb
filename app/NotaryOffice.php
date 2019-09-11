@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class NotaryOffice extends Model
 {
     //
-    protected $table = 'jsyfb_notary_office';
+    protected $table = 'jyfb_notary_office';
 
     // 状态
     public static $_statuses = ['禁用', '正常'];

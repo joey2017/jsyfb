@@ -30,6 +30,7 @@ Route::group([
         'articles/browse-history'     => BrowseHistoryController::class,
         'articles/comments'           => ArticleCommentController::class,
         'articles/likes'              => ArticleLikeController::class,
+        'articles/collects'           => CollectController::class,
         'articles/specialist/advices' => SpecialistAdviceController::class,
         'answers/lists'               => AnswerListController::class,
         'answers/records'             => AnswerRecordController::class,
