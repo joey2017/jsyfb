@@ -4,13 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BrowseHistory extends Model
+class ArticleLike extends Model
 {
     //
-    protected $table = 'jsyfb_browse_history';
-
-    // 状态
-    public static $_statuses = ['禁用', '正常'];
+    protected $table = 'jsyfb_article_like';
 
     public function user()
     {

@@ -4,16 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Acticle extends Model
+class Article extends Model
 {
-    protected $table = 'jsyfb_hot_acticle';
+    protected $table = 'jsyfb_hot_article';
 
     // 状态
     public static $_statuses = ['禁用', '正常'];
 
-    public function acticleComments()
+    public function articleComments()
     {
-        return $this->hasMany(ActicleComment::class,'acticle_id');
+        return $this->hasMany(ArticleComment::class,'article_id');
     }
 
     public function specialist()

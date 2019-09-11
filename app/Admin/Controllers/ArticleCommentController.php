@@ -2,13 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\ActicleComment;
+use App\ArticleComment;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class ActicleCommentController extends AdminController
+class ArticleCommentController extends AdminController
 {
     /**
      * Title for current resource.
@@ -24,11 +24,11 @@ class ActicleCommentController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new ActicleComment);
+        $grid = new Grid(new ArticleComment);
 
         $grid->column('id', __('Id'));
         $grid->column('user_id', trans('admin.user_id'));
-        $grid->column('acticle_id', trans('admin.acticle_id'));
+        $grid->column('article_id', trans('admin.article_id'));
         $grid->column('interpretation', trans('admin.interpretation'));
         $grid->column('measures', trans('admin.measures'));
         $grid->column('content', trans('admin.content'));
@@ -46,11 +46,11 @@ class ActicleCommentController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(ActicleComment::findOrFail($id));
+        $show = new Show(ArticleComment::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
-        $show->field('acticle_id', trans('admin.acticle_id'));
+        $show->field('article_id', trans('admin.article_id'));
         $show->field('interpretation', trans('admin.interpretation'));
         $show->field('measures', trans('admin.measures'));
         $show->field('content', trans('admin.content'));
@@ -67,10 +67,10 @@ class ActicleCommentController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new ActicleComment);
+        $form = new Form(new ArticleComment);
 
         $form->number('user_id', trans('admin.user_id'));
-        $form->number('acticle_id', trans('admin.acticle_id'));
+        $form->number('article_id', trans('admin.article_id'));
         $form->textarea('interpretation', trans('admin.interpretation'));
         $form->textarea('measures', trans('admin.measures'));
         $form->textarea('content', trans('admin.content'));

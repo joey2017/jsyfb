@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ActicleComment extends Model
+class ArticleComment extends Model
 {
     //
-    protected $table = 'jsyfb_acticle_comment';
+    protected $table = 'jsyfb_article_comment';
 
-    public function acticle()
+    public function article()
     {
-        return $this->belongsTo(Acticle::class, 'acticle_id');
+        return $this->belongsTo(Article::class, 'article_id');
     }
 
     public function user()

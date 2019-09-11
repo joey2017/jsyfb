@@ -118,7 +118,6 @@ return [
     'user_id'               => '用户Id',
     'article_id'            => '文章Id',
     'parent_id'             => '父级Id',
-    'article_id'            => '文章Id',
     'path'                  => '路径',
     'cate_id'               => '分类Id',
     'book_title'            => '主题',

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Acticle;
+use App\Article;
 use App\Specialist;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
 
-class ActicleController extends AdminController
+class ArticleController extends AdminController
 {
     /**
      * Title for current resource.
@@ -25,13 +25,13 @@ class ActicleController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Acticle);
+        $grid = new Grid(new Article);
 
         $grid->column('id', __('Id'))->sortable();
         /*
         $grid->column('content', trans('admin.content'))->expand(function ($model) {
-            //dd($model->acticlecomments()->take(10)->get());
-            $comments = $model->acticleComments()->take(10)->get()->map(function ($comment) {
+            //dd($model->articlecomments()->take(10)->get());
+            $comments = $model->articleComments()->take(10)->get()->map(function ($comment) {
                 //dd($comment->user());
                 return $comment->only(['id', 'user_id', 'interpretation', 'measures', 'content', 'created_at']);
             });
@@ -52,7 +52,7 @@ class ActicleController extends AdminController
         });
         */
         $grid->column('status',trans('admin.status'))->display(function($status){
-            return Acticle::$_statuses[$status];
+            return Article::$_statuses[$status];
         })->label(['warning', 'primary']);
 
         $grid->column('created_at', trans('admin.created_at'));
@@ -69,7 +69,7 @@ class ActicleController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Acticle::findOrFail($id));
+        $show = new Show(Article::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('content', trans('admin.content'));
@@ -90,7 +90,7 @@ class ActicleController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Acticle);
+        $form = new Form(new Article);
 
         //$specs = Specialist::all()->pluck('name','id')->toArray();
         $specs = Specialist::where('status',1)->pluck('name','id')->toArray();
