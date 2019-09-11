@@ -68,8 +68,8 @@ class BrowseHistoryController extends AdminController
     {
         $form = new Form(new BrowseHistory);
 
-        $form->number('user_id', trans('admin.user_id'));
-        $form->number('article_id', trans('admin.article_id'));
+        $form->number('user_id', trans('admin.user_id'))->required();
+        $form->number('article_id', trans('admin.article_id'))->required();
         $form->switch('status', trans('admin.status'))->default(1);
         $form->switch('is_deleted', trans('admin.is_deleted'));
 

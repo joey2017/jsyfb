@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndUsername;
 use App\Member;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -29,13 +30,14 @@ class MemberController extends AdminController
         $grid->disableCreateButton();
         $grid->disableExport();
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('cost', __('Cost'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('expire_time', __('Expire time'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user.username', trans('admin.username'));
+        $grid->column('cost', trans('admin.cost'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Member::$_statuses[$status];
+        })->label(['warning','primary']);
+        $grid->column('expire_time', trans('admin.expire_time'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -51,13 +53,11 @@ class MemberController extends AdminController
         $show = new Show(Member::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('cost', __('Cost'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('expire_time', __('Expire time'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('cost', trans('admin.cost'));
+        $show->field('expire_time', trans('admin.expire_time'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -71,11 +71,9 @@ class MemberController extends AdminController
     {
         $form = new Form(new Member);
 
-        $form->number('user_id', __('User id'));
-        $form->decimal('cost', __('Cost'))->default(0.00);
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
-        $form->datetime('expire_time', __('Expire time'))->default(date('Y-m-d H:i:s'));
+        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername());
+        $form->decimal('cost', trans('admin.cost'))->default(0.00);
+        $form->datetime('expire_time', trans('admin.expire_time'))->default(date('Y-m-d H:i:s'));
 
         return $form;
     }

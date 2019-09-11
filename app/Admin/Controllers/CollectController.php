@@ -2,7 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Article;
 use App\Collect;
+use function App\Helpers\getAllUsersIdAndUsername;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -52,7 +54,6 @@ class CollectController extends AdminController
         $show->field('user_id', trans('admin.user_id'));
         $show->field('article_id', trans('admin.article_id'));
         $show->field('status', trans('admin.status'));
-        $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -68,10 +69,8 @@ class CollectController extends AdminController
     {
         $form = new Form(new Collect);
 
-        $form->number('user_id', trans('admin.user_id'));
-        $form->number('article_id', trans('admin.article_id'));
-        $form->switch('status', trans('admin.status'))->default(1);
-//        $form->switch('is_deleted', trans('admin.is_deleted'));
+        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername());
+        $form->select('article_id', '热门资讯')->options(Article::where('status',1)->pluck('content','id')->toArray());
 
         return $form;
     }

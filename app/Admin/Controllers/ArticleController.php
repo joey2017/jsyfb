@@ -17,7 +17,7 @@ class ArticleController extends AdminController
      *
      * @var string
      */
-    protected $title = '热门文章';
+    protected $title = '热门资讯';
     /**
      * Make a grid builder.
      *
@@ -54,6 +54,15 @@ class ArticleController extends AdminController
         $grid->column('status',trans('admin.status'))->display(function($status){
             return Article::$_statuses[$status];
         })->label(['warning', 'primary']);
+
+        $grid->filter(function($filter){
+
+            // 去掉默认的 id 过滤器
+            $filter->disableIdFilter();
+
+            // 添加新的字段过滤器（通过工号过滤）
+            $filter->like('content', '内容');
+        });
 
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

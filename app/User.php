@@ -47,6 +47,10 @@ class User extends Authenticatable
      */
     protected $dates = ['last_login_time'];
 
+
+    // 状态
+    public static $_statuses = ['禁用', '正常'];
+
     /*
      * 访问器
      */
@@ -79,5 +83,10 @@ class User extends Authenticatable
     public function notice()
     {
         return $this->hasOne(Notice::class,'user_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'inviter_id');
     }
 }

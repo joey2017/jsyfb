@@ -24,7 +24,7 @@ Route::group([
         'usercenter/comments'         => ArticleCommentController::class,
         'usercenter/lists'            => UserController::class,
         'usercenter/signs'            => UserSignController::class,
-        'legals/categorys'             => LegalBookCategoryController::class,
+        'legals/categorys'            => LegalBookCategoryController::class,
         'legals/books'                => LegalBookController::class,
         'legals/columns'              => ColumnController::class,
         'articles/browse-history'     => BrowseHistoryController::class,
