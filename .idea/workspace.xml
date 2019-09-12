@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54f0960f-6127-482d-abac-f86454fa9aab" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controllers/CouponController.php" afterPath="$PROJECT_DIR$/app/Admin/Controllers/CouponController.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/Controllers/CouponGrantController.php" afterPath="$PROJECT_DIR$/app/Admin/Controllers/CouponGrantController.php" />
-      <change beforePath="$PROJECT_DIR$/app/Admin/routes.php" afterPath="$PROJECT_DIR$/app/Admin/routes.php" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/functions.php" afterPath="$PROJECT_DIR$/app/Helpers/functions.php" />
-      <change beforePath="$PROJECT_DIR$/app/Models/CouponGrant.php" afterPath="$PROJECT_DIR$/app/Models/CouponGrant.php" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/zh-CN/admin.php" afterPath="$PROJECT_DIR$/resources/lang/zh-CN/admin.php" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -511,12 +502,12 @@
       <workItem from="1568166813855" duration="1062000" />
       <workItem from="1568167979568" duration="20057000" />
       <workItem from="1568249320021" duration="2105000" />
-      <workItem from="1568251516026" duration="22398000" />
+      <workItem from="1568251516026" duration="22453000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="204890000" />
+    <option name="totallyTimeSpent" value="204945000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
