@@ -23,6 +23,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
         '0d8253363903f0ac7b0978dcde4e28a0' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/helpers.php',
+        '868f7b8ff9807a9ca7220d283955c57d' => __DIR__ . '/../..' . '/app/helpers/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -495,9 +496,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
 
     public static $classMap = array (
         'ActicleCommentSeederTable' => __DIR__ . '/../..' . '/database/seeds/ActiclecommentSeederTable.php',
-        'App\\Acticle' => __DIR__ . '/../..' . '/app/Acticle.php',
-        'App\\ActicleComment' => __DIR__ . '/../..' . '/app/ActicleComment.php',
-        'App\\ActicleLike' => __DIR__ . '/../..' . '/app/ActicleLike.php',
+        'App\\ActicleLike' => __DIR__ . '/../..' . '/app/ArticleLike.php',
         'App\\Admin\\Actions\\ClearCache' => __DIR__ . '/../..' . '/app/Admin/Actions/ClearCache.php',
         'App\\Admin\\Actions\\Document\\CloneDocument' => __DIR__ . '/../..' . '/app/Admin/Actions/Document/CloneDocument.php',
         'App\\Admin\\Actions\\Document\\CopyDocuments' => __DIR__ . '/../..' . '/app/Admin/Actions/Document/CopyDocuments.php',
@@ -527,11 +526,11 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Admin\\Actions\\UserStory\\MoveDown' => __DIR__ . '/../..' . '/app/Admin/Actions/UserStory/MoveDown.php',
         'App\\Admin\\Actions\\UserStory\\MoveUp' => __DIR__ . '/../..' . '/app/Admin/Actions/UserStory/MoveUp.php',
         'App\\Admin\\Actions\\UserStory\\Replicate' => __DIR__ . '/../..' . '/app/Admin/Actions/UserStory/Replicate.php',
-        'App\\Admin\\Controllers\\ActicleCommentController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ActicleCommentController.php',
-        'App\\Admin\\Controllers\\ActicleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ActicleController.php',
-        'App\\Admin\\Controllers\\ActicleLikeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ActicleLikeController.php',
+        'App\\Admin\\Controllers\\ActicleCommentController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ArticleCommentController.php',
+        'App\\Admin\\Controllers\\ActicleLikeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ArticleLikeController.php',
         'App\\Admin\\Controllers\\AnswerListController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AnswerListController.php',
         'App\\Admin\\Controllers\\AnswerRecordController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AnswerRecordController.php',
+        'App\\Admin\\Controllers\\ArticleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ArticleController.php',
         'App\\Admin\\Controllers\\AttentionController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AttentionController.php',
         'App\\Admin\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AuthController.php',
         'App\\Admin\\Controllers\\BalanceController' => __DIR__ . '/../..' . '/app/Admin/Controllers/BalanceController.php',
@@ -604,6 +603,8 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Admin\\Forms\\Steps\\Profile' => __DIR__ . '/../..' . '/app/Admin/Forms/Steps/Profile.php',
         'App\\AnswerList' => __DIR__ . '/../..' . '/app/AnswerList.php',
         'App\\AnswerRecord' => __DIR__ . '/../..' . '/app/AnswerRecord.php',
+        'App\\Article' => __DIR__ . '/../..' . '/app/Article.php',
+        'App\\ArticleComment' => __DIR__ . '/../..' . '/app/ArticleComment.php',
         'App\\Attention' => __DIR__ . '/../..' . '/app/Attention.php',
         'App\\Balance' => __DIR__ . '/../..' . '/app/Balance.php',
         'App\\BalanceLog' => __DIR__ . '/../..' . '/app/BalanceLog.php',

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\CouponGrant;
+use App\Models\CouponGrant;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\BusinessCategory;
+use App\Models\BusinessCategory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -29,8 +29,9 @@ class BusinessCategoryController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('title', trans('admin.title'));
         $grid->column('descr', trans('admin.descr'));
-        $grid->column('status', trans('admin.status'));
-        $grid->column('is_deleted', trans('admin.is_deleted'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return BusinessCategory::$_statuses[$status];
+        })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -50,8 +51,6 @@ class BusinessCategoryController extends AdminController
         $show->field('id', __('Id'));
         $show->field('title', trans('admin.title'));
         $show->field('descr', trans('admin.descr'));
-        $show->field('status',trans('admin.status'));
-        $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -69,8 +68,6 @@ class BusinessCategoryController extends AdminController
 
         $form->text('title', trans('admin.title'));
         $form->text('descr', trans('admin.descr'));
-        $form->switch('status', trans('admin.status'))->default(1);
-        $form->switch('is_deleted', trans('admin.is_deleted'));
 
         return $form;
     }

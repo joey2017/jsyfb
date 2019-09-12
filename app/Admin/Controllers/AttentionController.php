@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Attention;
+use App\Models\Attention;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -27,13 +27,20 @@ class AttentionController extends AdminController
         $grid = new Grid(new Attention);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', trans('admin.user_id'));
-        $grid->column('role_id', trans('admin.role_id'));
-        $grid->column('role', trans('admin.role'));
-        $grid->column('status', trans('admin.status'));
-        $grid->column('is_deleted', trans('admin.is_deleted'));
+        $grid->column('user.username', trans('admin.username'));
+        $grid->column('specialist.name', '关注专家');
+        //$grid->column('role', trans('admin.role'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Attention::$_statuses[$status];
+        })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+        $grid->disableCreateButton();
+        $grid->actions(function($actions){
+            $actions->disableView();
+            // 去掉编辑
+            $actions->disableEdit();
+        });
 
         return $grid;
     }
@@ -50,8 +57,7 @@ class AttentionController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
-        $show->field('role_id', trans('admin.role_id'));
-        $show->field('role', trans('admin.role'));
+        $show->field('spec_id', trans('admin.spec_id'));
         $show->field('status', trans('admin.status'));
         $show->field('is_deleted', trans('admin.is_deleted'));
         $show->field('created_at', trans('admin.created_at'));
@@ -70,11 +76,14 @@ class AttentionController extends AdminController
         $form = new Form(new Attention);
 
         $form->number('user_id', trans('admin.user_id'));
-        $form->number('role_id', trans('admin.role_id'));
-        $form->text('role', trans('admin.role'));
-        $form->switch('status', trans('admin.status'))->default(1);
-        $form->switch('is_deleted', trans('admin.is_deleted'));
+        $form->number('spec_id', trans('admin.spec_id'));
 
         return $form;
+    }
+
+
+    public function test()
+    {
+        $this->form()->store();
     }
 }

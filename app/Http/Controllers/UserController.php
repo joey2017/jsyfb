@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Article;
+use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller{

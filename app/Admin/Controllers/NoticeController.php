@@ -2,7 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Notice;
+use function App\Helpers\getAllUsersIdAndUsername;
+use App\Models\Notice;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -29,12 +30,15 @@ class NoticeController extends AdminController
 
         $grid->disableCreateButton();
         $grid->disableExport();
+
         $grid->column('id', __('Id'));
         $grid->column('user.username',trans('admin.username'));
-        $grid->column('cate_id', trans('admin.cate_id'));
+        //$grid->column('cate_id', trans('admin.cate_id'));
         $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
-        $grid->column('status', trans('admin.status'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Notice::$_statuses[$status];
+        })->label(['warning','success']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -53,7 +57,7 @@ class NoticeController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
-        $show->field('cate_id', trans('admin.cate_id'));
+        //$show->field('cate_id', trans('admin.cate_id'));
         $show->field('title', trans('admin.title'));
         $show->field('content', trans('admin.content'));
         $show->field('status', trans('admin.status'));
@@ -72,8 +76,8 @@ class NoticeController extends AdminController
     {
         $form = new Form(new Notice);
 
-        $form->number('user_id', trans('admin.user_id'));
-        $form->number('cate_id', trans('admin.cate_id'));
+        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndUsername());
+        //$form->number('cate_id', trans('admin.cate_id'));
         $form->text('title', trans('admin.title'));
         $form->textarea('content', trans('admin.content'));
         $form->switch('status', trans('admin.status'));

@@ -2,7 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use \App\Ingots;
+use App\Models\Ingots;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -27,10 +28,11 @@ class IngotsController extends AdminController
         $grid = new Grid(new Ingots);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', trans('admin.user_id'));
+        $grid->column('user.username', trans('admin.username'));
         $grid->column('quantity', trans('admin.quantity'));
-        $grid->column('status', trans('admin.status'));
-        $grid->column('is_deleted', trans('admin.is_deleted'));
+        $grid->column('status', trans('admin.status'))->display(function($status){
+            return Ingots::$_statuses[$status];
+        })->label(['warning','primary']);
         $grid->column('expire_time', trans('admin.expire_time'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -49,13 +51,11 @@ class IngotsController extends AdminController
         $show = new Show(Ingots::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('quantity', __('Quantity'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('expire_time', __('Expire time'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('quantity', trans('admin.quantity'));
+        $show->field('expire_time', trans('admin.expire_time'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -69,11 +69,9 @@ class IngotsController extends AdminController
     {
         $form = new Form(new Ingots);
 
-        $form->number('user_id', __('User id'));
-        $form->number('quantity', __('Quantity'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
-        $form->datetime('expire_time', __('Expire time'))->default(date('Y-m-d H:i:s'));
+        $form->select('user_id', trans('admin.username'))->options(User::where('status',1)->pluck('username','id')->toArray());
+        $form->number('quantity', trans('admin.quantity'));
+        $form->datetime('expire_time', trans('admin.expire_time'))->default(date('Y-m-d H:i:s'));
 
         return $form;
     }
