@@ -173,4 +173,7 @@ return [
     'end_time'              => '优惠结束时间',
     'remark'                => '备注',
     'num'                   => '每人限领',
+    'coupon'                => '优惠券',
+    'coupon_id'             => '优惠券id',
+    'coupon_name'           => '优惠券名称',
 ];
