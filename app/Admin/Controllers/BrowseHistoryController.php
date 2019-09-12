@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\BrowseHistory;
+use App\Models\BrowseHistory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

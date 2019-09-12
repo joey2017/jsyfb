@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Question;
-use App\QuestionCategory;
+use App\Models\Question;
+use App\Models\QuestionCategory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Article;
-use App\Specialist;
+use App\Models\Article;
+use App\Models\Specialist;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

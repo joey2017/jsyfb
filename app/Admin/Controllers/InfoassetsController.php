@@ -2,8 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Infoassets;
-
+use App\Models\Infoassets;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Grid;
 use Encore\Admin\Form;

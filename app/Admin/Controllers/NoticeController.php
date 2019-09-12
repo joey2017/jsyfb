@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllUsersIdAndUsername;
-use App\Notice;
+use App\Models\Notice;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

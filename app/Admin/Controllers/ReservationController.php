@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use \App\Reservation;
+use App\Models\Reservation;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

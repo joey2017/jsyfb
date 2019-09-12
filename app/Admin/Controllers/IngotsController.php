@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Ingots;
-use App\User;
+use App\Models\Ingots;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

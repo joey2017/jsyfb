@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\Article;
-use App\Collect;
+use App\Models\Article;
+use App\Models\Collect;
 use function App\Helpers\getAllUsersIdAndUsername;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;

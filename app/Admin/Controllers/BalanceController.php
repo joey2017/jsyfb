@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Balance;
+use App\Models\Balance;
 use function App\Helpers\getAllUsersIdAndUsername;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;

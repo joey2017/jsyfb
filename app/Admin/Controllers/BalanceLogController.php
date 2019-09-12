@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\BalanceLog;
+use App\Models\BalanceLog;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

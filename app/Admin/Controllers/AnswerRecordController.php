@@ -2,9 +2,9 @@
 
 namespace App\Admin\Controllers;
 
-use App\AnswerList;
-use App\User;
-use App\AnswerRecord;
+use App\Models\AnswerList;
+use App\Models\User;
+use App\Models\AnswerRecord;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

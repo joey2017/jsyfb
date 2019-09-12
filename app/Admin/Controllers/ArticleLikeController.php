@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\ArticleLike;
+use App\Models\ArticleLike;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use App\LegalBook;
-use App\LegalBookCategory;
+use App\Models\LegalBook;
+use App\Models\LegalBookCategory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;

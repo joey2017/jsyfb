@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\QuestionCategory;
+use App\Models\QuestionCategory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Layout\Content;

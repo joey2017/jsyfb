@@ -2,9 +2,9 @@
 
 namespace App\Admin\Controllers;
 
-use App\Specialist;
-use \App\SpecialistAdvice;
-use App\User;
+use App\Models\Specialist;
+use App\Models\SpecialistAdvice;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
