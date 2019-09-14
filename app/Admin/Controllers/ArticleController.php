@@ -5,12 +5,10 @@ namespace App\Admin\Controllers;
 use App\Models\Article;
 use App\Models\Specialist;
 use Encore\Admin\Controllers\AdminController;
-use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Encore\Admin\Widgets\Table;
-use Illuminate\Support\Facades\Redis;
+//use Encore\Admin\Widgets\Table;
 
 class ArticleController extends AdminController
 {
@@ -27,7 +25,6 @@ class ArticleController extends AdminController
      */
     protected function grid()
     {
-        var_dump(Redis::get(a));die;
         $grid = new Grid(new Article);
 
         $grid->column('id', __('Id'))->sortable();
