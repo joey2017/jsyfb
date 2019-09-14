@@ -10,7 +10,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class CollectController extends AdminController
+class CollectionController extends AdminController
 {
     /**
      * Title for current resource.
@@ -26,13 +26,13 @@ class CollectController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Collect);
+        $grid = new Grid(new Collection);
 
         $grid->column('id', __('Id'));
         $grid->column('user.username', trans('admin.username'));
         $grid->column('hotArticle.content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Collect::$_statuses[$status];
+            return Collection::$_statuses[$status];
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -48,7 +48,7 @@ class CollectController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Collect::findOrFail($id));
+        $show = new Show(Collection::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
@@ -67,7 +67,7 @@ class CollectController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Collect);
+        $form = new Form(new Collection);
 
         $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername());
         $form->select('article_id', '热门资讯')->options(Article::where('status',1)->pluck('content','id')->toArray());

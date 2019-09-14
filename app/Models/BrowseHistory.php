@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\BrowseHistory
+ *
+ * @property-read \App\Models\Article $hotArticle
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory query()
+ * @mixin \Eloquent
+ */
 class BrowseHistory extends Model
 {
     //

@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\SpecialistAdvice
+ *
+ * @property-read \App\Models\Specialist $specialist
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice query()
+ * @mixin \Eloquent
+ */
 class SpecialistAdvice extends Model
 {
     //

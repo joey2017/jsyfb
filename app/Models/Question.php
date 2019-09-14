@@ -4,6 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Question
+ *
+ * @property-read \App\Models\QuestionCategory $questionCategory
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Question query()
+ * @mixin \Eloquent
+ */
 class Question extends Model
 {
     //

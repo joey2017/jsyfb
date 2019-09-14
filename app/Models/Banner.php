@@ -4,6 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Banner
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Banner newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Banner newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Banner query()
+ * @mixin \Eloquent
+ */
 class Banner extends Model
 {
     //

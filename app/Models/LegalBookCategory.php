@@ -6,6 +6,18 @@ use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\LegalBookCategory
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LegalBookCategory[] $children
+ * @property-read int|null $children_count
+ * @property-read \App\Models\LegalBook $legalBook
+ * @property-read \App\Models\LegalBookCategory $parent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookCategory query()
+ * @mixin \Eloquent
+ */
 class LegalBookCategory extends Model
 {
     use ModelTree, AdminBuilder;

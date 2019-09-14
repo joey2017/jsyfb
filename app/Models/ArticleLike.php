@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\ArticleLike
+ *
+ * @property-read \App\Models\Article $hotArticle
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike query()
+ * @mixin \Eloquent
+ */
 class ArticleLike extends Model
 {
     //

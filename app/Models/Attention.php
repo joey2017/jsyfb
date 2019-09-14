@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Attention
+ *
+ * @property-read \App\Models\Specialist $specialist
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Attention newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Attention newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Attention query()
+ * @mixin \Eloquent
+ */
 class Attention extends Model
 {
     //
