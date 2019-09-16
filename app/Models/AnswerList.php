@@ -4,6 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\AnswerList
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList query()
+ * @mixin \Eloquent
+ */
 class AnswerList extends Model
 {
     //

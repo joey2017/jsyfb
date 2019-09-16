@@ -5,10 +5,12 @@ namespace App\Admin\Controllers;
 use App\Models\Article;
 use App\Models\Specialist;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
+use Illuminate\Support\Facades\Redis;
 
 class ArticleController extends AdminController
 {
@@ -25,6 +27,7 @@ class ArticleController extends AdminController
      */
     protected function grid()
     {
+        var_dump(Redis::get(a));die;
         $grid = new Grid(new Article);
 
         $grid->column('id', __('Id'))->sortable();
@@ -60,10 +63,9 @@ class ArticleController extends AdminController
             // 去掉默认的 id 过滤器
             $filter->disableIdFilter();
 
-            // 添加新的字段过滤器（通过工号过滤）
+            // 添加新的字段过滤器（通过内容过滤）
             $filter->like('content', '内容');
         });
-
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 

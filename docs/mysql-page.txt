@@ -1,0 +1,64 @@
+查询构造器分页
+$users = DB::table('users')->paginate(15);
+
+注意：目前，Lavarel 无法高效地执行使用了 groupBy 语句的分页操作。如果你需要使用对使用了 groupBy 的结果集分页，建议你手工查询数据库并创建分页。
+
+简单分页
+
+如果只需要在你的分页视图中简单地显示『下一页』和『上一页』链接，你可以使用 simplePaginate 方法执行更高效地查询。这在数据很多且不需要在渲染视图时显示每页的页码时非常有用：
+
+$users = DB::table('users')->simplePaginate(15);
+
+Eloquent 分页
+你还能对 Eloquent 查询结果分页。在下面的例子中，我们将对 User 模型按每页 15 条分页。如你所见，其语法与查询构造器分页基本雷同：
+
+$users = App\User::paginate(15);
+
+$users = User::where('votes', '>', 100)->paginate(15);
+
+$users = User::where('votes', '>', 100)->simplePaginate(15);
+
+
+手动创建分页
+有时你可能希望手动创建分页，并传递一个数组集给它。可以通过创建 Illuminate\Pagination\Paginator 或 Illuminate\Pagination\LengthAwarePaginator 实例来实现，这有赖于你的需要。.
+
+Paginator 类不需要知道结果集的总数；但是，这样一来，这个类就没办法获知最后一页的索引。 LengthAwarePaginator 接受和 Paginator 几乎相同的参数；不过，它会计算结果集的总数。
+
+换句话说， Paginator 相当于 查询构造器 或 Eloquent 的 simplePaginate 方法，而 LengthAwarePaginator 相当于 paginate 方法。
+
+
+显示结果集
+调用 paginate 方法时，会得到 Illuminate\Pagination\LengthAwarePaginator 实例。调用 simplePaginate 方法，得到的是 Illuminate\Pagination\Paginator 实例。这些对象提供了分析结果集的几个方法。 除了这些辅助方法，分页器实例合为迭代器，可以像数组一样循环。因此，当得到结果后，可以使用 Blade 显示数据、渲染分页链接：
+
+<div class="container">
+    @foreach ($users as $user)
+        {{ $user->name }}
+    @endforeach
+</div>
+
+{{ $users->links() }}
+links 方法渲染结果集中剩余页面的链接。每个链接都包含 page URL 变量。记住， links 生成的 HTML 兼容 Bootstrap CSS 框架。
+
+附加参数到分页链接
+可以使用 appends 方法，向分页链接中添加查询参数。例如，要在每页链接中添加 sort=votes ，只需要这样调用 appends:
+
+{{ $users->appends(['sort' => 'votes'])->links() }}
+
+
+
+
+$results->count()	获取当前页数据数量。
+$results->currentPage()	获取当前页页码。
+$results->firstItem()	获取结果集中第一条数据的结果编号。
+$results->getOptions()	获取分页器选项。
+$results->getUrlRange($start, $end)	创建分页 URL 范围。
+$results->hasMorePages()	是否有多页。
+$results->lastItem()	获取结果集中最后一条数据的结果编号。
+$results->lastPage()	获取最后一页的页码（在 simplePaginate 中无效）。
+$results->nextPageUrl()	获取下一页的 URL 。
+$results->onFirstPage()	当前页是否为第一页。
+$results->perPage()	每页的数据条数。
+$results->previousPageUrl()	获取前一页的 URL。
+$results->total()	数据总数（在 simplePaginate 无效）。
+$results->url($page)	获取指定页的 URL。
+

@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\AnswerRecord
+ *
+ * @property-read \App\Models\AnswerList $answerList
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord query()
+ * @mixin \Eloquent
+ */
 class AnswerRecord extends Model
 {
     //

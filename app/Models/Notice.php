@@ -4,6 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Notice
+ *
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice query()
+ * @mixin \Eloquent
+ */
 class Notice extends Model
 {
     //
