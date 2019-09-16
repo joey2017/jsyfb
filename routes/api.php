@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
+    Route::get('/users','Usercontroller@index')->name('user.index');
+    Route::get('/users/{user}','Usercontroller@show')->name('user.show');
+    Route::post('/users','UserController@store')->name('users.store');
+    Route::post('/login','UserController@login')->name('users.login');
+    Route::get('/users/info','UserController@info')->name('users.info');
 });
+
+

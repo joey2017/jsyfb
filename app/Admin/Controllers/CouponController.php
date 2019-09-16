@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 
 class CouponController extends AdminController
 {
@@ -92,5 +93,10 @@ class CouponController extends AdminController
         $form->text('remark', trans('admin.remark'));
 
         return $form;
+    }
+
+    public function getInfo(Request $request)
+    {
+        return Coupon::findOrFail($request->get('id',0))->toJson();
     }
 }

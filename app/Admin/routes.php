@@ -11,6 +11,9 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('admin.home');
+
+    $router->get('coupons/getInfo', 'CouponController@getInfo');
+
     $router->resources([
         //'infoassets'              => InfoassetsController::class,
         'personnel/laywers'           => LaywerController::class,
@@ -66,3 +69,7 @@ Route::group([
 
 
 });
+
+
+Route::get('messages/create','MessageController@create');
+Route::post('messages','MessageController@store');

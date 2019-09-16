@@ -1,0 +1,47 @@
+页面消息
+Notifications
+在页面调用下面的方法，它将会调用toastr组件，在页面的右上角添加一条浮动的提示
+
+admin_toastr('Message...', 'success');
+
+admin_toastr('Message...', 'info');
+
+admin_toastr('Message...', 'warning');
+
+admin_toastr('Message...', 'error');
+也可以接收第三个参数，给toastr添加设置参数,更多参数参考toastr
+
+admin_toastr('Message...', 'success', ['timeOut' => 5000]);
+
+
+<?php
+
+namespace App\Admin\Controllers;
+
+use Encore\Admin\Layout\Content;
+use App\Http\Controllers\Controller;
+
+class PostController extends Controller
+{
+    public function index(Content $content)
+    {
+        return $content
+            ->withError('Title', 'messages..');
+    }
+}
+添加其它几种类型的消息
+
+$content->withWarning('Title', 'messages..');
+
+$content->withInfo('Title', 'messages..');
+
+$content->withSuccess('Title', 'messages..');
+也可以用下面的几个方法, 效果是一样的
+
+admin_success($title, $message);
+
+admin_warning($title, $message);
+
+admin_error($title, $message);
+
+admin_info($title, $message);
