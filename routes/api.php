@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+//Route::get('/Api/v1/users','App\\Http\\Controller\\Api\Usercontroller@index')->name('user.index');
+Route::namespace('Api')->prefix('v1')->group(function(){
+    Route::get('/users','Usercontroller@index')->name('user.index');
 });

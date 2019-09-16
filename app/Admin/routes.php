@@ -69,3 +69,7 @@ Route::group([
 
 
 });
+
+
+Route::get('messages/create','MessageController@create');
+Route::post('messages','MessageController@store');
