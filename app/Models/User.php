@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * App\Models\User
@@ -21,9 +22,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User query()
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
+    public function getJWTIdentifier()
+    {
+        // TODO: Implement getJWTIdentifier() method.
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        // TODO: Implement getJWTCustomClaims() method.
+        return [];
+    }
 
     protected $table = 'jyfb_user';
     /**
@@ -51,9 +64,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
+    /*protected $casts = [
         //'email_verified_at' => 'datetime',
-    ];
+    ];*/
 
     /**
      * 应该转换为日期格式的属性.
@@ -65,6 +78,8 @@ class User extends Authenticatable
 
     // 状态
     public static $_statuses = ['禁用', '正常'];
+    const INVALID = 0;
+    const NORMAL  = 1;
 
     /*
      * 访问器
@@ -91,17 +106,31 @@ class User extends Authenticatable
     //protected $visible = ['first_name', 'last_name'];
 
 
-    public function userSign(){
-        return $this->hasOne(UserSign::class,'user_id');
+    public function userSign()
+    {
+        return $this->hasOne(UserSign::class, 'user_id');
     }
 
     public function notice()
     {
-        return $this->hasOne(Notice::class,'user_id');
+        return $this->hasOne(Notice::class, 'user_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class,'inviter_id');
+        return $this->belongsTo(User::class, 'inviter_id');
+    }
+
+    public static function getStatusName(int $status):string
+    {
+        switch ($status)
+        {
+            case self::INVALID:
+                return '禁用';
+            case self::NORMAL:
+                return '正常';
+            default:
+                return '正常';
+        }
     }
 }

@@ -52,7 +52,8 @@ class LoginController extends Controller
      */
     public function username()
     {
-        return 'mobile';
+        //return 'mobile';
+        return 'username';
     }
 
     /**

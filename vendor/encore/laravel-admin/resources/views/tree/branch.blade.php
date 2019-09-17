@@ -9,7 +9,7 @@
     @if(isset($branch['children']))
     <ol class="dd-list">
         @foreach($branch['children'] as $branch)
-            @include($branchView, array_merge($branch,['path' => $path]))
+            @include($branchView, $branch)
         @endforeach
     </ol>
     @endif

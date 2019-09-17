@@ -34,3 +34,6 @@ GET	/photos/{photo}	show	photos.show
 GET	/photos/{photo}/edit	 edit	photos.edit
 PUT/PATCH /photos/{photo}	update	photos.update
 DELETE	/photos/{photo}	destroy	photos.destroy
+
+
+一般在使用过程中，使用bind，instance, singleton去绑定value，使用arrayacces的方式去获取绑定的value。通过make去自动构建一个类的实例.
