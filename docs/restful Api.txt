@@ -1,0 +1,18 @@
+{
+    "status": 404,
+    "code": 40483,
+    "message": "Oops! It looks like that file does not exist.",
+    "url": "/errors/40483"
+    "data":{
+            "id": "ab473fb91021000",
+            "email": "admin@soulgame.com",
+            "contact": "songxx",
+            "telephone": "15901288634",
+            "qq": "12796694",
+            "company": "北京魂世界信息技术有限公司",
+            "website": "http://soulgame.com/",
+            "username": null,
+            "password": null,
+            "ackPassword": null
+            }
+}

@@ -14,19 +14,19 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    /*protected $dontReport = [
+    protected $dontReport = [
         //
-    ];*/
+    ];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array
      */
-    /*protected $dontFlash = [
+    protected $dontFlash = [
         'password',
         'password_confirmation',
-    ];*/
+    ];
 
     /**
      * Report or log an exception.
@@ -34,10 +34,10 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    /*public function report(Exception $exception)
+    public function report(Exception $exception)
     {
         parent::report($exception);
-    }*/
+    }
 
     /**
      * Render an exception into an HTTP response.

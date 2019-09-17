@@ -14,15 +14,23 @@ use Illuminate\Http\Request;
 */
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+//    return $request->user
 
 Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
-    Route::get('/users','Usercontroller@index')->name('user.index');
-    Route::get('/users/{user}','Usercontroller@show')->name('user.show');
     Route::post('/users','UserController@store')->name('users.store');
     Route::post('/login','UserController@login')->name('users.login');
-    Route::get('/users/info','UserController@info')->name('users.info');
+    //用户留言
+    Route::post('/messages','MessageController@store')->name('users.messages');
+    Route::middleware('api.refresh')->group(function () {
+        //当前用户信息
+        Route::get('/users/info','UserController@info')->name('users.info');
+        //用户列表
+        Route::get('/users','UserController@index')->name('users.index');
+        //用户信息
+        Route::get('/users/{user}','UserController@show')->name('users.show');
+        //用户退出
+        Route::get('/logout','UserController@logout')->name('users.logout');
+    });
 });
 
 

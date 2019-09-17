@@ -21,8 +21,10 @@ return array(
     'bd9634f2d41831496de0d3dfe4c94881' => $vendorDir . '/symfony/polyfill-php56/bootstrap.php',
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
+    '0ccdf99b8f62f02c52cba55802e0c2e7' => $vendorDir . '/zircote/swagger-php/src/functions.php',
     '4a1f389d6ce373bda9e57857d3b61c84' => $vendorDir . '/barryvdh/laravel-debugbar/src/helpers.php',
     '0d8253363903f0ac7b0978dcde4e28a0' => $vendorDir . '/beyondcode/laravel-dump-server/helpers.php',
+    'ac0aa5b57142c92aeadc397fa46b9d39' => $vendorDir . '/darkaonline/l5-swagger/src/helpers.php',
     'e044f3da7a892bf7d8d04992ac00bea7' => $vendorDir . '/medz/cors/src/ThinkPHP/injection.php',
     '868f7b8ff9807a9ca7220d283955c57d' => $baseDir . '/app/helpers/functions.php',
 );

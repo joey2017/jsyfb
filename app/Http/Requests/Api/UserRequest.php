@@ -21,6 +21,7 @@ class UserRequest extends FormRequest
             case 'POST':
                 return [
                     'username' => ['required', 'max:12', 'unique:jyfb_user,username'],
+                    //'username' => ['required', 'max:12', 'unique:jyfb_user,username'],
                     'password' => ['required', 'max:16', 'min:6']
                 ];
 
@@ -39,14 +40,14 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.required'=>'用户ID必须填写',
-            'id.exists'=>'用户不存在',
-            'username.unique' => '用户名已经存在',
+            'id.required'       => '用户ID必须填写',
+            'id.exists'         => '用户不存在',
+            'username.unique'   => '用户名已经存在',
             'username.required' => '用户名不能为空',
-            'username.max' => '用户名最大长度为12个字符',
+            'username.max'      => '用户名最大长度为12个字符',
             'password.required' => '密码不能为空',
-            'password.max' => '密码长度不能超过16个字符',
-            'password.min' => '密码长度不能小于6个字符'
+            'password.max'      => '密码长度不能超过16个字符',
+            'password.min'      => '密码长度不能小于6个字符'
         ];
     }
 }

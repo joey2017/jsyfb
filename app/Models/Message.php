@@ -16,4 +16,8 @@ class Message extends Model
 {
     //
     protected $table = 'jyfb_message';
+
+    protected $fillable = [
+        'user_id','username','mobile','content'
+    ];
 }
