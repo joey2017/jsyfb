@@ -6,7 +6,7 @@ use App\Http\Requests\Api\MessageForm;
 use App\Models\Message;
 
 /*
- * @swg\Info(title="Project API", version="1")
+ * @swg\Info(title="Project API", version="2")
  */
 class MessageController extends Controller
 {
