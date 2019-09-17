@@ -1,0 +1,30 @@
+https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code='.$code.'&grant_type=authorization_code
+
+{
+    "openid": "OPENID",
+    "session_key": "SESSIONKEY",
+    "unionid": "UNIONID"
+  }
+
+ include_once "wxBizDataCrypt.php";
+   $appid = 'APPID';
+   $sessionKey = $_SESSION["sk"];
+   $encryptedData = $_POST["encryptedData"];
+   $iv = $_POST["iv"];
+
+   $pc = new WXBizDataCrypt($appid, $sessionKey);
+   $errCode = $pc->decryptData($encryptedData, $iv, $data );
+
+   if($errCode == 0)
+   {
+        echo $data;
+   }else{
+        echo $errCode;
+   }
+
+数据验证
+
+if(hash('sha1',$rawData.$session_key) === $signature)
+{
+     echo  '验证通过';
+}
