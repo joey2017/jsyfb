@@ -77,7 +77,6 @@ class User extends Authenticatable implements JWTSubject
 
 
     // 状态
-    public static $_statuses = ['禁用', '正常'];
     const INVALID = 0;
     const NORMAL  = 1;
 
@@ -116,6 +115,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Notice::class, 'user_id');
     }
 
+    /*
+     * 用户邀请人
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'inviter_id');

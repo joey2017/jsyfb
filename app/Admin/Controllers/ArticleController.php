@@ -52,7 +52,7 @@ class ArticleController extends AdminController
         });
         */
         $grid->column('status',trans('admin.status'))->display(function($status){
-            return Article::$_statuses[$status];
+            return Article::getStatusName($status);
         })->label(['warning', 'primary']);
 
         $grid->filter(function($filter){

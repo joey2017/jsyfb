@@ -19,10 +19,24 @@ class Notice extends Model
     protected $table = 'jyfb_notice';
 
     // 状态
-    public static $_statuses = ['未读', '已读'];
+    const INVALID = 0;
+    const NORMAL  = 1;
 
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public static function getStatusName(int $status):string
+    {
+        switch ($status)
+        {
+            case self::INVALID:
+                return '未读';
+            case self::NORMAL:
+                return '已读';
+            default:
+                return '未知';
+        }
     }
 }

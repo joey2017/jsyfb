@@ -5,8 +5,34 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\MessageForm;
 use App\Models\Message;
 
-/*
- * @swg\Info(title="Project API", version="2")
+/**
+ * @OA\Info(
+ *     version="3.0",
+ *     title="Task Resource OpenApi",
+ *     @OA\Contact(
+ *         name="学院君",
+ *         url="http://xueyuanjun.com",
+ *         email="support@todo.test"
+ *     )
+ * ),
+ * @OA\Server(
+ *     url="http://todo.test/dingoapi/tasks"
+ * ),
+ * @OA\SecurityScheme(
+ *     type="oauth2",
+ *     description="Use a global client_id / client_secret and your email / password combo to obtain a token",
+ *     name="passport",
+ *     in="header",
+ *     scheme="http",
+ *     securityScheme="passport",
+ *     @OA\Flow(
+ *         flow="password",
+ *         authorizationUrl="/oauth/authorize",
+ *         tokenUrl="/oauth/token",
+ *         refreshUrl="/oauth/token/refresh",
+ *         scopes={}
+ *     )
+ * )
  */
 class MessageController extends Controller
 {

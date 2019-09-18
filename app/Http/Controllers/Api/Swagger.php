@@ -1,34 +1,81 @@
 <?php
 /**
- * @SWG\Swagger(
- *   consumes={"multipart/form-data","application/x-www-form-urlencoded"},
- *   produces={"application/json"},
- *   swagger="2.0",
- *   schemes={"http"},
- *   host=L5_SWAGGER_CONST_HOST,
- *   basePath="/v1",
- *   @SWG\Info(
- *     title="家有法宝",
- *     version="1.0",
- *     description="家有法宝接口文档",
- *     @SWG\Contact(email="zongjun.li@outlook.com"),
- *   )
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="L5 OpenApi",
+ *      description="L5 Swagger OpenApi description",
+ *      @OA\Contact(
+ *          email="darius@matulionis.lt"
+ *      ),
+ *     @OA\License(
+ *         name="Apache 2.0",
+ *         url="http://www.apache.org/licenses/LICENSE-2.0.html"
+ *     )
  * )
  */
-
-
 /**
- * @SWG\Get(
- *      path="/articles",
- *      operationId="getArticlesList",
- *      tags={"Articles"},
- *      summary="Get list of articles",
- *      description="Returns list of articles",
- *      @SWG\Response(
+ *  @OA\Server(
+ *      url=L5_SWAGGER_CONST_HOST,
+ *      description="L5 Swagger OpenApi dynamic host server"
+ *  )
+ *
+ *  @OA\Server(
+ *      url="https://projects.dev/api/v1",
+ *      description="L5 Swagger OpenApi Server"
+ * )
+ */
+/**
+ * @OA\SecurityScheme(
+ *     type="oauth2",
+ *     description="Use a global client_id / client_secret and your username / password combo to obtain a token",
+ *     name="Password Based",
+ *     in="header",
+ *     scheme="https",
+ *     securityScheme="Password Based",
+ *     @OA\Flow(
+ *         flow="password",
+ *         authorizationUrl="/oauth/authorize",
+ *         tokenUrl="/oauth/token",
+ *         refreshUrl="/oauth/token/refresh",
+ *         scopes={}
+ *     )
+ * )
+ */
+/**
+ * @OA\Tag(
+ *     name="project",
+ *     description="Everything about your Projects",
+ *     @OA\ExternalDocumentation(
+ *         description="Find out more",
+ *         url="http://swagger.io"
+ *     )
+ * )
+ *
+ * @OA\Tag(
+ *     name="user",
+ *     description="Operations about user",
+ *     @OA\ExternalDocumentation(
+ *         description="Find out more about",
+ *         url="http://swagger.io"
+ *     )
+ * )
+ * @OA\ExternalDocumentation(
+ *     description="Find out more about Swagger",
+ *     url="http://swagger.io"
+ * )
+ */
+/**
+ * @OA\Get(
+ *      path="/projects",
+ *      operationId="getProjectsList",
+ *      tags={"Projects"},
+ *      summary="Get list of projects",
+ *      description="Returns list of projects",
+ *      @OA\Response(
  *          response=200,
  *          description="successful operation"
  *       ),
- *       @SWG\Response(response=400, description="Bad request"),
+ *       @OA\Response(response=400, description="Bad request"),
  *       security={
  *           {"api_key_security_example": {}}
  *       }
@@ -36,85 +83,32 @@
  *
  * Returns list of projects
  */
-
 /**
- * @SWG\Get(
- *      path="/users/{id}",
- *      operationId="getUserById",
- *      tags={"Users"},
- *      summary="Get user information",
- *      description="Returns user data",
- *      @SWG\Parameter(
+ * @OA\Get(
+ *      path="/projects/{id}",
+ *      operationId="getProjectById",
+ *      tags={"Projects"},
+ *      summary="Get project information",
+ *      description="Returns project data",
+ *      @OA\Parameter(
  *          name="id",
- *          description="User id",
+ *          description="Project id",
  *          required=true,
- *          type="integer",
- *          in="path"
+ *          in="path",
+ *          @OA\Schema(
+ *              type="integer"
+ *          )
  *      ),
- *      @SWG\Response(
+ *      @OA\Response(
  *          response=200,
  *          description="successful operation"
  *       ),
- *      @SWG\Response(response=400, description="Bad request"),
- *      @SWG\Response(response=404, description="Resource Not Found"),
+ *      @OA\Response(response=400, description="Bad request"),
+ *      @OA\Response(response=404, description="Resource Not Found"),
  *      security={
  *         {
- *             "oauth2_security_example": {"write:users", "read:users"}
+ *             "oauth2_security_example": {"write:projects", "read:projects"}
  *         }
  *     },
  * )
- *
  */
-
-/**
- * @SWG\Get(
- *     path="/users",
- *     summary="用户列表",
- *     tags={"Users"},
- *     description="返回包含所有人的列表。",
- *     @SWG\Parameter(
- *         name="pageSize",
- *         in="query",
- *         description="Number of users returned",
- *         type="integer"
- *     ),
- *     @SWG\Parameter(
- *         name="pageNumber",
- *         in="query",
- *         description="Page number",
- *         type="integer"
- *     ),
- *     @SWG\Response(
- *         response=200,
- *         description="一个用户列表",
- *         @SWG\Schema(
- *             type="array",
- *             @SWG\Items(
- *                  required={"username"},
- *                  required={"id"},
- *                  @SWG\Property(
- *                      property="id",
- *                      type="string",
- *                      description="id"
- *                  ),
- *                  @SWG\Property(
- *                      property="nickname",
- *                      type="string",
- *                      description="nickname"
- *                  ),
- *                  @SWG\Property(
- *                      property="mobile",
- *                      type="string",
- *                      description="mobile"
- *                  ),
- *                  @SWG\Property(
- *                      property="username",
- *                      type="string",
- *                      description="username"
- *                  )
- *             )
- *         ),
- *     ),
- * )
- */
-

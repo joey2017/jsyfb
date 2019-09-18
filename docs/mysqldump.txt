@@ -1,0 +1,1 @@
+mysqldump -uroot -proot --databases newlaravel > ./docs/newlaravel.20190918.sql
