@@ -19,7 +19,9 @@ class NoticeController extends Controller
     public function show(Notice $notice)
     {
         if ($notice->user_id != Auth::guard('api')->id()) {
+            //throw new AuthorizationException('无权访问');
             return $this->failed('无权访问',403);
+
         };
         return $this->success(new NoticeResource($notice));
     }
