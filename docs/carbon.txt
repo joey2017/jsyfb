@@ -1,0 +1,44 @@
+获取当前时间
+echo Carbon::now();                             // 2016-10-14 15:18:34
+echo Carbon::today();                            // 2016-10-14 00:00:00
+echo  Carbon::tomorrow('Europe/London');                          // 2016-10-14 00:00:00
+echo Carbon::yesterday();                         // 2016-10-14 00:00:00
+
+echo Carbon::today()->toDateTimeString();
+echo Carbon::yesterday()->toDateTimeString();
+echo Carbon::tomorrow()->toDateTimeString();
+
+日期类型转为字符串
+echo Carbon::now()->toDateString(); //2016-10-14
+echo Carbon::now()->toDateTimeString(); //2016-10-14 20:22:50
+
+日期解析
+echo Carbon::parse('2016-10-15')->toDateTimeString(); //2016-10-15 00:00:00
+echo Carbon::parse('2016-10-15')->toDateTimeString(); //2016-10-15 00:00:00
+echo Carbon::parse('2016-10-15 00:10:25')->toDateTimeString(); //2016-10-15 00:10:25
+
+echo Carbon::parse('today')->toDateTimeString(); //2016-10-15 00:00:00
+echo Carbon::parse('yesterday')->toDateTimeString(); //2016-10-14 00:00:00
+echo Carbon::parse('tomorrow')->toDateTimeString(); //2016-10-16 00:00:00
+echo Carbon::parse('2 days ago')->toDateTimeString(); //2016-10-13 20:49:53
+echo Carbon::parse('+3 days')->toDateTimeString(); //2016-10-18 20:49:53
+echo Carbon::parse('+2 weeks')->toDateTimeString(); //2016-10-29 20:49:53
+echo Carbon::parse('+4 months')->toDateTimeString(); //2017-02-15 20:49:53
+echo Carbon::parse('-1 year')->toDateTimeString(); //2015-10-15 20:49:53
+echo Carbon::parse('next wednesday')->toDateTimeString(); //2016-10-19 00:00:00
+echo Carbon::parse('last friday')->toDateTimeString(); //2016-10-14 00:00:00
+
+构造日期
+$year = '2015';
+$month = '04';
+$day = '12';
+
+echo Carbon::createFromDate($year, $month, $day); //2015-04-12 20:55:59
+
+$hour = '02';
+$minute = '15':
+$second = '30';
+
+echo Carbon::create($year, $month, $day, $hour, $minute, $second); //2015-04-12 02:15:30
+
+echo Carbon::createFromDate(null, 12, 25);  // 年默认为当前年份
