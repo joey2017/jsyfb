@@ -15,8 +15,9 @@ class WechatController extends Controller
     }
 
     /**
-     * 小程序登录获取用户信息
-     * @return [type]  [description]
+     * @param Request $request
+     * @return string
+     * @throws \Exception
      */
     public function getWxUserInfo(Request $request)
     {
@@ -27,7 +28,7 @@ class WechatController extends Controller
         $iv            = $request->input('iv', '');
 
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
-        $userInfo = $this->wxxcx->getLoginInfo($code);
+        $this->wxxcx->getLoginInfo($code);
 
         //获取解密后的用户信息
         return $this->wxxcx->getUserInfo($encryptedData, $iv);

@@ -11,6 +11,39 @@ use Illuminate\Support\Facades\Log;
 
 class ArticleLikeController extends Controller
 {
+    /**
+     * @SWG\Post(
+     *     path="/articles/likes",
+     *     summary="文章点赞",
+     *     tags={"点赞"},
+     *     description="热门资讯点赞",
+     *     operationId="articles-likes.create",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="article_id",
+     *         in="query",
+     *         description="请求参数-资讯id",
+     *         required=true,
+     *         type="integer",
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="操作成功"
+     *     ),
+     *     @SWG\Response(
+     *         response=400,
+     *         description="参数错误",
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="未授权",
+     *     ),
+     *     @SWG\Response(
+     *         response=406,
+     *         description="重复点赞",
+     *     ),
+     * )
+     */
     public function create(Request $request)
     {
         $article_id = $request->input('article_id', '');
@@ -45,7 +78,9 @@ class ArticleLikeController extends Controller
             });
 
         } catch (\PDOException $e) {
-            Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage(),'info' => $e->getTraceAsString()]);
+            Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage()]);
+        } catch (\Throwable $exception) {
+            Log::error('throwable错误：',['msg' => $exception->getMessage()]);
         }
 
         return $this->setStatusCode(201)->success('点赞成功');

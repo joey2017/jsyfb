@@ -17,6 +17,35 @@ class UserSignController extends Controller
         return $this->success(new UserSignResource($sign));
     }
 
+    /**
+     * @SWG\Post(
+     *     path="/signs/{id}",
+     *     summary="签到",
+     *     tags={"签到"},
+     *     description="签到操作",
+     *     operationId="signs.update",
+     *     produces={"application/json"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The person's id",
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="success"
+     *     ),
+     *     @SWG\Response(
+     *         response=406,
+     *         description="Unauthorized"
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="server error"
+     *     )
+     * )
+     */
     public function update(User $user)
     {
         try {
