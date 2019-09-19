@@ -33,7 +33,7 @@ class QuestionController extends AdminController
         $grid->column('answer', trans('admin.answer'))->width(600);
         //$grid->column('status', trans('admin.status'));
         $grid->column('status',trans('admin.status'))->display(function($status){
-            return Question::$_statuses[$status];
+            return Question::getStatusName($status);
         })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

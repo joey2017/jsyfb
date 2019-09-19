@@ -22,15 +22,16 @@ class UserSignController extends Controller
         try {
             $day = Carbon::now();
             $sign = $user->userSign()->first();
+
+            if ($day->toDateString() == Carbon::parse($sign->last_sign_time)->toDateString()) {
+                return $this->failed('您今天已经签到过了');
+            }
+
             $sign->successive_sign_count += 1;
             $sign->count                 += 1;
             $sign->week_count            += 1;
-            $sign->last_sign_time        = $day;
             $sign->updated_at            = $day;
-
-            if (time() - strtotime($sign->last_sign_time) < 86400) {
-                return $this->failed('您今天已经签到过了');
-            }
+            $sign->last_sign_time        = $day;
 
             if ($sign->save()) {
 
@@ -40,10 +41,8 @@ class UserSignController extends Controller
             }
 
         } catch (\PDOException $e) {
-           /* $monolog = Log::getMonolog();
-            $monolog->popHandler();
-            Log::useFiles(storage_path('logs/mysql/test.log'));*/
-            Log::error('数据库错误：'.$e->getMessage(),['msg' => $e->getTraceAsString()]);
+            //Log::error('数据库错误：'.$e->getMessage(),['msg' => $e->getTraceAsString()]);
+            Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage()]);
         }
 
         return $this->failed('签到失败,请稍后重试',500);

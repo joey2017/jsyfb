@@ -30,7 +30,7 @@ class BusinessCategoryController extends AdminController
         $grid->column('title', trans('admin.title'));
         $grid->column('descr', trans('admin.descr'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return BusinessCategory::$_statuses[$status];
+            return BusinessCategory::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

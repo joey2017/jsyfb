@@ -692,7 +692,7 @@ class ComposerStaticInit9a85be084211831a230f41e2d7e1b3ce
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Api\\FormRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Api/FormRequest.php',
-        'App\\Http\\Requests\\Api\\MessageForm' => __DIR__ . '/../..' . '/app/Http/Requests/Api/MessageForm.php',
+        'App\\Http\\Requests\\Api\\MessageForm' => __DIR__ . '/../..' . '/app/Http/Requests/Api/MessageRequest.php',
         'App\\Http\\Requests\\Api\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Api/UserRequest.php',
         'App\\Http\\Resources\\Api\\UserResource' => __DIR__ . '/../..' . '/app/Http/Resources/Api/UserResource.php',
         'App\\Models\\AnswerList' => __DIR__ . '/../..' . '/app/Models/AnswerList.php',

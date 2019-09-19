@@ -34,7 +34,7 @@ class AnswerListController extends AdminController
         $grid->column('option4', trans('admin.option4'));
         $grid->column('correct', trans('admin.correct'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return AnswerList::$_statuses[$status];
+            return AnswerList::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

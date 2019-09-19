@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class MessageForm extends FormRequest
+class MessageRequest extends FormRequest
 {
 
     /**

@@ -19,6 +19,10 @@ class Article extends Model
 {
     protected $table = 'jyfb_hot_article';
 
+    protected $fillable = [
+        'user_id','spec_id','content'
+    ];
+
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;

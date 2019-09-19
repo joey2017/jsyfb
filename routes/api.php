@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,11 +40,35 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
 
         //文章列表
         Route::get('/articles','ArticleController@index')->name('articles.index');
+        //文章发布
+        Route::post('/articles','ArticleController@store')->name('articles.store');
         //文章详情
         Route::get('/articles/{article}','ArticleController@show')->name('articles.show');
 
         //点赞
         Route::post('/articles/likes','ArticleLikeController@create')->name('articles-likes.create');
+
+        //分享
+        Route::post('/articles/shares','ArticleShareController@create')->name('articles-shares.create');
+
+        //律师
+        Route::get('/laywers','LaywerController@index')->name('laywers.index');
+
+        //律师详情
+        Route::get('/laywers/{laywer}','LaywerController@show')->name('laywers.show');
+
+        //业务分类
+        Route::get('/business/categories','BusinessCategoryController@index')->name('business-categories.index');
+
+        //常见问题
+        Route::get('/questions','QuestionController@index')->name('questions.index');
+
+        //公证处列表
+        Route::get('/notarys/offices','NotaryOfficeController@index')->name('notarys-offices.index');
+
+        //答题表
+        Route::get('/answer/lists','AnswerListController@index')->name('answer-lists.index');
+
 
     });
 });

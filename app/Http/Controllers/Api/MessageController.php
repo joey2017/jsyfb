@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\MessageForm;
+use App\Http\Requests\Api\MessageRequest;
 use App\Models\Message;
 
 /**
@@ -58,9 +58,9 @@ class MessageController extends Controller
      *   }}
      * )
      */
-    public function store(MessageForm $form)
+    public function store(MessageRequest $request)
     {
-        Message::create($form->all());
+        Message::create($request->all());
         return $this->setStatusCode('201')->success('留言成功');
     }
 
@@ -86,9 +86,9 @@ class MessageController extends Controller
      *   }}
      * )
      */
-    public function update(MessageForm $form)
+    public function update(MessageRequest $request)
     {
-        Message::create($form->all());
+        Message::create($request->all());
         return $this->setStatusCode('201')->success('留言成功');
     }
 }

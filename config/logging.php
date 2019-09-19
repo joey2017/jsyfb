@@ -89,6 +89,13 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'mysqllog' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/mysql/error.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
     ],
 
 ];

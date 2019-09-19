@@ -50,7 +50,7 @@ class NotaryOfficeController extends AdminController
         $grid->column('lng', trans('admin.lng'));
         $grid->column('lat', trans('admin.lat'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return NotaryOffice::$_statuses[$status];
+            return NotaryOffice::getStatusName($status);
         })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

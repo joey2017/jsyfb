@@ -20,10 +20,24 @@ class NotaryOffice extends Model
     protected $table = 'jyfb_notary_office';
 
     // 状态
-    public static $_statuses = ['禁用', '正常'];
+    const INVALID = 0;
+    const NORMAL  = 1;
 
     public function notaryOfficeComments()
     {
-        return $this->hasMany(NotaryOfficeComment::class,'office_id');
+        return $this->hasMany(NotaryOfficeComment::class, 'office_id');
+    }
+
+    public static function getStatusName(int $status):string
+    {
+        switch ($status)
+        {
+            case self::INVALID:
+                return '禁用';
+            case self::NORMAL:
+                return '正常';
+            default:
+                return '正常';
+        }
     }
 }

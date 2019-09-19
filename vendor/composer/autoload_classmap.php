@@ -139,7 +139,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Api\\FormRequest' => $baseDir . '/app/Http/Requests/Api/FormRequest.php',
-    'App\\Http\\Requests\\Api\\MessageForm' => $baseDir . '/app/Http/Requests/Api/MessageForm.php',
+    'App\\Http\\Requests\\Api\\MessageForm' => $baseDir . '/app/Http/Requests/Api/MessageRequest.php',
     'App\\Http\\Requests\\Api\\UserRequest' => $baseDir . '/app/Http/Requests/Api/UserRequest.php',
     'App\\Http\\Resources\\Api\\UserResource' => $baseDir . '/app/Http/Resources/Api/UserResource.php',
     'App\\Models\\AnswerList' => $baseDir . '/app/Models/AnswerList.php',

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\NoticeResource;
 use App\Models\Notice;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 
 class NoticeController extends Controller
@@ -20,7 +19,6 @@ class NoticeController extends Controller
     public function show(Notice $notice)
     {
         if ($notice->user_id != Auth::guard('api')->id()) {
-            //throw new AuthorizationException('无权访问');
             return $this->failed('无权访问',403);
 
         };

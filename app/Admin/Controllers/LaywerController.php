@@ -37,7 +37,7 @@ class LaywerController extends AdminController
         $grid->column('company', trans('admin.company'));
         $grid->column('summary', trans('admin.summary'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Laywer::$_statuses[$status];
+            return Laywer::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

@@ -6,6 +6,8 @@ use App\Models\Article;
 use App\Models\ArticleLike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ArticleLikeController extends Controller
 {
@@ -28,18 +30,22 @@ class ArticleLikeController extends Controller
 
         try {
             if ($cancel == 1) {
-                ArticleLike::where([['user_id', Auth::guard('api')->id()], ['article_id', $article_id]])->delete();
-                $article->like_count -= 1;
-                $article->save();
+                DB::transaction(function() use ($article){
+                    ArticleLike::where([['user_id', Auth::guard('api')->id()], ['article_id', $article->id]])->delete();
+                    $article->like_count -= 1;
+                    $article->save();
+                });
+
                 return $this->setStatusCode(201)->success('取消点赞成功');
             }
-
-            ArticleLike::create(['user_id' => Auth::guard('api')->id(),'article_id' => $article_id]);
-            $article->like_count += 1;
-            $article->save();
+            DB::transaction(function() use ($article){
+                ArticleLike::create(['user_id' => Auth::guard('api')->id(),'article_id' => $article->id]);
+                $article->like_count += 1;
+                $article->save();
+            });
 
         } catch (\PDOException $e) {
-
+            Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage(),'info' => $e->getTraceAsString()]);
         }
 
         return $this->setStatusCode(201)->success('点赞成功');
