@@ -2,23 +2,60 @@
     "swagger": "2.0",
     "info": {
         "title": "\u5bb6\u6709\u6cd5\u5b9d\u63a5\u53e3\u6587\u6863",
-        "description": "\u5bb6\u6709\u6cd5\u5b9d\u662f\u4e00\u4e2a\u4f7f\u7528\u5ea6\u975e\u5e38\u9ad8\u7684\u5fae\u4fe1\u5c0f\u7a0b\u5e8f\uff0c\u53d1\u5e03\u81f3\u4eca\u83b7\u5f97\u4e86\u65e0\u6570\u7684\u7528\u6237\u597d\u8bc4\uff0c\u4e3a\u4e86\u6ee1\u8db3\u4f7f\u7528\u8005\u7684\u9700\u8981\uff0c\u73b0\u5c06\u63a5\u53e3\u5217\u8868\u8fd9\u91cc\u5982\u4e0b\uff0c\u5982\u6709\u95ee\u9898\u6b22\u8fce\u53ca\u65f6\u53cd\u9988",
+        "description": "\u5bb6\u6709\u6cd5\u5b9d\u662f\u4e00\u4e2a\u4f7f\u7528\u5ea6\u975e\u5e38\u9ad8\u7684\u5fae\u4fe1\u5c0f\u7a0b\u5e8f\uff0c\u53d1\u5e03\u81f3\u4eca\u83b7\u5f97\u4e86\u65e0\u6570\u7684\u7528\u6237\u597d\u8bc4\uff0c\u4e3a\u4e86\u6ee1\u8db3\u4f7f\u7528\u8005\u7684\u9700\u8981\uff0c\u73b0\u5c06\u63a5\u53e3\u5217\u8868\u8fd9\u91cc\u5982\u4e0b\uff0c\u5982\u6709\u95ee\u9898\u6b22\u8fce\u53ca\u65f6\u53cd\u9988<br>\r\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>\r\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>\r\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>",
         "contact": {
             "name": "joey",
             "email": "zongjun.li@outlook.com"
         },
         "version": "1.0"
     },
-    "host": "http://dev.laravel.com/api",
+    "host": "dev.laravel.com/api/v1",
     "basePath": "/",
     "schemes": [
         "http"
     ],
     "paths": {
+        "/answer": {
+            "get": {
+                "tags": [
+                    "Misc"
+                ],
+                "summary": "\u6bcf\u65e5\u7b54\u9898\u5e93",
+                "description": "\u7b54\u9898\u5217\u8868",
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/answer/{id}": {
+            "get": {
+                "tags": [
+                    "Misc"
+                ],
+                "summary": "\u9898\u76ee\u8be6\u60c5",
+                "description": "\u9898\u76ee\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7b54\u9898id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
         "/articles/likes": {
             "post": {
                 "tags": [
-                    "\u70b9\u8d5e"
+                    "MainPage"
                 ],
                 "summary": "\u6587\u7ae0\u70b9\u8d5e",
                 "description": "\u70ed\u95e8\u8d44\u8baf\u70b9\u8d5e",
@@ -51,52 +88,95 @@
                 }
             }
         },
+        "/attentions": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u6211\u7684\u5173\u6ce8\u5217\u8868",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u3002",
+                "operationId": "attentions.index",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "401": {
+                        "description": "\u672a\u6388\u6743"
+                    },
+                    "405": {
+                        "description": "\u8bbf\u95ee\u65b9\u5f0f\u4e0d\u6b63\u786e"
+                    }
+                }
+            }
+        },
+        "/attentions/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5173\u6ce8\u8be6\u60c5",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u3002",
+                "operationId": "messages.store",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "401": {
+                        "description": "\u672a\u6388\u6743"
+                    },
+                    "405": {
+                        "description": "\u8bbf\u95ee\u65b9\u5f0f\u4e0d\u6b63\u786e"
+                    }
+                }
+            }
+        },
         "/laywer": {
             "get": {
                 "tags": [
-                    "\u5546\u54c1"
+                    "Tool"
                 ],
-                "summary": "\u5546\u54c1\u5217\u8868",
+                "summary": "\u5f8b\u5e08\u5217\u8868",
                 "parameters": [
                     {
-                        "name": "goods_name",
+                        "name": "name",
                         "in": "query",
-                        "description": "\u5546\u54c1\u540d\u79f0",
+                        "description": "\u5f8b\u5e08\u540d\u79f0",
                         "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "min_shop_price",
+                        "name": "cate_id",
                         "in": "query",
-                        "description": "\u5546\u54c1\u6700\u5c0f\u4ef7\u683c",
-                        "required": false,
-                        "type": "number"
-                    },
-                    {
-                        "name": "max_shop_price",
-                        "in": "query",
-                        "description": "\u5546\u54c1\u6700\u5927\u4ef7\u683c",
-                        "required": false,
-                        "type": "number"
-                    },
-                    {
-                        "name": "goods_sn",
-                        "in": "query",
-                        "description": "\u5546\u54c1\u7f16\u53f7",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "brand_id",
-                        "in": "query",
-                        "description": "\u54c1\u724cid",
+                        "description": "\u804c\u52a1\u5206\u7c7bid",
                         "required": false,
                         "type": "integer"
                     },
                     {
-                        "name": "goods_type",
+                        "name": "province",
                         "in": "query",
-                        "description": "\u5546\u54c1\u7c7b\u578b  1\uff1a\u5546\u54c1 2\uff1a\u5957\u9910 3\uff1a\u79ef\u5206\u5546\u54c1",
+                        "description": "\u7701\u4efd",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "\u57ce\u5e02",
                         "required": false,
                         "type": "string"
                     },
@@ -114,63 +194,39 @@
                         ]
                     },
                     {
-                        "name": "cat_id",
+                        "name": "score",
                         "in": "query",
-                        "description": "\u5546\u54c1\u5206\u7c7bid\uff0c\u53ef\u4ee5\u662f\u4e00\u4e8c\u4e09\u7ea7\u5206\u7c7bid\uff0c\u53ef\u4ee5\u662f\u6570\u7ec4\uff08\u591a\u4e2a\uff09\u6216\u8005\u6570\u5b57",
+                        "description": "\u670d\u52a1\u8bc4\u5206",
                         "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "filter_cat_id",
-                        "in": "query",
-                        "description": "\u9700\u8981\u8fdb\u884c\u8fc7\u6ee4\u7684\u5546\u54c1\u5206\u7c7bid\uff0c\u53ef\u4ee5\u662f\u4e00\u4e8c\u4e09\u7ea7\u5206\u7c7bid\uff0c\u53ef\u4ee5\u662f\u6570\u7ec4\uff08\u591a\u4e2a\uff09\u6216\u8005\u6570\u5b57",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "\u6392\u5e8f\uff0c\u4f9d\u6b21\u662f \u5e93\u5b58\u6392\u5e8f \u552e\u4ef7\u6392\u5e8f \u9500\u91cf\u6392\u5e8f \u4e0b\u5355\u91cf  \u5e26'-'\u53f7\u7684\u4e3a\u5012\u5e8f\uff0c\u53cd\u4e4b\u4e3a\u5347\u5e8f",
-                        "required": false,
-                        "type": "string",
-                        "enum": [
-                            "goods_number",
-                            "-goods_number",
-                            "shop_price",
-                            "-shop_price",
-                            "sales_volume",
-                            "-sales_volume"
-                        ]
-                    },
-                    {
-                        "name": "get_good_evaluate",
-                        "in": "query",
-                        "description": "\u9700\u8981\u83b7\u53d6\u597d\u8bc4\u91cf 0\uff1a\u4e0d\u83b7\u53d6 1\uff1a\u83b7\u53d6",
-                        "required": false,
-                        "type": "integer",
-                        "enum": [
-                            0,
-                            1
-                        ]
-                    },
-                    {
-                        "name": "get_collect_num",
-                        "in": "query",
-                        "description": "\u9700\u8981\u83b7\u53d6\u6536\u85cf\u6570 0\uff1a\u4e0d\u83b7\u53d6 1\uff1a\u83b7\u53d6",
-                        "required": false,
-                        "type": "integer",
-                        "enum": [
-                            0,
-                            1
-                        ]
+                        "type": "number"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "\u83b7\u53d6\u5546\u54c1\u5217\u8868",
-                        "schema": {
-                            "$ref": "#/definitions/goodsTmp"
-                        }
+                        "description": "\u83b7\u53d6\u5f8b\u5e08\u5217\u8868"
+                    }
+                }
+            }
+        },
+        "/laywer/{id}": {
+            "get": {
+                "tags": [
+                    "Tool"
+                ],
+                "summary": "\u5f8b\u5e08\u8be6\u60c5",
+                "description": "\u5f8b\u5e08\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5f8b\u5e08id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
                     }
                 }
             }
@@ -178,7 +234,7 @@
         "/messages": {
             "post": {
                 "tags": [
-                    "\u7559\u8a00"
+                    "MainPage"
                 ],
                 "summary": "\u63d0\u4ea4\u7559\u8a00",
                 "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u3002",
@@ -209,10 +265,10 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "success"
+                        "description": "\u6210\u529f"
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "description": "\u672a\u6388\u6743"
                     }
                 }
             }
@@ -220,7 +276,7 @@
         "/notices": {
             "get": {
                 "tags": [
-                    "\u7cfb\u7edf\u6d88\u606f"
+                    "MainPage"
                 ],
                 "summary": "\u6d88\u606f\u5217\u8868",
                 "description": "\u5305\u542b\u5404\u79cd\u6d88\u606f",
@@ -246,12 +302,15 @@
                                     "type": "string"
                                 },
                                 "status": {
-                                    "description": "\u6d88\u606f\u72b6\u6001",
+                                    "description": "\u6d88\u606f\u72b6\u6001\uff1a0\u672a\u8bfb1\u5df2\u8bfb",
                                     "type": "integer"
                                 }
                             },
                             "type": "json"
                         }
+                    },
+                    "401": {
+                        "description": "\u672a\u6388\u6743"
                     },
                     "422": {
                         "description": "error"
@@ -259,10 +318,36 @@
                 }
             }
         },
+        "/notices/{id}": {
+            "get": {
+                "tags": [
+                    "MainPage"
+                ],
+                "summary": "\u6d88\u606f\u8be6\u60c5",
+                "description": "\u6d88\u606f\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u6d88\u606fid",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "tags": [
-                    "\u7528\u6237\u5217\u8868"
+                    "User"
                 ],
                 "summary": "\u7528\u6237\u8d44\u6599\u7ba1\u7406",
                 "description": "\u7528\u6237\u8d44\u6599\u5217\u8868",
@@ -316,20 +401,24 @@
                                                 "description": "id",
                                                 "type": "integer"
                                             },
-                                            "source": {
-                                                "description": "\u6570\u636e\u6765\u6e90",
+                                            "username": {
+                                                "description": "\u7528\u6237\u540d",
                                                 "type": "string"
                                             },
-                                            "industry_no": {
-                                                "description": "\u884c\u4e1a\u7f16\u53f7",
-                                                "type": "integer"
+                                            "nickname": {
+                                                "description": "\u6635\u79f0",
+                                                "type": "string"
                                             },
-                                            "channel_id": {
-                                                "description": "\u6e20\u9053id",
-                                                "type": "integer"
+                                            "avatar": {
+                                                "description": "\u5934\u50cf",
+                                                "type": "string"
                                             },
-                                            "name": {
-                                                "description": "\u540d\u79f0",
+                                            "mobile": {
+                                                "description": "\u624b\u673a\u53f7\u7801",
+                                                "type": "string"
+                                            },
+                                            "descr": {
+                                                "description": "\u63cf\u8ff0",
                                                 "type": "string"
                                             }
                                         }
@@ -345,10 +434,153 @@
                 }
             }
         },
-        "/signs/{id}": {
+        "/user/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u7528\u6237\u8be6\u60c5",
+                "description": "\u7528\u6237\u8be6\u60c5\u63a5\u53e3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/user": {
             "post": {
                 "tags": [
-                    "\u7b7e\u5230"
+                    "User"
+                ],
+                "summary": "\u7528\u6237\u6ce8\u518c",
+                "description": "\u7528\u6237\u6ce8\u518c\u63a5\u53e3",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "\u7528\u6237\u540d",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "\u767b\u5f55\u5bc6\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u767b\u5f55\u63a5\u53e3(\u7528\u6237\u540d+\u5bc6\u7801)",
+                "description": "\u7528\u6237\u767b\u5f55\u63a5\u53e3,\u8d26\u53f7\u53ef\u4e3a \u7528\u6237\u540d \u6216 \u624b\u673a\u53f7",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "\u767b\u5f55\u7528\u6237\u540d/\u624b\u673a\u53f7",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "\u767b\u5f55\u5bc6\u7801",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "client_type",
+                        "in": "formData",
+                        "description": "\u8c03\u7528\u6b64\u63a5\u53e3\u7684\u5ba2\u6237\u7aef\u7c7b\u578b: 1-Android, 2-IOS. \u975e\u5fc5\u586b,\u6240\u4ee5 required \u5199\u4e86 false",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u767b\u51fa",
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/user/info": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u4e2a\u4eba\u4fe1\u606f",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
+        "/signs/{id}": {
+            "get": {
+                "tags": [
+                    "MainPage"
+                ],
+                "summary": "\u7b7e\u5230\u9875",
+                "description": "\u7b7e\u5230\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "MainPage"
                 ],
                 "summary": "\u7b7e\u5230",
                 "description": "\u7b7e\u5230\u64cd\u4f5c",
@@ -360,7 +592,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "The person's id",
+                        "description": "\u7528\u6237id",
                         "required": true,
                         "type": "integer"
                     }
@@ -379,26 +611,38 @@
             }
         }
     },
-    "definitions": {
-        "goodsTmp": {
-            "required": [
-                "goods_id"
-            ],
-            "properties": {
-                "goods_id": {
-                    "description": "\u5546\u54c1id",
-                    "type": "integer"
-                },
-                "cat_id": {
-                    "description": "\u5206\u7c7bid\uff0c\u6700\u591a\u4e09\u7ea7\uff0c\u6309\u6570\u7ec4\u4e0b\u6807\u6392\u7ea7\u522b",
-                    "type": "string"
-                },
-                "catName": {
-                    "description": "\u5546\u54c1\u5206\u7c7b\u5c42\u7ea7\u540d\u79f0\uff0c\u5982\uff1a\u4e00\u7ea7\u5206\u7c7b > \u4e8c\u7ea7\u5206\u7c7b > \u4e09\u7ea7\u5206\u7c7b",
-                    "type": "string"
-                }
-            },
-            "type": "object"
+    "definitions": {},
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "MainPage",
+            "description": "\u9996\u9875\u6a21\u5757"
+        },
+        {
+            "name": "LegalBook",
+            "description": "\u5bb6\u6709\u6cd5\u5b9d\u5b9d\u5178"
+        },
+        {
+            "name": "Tool",
+            "description": "\u5de5\u5177\u6a21\u5757"
+        },
+        {
+            "name": "Specialist",
+            "description": "\u4e13\u5c5e\u987e\u95ee"
+        },
+        {
+            "name": "User",
+            "description": "\u4e2a\u4eba\u4e2d\u5fc3"
+        },
+        {
+            "name": "Misc",
+            "description": "\u5176\u4ed6\u63a5\u53e3"
+        }
+    ]
 }

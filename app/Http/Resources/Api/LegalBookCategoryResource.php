@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\AnswerList;
+use App\Models\LegalBookCategory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnswerListResource extends JsonResource
+class LegalBookCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +18,11 @@ class AnswerListResource extends JsonResource
         return [
             'id'         => $this->id,
             'title'      => $this->title,
-            'A'          => $this->A,
-            'B'          => $this->B,
-            'C'          => $this->C,
-            'D'          => $this->D,
-            'correct'    => $this->correct,
-            'status'     => AnswerList::getStatusName($this->status),
+            'parent_id'  => $this->parent_id,
+            'path'       => $this->path,
+            'order'      => $this->order,
+            'logo'       => $this->logo,
+            'status'     => LegalBookCategory::getStatusName($this->status),
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at
         ];

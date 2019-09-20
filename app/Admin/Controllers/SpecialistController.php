@@ -36,7 +36,7 @@ class SpecialistController extends AdminController
         $grid->column('telephone', trans('admin.telephone'));
         $grid->column('company', trans('admin.company'));
         $grid->column('comments_count', trans('admin.comments_count'));
-        $grid->column('avg_point', trans('admin.avg_point'));
+        $grid->column('score', trans('admin.score'));
         $grid->column('summary', trans('admin.summary'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Specialist::$_statuses[$status];

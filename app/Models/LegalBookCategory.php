@@ -24,9 +24,26 @@ class LegalBookCategory extends Model
     //
     protected $table = 'jyfb_legal_book_category';
 
+    // 状态
+    const INVALID = 0;
+    const NORMAL  = 1;
+
     public function legalBook()
     {
         //return $this->hasOne('App\LegalBook', 'cate_id');
         return $this->hasOne(LegalBook::class, 'cate_id');
+    }
+
+    public static function getStatusName(int $status):string
+    {
+        switch ($status)
+        {
+            case self::INVALID:
+                return '禁用';
+            case self::NORMAL:
+                return '正常';
+            default:
+                return '正常';
+        }
     }
 }

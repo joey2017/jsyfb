@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class ArticleShareController extends Controller
 {
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $article_id = $request->input('article_id', '');
 
@@ -31,6 +31,8 @@ class ArticleShareController extends Controller
 
         } catch (\PDOException $e) {
             Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage()]);
+        } catch (\Throwable $exception) {
+            Log::error('throwable错误：',['msg' => $exception->getMessage()]);
         }
 
         return $this->setStatusCode(201)->success('分享成功');

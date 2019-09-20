@@ -15,7 +15,7 @@ class UserController extends Controller
      * @SWG\Get(
      *     path="/users",
      *     summary="用户资料管理",
-     *     tags={"用户列表"},
+     *     tags={"User"},
      *     description="用户资料列表",
      *     operationId="user.index",
      *     produces={"application/json"},
@@ -37,8 +37,8 @@ class UserController extends Controller
      *         @SWG\Schema(
      *            type="json",
      *            @SWG\Property(
-     *                  property="pages",
-     *                  @SWG\Property(
+     *                 property="pages",
+     *                 @SWG\Property(
      *                     property="totalnum",
      *                     type="integer",
      *                     description="记录总数",
@@ -68,24 +68,29 @@ class UserController extends Controller
      *                     description="id",
      *                  ),
      *                  @SWG\Property(
-     *                     property="source",
+     *                     property="username",
      *                     type="string",
-     *                     description="数据来源",
+     *                     description="用户名",
      *                  ),
      *                  @SWG\Property(
-     *                     property="industry_no",
-     *                     type="integer",
-     *                     description="行业编号",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="channel_id",
-     *                     type="integer",
-     *                     description="渠道id",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="name",
+     *                     property="nickname",
      *                     type="string",
-     *                     description="名称",
+     *                     description="昵称",
+     *                  ),
+     *                  @SWG\Property(
+     *                     property="avatar",
+     *                     type="string",
+     *                     description="头像",
+     *                  ),
+     *                  @SWG\Property(
+     *                     property="mobile",
+     *                     type="string",
+     *                     description="手机号码",
+     *                  ),
+     *                  @SWG\Property(
+     *                     property="descr",
+     *                     type="string",
+     *                     description="描述",
      *                  ),
      *              )
      *            ),
@@ -105,17 +110,71 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
+    /**
+     * @SWG\Get(
+     *   path="/user/{id}",
+     *   tags={"User"},
+     *   summary="用户详情",
+     *   description="用户详情接口",
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
+     *     description="用户id"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   )
+     * )
+     */
     public function show(User $user)
     {
         return $this->success(new UserResource($user));
     }
 
+    /**
+     * @SWG\Post(
+     *   path="/user",
+     *   tags={"User"},
+     *   summary="用户注册",
+     *   description="用户注册接口",
+     *   @SWG\Parameter(name="username", type="string", required=true, in="formData",
+     *     description="用户名"
+     *   ),
+     *   @SWG\Parameter(name="password", type="string", required=true, in="formData",
+     *     description="登录密码"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   )
+     * )
+     */
     public function store(UserRequest $userRequest)
     {
         User::create($userRequest->all());
         return $this->setStatusCode(201)->success('用户注册成功');
     }
 
+    /**
+     * @SWG\Post(
+     *   path="/login",
+     *   tags={"User"},
+     *   summary="登录接口(用户名+密码)",
+     *   description="用户登录接口,账号可为 用户名 或 手机号",
+     *   @SWG\Parameter(name="username", type="string", required=true, in="formData",
+     *     description="登录用户名/手机号"
+     *   ),
+     *   @SWG\Parameter(name="password", type="string", required=true, in="formData",
+     *     description="登录密码"
+     *   ),
+     *   @SWG\Parameter(name="client_type", type="integer", required=false, in="formData",
+     *     description="调用此接口的客户端类型: 1-Android, 2-IOS. 非必填,所以 required 写了 false"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   )
+     * )
+     */
     public function login(Request $request)
     {
 
@@ -139,14 +198,35 @@ class UserController extends Controller
         }
     }
 
-    //用户退出
+    /**
+     * @SWG\Get(
+     *   path="/logout",
+     *   tags={"User"},
+     *   summary="登出",
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   )
+     * )
+     */
     public function logout()
     {
         Auth::guard('api')->logout();
         return $this->success('退出成功...');
     }
 
-    //返回当前登录用户信息
+    /**
+     * @SWG\Get(
+     *   path="/user/info",
+     *   tags={"User"},
+     *   produces={"application/json"},
+     *   summary="个人信息",
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   )
+     * )
+     */
     public function info()
     {
         $user = Auth::guard('api')->user();

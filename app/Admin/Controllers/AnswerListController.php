@@ -28,10 +28,10 @@ class AnswerListController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', '题目');
-        $grid->column('option1', trans('admin.option1'));
-        $grid->column('option2', trans('admin.option2'));
-        $grid->column('option3', trans('admin.option3'));
-        $grid->column('option4', trans('admin.option4'));
+        $grid->column('A', trans('admin.A'));
+        $grid->column('B', trans('admin.B'));
+        $grid->column('C', trans('admin.C'));
+        $grid->column('D', trans('admin.D'));
         $grid->column('correct', trans('admin.correct'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return AnswerList::getStatusName($status);
@@ -54,10 +54,10 @@ class AnswerListController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('title', trans('admin.title'));
-        $show->field('option1', trans('admin.option1'));
-        $show->field('option2', trans('admin.option2'));
-        $show->field('option3', trans('admin.option3'));
-        $show->field('option4', trans('admin.option4'));
+        $show->field('A', trans('admin.A'));
+        $show->field('B', trans('admin.B'));
+        $show->field('C', trans('admin.C'));
+        $show->field('D', trans('admin.D'));
         $show->field('correct', trans('admin.correct'));
         $show->field('status', trans('admin.status'));
         $show->field('created_at', trans('admin.created_at'));
@@ -76,10 +76,10 @@ class AnswerListController extends AdminController
         $form = new Form(new AnswerList);
 
         $form->text('title', trans('admin.title'));
-        $form->text('option1', trans('admin.option1'));
-        $form->text('option2', trans('admin.option2'));
-        $form->text('option3', trans('admin.option3'));
-        $form->text('option4', trans('admin.option4'));
+        $form->text('A', trans('admin.A'));
+        $form->text('B', trans('admin.B'));
+        $form->text('C', trans('admin.C'));
+        $form->text('D', trans('admin.D'));
         $form->text('correct', trans('admin.correct'));
         $form->switch('status', trans('admin.status'))->default(1);
 

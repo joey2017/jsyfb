@@ -15,7 +15,7 @@ class ArticleLikeController extends Controller
      * @SWG\Post(
      *     path="/articles/likes",
      *     summary="文章点赞",
-     *     tags={"点赞"},
+     *     tags={"MainPage"},
      *     description="热门资讯点赞",
      *     operationId="articles-likes.create",
      *     produces={"application/json"},
@@ -44,7 +44,7 @@ class ArticleLikeController extends Controller
      *     ),
      * )
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $article_id = $request->input('article_id', '');
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\AnswerList;
+use App\Models\QuestionCategory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnswerListResource extends JsonResource
+class QuestionCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -18,12 +18,11 @@ class AnswerListResource extends JsonResource
         return [
             'id'         => $this->id,
             'title'      => $this->title,
-            'A'          => $this->A,
-            'B'          => $this->B,
-            'C'          => $this->C,
-            'D'          => $this->D,
-            'correct'    => $this->correct,
-            'status'     => AnswerList::getStatusName($this->status),
+            'parent_id'  => $this->parent_id,
+            'path'       => $this->path,
+            'order'      => $this->order,
+            'logo'       => $this->logo,
+            'status'     => QuestionCategory::getStatusName($this->status),
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at
         ];

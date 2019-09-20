@@ -46,10 +46,10 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/articles/{article}','ArticleController@show')->name('articles.show');
 
         //点赞
-        Route::post('/articles/likes','ArticleLikeController@create')->name('articles-likes.create');
+        Route::post('/articles/likes','ArticleLikeController@store')->name('articles-likes.store');
 
         //分享
-        Route::post('/articles/shares','ArticleShareController@create')->name('articles-shares.create');
+        Route::post('/articles/shares','ArticleShareController@store')->name('articles-shares.store');
 
         //律师
         Route::get('/laywers','LaywerController@index')->name('laywers.index');
@@ -62,12 +62,25 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
 
         //常见问题
         Route::get('/questions','QuestionController@index')->name('questions.index');
+        Route::get('/questions/categories','QuestionCategoryController@index')->name('questions-categories.index');
 
         //公证处列表
         Route::get('/notarys/offices','NotaryOfficeController@index')->name('notarys-offices.index');
 
         //答题表
         Route::get('/answer/lists','AnswerListController@index')->name('answer-lists.index');
+
+        //每日答题
+        Route::get('/answer/records','AnswerRecordController@index')->name('answer-records.index');
+        Route::post('/answer/records','AnswerRecordController@store')->name('answer-records.store');
+        Route::get('/answer/records/{record}','AnswerRecordController@show')->name('answer-records.show');
+
+        //宝典分类
+        Route::get('/legal/categories','LegalBookCategoryController@index')->name('legal-categories.index');
+
+        //关注
+        Route::get('/attentions','AttentionController@index')->name('attentions.index');
+        Route::get('/attentions/{attention}','AttentionController@show')->name('attentions.show');
 
 
     });

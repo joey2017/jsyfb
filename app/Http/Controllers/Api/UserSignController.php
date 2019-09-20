@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Log;
 class UserSignController extends Controller
 {
 
+    /**
+     * @SWG\Get(
+     *   path="/signs/{id}",
+     *   tags={"MainPage"},
+     *   summary="签到页",
+     *   description="签到详情",
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
+     *     description="用户id"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   ),
+     *   @SWG\Response(
+     *     response=404,
+     *     description="未找到"
+     *   )
+     * )
+     */
     public function show(User $user)
     {
         //$sign = UserSign::firstOrCreate(['user_id' => $user->id]);
@@ -21,7 +40,7 @@ class UserSignController extends Controller
      * @SWG\Post(
      *     path="/signs/{id}",
      *     summary="签到",
-     *     tags={"签到"},
+     *     tags={"MainPage"},
      *     description="签到操作",
      *     operationId="signs.update",
      *     produces={"application/json"},
@@ -29,7 +48,7 @@ class UserSignController extends Controller
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="The person's id",
+     *         description="用户id",
      *         type="integer"
      *     ),
      *     @SWG\Response(
@@ -46,6 +65,7 @@ class UserSignController extends Controller
      *     )
      * )
      */
+    //todo 不需要传递User模型了吧？
     public function update(User $user)
     {
         try {

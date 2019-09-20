@@ -31,7 +31,7 @@ class AttentionController extends AdminController
         $grid->column('specialist.name', '关注专家');
         //$grid->column('role', trans('admin.role'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Attention::$_statuses[$status];
+            return Attention::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

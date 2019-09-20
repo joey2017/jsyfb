@@ -12,7 +12,7 @@ class MessageController extends Controller
      * @SWG\Post(
      *   path="/messages",
      *   summary="提交留言",
-     *   tags={"留言"},
+     *   tags={"MainPage"},
      *   description="请求该接口需要先登录。",
      *   operationId="messages.store",
      *   produces={"application/json"},
@@ -35,8 +35,8 @@ class MessageController extends Controller
      *     type="string",
      *     description="用户手机",
      *   ),
-     *   @SWG\Response(response="201", description="success"),
-     *   @SWG\Response(response="401", description="Unauthorized")
+     *   @SWG\Response(response="201", description="成功"),
+     *   @SWG\Response(response="401", description="未授权")
      * )
      */
     public function store(MessageRequest $request)

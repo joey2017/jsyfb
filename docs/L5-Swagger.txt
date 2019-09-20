@@ -1,4 +1,58 @@
 <?php
+
+schemes: 使用协议 (可以填多种协议)
+host: 项目地址, 这个地址会作为每个接口的 url base ,拼接起来一期作为访问地址
+consumes: 接口默认接收的MIME类型, 我的例子中的 formData 对应post表单类型. 注意这是项目默认值,在单个接口注释里可以复写这个值.
+produces: 接口默认的回复MIME类型. api接口用的比较多的就是 application/json 和 application/xml.
+@SWG\Info: 这个里面填写的东西,会放在文档的最开头,用作文档说明.
+@SWG\Tag: tag是用来给文档分类的,name字段必须唯一.某个接口可以指定多个tag,那它就会出现在多组分类中. tag也可以不用在这里预先定义就可以使用,但那样就没有描述了. 多说无益,稍微用用就啥都明白了.
+
+接口描述 (@SWGGet, @SWGPost 等) 常用字段:
+summary - string
+接口的简要介绍,会显示在接口标头上,不能超过120个字符
+
+description - string
+接口的详细介绍
+
+externalDocs - string
+外部文档链接
+
+operationId - string
+全局唯一的接口标识
+
+consumes - [string]
+接口接收的MIME类型
+
+produces - [string]
+接口返回的MIME类型,如 application/json
+
+schemes -    [string]
+接口所支持的协议,取值仅限: "http", "https", "ws", "wss"
+
+parameters -    [Parameter Object | Reference Object]
+参数列表
+
+
+参数描述 (@SWGParameter) 常用字段:
+
+name - string
+参数名. 通过路径传参(in 取值 "path")时有注意事项,没用到,懒得看了...
+
+in - string
+参数从何处来. 必填. 取值仅限: "query", "header", "path", "formData", "body"
+
+description - string
+参数描述. 最好别太长
+
+type - string
+参数类型. 取值仅限: "string", "number", "integer", "boolean", "array", "file"
+
+required - boolean
+参数是否必须. 通过路径传参(in 取值 "path")时必须为 true.
+
+default - *
+默认值. 在你打算把参数通过 path 传递时规矩挺多,我没用到.用到的同学自己看文档吧.
+
 /**
  * @SWG\Swagger(
  *     basePath="/api/v1",

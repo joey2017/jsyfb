@@ -16,10 +16,10 @@ class CreateJsyfbAnswerListTable extends Migration
         Schema::create('jsyfb_answer_list', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title',200)->nullable()->comment('题目');
-            $table->string('option1',100)->nullable()->comment('选项1');
-            $table->string('option2',100)->nullable()->comment('选项2');
-            $table->string('option3',100)->nullable()->comment('选项3');
-            $table->string('option4',100)->nullable()->comment('选项4');
+            $table->string('A',100)->nullable()->comment('选项A');
+            $table->string('B',100)->nullable()->comment('选项B');
+            $table->string('C',100)->nullable()->comment('选项C');
+            $table->string('D',100)->nullable()->comment('选项D');
             $table->tinyInteger('status')->default(1)->comment('是否删除：0否1是');
             $table->tinyInteger('is_deleted')->default(0)->comment('是否删除：0否1是');
             $table->timestamps();

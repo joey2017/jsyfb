@@ -21,7 +21,7 @@ class NotaryOfficeResource extends JsonResource
             'mobile'         => $this->mobile,
             'telephone'      => $this->telephone,
             'comments_count' => $this->comments_count,
-            'avg_point'      => $this->avg_point,
+            'score'          => $this->score,
             'address'        => $this->address,
             'lng'            => $this->lng,
             'lat'            => $this->lat,

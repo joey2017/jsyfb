@@ -19,6 +19,10 @@ class AnswerRecord extends Model
     //
     protected $table = 'jyfb_everyday_answer_record';
 
+    protected $fillable = [
+        'user_id','answer_list_id','date','question','answer','correct','score'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');

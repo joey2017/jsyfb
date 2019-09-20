@@ -8,32 +8,49 @@
  *     @SWG\Info(
  *         version="1.0",
  *         title="家有法宝接口文档",
- *         description="家有法宝是一个使用度非常高的微信小程序，发布至今获得了无数的用户好评，为了满足使用者的需要，现将接口列表这里如下，如有问题欢迎及时反馈",
+ *         description="家有法宝是一个使用度非常高的微信小程序，发布至今获得了无数的用户好评，为了满足使用者的需要，现将接口列表这里如下，如有问题欢迎及时反馈<br>
+以后大家就在这里愉快的对接口把!<br>
+以后大家就在这里愉快的对接口把!<br>
+以后大家就在这里愉快的对接口把!<br>",
  *         @SWG\Contact(name="joey", email="zongjun.li@outlook.com"),
- *     )
+ *     ),
+ *     @SWG\Tag(
+ *         name="MainPage",
+ *         description="首页模块",
+ *     ),
+ *
+ *     @SWG\Tag(
+ *         name="LegalBook",
+ *         description="家有法宝宝典",
+ *     ),
+ *
+ *     @SWG\Tag(
+ *         name="Tool",
+ *         description="工具模块",
+ *     ),
+ *
+ *     @SWG\Tag(
+ *         name="Specialist",
+ *         description="专属顾问",
+ *     ),
+ *
+ *     @SWG\Tag(
+ *         name="User",
+ *         description="个人中心",
+ *     ),
+ *
+ *     @SWG\Tag(
+ *         name="Misc",
+ *         description="其他接口",
+ *     ),
  * )
  */
 
 /**
- * 定义块，一维数组
- * @SWG\Definition(
- *     definition="goodsTmp",
- *     type="object",
- *     required={"goods_id"},
- *     @SWG\Property(
- *         property="goods_id",
- *         type="integer",
- *         description="商品id"
- *     ),
- *     @SWG\Property(
- *         property="cat_id",
- *         type="string",
- *         description="分类id，最多三级，按数组下标排级别"
- *     ),
- *     @SWG\Property(
- *         property="catName",
- *         type="string",
- *         description="商品分类层级名称，如：一级分类 > 二级分类 > 三级分类"
- *     )
+ * @SWG\SecurityScheme(
+ *     securityDefinition="Bearer",
+ *     type="apiKey",
+ *     name="Authorization",
+ *     in="header"
  * )
  */

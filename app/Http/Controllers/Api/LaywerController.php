@@ -10,47 +10,33 @@ class LaywerController extends Controller
     /**
      * @SWG\Get(
      *   path="/laywer",
-     *   tags={"商品"},
-     *   summary="商品列表",
+     *   tags={"Tool"},
+     *   summary="律师列表",
      *   @SWG\Parameter(
      *        in = "query",
-     *        name = "goods_name",
-     *        description = "商品名称",
+     *        name = "name",
+     *        description = "律师名称",
      *        required = false,
      *        type = "string"
      *   ),
      *   @SWG\Parameter(
      *        in = "query",
-     *        name = "min_shop_price",
-     *        description = "商品最小价格",
-     *        required = false,
-     *        type = "number"
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "max_shop_price",
-     *        description = "商品最大价格",
-     *        required = false,
-     *        type = "number"
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "goods_sn",
-     *        description = "商品编号",
-     *        required = false,
-     *        type = "string"
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "brand_id",
-     *        description = "品牌id",
+     *        name = "cate_id",
+     *        description = "职务分类id",
      *        required = false,
      *        type = "integer"
      *   ),
      *   @SWG\Parameter(
      *        in = "query",
-     *        name = "goods_type",
-     *        description = "商品类型  1：商品 2：套餐 3：积分商品",
+     *        name = "province",
+     *        description = "省份",
+     *        required = false,
+     *        type = "string"
+     *   ),
+     *   @SWG\Parameter(
+     *        in = "query",
+     *        name = "city",
+     *        description = "城市",
      *        required = false,
      *        type = "string"
      *   ),
@@ -64,46 +50,14 @@ class LaywerController extends Controller
      *   ),
      *   @SWG\Parameter(
      *        in = "query",
-     *        name = "cat_id",
-     *        description = "商品分类id，可以是一二三级分类id，可以是数组（多个）或者数字",
+     *        name = "score",
+     *        description = "服务评分",
      *        required = false,
-     *        type = "integer"
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "filter_cat_id",
-     *        description = "需要进行过滤的商品分类id，可以是一二三级分类id，可以是数组（多个）或者数字",
-     *        required = false,
-     *        type = "integer"
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "sort",
-     *        description = "排序，依次是 库存排序 售价排序 销量排序 下单量  带'-'号的为倒序，反之为升序",
-     *        required = false,
-     *        type = "string",
-     *        enum={"goods_number", "-goods_number", "shop_price", "-shop_price", "sales_volume", "-sales_volume"}
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "get_good_evaluate",
-     *        description = "需要获取好评量 0：不获取 1：获取",
-     *        required = false,
-     *        type = "integer",
-     *        enum={0, 1}
-     *   ),
-     *   @SWG\Parameter(
-     *        in = "query",
-     *        name = "get_collect_num",
-     *        description = "需要获取收藏数 0：不获取 1：获取",
-     *        required = false,
-     *        type = "integer",
-     *        enum={0, 1}
+     *        type = "number"
      *   ),
      *   @SWG\Response(
      *     response="200",
-     *     description="获取商品列表",
-     *     @SWG\Schema(ref="#/definitions/goodsTmp")
+     *     description="获取律师列表",
      *   )
      *
      * )
@@ -114,6 +68,21 @@ class LaywerController extends Controller
         return LaywerResource::collection($laywers);
     }
 
+    /**
+     * @SWG\Get(
+     *   path="/laywer/{id}",
+     *   tags={"Tool"},
+     *   summary="律师详情",
+     *   description="律师详情",
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
+     *     description="律师id"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   )
+     * )
+     */
     public function show(Laywer $laywer)
     {
         return $this->success(new LaywerResource($laywer));

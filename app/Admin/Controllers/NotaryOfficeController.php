@@ -45,7 +45,7 @@ class NotaryOfficeController extends AdminController
         //$grid->column('wechat', trans('admin.wechat'));
         $grid->column('summary', trans('admin.summary'));
         $grid->column('comments_count', trans('admin.comments_count'));
-        $grid->column('avg_point', trans('admin.avg_point'));
+        $grid->column('score', trans('admin.score'));
         $grid->column('address', trans('admin.address'));
         $grid->column('lng', trans('admin.lng'));
         $grid->column('lat', trans('admin.lat'));
@@ -77,7 +77,7 @@ class NotaryOfficeController extends AdminController
         //$show->field('wechat', trans('admin.wechat'));
         $show->field('summary', trans('admin.summary'));
         $show->field('comments_count', trans('admin.comments_count'));
-        $show->field('avg_point', trans('admin.avg_point'));
+        $show->field('score', trans('admin.score'));
         $show->field('address', trans('admin.address'));
         $show->field('lng', trans('admin.lng'));
         $show->field('lat', trans('admin.lat'));
@@ -105,7 +105,7 @@ class NotaryOfficeController extends AdminController
         //$form->text('wechat', trans('admin.wechat'));
         $form->text('summary', trans('admin.summary'));
         $form->text('comments_count', trans('admin.comments_count'));
-        $form->text('avg_point', trans('admin.avg_point'));
+        $form->text('score', trans('admin.score'));
         $form->text('address', trans('admin.address'));
         $form->text('lng', trans('admin.lng'));
         $form->text('lat', trans('admin.lat'));

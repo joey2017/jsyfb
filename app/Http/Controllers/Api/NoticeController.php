@@ -12,7 +12,7 @@ class NoticeController extends Controller
      * @SWG\Get(
      *     path="/notices",
      *     summary="消息列表",
-     *     tags={"系统消息"},
+     *     tags={"MainPage"},
      *     description="包含各种消息",
      *     operationId="home.index",
      *     produces={"application/json"},
@@ -39,9 +39,13 @@ class NoticeController extends Controller
      *            @SWG\Property(
      *               property="status",
      *               type="integer",
-     *               description="消息状态"
+     *               description="消息状态：0未读1已读"
      *            )
      *         )
+     *     ),
+     *     @SWG\Response(
+     *         response=401,
+     *         description="未授权",
      *     ),
      *     @SWG\Response(
      *         response=422,
@@ -57,10 +61,29 @@ class NoticeController extends Controller
         return NoticeResource::collection($notices);
     }
 
+    /**
+     * @SWG\Get(
+     *   path="/notices/{id}",
+     *   tags={"MainPage"},
+     *   summary="消息详情",
+     *   description="消息详情",
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
+     *     description="消息id"
+     *   ),
+     *   @SWG\Response(
+     *     response=200,
+     *     description="成功"
+     *   ),
+     *   @SWG\Response(
+     *     response=403,
+     *     description="禁止访问"
+     *   )
+     * )
+     */
     public function show(Notice $notice)
     {
         if ($notice->user_id != Auth::guard('api')->id()) {
-            return $this->failed('无权访问',403);
+            return $this->failed('禁止访问',403);
 
         };
         return $this->success(new NoticeResource($notice));
