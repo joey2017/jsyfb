@@ -112,7 +112,7 @@ class UserController extends Controller
 
     /**
      * @SWG\Get(
-     *   path="/user/{id}",
+     *   path="/users/{id}",
      *   tags={"User"},
      *   summary="用户详情",
      *   description="用户详情接口",
@@ -132,7 +132,7 @@ class UserController extends Controller
 
     /**
      * @SWG\Post(
-     *   path="/user",
+     *   path="/users",
      *   tags={"User"},
      *   summary="用户注册",
      *   description="用户注册接口",
@@ -217,10 +217,15 @@ class UserController extends Controller
 
     /**
      * @SWG\Get(
-     *   path="/user/info",
+     *   path="/users/info",
      *   tags={"User"},
      *   produces={"application/json"},
      *   summary="个人信息",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(
      *     response=200,
      *     description="成功"
