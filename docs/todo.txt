@@ -1,5 +1,5 @@
 1.模型查询结果404异常捕获
-App\Exceptions\Handler  render()
+ajax请求 + App\Exceptions\Handler  render()
 2.日志目录设置，日志记录
 
 只用在配置文件里加一个配置就可以了
