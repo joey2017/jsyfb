@@ -37,7 +37,7 @@ class NoticeController extends AdminController
         $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Notice::$_statuses[$status];
+            return Notice::getStatusName($status);
         })->label(['warning','success']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

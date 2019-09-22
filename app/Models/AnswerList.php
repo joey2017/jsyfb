@@ -14,13 +14,25 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AnswerList extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_answer_list';
 
     // 状态
+    /**
+     *
+     */
     const INVALID = 0;
-    const NORMAL  = 1;
+    /**
+     *
+     */
+    const NORMAL = 1;
 
+    /**
+     * @param int $status
+     * @return string
+     */
     public static function getStatusName(int $status):string
     {
         switch ($status)
