@@ -14,34 +14,21 @@ class ArticleLikeController extends Controller
     /**
      * @SWG\Post(
      *     path="/articles/likes",
-     *     summary="文章点赞",
      *     tags={"MainPage"},
+     *     summary="文章点赞",
      *     description="热门资讯点赞",
-     *     operationId="articles-likes.create",
+     *     operationId="articles-likes.store",
      *     produces={"application/json"},
-     *     @SWG\Parameter(
-     *         name="article_id",
-     *         in="query",
-     *         description="请求参数-资讯id",
-     *         required=true,
-     *         type="integer",
-     *     ),
-     *     @SWG\Response(
-     *         response=201,
-     *         description="操作成功"
-     *     ),
-     *     @SWG\Response(
-     *         response=400,
-     *         description="参数错误",
-     *     ),
-     *     @SWG\Response(
-     *         response=401,
-     *         description="未授权",
-     *     ),
-     *     @SWG\Response(
-     *         response=406,
-     *         description="重复点赞",
-     *     ),
+     *     security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *     },
+     *     @SWG\Parameter(name="article_id",in="query",description="请求参数-资讯id",required=true,type="integer"),
+     *     @SWG\Response(response=201,description="操作成功"),
+     *     @SWG\Response(response=400,description="参数错误"),
+     *     @SWG\Response(response=401,description="未授权"),
+     *     @SWG\Response(response=406,description="重复点赞"),
      * )
      */
     public function store(Request $request)

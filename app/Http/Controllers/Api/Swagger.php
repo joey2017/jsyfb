@@ -54,3 +54,17 @@
  *     in="header"
  * )
  */
+
+/**
+ * @SWG\Definition(
+ *     definition="Error",
+ *     @SWG\Property(
+ *         property="code",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="message",
+ *         type="string"
+ *     )
+ * )
+ */

@@ -9,14 +9,11 @@ class AnswerListController extends Controller
 {
     /**
      * @SWG\Get(
-     *   path="/answer",
+     *   path="/answer/lists",
      *   tags={"Misc"},
      *   summary="每日答题库",
      *   description="答题列表",
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
+     *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function index()
@@ -27,22 +24,17 @@ class AnswerListController extends Controller
 
     /**
      * @SWG\Get(
-     *   path="/answer/{id}",
+     *   path="/answer/lists/{id}",
      *   tags={"Misc"},
      *   summary="题目详情",
      *   description="题目详情",
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
-     *     description="答题id"
-     *   ),
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="答题id"),
+     *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function show(AnswerList $answerList)
+    public function show(AnswerList $list)
     {
-        return $this->success(new AnswerListResource($answerList));
+        return $this->success(new AnswerListResource($list));
     }
 
 }

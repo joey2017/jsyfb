@@ -69,6 +69,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
 
         //答题表
         Route::get('/answer/lists','AnswerListController@index')->name('answer-lists.index');
+        Route::get('/answer/lists/{list}','AnswerListController@show')->name('answer-lists.show');
 
         //每日答题
         Route::get('/answer/records','AnswerRecordController@index')->name('answer-records.index');
@@ -77,6 +78,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
 
         //宝典分类
         Route::get('/legal/categories','LegalBookCategoryController@index')->name('legal-categories.index');
+        Route::get('/legal/categories/{category}','LegalBookCategoryController@show')->name('legal-categories.show');
 
         //关注
         Route::get('/attentions','AttentionController@index')->name('attentions.index');

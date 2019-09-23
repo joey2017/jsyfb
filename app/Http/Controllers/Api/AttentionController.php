@@ -16,6 +16,11 @@ class AttentionController extends Controller
      *   tags={"User"},
      *   description="请求该接口需要先登录。",
      *   operationId="attentions.index",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   produces={"application/json"},
      *   @SWG\Response(response="200", description="成功"),
      *   @SWG\Response(response="401", description="未授权"),
@@ -37,13 +42,12 @@ class AttentionController extends Controller
      *   description="请求该接口需要先登录。",
      *   operationId="messages.store",
      *   produces={"application/json"},
-     *   @SWG\Parameter(
-     *     in="path",
-     *     name="id",
-     *     type="string",
-     *     description="用户id",
-     *     required=true,
-     *   ),
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(in="path",name="id",type="string",description="用户id",required=true),
      *   @SWG\Response(response="200", description="成功"),
      *   @SWG\Response(response="401", description="未授权"),
      *   @SWG\Response(response="405", description="访问方式不正确")

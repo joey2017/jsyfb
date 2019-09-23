@@ -116,6 +116,11 @@ class UserController extends Controller
      *   tags={"User"},
      *   summary="用户详情",
      *   description="用户详情接口",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
      *     description="用户id"
      *   ),
@@ -169,10 +174,7 @@ class UserController extends Controller
      *   @SWG\Parameter(name="client_type", type="integer", required=false, in="formData",
      *     description="调用此接口的客户端类型: 1-Android, 2-IOS. 非必填,所以 required 写了 false"
      *   ),
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
+     *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function login(Request $request)
@@ -226,10 +228,7 @@ class UserController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
+     *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function info()

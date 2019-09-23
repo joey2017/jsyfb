@@ -11,6 +11,26 @@ use Illuminate\Support\Facades\Log;
 
 class ArticleShareController extends Controller
 {
+    /**
+     * @SWG\Post(
+     *     path="/articles/shares",
+     *     tags={"MainPage"},
+     *     summary="文章转发",
+     *     description="热门资讯转发",
+     *     operationId="articles-shares.store",
+     *     produces={"application/json"},
+     *     security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *     },
+     *     @SWG\Parameter(name="article_id",in="query",description="请求参数-资讯id",required=true,type="integer"),
+     *     @SWG\Response(response=201,description="操作成功"),
+     *     @SWG\Response(response=400,description="参数错误",),
+     *     @SWG\Response(response=401,description="未授权",),
+     *     @SWG\Response(response="405", description="访问方式不正确")
+     * )
+     */
     public function store(Request $request)
     {
         $article_id = $request->input('article_id', '');

@@ -16,17 +16,14 @@ class UserSignController extends Controller
      *   tags={"MainPage"},
      *   summary="签到页",
      *   description="签到详情",
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
-     *     description="用户id"
-     *   ),
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   ),
-     *   @SWG\Response(
-     *     response=404,
-     *     description="未找到"
-     *   )
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
+     *   @SWG\Response(response=200,description="成功"),
+     *   @SWG\Response(response=404,description="未找到")
      * )
      */
     public function show(User $user)
@@ -44,25 +41,15 @@ class UserSignController extends Controller
      *     description="签到操作",
      *     operationId="signs.update",
      *     produces={"application/json"},
-     *     @SWG\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="用户id",
-     *         type="integer"
-     *     ),
-     *     @SWG\Response(
-     *         response=201,
-     *         description="success"
-     *     ),
-     *     @SWG\Response(
-     *         response=406,
-     *         description="Unauthorized"
-     *     ),
-     *     @SWG\Response(
-     *         response=500,
-     *         description="server error"
-     *     )
+     *     security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *     },
+     *     @SWG\Parameter(name="id",in="path",required=true,description="用户id",type="integer"),
+     *     @SWG\Response(response=201,description="success"),
+     *     @SWG\Response(response=406,description="Unauthorized"),
+     *     @SWG\Response(response=500,description="server error")
      * )
      */
     //todo 不需要传递User模型了吧？
