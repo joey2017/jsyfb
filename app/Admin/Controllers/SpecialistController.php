@@ -39,7 +39,7 @@ class SpecialistController extends AdminController
         $grid->column('score', trans('admin.score'));
         $grid->column('summary', trans('admin.summary'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Specialist::$_statuses[$status];
+            return Specialist::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

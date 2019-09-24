@@ -12,12 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog query()
  * @mixin \Eloquent
  */
-class IngotsLog extends Model
+
+class Goods extends Model
 {
     //
-    protected $table = 'jyfb_ingots_log';
-
-    protected $fillable = [
-        'user_id', 'cost', 'descr', 'type', 'status', 'is_deleted', 'remark'
-    ];
+    protected $table = 'jyfb_goods';
 }

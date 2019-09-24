@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\MessageRequest;
 use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -30,7 +31,7 @@ class MessageController extends Controller
      */
     public function store(MessageRequest $request)
     {
-        Message::create($request->all());
+        Message::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id()]));
         return $this->setStatusCode('201')->success('留言成功');
     }
 

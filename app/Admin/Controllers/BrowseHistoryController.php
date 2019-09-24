@@ -30,7 +30,7 @@ class BrowseHistoryController extends AdminController
         $grid->column('user.username', trans('admin.username'));
         $grid->column('hotArticle.content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return BrowseHistory::$_statuses[$status];
+            return BrowseHistory::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

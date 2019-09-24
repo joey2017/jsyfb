@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "\u5bb6\u6709\u6cd5\u5b9d\u63a5\u53e3\u6587\u6863",
-        "description": "\u5bb6\u6709\u6cd5\u5b9d\u662f\u4e00\u4e2a\u4f7f\u7528\u5ea6\u975e\u5e38\u9ad8\u7684\u5fae\u4fe1\u5c0f\u7a0b\u5e8f\uff0c\u53d1\u5e03\u81f3\u4eca\u83b7\u5f97\u4e86\u65e0\u6570\u7684\u7528\u6237\u597d\u8bc4\uff0c\u4e3a\u4e86\u6ee1\u8db3\u4f7f\u7528\u8005\u7684\u9700\u8981\uff0c\u73b0\u5c06\u63a5\u53e3\u5217\u8868\u8fd9\u91cc\u5982\u4e0b\uff0c\u5982\u6709\u95ee\u9898\u6b22\u8fce\u53ca\u65f6\u53cd\u9988<br>\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>",
+        "description": "\u5bb6\u6709\u6cd5\u5b9d\u662f\u4e00\u4e2a\u4f7f\u7528\u5ea6\u975e\u5e38\u9ad8\u7684\u5fae\u4fe1\u5c0f\u7a0b\u5e8f\uff0c\u53d1\u5e03\u81f3\u4eca\u83b7\u5f97\u4e86\u65e0\u6570\u7684\u7528\u6237\u597d\u8bc4\uff0c\u4e3a\u4e86\u6ee1\u8db3\u4f7f\u7528\u8005\u7684\u9700\u8981\uff0c\u73b0\u5c06\u63a5\u53e3\u5217\u8868\u8fd9\u91cc\u5982\u4e0b\uff0c\u5982\u6709\u95ee\u9898\u6b22\u8fce\u53ca\u65f6\u53cd\u9988<br>\r\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>\r\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>\r\n\u4ee5\u540e\u5927\u5bb6\u5c31\u5728\u8fd9\u91cc\u6109\u5feb\u7684\u5bf9\u63a5\u53e3\u628a!<br>",
         "contact": {
             "name": "joey",
             "email": "zongjun.li@outlook.com"
@@ -389,6 +389,66 @@
                 ]
             }
         },
+        "/balance-logs": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u94b1\u5305\u4f59\u989d\u660e\u7ec6",
+                "description": "\u94b1\u5305\u4f59\u989d\u660e\u7ec6\u3002",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "401": {
+                        "description": "\u672a\u6388\u6743"
+                    },
+                    "405": {
+                        "description": "\u8bbf\u95ee\u65b9\u5f0f\u4e0d\u6b63\u786e"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u94b1\u5305\u5145\u503c",
+                "description": "\u5fae\u4fe1\u652f\u4ed8\u94b1\u5305\u5145\u503c",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "amount",
+                        "in": "formData",
+                        "description": "\u91d1\u989d\u5927\u5c0f",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u6210\u529f"
+                    },
+                    "401": {
+                        "description": "\u672a\u6388\u6743"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/business/categories": {
             "get": {
                 "tags": [
@@ -764,6 +824,207 @@
                 ]
             }
         },
+        "/users/addresses": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5730\u5740\u5217\u8868",
+                "description": "\u5730\u5740\u5217\u8868",
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/addresses/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5730\u5740\u8be6\u60c5",
+                "description": "\u5730\u5740\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5730\u5740id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/address/{id}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5730\u5740\u4fee\u6539\u4fdd\u5b58",
+                "description": "\u5730\u5740\u4fee\u6539\u4fdd\u5b58",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5730\u5740id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "receiver",
+                        "in": "formData",
+                        "description": "\u6536\u8d27\u4eba",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "receiver_mobile",
+                        "in": "formData",
+                        "description": "\u6536\u8d27\u4eba\u624b\u673a\u53f7\u7801",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "province",
+                        "in": "formData",
+                        "description": "\u7701\u4efd",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "\u57ce\u5e02",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "district",
+                        "in": "formData",
+                        "description": "\u533a\u53bf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "\u5730\u5740\u8be6\u60c5",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "500": {
+                        "description": "\u670d\u52a1\u5668\u9519\u8bef"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/address": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u65b0\u589e\u5730\u5740",
+                "description": "\u65b0\u589e\u5730\u5740",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "receiver",
+                        "in": "formData",
+                        "description": "\u6536\u8d27\u4eba",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "receiver_mobile",
+                        "in": "formData",
+                        "description": "\u6536\u8d27\u4eba\u624b\u673a\u53f7\u7801",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "province",
+                        "in": "formData",
+                        "description": "\u7701\u4efd",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "\u57ce\u5e02",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "district",
+                        "in": "formData",
+                        "description": "\u533a\u53bf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "description": "\u5730\u5740\u8be6\u60c5",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "500": {
+                        "description": "\u670d\u52a1\u5668\u9519\u8bef"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/users": {
             "get": {
                 "tags": [
@@ -972,6 +1233,150 @@
                 "responses": {
                     "200": {
                         "description": "\u6210\u529f"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/comments/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u6211\u7684\u8bc4\u8bba",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/collections/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u6211\u7684\u6536\u85cf",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/browse-historys/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u6211\u7684\u6536\u85cf",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/users/balance-logs/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u6211\u7684\u6536\u85cf",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u7528\u6237id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
                     }
                 },
                 "security": [

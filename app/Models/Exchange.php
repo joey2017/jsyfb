@@ -4,22 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Models\Reservation
- *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation query()
- * @mixin \Eloquent
- */
-class Reservation extends Model
+class Exchange extends Model
 {
     //
-    protected $table = 'jyfb_service_reservation';
+    protected $table = 'jyfb_exchange';
 
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
+
+    public function goods()
+    {
+        return $this->belongsTo(Goods::class,'goods_id');
+    }
 
     /**
      * @param int $status

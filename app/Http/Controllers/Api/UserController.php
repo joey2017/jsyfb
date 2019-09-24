@@ -3,7 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\UserRequest;
+use App\Http\Resources\Api\BalanceLogResource;
+use App\Http\Resources\Api\BrowseHistoryResource;
+use App\Http\Resources\Api\CollectionResource;
+use App\Http\Resources\Api\NotaryOfficeCommentResource;
 use App\Http\Resources\Api\UserResource;
+use App\Models\BalanceLog;
+use App\Models\BrowseHistory;
+use App\Models\Collection;
+use App\Models\NotaryOfficeComment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,18 +27,8 @@ class UserController extends Controller
      *     description="用户资料列表",
      *     operationId="user.index",
      *     produces={"application/json"},
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="分页编号,默认1",
-     *         type="integer",
-     *     ),
-     *     @SWG\Parameter(
-     *         name="pagesize",
-     *         in="query",
-     *         description="每页显示条数,默认10",
-     *         type="integer",
-     *     ),
+     *     @SWG\Parameter(name="page",in="query",description="分页编号,默认1",type="integer"),
+     *     @SWG\Parameter(name="pagesize",in="query",description="每页显示条数,默认10",type="integer"),
      *     @SWG\Response(
      *         response=200,
      *         description="用户列表",
@@ -38,68 +36,25 @@ class UserController extends Controller
      *            type="json",
      *            @SWG\Property(
      *                 property="pages",
-     *                 @SWG\Property(
-     *                     property="totalnum",
-     *                     type="integer",
-     *                     description="记录总数",
-     *                 ),
-     *                 @SWG\Property(
-     *                     property="totalpage",
-     *                     type="integer",
-     *                     description="总页数",
-     *                 ),
-     *                 @SWG\Property(
-     *                     property="pagesize",
-     *                     type="integer",
-     *                     description="每页显示记录数",
-     *                 ),
-     *                 @SWG\Property(
-     *                     property="page",
-     *                     type="integer",
-     *                     description="当前页数",
-     *                 ),
+     *                 @SWG\Property(property="totalnum",type="integer",description="记录总数"),
+     *                 @SWG\Property(property="totalpage",type="integer",description="总页数"),
+     *                 @SWG\Property(property="pagesize",type="integer",description="每页显示记录数"),
+     *                 @SWG\Property(property="page",type="integer",description="当前页数"),
      *            ),
      *            @SWG\Property(
      *               property="lists",
      *               @SWG\Items(
-     *                  @SWG\Property(
-     *                     property="id",
-     *                     type="integer",
-     *                     description="id",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="username",
-     *                     type="string",
-     *                     description="用户名",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="nickname",
-     *                     type="string",
-     *                     description="昵称",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="avatar",
-     *                     type="string",
-     *                     description="头像",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="mobile",
-     *                     type="string",
-     *                     description="手机号码",
-     *                  ),
-     *                  @SWG\Property(
-     *                     property="descr",
-     *                     type="string",
-     *                     description="描述",
-     *                  ),
-     *              )
+     *                  @SWG\Property(property="id",type="integer",description="id",),
+     *                  @SWG\Property(property="username",type="string",description="用户名"),
+     *                  @SWG\Property(property="nickname",type="string",description="昵称"),
+     *                  @SWG\Property(property="avatar",type="string",description="头像"),
+     *                  @SWG\Property(property="mobile",type="string",description="手机号码"),
+     *                  @SWG\Property(property="descr",type="string",description="描述"),
+     *               )
      *            ),
      *         ),
      *     ),
-     *     @SWG\Response(
-     *         response=422,
-     *         description="error",
-     *     )
+     *     @SWG\Response(response=422,description="error")
      * )
      */
     public function index()
@@ -121,9 +76,7 @@ class UserController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",
-     *     description="用户id"
-     *   ),
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",description="用户id"),
      *   @SWG\Response(
      *     response=200,
      *     description="成功"
@@ -141,16 +94,9 @@ class UserController extends Controller
      *   tags={"User"},
      *   summary="用户注册",
      *   description="用户注册接口",
-     *   @SWG\Parameter(name="username", type="string", required=true, in="formData",
-     *     description="用户名"
-     *   ),
-     *   @SWG\Parameter(name="password", type="string", required=true, in="formData",
-     *     description="登录密码"
-     *   ),
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
+     *   @SWG\Parameter(name="username", type="string", required=true, in="formData", description="用户名"),
+     *   @SWG\Parameter(name="password", type="string", required=true, in="formData", description="登录密码"),
+     *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function store(UserRequest $userRequest)
@@ -165,15 +111,10 @@ class UserController extends Controller
      *   tags={"User"},
      *   summary="登录接口(用户名+密码)",
      *   description="用户登录接口,账号可为 用户名 或 手机号",
-     *   @SWG\Parameter(name="username", type="string", required=true, in="formData",
-     *     description="登录用户名/手机号"
-     *   ),
-     *   @SWG\Parameter(name="password", type="string", required=true, in="formData",
-     *     description="登录密码"
-     *   ),
+     *   @SWG\Parameter(name="username", type="string", required=true, in="formData", description="登录用户名/手机号"),
+     *   @SWG\Parameter(name="password", type="string", required=true, in="formData", description="登录密码"),
      *   @SWG\Parameter(name="client_type", type="integer", required=false, in="formData",
-     *     description="调用此接口的客户端类型: 1-Android, 2-IOS. 非必填,所以 required 写了 false"
-     *   ),
+     *     description="调用此接口的客户端类型: 1-Android, 2-IOS. 非必填,所以 required 写了 false"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -205,10 +146,7 @@ class UserController extends Controller
      *   path="/logout",
      *   tags={"User"},
      *   summary="登出",
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
+     *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function logout()
@@ -235,5 +173,110 @@ class UserController extends Controller
     {
         $user = Auth::guard('api')->user();
         return $this->success(new UserResource($user));
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/users/comments/{id}",
+     *   tags={"User"},
+     *   produces={"application/json"},
+     *   summary="我的评论",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
+     *   @SWG\Response(response=200,description="成功"),
+     *   @SWG\Response(response=403,description="禁止访问"),
+     *   @SWG\Response(response=404,description="未找到")
+     * )
+     */
+    public function comments(User $user)
+    {
+        if (Auth::guard('api')->id() != $user->id) {
+            return $this->failed('禁止访问',403);
+        }
+        $comments = NotaryOfficeComment::where('user_id',$user->id)->paginate(5);
+        return NotaryOfficeCommentResource::collection($comments);
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/users/collections/{id}",
+     *   tags={"User"},
+     *   produces={"application/json"},
+     *   summary="我的收藏",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
+     *   @SWG\Response(response=200,description="成功"),
+     *   @SWG\Response(response=403,description="禁止访问"),
+     *   @SWG\Response(response=404,description="未找到")
+     * )
+     */
+    public function collections(User $user)
+    {
+        if (Auth::guard('api')->id() != $user->id) {
+            return $this->failed('禁止访问',403);
+        }
+        $collections = Collection::where('user_id',$user->id)->paginate(5);
+        return CollectionResource::collection($collections);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/users/browse-historys/{id}",
+     *   tags={"User"},
+     *   produces={"application/json"},
+     *   summary="我的收藏",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
+     *   @SWG\Response(response=200,description="成功"),
+     *   @SWG\Response(response=403,description="禁止访问"),
+     *   @SWG\Response(response=404,description="未找到")
+     * )
+     */
+    public function browseHistorys(User $user)
+    {
+        if (Auth::guard('api')->id() != $user->id) {
+            return $this->failed('禁止访问',403);
+        }
+        $historys = BrowseHistory::where('user_id',$user->id)->paginate(5);
+        return BrowseHistoryResource::collection($historys);
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/users/balance-logs/{id}",
+     *   tags={"User"},
+     *   produces={"application/json"},
+     *   summary="我的收藏",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
+     *   @SWG\Response(response=200,description="成功"),
+     *   @SWG\Response(response=403,description="禁止访问"),
+     *   @SWG\Response(response=404,description="未找到")
+     * )
+     */
+    public function balanceLogs(User $user)
+    {
+        if (Auth::guard('api')->id() != $user->id) {
+            return $this->failed('禁止访问',403);
+        }
+        $historys = BalanceLog::where('user_id',$user->id)->paginate(5);
+        return BalanceLogResource::collection($historys);
     }
 }

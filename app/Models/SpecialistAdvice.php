@@ -20,7 +20,8 @@ class SpecialistAdvice extends Model
     protected $table = 'jyfb_specialist_advice';
 
     // 状态
-    public static $_statuses = ['禁用', '正常'];
+    const INVALID = 0;
+    const NORMAL  = 1;
 
     public function user()
     {

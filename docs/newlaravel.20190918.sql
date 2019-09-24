@@ -280,13 +280,13 @@ INSERT INTO `admin_users` VALUES (1,'admin','$2y$10$nMtu4X/fCP//eyKC3Yli4O/zhK6x
 UNLOCK TABLES;
 
 --
--- Table structure for table `category`
+-- Table structure for table `category    backup`
 --
 
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `category    backup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category` (
+CREATE TABLE `category    backup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL COMMENT '父分类ID',
   `name` varchar(20) DEFAULT NULL COMMENT '分类别名',
@@ -299,161 +299,12 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `category    backup`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `jsyfb_acticle_comment`
---
-
-DROP TABLE IF EXISTS `jsyfb_acticle_comment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jsyfb_acticle_comment` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
-  `acticle_id` int(11) DEFAULT NULL COMMENT '文章id',
-  `interpretation` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '解读',
-  `measures` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '措施',
-  `content` text COLLATE utf8mb4_unicode_ci COMMENT '评论内容',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `comment-user-acticle` (`user_id`,`acticle_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jsyfb_acticle_comment`
---
-
-LOCK TABLES `jsyfb_acticle_comment` WRITE;
-/*!40000 ALTER TABLE `jsyfb_acticle_comment` DISABLE KEYS */;
-INSERT INTO `jsyfb_acticle_comment` VALUES (1,118,16,'Ullam quia voluptatum voluptatem occaecati.','Ipsum magnam itaque reprehenderit quia quaerat harum maiores laboriosam.','a','2019-09-01 22:50:20','2019-09-01 22:50:20'),(2,262,16,'Doloribus nemo voluptates et nostrum.','Minus blanditiis blanditiis reiciendis quisquam quos dicta.','b','2019-09-01 22:50:20','2019-09-01 22:50:20'),(3,357,16,'Et ut debitis quae sequi quis.','Autem et molestias tempore eum modi.','c','2019-09-01 22:50:20','2019-09-01 22:50:20'),(4,57,67,'Commodi quasi perferendis qui molestias.','Neque et est recusandae.','d','2019-09-01 22:50:20','2019-09-01 22:50:20'),(5,61,23,'Aut facilis aliquam dolores.','Aut ut adipisci laborum rerum rem quia cum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(6,244,40,'Fugiat dolor enim facilis cum est.','Nam assumenda dolorem iure doloribus deserunt.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(7,234,11,'Eos tempore sed necessitatibus ut autem impedit.','Ratione aut sequi minus nihil.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(8,8,17,'Praesentium necessitatibus quidem error neque molestiae qui dolorum.','Repellendus nihil sunt vel sed et vitae excepturi.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(9,463,73,'Rerum possimus voluptatem dolorum dicta.','Voluptas et praesentium vel dolores dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(10,348,23,'Qui qui saepe ad vero error.','Velit sed quia suscipit qui quia laborum fuga.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(11,126,69,'Accusamus aut et dignissimos quisquam laudantium.','Magni maxime consequatur ut et quidem fugit adipisci.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(12,328,20,'Sapiente quaerat ut perferendis beatae qui.','Dolores et et quia ut nihil.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(13,176,73,'Sit eos voluptas nihil alias voluptate exercitationem ex.','Quod vel et deleniti dignissimos quam eos.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(14,310,75,'Optio ea placeat sapiente dolorum ipsum autem sed perferendis.','Quia fugit in sit et aut ipsum nostrum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(15,304,36,'Exercitationem aut harum eligendi soluta.','Maxime repellat voluptatem autem velit illum adipisci.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(16,110,41,'Assumenda sed voluptatem maiores saepe quasi nobis expedita ipsum.','Est id iste dolore est modi.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(17,265,50,'Id dolor qui quisquam nemo facere eum accusamus.','Sed dolor provident placeat at cumque ut quidem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(18,145,53,'Dolore odio ab fugiat voluptates magnam nesciunt.','Amet et non non autem minima dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(19,304,33,'Nam tempore est minima distinctio suscipit et.','Sunt esse molestiae unde non voluptatibus quia impedit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(20,404,94,'Adipisci et sint omnis cum culpa eaque.','Et et repellendus recusandae et sint quidem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(21,187,71,'Qui esse ipsum quibusdam corporis inventore.','Laudantium autem ea iure voluptate et dignissimos.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(22,218,95,'Voluptatibus iste architecto mollitia.','Aspernatur ut molestiae fuga.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(23,271,10,'Ipsa ea laboriosam modi debitis nemo similique.','Voluptas qui et et cumque mollitia ipsum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(24,58,95,'A delectus inventore repudiandae repellat debitis dicta.','Repellendus suscipit non eos harum in alias.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(25,404,31,'Aut pariatur mollitia dolores ex.','Sed ipsa quod eveniet id repudiandae hic.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(26,99,9,'Debitis illo incidunt a dolorem maiores.','Delectus vel blanditiis aperiam eaque pariatur dolores non.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(27,19,72,'Id doloremque voluptatem nihil accusantium.','Voluptate doloribus dolorem quia ut enim excepturi dignissimos ut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(28,368,50,'Ea et illo autem quas.','Error amet odit saepe architecto aut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(29,471,27,'Eligendi quos eius cumque in eum ipsam.','Numquam ipsa animi aut consequatur quia blanditiis magni.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(30,281,81,'Eos qui aut eos omnis tempore nulla.','Animi reprehenderit magni in repellendus molestias.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(31,306,48,'Magnam error aliquid aperiam qui.','Nulla rerum tenetur sed ipsam qui dolores consequuntur.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(32,447,94,'Quis iste quas rerum omnis alias corporis.','Numquam ipsum rerum et error et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(33,180,19,'Rerum dolorum modi dolorem praesentium.','Dolores voluptatem beatae est assumenda.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(34,352,20,'Pariatur beatae eum veritatis esse saepe.','Sit porro ducimus ipsum et occaecati aut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(35,337,4,'Ut ad dolor labore dicta voluptas voluptatem modi.','Doloribus adipisci dolore nemo aliquam nam delectus ipsam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(36,359,96,'Reiciendis excepturi repellendus cum tenetur.','Dolor impedit sunt quis molestiae deserunt.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(37,456,40,'Incidunt aut expedita numquam dolor occaecati ad velit.','Suscipit aspernatur voluptatem eius nobis voluptatem fugiat repellat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(38,137,47,'Dolorum perspiciatis velit fuga atque nihil ipsa voluptatem.','Illo velit illo et eos aut exercitationem ab.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(39,57,8,'Esse amet sed ullam dolor.','Laudantium itaque alias labore quos est quia consequatur voluptate.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(40,357,75,'Voluptatum inventore in cupiditate veniam animi assumenda.','Voluptatem natus voluptatem nobis labore cumque placeat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(41,408,25,'Officia laborum dolor voluptas neque ipsam.','Magni dolores facere sit et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(42,9,6,'Odit aut deleniti est quibusdam et.','Est deserunt magnam quibusdam accusantium doloribus assumenda.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(43,56,86,'Molestiae ab explicabo cum odit et.','Aliquam corrupti tempora iste.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(44,194,96,'Officia esse ut distinctio reprehenderit provident.','Sed error qui voluptatem suscipit dolor odio.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(45,79,33,'Ut molestiae porro hic in.','Iusto voluptatibus suscipit sed ullam doloremque quibusdam vitae.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(46,495,72,'Dolorem quam doloremque modi consectetur quo.','Asperiores unde nesciunt a fuga consequatur.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(47,196,85,'A repellendus ipsum consequuntur voluptate ut.','Sunt odit et aliquid ratione iusto sit ab.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(48,345,67,'Vel harum ea et consequatur odit est.','Unde voluptate nostrum ea et dolorum quia doloribus dolorem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(49,16,28,'Sint officia voluptatem sit sint qui omnis.','Accusamus hic dolore inventore praesentium qui.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(50,142,34,'Amet enim voluptatibus error.','Est temporibus nesciunt incidunt quibusdam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(51,111,19,'Ut repellendus et eaque provident.','Et aut odio et autem voluptatum iusto vero quos.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(52,3,33,'Ipsa excepturi officiis voluptas qui dolores recusandae et.','A vel voluptas consectetur temporibus perferendis.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(53,417,85,'Et rerum aut amet et quisquam.','Nihil ut amet qui soluta.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(54,361,12,'Pariatur vel voluptas omnis non sunt rem enim saepe.','Molestiae nulla et quas repudiandae rerum doloremque numquam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(55,106,33,'Commodi nesciunt asperiores quae et nemo occaecati fugit.','Cum vel illum voluptatibus inventore asperiores maiores et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(56,415,57,'Ipsum excepturi voluptatum et aliquid accusantium assumenda.','Sunt quis et voluptas minus incidunt eos maxime.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(57,479,15,'Consectetur nihil repellendus nesciunt mollitia aut quis minus.','Laborum est voluptas nam quia in.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(58,371,3,'Hic et rerum quos omnis occaecati.','Ut hic tenetur mollitia sequi laudantium ea asperiores placeat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(59,197,1,'Suscipit repellendus ad itaque reprehenderit deserunt omnis.','Numquam dolore ullam aut ab velit voluptate.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(60,91,22,'Iure quod ipsa quaerat assumenda dignissimos.','Ut consequuntur ut voluptates aliquid.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(61,338,60,'Et omnis id animi harum.','Inventore nam ut soluta et sit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(62,395,35,'Ut aut a aut iusto pariatur placeat in.','Nesciunt itaque libero eaque qui deleniti.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(63,225,74,'Rerum eum similique cumque eos tempore saepe possimus.','Sunt perspiciatis eum consequatur distinctio atque.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(64,482,91,'Et necessitatibus voluptates velit.','Modi debitis rerum a quia.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(65,55,45,'Nam quibusdam vero aperiam ipsa sint.','Sequi laudantium ut excepturi dicta.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(66,471,14,'Autem officia voluptatem commodi ducimus.','Harum voluptatem placeat quia fugiat iusto aliquam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(67,306,92,'Atque consectetur eligendi exercitationem in consequatur molestiae.','Tempora possimus et rerum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(68,420,65,'Eligendi qui minima error quis molestiae et inventore.','Quisquam iusto voluptatem culpa voluptatem officia dolores voluptatem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(69,421,25,'Quo magni eligendi dicta velit est.','Eum ratione dolor et et est pariatur.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(70,110,59,'Neque voluptatem est perspiciatis sit ipsa facere voluptas.','Qui et possimus architecto laudantium quidem consequatur qui.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(71,14,33,'Eos maxime quia aliquam sunt sed.','Quia maiores neque eos alias earum saepe ab.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(72,280,16,'Ex voluptatibus qui esse est molestiae ipsam.','Dolor quod est harum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(73,331,100,'Aperiam et blanditiis unde temporibus est voluptatum nisi.','Atque alias vero et sed eum laudantium sequi.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(74,479,20,'Modi sunt et aut quis voluptatibus officia magni.','Nihil consectetur deserunt vero et consequatur repellat placeat saepe.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(75,103,74,'Temporibus quia animi voluptate assumenda ut.','Est inventore porro aut nesciunt similique dolores ut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(76,151,60,'Ducimus hic qui et officia atque.','Accusamus ipsam laborum possimus provident excepturi et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(77,103,21,'Dolorem nemo iusto at.','Accusamus delectus nihil at sint voluptatibus ex.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(78,364,94,'Dolores nemo quidem delectus ea architecto voluptatem nihil a.','Quod omnis maxime quisquam ut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(79,478,69,'Est omnis fugiat exercitationem nam quis ipsam voluptate.','Quia dolores dolorem qui aperiam dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(80,463,69,'Laudantium qui distinctio at est quisquam repudiandae amet.','Et voluptatum autem voluptas repellendus a quisquam numquam et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(81,93,53,'Aspernatur recusandae sapiente ex sapiente.','Et aliquid esse porro quo.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(82,177,47,'Mollitia reiciendis eveniet est facere ducimus pariatur ut.','Nihil est consequatur aut rem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(83,336,45,'Eos quo animi aut recusandae non numquam.','Eveniet commodi tempore quasi aliquam qui et rerum ipsa.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(84,342,12,'Doloremque perferendis ea tenetur rem quibusdam quo harum.','Nihil voluptatibus tempore doloribus tempore hic.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(85,367,89,'Eius aut incidunt voluptas nihil illo quisquam.','Ducimus harum consequatur ab dicta incidunt alias in impedit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(86,485,44,'Nesciunt sit quo recusandae repellendus ratione.','Consequuntur ipsa numquam et beatae ipsam est molestiae natus.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(87,142,22,'Tempore delectus qui laboriosam veniam voluptatem et et asperiores.','Quisquam est laborum officiis voluptates dolor laudantium blanditiis adipisci.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(88,495,72,'Molestiae rem dolor dolores quod rerum architecto.','Eveniet facilis enim vero aut modi adipisci impedit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(89,68,55,'Odit qui perspiciatis quia quasi et provident quos aut.','Rerum inventore magni est hic.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(90,346,90,'Quia iusto quia doloribus perspiciatis vel.','Ipsam magnam corrupti dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(91,304,35,'Quidem est nulla ut qui magni vel dolor.','Error voluptatem maxime est voluptas molestias quisquam autem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(92,63,4,'Et blanditiis et est quia corrupti.','Sunt doloribus corrupti vero voluptas.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(93,216,10,'Aperiam et autem et.','Et rem atque est.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(94,148,9,'Inventore fugiat dolores totam aliquid nemo occaecati voluptas.','Placeat id et voluptatem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(95,290,12,'Ut et iste laborum alias deserunt.','Pariatur est dolor vel odio amet.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(96,460,73,'Eos quo optio doloribus quam aut recusandae explicabo.','Inventore animi enim corrupti omnis.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(97,247,84,'Et sed ullam voluptatem qui.','Est ad minima rem fugit repudiandae.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(98,485,59,'Eveniet eum veniam sunt temporibus.','Qui occaecati doloremque possimus qui non est incidunt voluptatum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(99,392,13,'Est quia voluptatem laborum beatae odio.','Alias natus consequuntur quos illo.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(100,435,76,'Et qui omnis neque rerum eos asperiores et.','Voluptatem laboriosam adipisci vitae placeat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20');
-/*!40000 ALTER TABLE `jsyfb_acticle_comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `jsyfb_acticle_like`
---
-
-DROP TABLE IF EXISTS `jsyfb_acticle_like`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jsyfb_acticle_like` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL COMMENT '用户id',
-  `acticle_id` int(11) NOT NULL COMMENT '文章id',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='热门资讯点赞表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jsyfb_acticle_like`
---
-
-LOCK TABLES `jsyfb_acticle_like` WRITE;
-/*!40000 ALTER TABLE `jsyfb_acticle_like` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jsyfb_acticle_like` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `jsyfb_answer_list`
---
-
-DROP TABLE IF EXISTS `jsyfb_answer_list`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jsyfb_answer_list` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '题目',
-  `option1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '选项A',
-  `option2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项B',
-  `option3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项C',
-  `option4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项D',
-  `correct` enum('A','B','C','D') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '正确答案',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否删除：0否1是',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除：0否1是',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='答题表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jsyfb_answer_list`
---
-
-LOCK TABLES `jsyfb_answer_list` WRITE;
-/*!40000 ALTER TABLE `jsyfb_answer_list` DISABLE KEYS */;
-INSERT INTO `jsyfb_answer_list` VALUES (1,'法律规定，企业必须给职工缴足','五险一金','住房补贴',NULL,NULL,'A',1,0,'2019-09-10 04:16:00','2019-09-10 04:16:00');
-/*!40000 ALTER TABLE `jsyfb_answer_list` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `jsyfb_attention`
---
-
-DROP TABLE IF EXISTS `jsyfb_attention`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jsyfb_attention` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
-  `role_id` tinyint(4) DEFAULT NULL COMMENT '角色id',
-  `role` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '角色',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态：0禁用1正常',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除：0否1是',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='我的关注表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jsyfb_attention`
---
-
-LOCK TABLES `jsyfb_attention` WRITE;
-/*!40000 ALTER TABLE `jsyfb_attention` DISABLE KEYS */;
-INSERT INTO `jsyfb_attention` VALUES (1,357,10,'m',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(2,282,15,'r',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(3,80,13,'x',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(4,233,5,'m',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(5,86,20,'r',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(6,241,5,'c',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(7,450,5,'w',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(8,413,6,'v',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(9,322,17,'h',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(10,496,16,'g',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(11,86,15,'f',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(12,89,19,'q',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(13,294,11,'d',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(14,116,3,'y',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(15,482,18,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(16,101,8,'h',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(17,318,8,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(18,225,12,'h',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(19,393,10,'w',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(20,171,14,'c',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(21,349,5,'z',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(22,31,7,'o',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(23,187,1,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(24,54,15,'b',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(25,235,12,'f',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(26,348,8,'u',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(27,214,4,'i',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(28,92,10,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(29,280,6,'c',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(30,142,12,'f',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(31,193,2,'x',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(32,96,5,'v',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(33,396,19,'r',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(34,42,6,'h',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(35,7,17,'m',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(36,145,6,'b',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(37,459,16,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(38,78,15,'i',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(39,460,6,'u',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(40,159,19,'e',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(41,205,19,'k',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(42,429,8,'g',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(43,497,1,'b',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(44,267,4,'p',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(45,399,3,'m',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(46,254,11,'g',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(47,475,10,'z',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(48,148,1,'e',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(49,182,4,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(50,470,3,'d',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(51,82,16,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(52,358,18,'r',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(53,30,18,'g',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(54,302,7,'i',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(55,129,7,'x',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(56,459,5,'w',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(57,452,12,'c',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(58,462,17,'n',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(59,426,3,'j',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(60,403,19,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(61,186,2,'u',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(62,183,12,'b',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(63,363,16,'e',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(64,67,19,'m',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(65,325,7,'z',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(66,332,14,'d',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(67,181,7,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(68,22,7,'c',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(69,425,3,'l',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(70,141,8,'z',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(71,62,11,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(72,84,5,'e',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(73,156,15,'j',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(74,460,17,'b',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(75,456,19,'e',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(76,216,13,'g',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(77,71,10,'n',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(78,398,17,'b',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(79,11,14,'q',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(80,318,8,'k',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(81,310,6,'k',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(82,492,10,'m',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(83,216,4,'z',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(84,460,5,'u',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(85,445,15,'j',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(86,51,9,'e',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(87,101,17,'l',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(88,374,20,'k',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(89,2,17,'r',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(90,381,16,'y',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(91,174,1,'z',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(92,409,10,'d',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(93,76,14,'w',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(94,52,8,'t',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(95,486,20,'w',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(96,458,2,'s',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(97,363,2,'p',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(98,325,5,'v',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(99,31,6,'p',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13'),(100,282,15,'p',1,0,'2019-09-01 23:08:13','2019-09-01 23:08:13');
-/*!40000 ALTER TABLE `jsyfb_attention` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `jsyfb_balance`
---
-
-DROP TABLE IF EXISTS `jsyfb_balance`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jsyfb_balance` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(4) DEFAULT NULL COMMENT '用户id',
-  `amount` decimal(8,2) DEFAULT NULL COMMENT '金额大小',
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态：0禁用1正常',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除：0否1是',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `balance-user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='余额表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `jsyfb_balance`
---
-
-LOCK TABLES `jsyfb_balance` WRITE;
-/*!40000 ALTER TABLE `jsyfb_balance` DISABLE KEYS */;
-INSERT INTO `jsyfb_balance` VALUES (1,14,4411.53,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(2,486,2204.89,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(3,50,1013.22,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(4,407,4237.48,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(5,185,532.77,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(6,54,626.24,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(7,342,3673.16,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(8,490,2836.27,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(9,29,3598.95,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(10,13,4620.14,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(11,157,710.24,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(12,461,3339.32,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(13,284,2299.18,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(14,363,1070.81,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(15,40,4125.71,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(16,326,2722.71,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(17,346,1531.48,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(18,229,3577.59,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(19,430,3191.40,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(20,422,2785.29,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(21,485,4966.51,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(22,484,3181.74,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(23,8,1640.88,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(24,348,2312.42,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(25,292,4181.48,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(26,453,4555.86,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(27,86,529.08,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(28,421,600.11,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(29,456,3218.53,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(30,234,1152.99,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(31,469,2480.07,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(32,335,1197.23,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(33,173,1977.40,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(34,480,1284.01,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(35,277,1131.05,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(36,64,1128.31,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(37,258,4129.80,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(38,249,1565.17,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(39,360,1217.27,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(40,355,1240.80,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(41,457,3059.18,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(42,361,3698.73,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(43,443,1624.23,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(44,1,1916.24,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(45,8,2106.87,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(46,393,873.44,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(47,376,3081.31,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(48,105,2532.39,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(49,472,2120.29,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(50,237,4604.09,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(51,344,1890.10,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(52,375,1779.62,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(53,73,721.00,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(54,160,1443.47,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(55,293,3859.93,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(56,14,3413.22,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(57,152,631.64,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(58,359,562.24,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(59,83,323.73,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(60,82,2455.36,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(61,486,3670.41,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(62,6,3034.67,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(63,486,682.50,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(64,368,3163.44,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(65,456,4005.14,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(66,329,1440.73,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(67,95,3321.95,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(68,161,3742.59,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(69,365,1384.27,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(70,65,2096.57,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(71,277,4059.59,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(72,393,3036.27,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(73,65,3680.21,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(74,308,1365.52,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(75,221,1534.73,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(76,427,1955.98,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(77,470,762.34,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(78,397,538.68,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(79,256,4404.94,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(80,357,530.28,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(81,40,3247.49,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(82,61,1147.63,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(83,35,710.31,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(84,105,2955.06,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(85,242,4842.14,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(86,407,4697.45,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(87,307,4175.68,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(88,305,944.04,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(89,496,2386.90,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(90,162,3004.47,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(91,1,3727.13,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(92,31,1293.03,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(93,362,4148.76,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(94,152,2134.42,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(95,466,2240.00,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(96,193,4740.32,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(97,236,3659.02,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(98,446,2137.69,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(99,219,2226.00,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47'),(100,357,1621.02,1,0,'2019-09-02 00:18:47','2019-09-02 00:18:47');
-/*!40000 ALTER TABLE `jsyfb_balance` ENABLE KEYS */;
+LOCK TABLES `category    backup` WRITE;
+/*!40000 ALTER TABLE `category    backup` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category    backup` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -466,10 +317,10 @@ DROP TABLE IF EXISTS `jyfb_answer_list`;
 CREATE TABLE `jyfb_answer_list` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '题目',
-  `option1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '选项A',
-  `option2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项B',
-  `option3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项C',
-  `option4` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项D',
+  `A` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '' COMMENT '选项A',
+  `B` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项B',
+  `C` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项C',
+  `D` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '选项D',
   `correct` enum('A','B','C','D') COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '正确答案',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态：0禁用1正常',
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除：0否1是',
@@ -490,6 +341,37 @@ INSERT INTO `jyfb_answer_list` VALUES (1,'法律规定，企业必须给职工�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `jyfb_article_comment`
+--
+
+DROP TABLE IF EXISTS `jyfb_article_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jyfb_article_comment` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
+  `article_id` int(11) DEFAULT NULL COMMENT '文章id',
+  `interpretation` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '解读',
+  `measures` text COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '措施',
+  `content` text COLLATE utf8mb4_unicode_ci COMMENT '评论内容',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comment-user-acticle` (`user_id`,`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jyfb_article_comment`
+--
+
+LOCK TABLES `jyfb_article_comment` WRITE;
+/*!40000 ALTER TABLE `jyfb_article_comment` DISABLE KEYS */;
+INSERT INTO `jyfb_article_comment` VALUES (1,118,16,'Ullam quia voluptatum voluptatem occaecati.','Ipsum magnam itaque reprehenderit quia quaerat harum maiores laboriosam.','a','2019-09-01 22:50:20','2019-09-01 22:50:20'),(2,262,16,'Doloribus nemo voluptates et nostrum.','Minus blanditiis blanditiis reiciendis quisquam quos dicta.','b','2019-09-01 22:50:20','2019-09-01 22:50:20'),(3,357,16,'Et ut debitis quae sequi quis.','Autem et molestias tempore eum modi.','c','2019-09-01 22:50:20','2019-09-01 22:50:20'),(4,57,67,'Commodi quasi perferendis qui molestias.','Neque et est recusandae.','d','2019-09-01 22:50:20','2019-09-01 22:50:20'),(5,61,23,'Aut facilis aliquam dolores.','Aut ut adipisci laborum rerum rem quia cum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(6,244,40,'Fugiat dolor enim facilis cum est.','Nam assumenda dolorem iure doloribus deserunt.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(7,234,11,'Eos tempore sed necessitatibus ut autem impedit.','Ratione aut sequi minus nihil.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(8,8,17,'Praesentium necessitatibus quidem error neque molestiae qui dolorum.','Repellendus nihil sunt vel sed et vitae excepturi.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(9,463,73,'Rerum possimus voluptatem dolorum dicta.','Voluptas et praesentium vel dolores dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(10,348,23,'Qui qui saepe ad vero error.','Velit sed quia suscipit qui quia laborum fuga.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(11,126,69,'Accusamus aut et dignissimos quisquam laudantium.','Magni maxime consequatur ut et quidem fugit adipisci.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(12,328,20,'Sapiente quaerat ut perferendis beatae qui.','Dolores et et quia ut nihil.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(13,176,73,'Sit eos voluptas nihil alias voluptate exercitationem ex.','Quod vel et deleniti dignissimos quam eos.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(14,310,75,'Optio ea placeat sapiente dolorum ipsum autem sed perferendis.','Quia fugit in sit et aut ipsum nostrum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(15,304,36,'Exercitationem aut harum eligendi soluta.','Maxime repellat voluptatem autem velit illum adipisci.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(16,110,41,'Assumenda sed voluptatem maiores saepe quasi nobis expedita ipsum.','Est id iste dolore est modi.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(17,265,50,'Id dolor qui quisquam nemo facere eum accusamus.','Sed dolor provident placeat at cumque ut quidem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(18,145,53,'Dolore odio ab fugiat voluptates magnam nesciunt.','Amet et non non autem minima dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(19,304,33,'Nam tempore est minima distinctio suscipit et.','Sunt esse molestiae unde non voluptatibus quia impedit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(20,404,94,'Adipisci et sint omnis cum culpa eaque.','Et et repellendus recusandae et sint quidem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(21,187,71,'Qui esse ipsum quibusdam corporis inventore.','Laudantium autem ea iure voluptate et dignissimos.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(22,218,95,'Voluptatibus iste architecto mollitia.','Aspernatur ut molestiae fuga.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(23,271,10,'Ipsa ea laboriosam modi debitis nemo similique.','Voluptas qui et et cumque mollitia ipsum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(24,58,95,'A delectus inventore repudiandae repellat debitis dicta.','Repellendus suscipit non eos harum in alias.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(25,404,31,'Aut pariatur mollitia dolores ex.','Sed ipsa quod eveniet id repudiandae hic.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(26,99,9,'Debitis illo incidunt a dolorem maiores.','Delectus vel blanditiis aperiam eaque pariatur dolores non.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(27,19,72,'Id doloremque voluptatem nihil accusantium.','Voluptate doloribus dolorem quia ut enim excepturi dignissimos ut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(28,368,50,'Ea et illo autem quas.','Error amet odit saepe architecto aut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(29,471,27,'Eligendi quos eius cumque in eum ipsam.','Numquam ipsa animi aut consequatur quia blanditiis magni.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(30,281,81,'Eos qui aut eos omnis tempore nulla.','Animi reprehenderit magni in repellendus molestias.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(31,306,48,'Magnam error aliquid aperiam qui.','Nulla rerum tenetur sed ipsam qui dolores consequuntur.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(32,447,94,'Quis iste quas rerum omnis alias corporis.','Numquam ipsum rerum et error et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(33,180,19,'Rerum dolorum modi dolorem praesentium.','Dolores voluptatem beatae est assumenda.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(34,352,20,'Pariatur beatae eum veritatis esse saepe.','Sit porro ducimus ipsum et occaecati aut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(35,337,4,'Ut ad dolor labore dicta voluptas voluptatem modi.','Doloribus adipisci dolore nemo aliquam nam delectus ipsam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(36,359,96,'Reiciendis excepturi repellendus cum tenetur.','Dolor impedit sunt quis molestiae deserunt.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(37,456,40,'Incidunt aut expedita numquam dolor occaecati ad velit.','Suscipit aspernatur voluptatem eius nobis voluptatem fugiat repellat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(38,137,47,'Dolorum perspiciatis velit fuga atque nihil ipsa voluptatem.','Illo velit illo et eos aut exercitationem ab.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(39,57,8,'Esse amet sed ullam dolor.','Laudantium itaque alias labore quos est quia consequatur voluptate.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(40,357,75,'Voluptatum inventore in cupiditate veniam animi assumenda.','Voluptatem natus voluptatem nobis labore cumque placeat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(41,408,25,'Officia laborum dolor voluptas neque ipsam.','Magni dolores facere sit et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(42,9,6,'Odit aut deleniti est quibusdam et.','Est deserunt magnam quibusdam accusantium doloribus assumenda.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(43,56,86,'Molestiae ab explicabo cum odit et.','Aliquam corrupti tempora iste.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(44,194,96,'Officia esse ut distinctio reprehenderit provident.','Sed error qui voluptatem suscipit dolor odio.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(45,79,33,'Ut molestiae porro hic in.','Iusto voluptatibus suscipit sed ullam doloremque quibusdam vitae.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(46,495,72,'Dolorem quam doloremque modi consectetur quo.','Asperiores unde nesciunt a fuga consequatur.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(47,196,85,'A repellendus ipsum consequuntur voluptate ut.','Sunt odit et aliquid ratione iusto sit ab.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(48,345,67,'Vel harum ea et consequatur odit est.','Unde voluptate nostrum ea et dolorum quia doloribus dolorem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(49,16,28,'Sint officia voluptatem sit sint qui omnis.','Accusamus hic dolore inventore praesentium qui.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(50,142,34,'Amet enim voluptatibus error.','Est temporibus nesciunt incidunt quibusdam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(51,111,19,'Ut repellendus et eaque provident.','Et aut odio et autem voluptatum iusto vero quos.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(52,3,33,'Ipsa excepturi officiis voluptas qui dolores recusandae et.','A vel voluptas consectetur temporibus perferendis.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(53,417,85,'Et rerum aut amet et quisquam.','Nihil ut amet qui soluta.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(54,361,12,'Pariatur vel voluptas omnis non sunt rem enim saepe.','Molestiae nulla et quas repudiandae rerum doloremque numquam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(55,106,33,'Commodi nesciunt asperiores quae et nemo occaecati fugit.','Cum vel illum voluptatibus inventore asperiores maiores et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(56,415,57,'Ipsum excepturi voluptatum et aliquid accusantium assumenda.','Sunt quis et voluptas minus incidunt eos maxime.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(57,479,15,'Consectetur nihil repellendus nesciunt mollitia aut quis minus.','Laborum est voluptas nam quia in.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(58,371,3,'Hic et rerum quos omnis occaecati.','Ut hic tenetur mollitia sequi laudantium ea asperiores placeat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(59,197,1,'Suscipit repellendus ad itaque reprehenderit deserunt omnis.','Numquam dolore ullam aut ab velit voluptate.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(60,91,22,'Iure quod ipsa quaerat assumenda dignissimos.','Ut consequuntur ut voluptates aliquid.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(61,338,60,'Et omnis id animi harum.','Inventore nam ut soluta et sit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(62,395,35,'Ut aut a aut iusto pariatur placeat in.','Nesciunt itaque libero eaque qui deleniti.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(63,225,74,'Rerum eum similique cumque eos tempore saepe possimus.','Sunt perspiciatis eum consequatur distinctio atque.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(64,482,91,'Et necessitatibus voluptates velit.','Modi debitis rerum a quia.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(65,55,45,'Nam quibusdam vero aperiam ipsa sint.','Sequi laudantium ut excepturi dicta.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(66,471,14,'Autem officia voluptatem commodi ducimus.','Harum voluptatem placeat quia fugiat iusto aliquam.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(67,306,92,'Atque consectetur eligendi exercitationem in consequatur molestiae.','Tempora possimus et rerum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(68,420,65,'Eligendi qui minima error quis molestiae et inventore.','Quisquam iusto voluptatem culpa voluptatem officia dolores voluptatem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(69,421,25,'Quo magni eligendi dicta velit est.','Eum ratione dolor et et est pariatur.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(70,110,59,'Neque voluptatem est perspiciatis sit ipsa facere voluptas.','Qui et possimus architecto laudantium quidem consequatur qui.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(71,14,33,'Eos maxime quia aliquam sunt sed.','Quia maiores neque eos alias earum saepe ab.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(72,280,16,'Ex voluptatibus qui esse est molestiae ipsam.','Dolor quod est harum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(73,331,100,'Aperiam et blanditiis unde temporibus est voluptatum nisi.','Atque alias vero et sed eum laudantium sequi.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(74,479,20,'Modi sunt et aut quis voluptatibus officia magni.','Nihil consectetur deserunt vero et consequatur repellat placeat saepe.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(75,103,74,'Temporibus quia animi voluptate assumenda ut.','Est inventore porro aut nesciunt similique dolores ut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(76,151,60,'Ducimus hic qui et officia atque.','Accusamus ipsam laborum possimus provident excepturi et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(77,103,21,'Dolorem nemo iusto at.','Accusamus delectus nihil at sint voluptatibus ex.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(78,364,94,'Dolores nemo quidem delectus ea architecto voluptatem nihil a.','Quod omnis maxime quisquam ut.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(79,478,69,'Est omnis fugiat exercitationem nam quis ipsam voluptate.','Quia dolores dolorem qui aperiam dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(80,463,69,'Laudantium qui distinctio at est quisquam repudiandae amet.','Et voluptatum autem voluptas repellendus a quisquam numquam et.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(81,93,53,'Aspernatur recusandae sapiente ex sapiente.','Et aliquid esse porro quo.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(82,177,47,'Mollitia reiciendis eveniet est facere ducimus pariatur ut.','Nihil est consequatur aut rem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(83,336,45,'Eos quo animi aut recusandae non numquam.','Eveniet commodi tempore quasi aliquam qui et rerum ipsa.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(84,342,12,'Doloremque perferendis ea tenetur rem quibusdam quo harum.','Nihil voluptatibus tempore doloribus tempore hic.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(85,367,89,'Eius aut incidunt voluptas nihil illo quisquam.','Ducimus harum consequatur ab dicta incidunt alias in impedit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(86,485,44,'Nesciunt sit quo recusandae repellendus ratione.','Consequuntur ipsa numquam et beatae ipsam est molestiae natus.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(87,142,22,'Tempore delectus qui laboriosam veniam voluptatem et et asperiores.','Quisquam est laborum officiis voluptates dolor laudantium blanditiis adipisci.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(88,495,72,'Molestiae rem dolor dolores quod rerum architecto.','Eveniet facilis enim vero aut modi adipisci impedit.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(89,68,55,'Odit qui perspiciatis quia quasi et provident quos aut.','Rerum inventore magni est hic.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(90,346,90,'Quia iusto quia doloribus perspiciatis vel.','Ipsam magnam corrupti dolor.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(91,304,35,'Quidem est nulla ut qui magni vel dolor.','Error voluptatem maxime est voluptas molestias quisquam autem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(92,63,4,'Et blanditiis et est quia corrupti.','Sunt doloribus corrupti vero voluptas.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(93,216,10,'Aperiam et autem et.','Et rem atque est.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(94,148,9,'Inventore fugiat dolores totam aliquid nemo occaecati voluptas.','Placeat id et voluptatem.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(95,290,12,'Ut et iste laborum alias deserunt.','Pariatur est dolor vel odio amet.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(96,460,73,'Eos quo optio doloribus quam aut recusandae explicabo.','Inventore animi enim corrupti omnis.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(97,247,84,'Et sed ullam voluptatem qui.','Est ad minima rem fugit repudiandae.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(98,485,59,'Eveniet eum veniam sunt temporibus.','Qui occaecati doloremque possimus qui non est incidunt voluptatum.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(99,392,13,'Est quia voluptatem laborum beatae odio.','Alias natus consequuntur quos illo.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20'),(100,435,76,'Et qui omnis neque rerum eos asperiores et.','Voluptatem laboriosam adipisci vitae placeat.',NULL,'2019-09-01 22:50:20','2019-09-01 22:50:20');
+/*!40000 ALTER TABLE `jyfb_article_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `jyfb_article_like`
 --
 
@@ -502,7 +384,7 @@ CREATE TABLE `jyfb_article_like` (
   `article_id` int(11) NOT NULL COMMENT '文章id',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='热门资讯点赞表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='热门资讯点赞表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -513,6 +395,32 @@ LOCK TABLES `jyfb_article_like` WRITE;
 /*!40000 ALTER TABLE `jyfb_article_like` DISABLE KEYS */;
 INSERT INTO `jyfb_article_like` VALUES (3,1,1,'2019-09-11 06:20:05'),(5,3,1,'2019-09-18 09:02:56');
 /*!40000 ALTER TABLE `jyfb_article_like` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jyfb_article_share`
+--
+
+DROP TABLE IF EXISTS `jyfb_article_share`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jyfb_article_share` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `article_id` int(11) NOT NULL COMMENT '文章id',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='热门资讯分享表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jyfb_article_share`
+--
+
+LOCK TABLES `jyfb_article_share` WRITE;
+/*!40000 ALTER TABLE `jyfb_article_share` DISABLE KEYS */;
+INSERT INTO `jyfb_article_share` VALUES (1,3,17,'2019-09-19 02:02:45');
+/*!40000 ALTER TABLE `jyfb_article_share` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -594,7 +502,7 @@ CREATE TABLE `jyfb_balance_log` (
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `balance_log-user_id` (`user_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='钱包余额流水记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='钱包余额流水记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -603,6 +511,7 @@ CREATE TABLE `jyfb_balance_log` (
 
 LOCK TABLES `jyfb_balance_log` WRITE;
 /*!40000 ALTER TABLE `jyfb_balance_log` DISABLE KEYS */;
+INSERT INTO `jyfb_balance_log` VALUES (1,4,1,20,'111','111',1,0,'2019-09-24 03:36:45','2019-09-24 03:36:47');
 /*!40000 ALTER TABLE `jyfb_balance_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -721,7 +630,7 @@ CREATE TABLE `jyfb_collection` (
 
 LOCK TABLES `jyfb_collection` WRITE;
 /*!40000 ALTER TABLE `jyfb_collection` DISABLE KEYS */;
-INSERT INTO `jyfb_collection` VALUES (1,1,1,1,0,'2019-09-02 22:15:29','2019-09-02 22:15:56'),(2,3,18,1,0,'2019-09-11 07:07:49','2019-09-11 07:07:49');
+INSERT INTO `jyfb_collection` VALUES (1,1,1,1,0,'2019-09-02 22:15:29','2019-09-02 22:15:56'),(2,4,18,1,0,'2019-09-11 07:07:49','2019-09-11 07:07:49');
 /*!40000 ALTER TABLE `jyfb_collection` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -838,14 +747,16 @@ CREATE TABLE `jyfb_everyday_answer_record` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `answer_list_id` int(11) DEFAULT NULL COMMENT '问题id',
-  `date` timestamp NULL DEFAULT NULL COMMENT '日期',
+  `date` timestamp NULL DEFAULT NULL COMMENT '答题日期',
   `question` varchar(255) DEFAULT NULL COMMENT '问题',
-  `answer` varchar(255) DEFAULT NULL COMMENT '答案',
+  `answer` varchar(255) DEFAULT NULL COMMENT '用户答案（A/B/C/D）',
+  `correct` varchar(255) DEFAULT NULL COMMENT '正确答案（A/B/C/D）',
+  `score` tinyint(4) DEFAULT NULL COMMENT '获得分数',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
   KEY `answer-user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='每日答题记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='每日答题记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -854,7 +765,7 @@ CREATE TABLE `jyfb_everyday_answer_record` (
 
 LOCK TABLES `jyfb_everyday_answer_record` WRITE;
 /*!40000 ALTER TABLE `jyfb_everyday_answer_record` DISABLE KEYS */;
-INSERT INTO `jyfb_everyday_answer_record` VALUES (3,4,1,'2019-09-10 06:34:09','法律规定，企业必须给职工缴足','五险一金','2019-09-10 06:34:48','2019-09-10 06:34:48');
+INSERT INTO `jyfb_everyday_answer_record` VALUES (3,5,1,'2019-09-10 06:34:09','法律规定，企业必须给职工缴足','五险一金',NULL,NULL,'2019-09-10 06:34:48','2019-09-10 06:34:48'),(4,4,1,'2019-09-10 06:34:09','法律规定，企业必须给职工缴足','五险一金','',NULL,'2019-09-10 06:34:48','2019-09-10 06:34:48'),(5,3,1,'2019-09-10 06:34:09','法律规定，企业必须给职工缴足','五险一金','',NULL,'2019-09-10 06:34:48','2019-09-10 06:34:48'),(6,4,1,'2019-09-19 16:00:00','法律规定，企业必须给职工缴足','A','A',1,'2019-09-20 03:27:07','2019-09-20 03:27:07');
 /*!40000 ALTER TABLE `jyfb_everyday_answer_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -868,18 +779,13 @@ DROP TABLE IF EXISTS `jyfb_exchange`;
 CREATE TABLE `jyfb_exchange` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
-  `code` varchar(255) DEFAULT NULL COMMENT '兑换码',
-  `is_used` tinyint(4) DEFAULT NULL COMMENT '是否使用：0否1是',
-  `used_time` timestamp NULL DEFAULT NULL COMMENT '使用时间',
-  `expire_time` timestamp NULL DEFAULT NULL COMMENT '有效时间',
+  `goods_id` int(11) DEFAULT NULL COMMENT '兑换的商品id',
+  `ingots_quantity` tinyint(11) DEFAULT NULL COMMENT '使用法宝数量',
   `status` tinyint(4) DEFAULT '1' COMMENT '状态：0禁用1正常',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_at` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  KEY `
-
-exchange` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='兑换码表';
+  KEY `exchange` (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='法宝兑换记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -892,13 +798,13 @@ LOCK TABLES `jyfb_exchange` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `jyfb_exclusive_legal_advice没用到`
+-- Table structure for table `jyfb_exclusive_legal_advice    not used`
 --
 
-DROP TABLE IF EXISTS `jyfb_exclusive_legal_advice没用到`;
+DROP TABLE IF EXISTS `jyfb_exclusive_legal_advice    not used`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `jyfb_exclusive_legal_advice没用到` (
+CREATE TABLE `jyfb_exclusive_legal_advice    not used` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL COMMENT '用户id',
   `customer_id` int(11) DEFAULT NULL COMMENT '法顾id',
@@ -910,12 +816,69 @@ CREATE TABLE `jyfb_exclusive_legal_advice没用到` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `jyfb_exclusive_legal_advice没用到`
+-- Dumping data for table `jyfb_exclusive_legal_advice    not used`
 --
 
-LOCK TABLES `jyfb_exclusive_legal_advice没用到` WRITE;
-/*!40000 ALTER TABLE `jyfb_exclusive_legal_advice没用到` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jyfb_exclusive_legal_advice没用到` ENABLE KEYS */;
+LOCK TABLES `jyfb_exclusive_legal_advice    not used` WRITE;
+/*!40000 ALTER TABLE `jyfb_exclusive_legal_advice    not used` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jyfb_exclusive_legal_advice    not used` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jyfb_goods`
+--
+
+DROP TABLE IF EXISTS `jyfb_goods`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jyfb_goods` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `goods_name` varchar(255) NOT NULL COMMENT '商品名称',
+  `image` varchar(255) DEFAULT NULL COMMENT '商品图片',
+  `exchange_price` int(11) DEFAULT NULL COMMENT '法宝兑换价',
+  `stock` int(11) DEFAULT NULL COMMENT '库存',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `goods` (`goods_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jyfb_goods`
+--
+
+LOCK TABLES `jyfb_goods` WRITE;
+/*!40000 ALTER TABLE `jyfb_goods` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jyfb_goods` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jyfb_goods_attr`
+--
+
+DROP TABLE IF EXISTS `jyfb_goods_attr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jyfb_goods_attr` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `goods_id` int(11) NOT NULL COMMENT '商品id',
+  `size` varchar(255) DEFAULT NULL COMMENT '尺寸',
+  `color` varchar(255) DEFAULT NULL COMMENT '颜色',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `attrs` (`goods_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品属性表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jyfb_goods_attr`
+--
+
+LOCK TABLES `jyfb_goods_attr` WRITE;
+/*!40000 ALTER TABLE `jyfb_goods_attr` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jyfb_goods_attr` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -939,7 +902,7 @@ CREATE TABLE `jyfb_hot_article` (
   `created_at` timestamp NULL DEFAULT NULL COMMENT '注册时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COMMENT='热门资讯表';
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COMMENT='热门资讯表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -948,7 +911,7 @@ CREATE TABLE `jyfb_hot_article` (
 
 LOCK TABLES `jyfb_hot_article` WRITE;
 /*!40000 ALTER TABLE `jyfb_hot_article` DISABLE KEYS */;
-INSERT INTO `jyfb_hot_article` VALUES (1,NULL,1,'<blockquote><b>Accusantium sed similique qui ut dolore nihil.</b></blockquote><p>​<br></p>',NULL,NULL,831,NULL,0,0,'2019-09-01 21:15:06','2019-09-01 22:35:47'),(17,NULL,1,'Consequuntur voluptatem dolorum quia laudantium consequatur deleniti deleniti modi.',NULL,NULL,0,NULL,1,0,'2019-09-01 21:15:06','2019-09-18 09:21:11'),(18,NULL,1,'Optio harum dignissimos minima est sapiente est omnis.',NULL,NULL,228,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(19,NULL,1,'Mollitia nesciunt autem debitis aspernatur reiciendis dolorum.',NULL,NULL,305,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(20,NULL,1,'Et et explicabo quaerat laborum laborum ipsa consequuntur.',NULL,NULL,297,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(21,NULL,NULL,'Aliquam quibusdam blanditiis commodi commodi non occaecati.',NULL,NULL,670,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(22,NULL,NULL,'Quae non voluptatum non dolor voluptatibus earum.',NULL,NULL,209,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(23,NULL,NULL,'Voluptate tempora provident quod vel reiciendis voluptatem amet.',NULL,NULL,710,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(24,NULL,NULL,'Quibusdam sint quae quisquam incidunt quidem est est beatae.',NULL,NULL,758,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(25,NULL,NULL,'Fugit quos eveniet dolorem blanditiis sint iure dolores.',NULL,NULL,876,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(26,NULL,NULL,'Suscipit voluptate veniam voluptatem sapiente dolores.',NULL,NULL,578,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(27,NULL,NULL,'Libero quam porro natus labore vitae amet iusto.',NULL,NULL,484,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(28,NULL,NULL,'Sint voluptate et sint dolorum.',NULL,NULL,475,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(29,NULL,NULL,'Asperiores vitae libero facere aut.',NULL,NULL,533,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(30,NULL,NULL,'Alias autem mollitia totam fuga aut.',NULL,NULL,288,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(31,NULL,NULL,'Natus mollitia qui quis dolore magnam temporibus ex.',NULL,NULL,963,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(32,NULL,NULL,'Beatae minus beatae consectetur voluptatem mollitia.',NULL,NULL,531,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(33,NULL,NULL,'Accusamus velit sint qui dolore.',NULL,NULL,943,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(34,NULL,NULL,'Animi ullam eos amet perspiciatis atque laborum.',NULL,NULL,432,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(35,NULL,NULL,'Molestias incidunt et molestiae nisi distinctio.',NULL,NULL,787,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(36,NULL,NULL,'Culpa illum aut et velit consequuntur.',NULL,NULL,623,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(37,NULL,NULL,'Est quos qui asperiores nemo.',NULL,NULL,323,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(38,NULL,NULL,'Possimus pariatur porro accusamus et.',NULL,NULL,814,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(39,NULL,NULL,'Qui quod impedit fugit ea est ullam.',NULL,NULL,352,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(40,NULL,NULL,'Quam accusamus ad accusantium quia ullam et.',NULL,NULL,569,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(41,NULL,NULL,'Aliquam ut odit non.',NULL,NULL,861,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(42,NULL,NULL,'Deleniti quaerat odio laboriosam ut qui aut dolores.',NULL,NULL,284,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(43,NULL,NULL,'Quod sequi ipsum delectus corporis consequuntur eaque.',NULL,NULL,997,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(44,NULL,NULL,'Consequatur et et odit sit possimus aut sint est.',NULL,NULL,331,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(45,NULL,NULL,'Quo dicta et cupiditate iure vitae.',NULL,NULL,363,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(46,NULL,NULL,'Laborum saepe laboriosam et asperiores labore ullam est.',NULL,NULL,626,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(47,NULL,NULL,'Expedita optio saepe voluptas nostrum.',NULL,NULL,555,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(48,NULL,NULL,'Blanditiis qui fugiat in aut.',NULL,NULL,864,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(49,NULL,NULL,'Aut beatae repellat ex dolorum in et voluptatem.',NULL,NULL,987,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(50,NULL,NULL,'Voluptas eos vel voluptas ipsa sed.',NULL,NULL,846,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(51,NULL,NULL,'Veritatis voluptate atque odio perferendis et esse harum.',NULL,NULL,472,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(52,NULL,NULL,'Voluptatibus eum sit qui ad sunt nostrum in.',NULL,NULL,515,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(53,NULL,NULL,'Illo iure quam laudantium ut rerum et.',NULL,NULL,371,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(54,NULL,NULL,'Provident non molestias animi.',NULL,NULL,443,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(55,NULL,NULL,'Cum rerum error nemo id debitis sed quia.',NULL,NULL,376,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(56,NULL,NULL,'Autem doloremque et asperiores reprehenderit velit mollitia quia.',NULL,NULL,229,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(57,NULL,NULL,'Molestiae corrupti ipsam vel quo voluptate.',NULL,NULL,346,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(58,NULL,NULL,'Sed facere tenetur odio qui repudiandae.',NULL,NULL,438,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(59,NULL,NULL,'Aut dolorem vel eligendi ut voluptatum.',NULL,NULL,752,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(60,NULL,NULL,'Sit laboriosam ea qui sit ratione rem.',NULL,NULL,687,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(61,NULL,NULL,'Nobis non excepturi distinctio eos.',NULL,NULL,601,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(62,NULL,NULL,'Quia necessitatibus dolores non corporis.',NULL,NULL,278,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(63,NULL,NULL,'Praesentium dignissimos sequi atque labore consequatur in.',NULL,NULL,868,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(64,NULL,NULL,'Eaque reprehenderit aut nisi molestiae ut consequuntur.',NULL,NULL,513,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(65,NULL,NULL,'Architecto corporis officia corporis dolor ut rerum.',NULL,NULL,681,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(66,NULL,NULL,'Deserunt porro temporibus laboriosam eum in.',NULL,NULL,806,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(67,NULL,NULL,'Minima quis aspernatur aut alias minima.',NULL,NULL,271,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(68,NULL,NULL,'Voluptatibus atque possimus ex nihil qui velit.',NULL,NULL,907,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(69,NULL,NULL,'Quaerat cum sed eveniet nulla sint quidem distinctio.',NULL,NULL,826,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(70,NULL,NULL,'Debitis vel et voluptatem a.',NULL,NULL,229,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(71,NULL,NULL,'Amet ratione consequatur blanditiis illum.',NULL,NULL,810,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(72,NULL,NULL,'Sed totam consequuntur ea.',NULL,NULL,440,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(73,NULL,NULL,'Saepe labore fuga occaecati.',NULL,NULL,229,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(74,NULL,NULL,'Qui sit accusamus ea at pariatur magnam et.',NULL,NULL,518,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(75,NULL,NULL,'Necessitatibus eveniet laboriosam sit aperiam id qui itaque.',NULL,NULL,395,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(76,NULL,NULL,'Odio nulla quia qui.',NULL,NULL,214,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(77,NULL,NULL,'Laudantium aliquid sunt et nam in incidunt est.',NULL,NULL,398,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(78,NULL,NULL,'Ut nobis dolore ut.',NULL,NULL,992,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(79,NULL,NULL,'Est quos vero consequatur ea alias nostrum similique.',NULL,NULL,905,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(80,NULL,NULL,'Consequatur eius in qui optio dolores possimus.',NULL,NULL,340,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(81,NULL,NULL,'Sint reiciendis laborum adipisci nihil corporis necessitatibus.',NULL,NULL,683,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(82,NULL,NULL,'Eius ipsum consequatur accusamus ullam modi.',NULL,NULL,642,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(83,NULL,NULL,'Voluptatem a in nemo.',NULL,NULL,402,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(84,NULL,NULL,'Pariatur iste et molestias ut officia numquam.',NULL,NULL,273,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(85,NULL,NULL,'Iste velit placeat magnam.',NULL,NULL,521,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(86,NULL,NULL,'Voluptatum omnis quis asperiores consequatur.',NULL,NULL,923,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(87,NULL,NULL,'Sequi autem et explicabo.',NULL,NULL,750,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(88,NULL,NULL,'Dolor veritatis veritatis est voluptas.',NULL,NULL,219,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(89,NULL,NULL,'Accusamus quibusdam harum rerum voluptas doloribus.',NULL,NULL,714,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(90,NULL,NULL,'Sunt reprehenderit sed et perferendis.',NULL,NULL,257,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(91,NULL,NULL,'Et fugiat quo reprehenderit quas voluptas ut rerum.',NULL,NULL,865,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(92,NULL,NULL,'Aperiam rerum quas suscipit ut quis et.',NULL,NULL,815,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(93,NULL,NULL,'Velit sed voluptatem laudantium voluptatem.',NULL,NULL,833,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(94,NULL,NULL,'Tempora architecto quod voluptas et.',NULL,NULL,796,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(95,NULL,NULL,'Quia sed delectus molestiae.',NULL,NULL,417,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(96,NULL,NULL,'Voluptatem adipisci vel consequatur ut ut.',NULL,NULL,327,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(97,NULL,NULL,'Ad pariatur a voluptatem eaque quia facilis tenetur atque.',NULL,NULL,956,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(98,NULL,NULL,'Ratione quaerat ratione ullam consectetur eum.',NULL,NULL,503,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(99,NULL,NULL,'Labore doloribus nisi molestias mollitia nam.',NULL,NULL,336,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(100,NULL,NULL,'Ab corporis minus ipsa alias velit autem.',NULL,NULL,395,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(101,NULL,NULL,'Atque sed libero voluptatum eum et voluptatum qui.',NULL,NULL,905,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(102,NULL,NULL,'Delectus saepe aut quis repellendus possimus quos non.',NULL,NULL,517,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(103,NULL,NULL,'Cupiditate quisquam quidem quibusdam.',NULL,NULL,1000,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(104,NULL,NULL,'Adipisci eligendi consequuntur eligendi error.',NULL,NULL,527,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(105,NULL,NULL,'Et error amet sunt possimus ut.',NULL,NULL,698,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(106,NULL,NULL,'Id rerum et voluptates beatae ex totam maxime.',NULL,NULL,348,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(107,NULL,NULL,'Aut necessitatibus consequatur sequi nihil voluptatibus.',NULL,NULL,350,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(108,NULL,NULL,'Rerum quia dolorum suscipit velit in.',NULL,NULL,906,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(109,NULL,NULL,'Ratione doloremque cum sed ducimus autem suscipit aperiam magni.',NULL,NULL,281,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(110,NULL,NULL,'Voluptatem enim earum labore soluta ex et.',NULL,NULL,716,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(111,NULL,NULL,'Sit earum autem quisquam est vel.',NULL,NULL,444,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(112,NULL,NULL,'Nihil commodi doloremque ea.',NULL,NULL,355,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(113,NULL,NULL,'Aut impedit molestias in minus et sint.',NULL,NULL,372,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(114,NULL,NULL,'Blanditiis dolorum ducimus quaerat necessitatibus in et explicabo culpa.',NULL,NULL,816,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(115,NULL,NULL,'Est earum qui autem sequi est et atque.',NULL,NULL,573,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(116,NULL,1,'抢劫罪一般判多少年',NULL,NULL,0,NULL,1,0,'2019-09-09 06:34:49','2019-09-09 06:34:49');
+INSERT INTO `jyfb_hot_article` VALUES (1,NULL,1,'<blockquote><b>Accusantium sed similique qui ut dolore nihil.</b></blockquote><p>​<br></p>',NULL,NULL,831,NULL,0,0,'2019-09-01 21:15:06','2019-09-01 22:35:47'),(17,NULL,1,'Consequuntur voluptatem dolorum quia laudantium consequatur deleniti deleniti modi.',NULL,NULL,-2,1,1,0,'2019-09-01 21:15:06','2019-09-19 02:02:45'),(18,NULL,1,'Optio harum dignissimos minima est sapiente est omnis.',NULL,NULL,228,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(19,NULL,1,'Mollitia nesciunt autem debitis aspernatur reiciendis dolorum.',NULL,NULL,305,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(20,NULL,1,'Et et explicabo quaerat laborum laborum ipsa consequuntur.',NULL,NULL,297,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(21,NULL,NULL,'Aliquam quibusdam blanditiis commodi commodi non occaecati.',NULL,NULL,670,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(22,NULL,NULL,'Quae non voluptatum non dolor voluptatibus earum.',NULL,NULL,209,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(23,NULL,NULL,'Voluptate tempora provident quod vel reiciendis voluptatem amet.',NULL,NULL,710,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(24,NULL,NULL,'Quibusdam sint quae quisquam incidunt quidem est est beatae.',NULL,NULL,758,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(25,NULL,NULL,'Fugit quos eveniet dolorem blanditiis sint iure dolores.',NULL,NULL,876,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(26,NULL,NULL,'Suscipit voluptate veniam voluptatem sapiente dolores.',NULL,NULL,578,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(27,NULL,NULL,'Libero quam porro natus labore vitae amet iusto.',NULL,NULL,484,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(28,NULL,NULL,'Sint voluptate et sint dolorum.',NULL,NULL,475,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(29,NULL,NULL,'Asperiores vitae libero facere aut.',NULL,NULL,533,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(30,NULL,NULL,'Alias autem mollitia totam fuga aut.',NULL,NULL,288,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(31,NULL,NULL,'Natus mollitia qui quis dolore magnam temporibus ex.',NULL,NULL,963,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(32,NULL,NULL,'Beatae minus beatae consectetur voluptatem mollitia.',NULL,NULL,531,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(33,NULL,NULL,'Accusamus velit sint qui dolore.',NULL,NULL,943,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(34,NULL,NULL,'Animi ullam eos amet perspiciatis atque laborum.',NULL,NULL,432,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(35,NULL,NULL,'Molestias incidunt et molestiae nisi distinctio.',NULL,NULL,787,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(36,NULL,NULL,'Culpa illum aut et velit consequuntur.',NULL,NULL,623,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(37,NULL,NULL,'Est quos qui asperiores nemo.',NULL,NULL,323,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(38,NULL,NULL,'Possimus pariatur porro accusamus et.',NULL,NULL,814,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(39,NULL,NULL,'Qui quod impedit fugit ea est ullam.',NULL,NULL,352,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(40,NULL,NULL,'Quam accusamus ad accusantium quia ullam et.',NULL,NULL,569,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(41,NULL,NULL,'Aliquam ut odit non.',NULL,NULL,861,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(42,NULL,NULL,'Deleniti quaerat odio laboriosam ut qui aut dolores.',NULL,NULL,284,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(43,NULL,NULL,'Quod sequi ipsum delectus corporis consequuntur eaque.',NULL,NULL,997,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(44,NULL,NULL,'Consequatur et et odit sit possimus aut sint est.',NULL,NULL,331,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(45,NULL,NULL,'Quo dicta et cupiditate iure vitae.',NULL,NULL,363,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(46,NULL,NULL,'Laborum saepe laboriosam et asperiores labore ullam est.',NULL,NULL,626,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(47,NULL,NULL,'Expedita optio saepe voluptas nostrum.',NULL,NULL,555,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(48,NULL,NULL,'Blanditiis qui fugiat in aut.',NULL,NULL,864,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(49,NULL,NULL,'Aut beatae repellat ex dolorum in et voluptatem.',NULL,NULL,987,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(50,NULL,NULL,'Voluptas eos vel voluptas ipsa sed.',NULL,NULL,846,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(51,NULL,NULL,'Veritatis voluptate atque odio perferendis et esse harum.',NULL,NULL,472,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(52,NULL,NULL,'Voluptatibus eum sit qui ad sunt nostrum in.',NULL,NULL,515,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(53,NULL,NULL,'Illo iure quam laudantium ut rerum et.',NULL,NULL,371,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(54,NULL,NULL,'Provident non molestias animi.',NULL,NULL,443,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(55,NULL,NULL,'Cum rerum error nemo id debitis sed quia.',NULL,NULL,376,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(56,NULL,NULL,'Autem doloremque et asperiores reprehenderit velit mollitia quia.',NULL,NULL,229,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(57,NULL,NULL,'Molestiae corrupti ipsam vel quo voluptate.',NULL,NULL,346,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(58,NULL,NULL,'Sed facere tenetur odio qui repudiandae.',NULL,NULL,438,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(59,NULL,NULL,'Aut dolorem vel eligendi ut voluptatum.',NULL,NULL,752,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(60,NULL,NULL,'Sit laboriosam ea qui sit ratione rem.',NULL,NULL,687,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(61,NULL,NULL,'Nobis non excepturi distinctio eos.',NULL,NULL,601,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(62,NULL,NULL,'Quia necessitatibus dolores non corporis.',NULL,NULL,278,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(63,NULL,NULL,'Praesentium dignissimos sequi atque labore consequatur in.',NULL,NULL,868,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(64,NULL,NULL,'Eaque reprehenderit aut nisi molestiae ut consequuntur.',NULL,NULL,513,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(65,NULL,NULL,'Architecto corporis officia corporis dolor ut rerum.',NULL,NULL,681,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(66,NULL,NULL,'Deserunt porro temporibus laboriosam eum in.',NULL,NULL,806,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(67,NULL,NULL,'Minima quis aspernatur aut alias minima.',NULL,NULL,271,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(68,NULL,NULL,'Voluptatibus atque possimus ex nihil qui velit.',NULL,NULL,907,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(69,NULL,NULL,'Quaerat cum sed eveniet nulla sint quidem distinctio.',NULL,NULL,826,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(70,NULL,NULL,'Debitis vel et voluptatem a.',NULL,NULL,229,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(71,NULL,NULL,'Amet ratione consequatur blanditiis illum.',NULL,NULL,810,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(72,NULL,NULL,'Sed totam consequuntur ea.',NULL,NULL,440,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(73,NULL,NULL,'Saepe labore fuga occaecati.',NULL,NULL,229,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(74,NULL,NULL,'Qui sit accusamus ea at pariatur magnam et.',NULL,NULL,518,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(75,NULL,NULL,'Necessitatibus eveniet laboriosam sit aperiam id qui itaque.',NULL,NULL,395,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(76,NULL,NULL,'Odio nulla quia qui.',NULL,NULL,214,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(77,NULL,NULL,'Laudantium aliquid sunt et nam in incidunt est.',NULL,NULL,398,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(78,NULL,NULL,'Ut nobis dolore ut.',NULL,NULL,992,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(79,NULL,NULL,'Est quos vero consequatur ea alias nostrum similique.',NULL,NULL,905,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(80,NULL,NULL,'Consequatur eius in qui optio dolores possimus.',NULL,NULL,340,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(81,NULL,NULL,'Sint reiciendis laborum adipisci nihil corporis necessitatibus.',NULL,NULL,683,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(82,NULL,NULL,'Eius ipsum consequatur accusamus ullam modi.',NULL,NULL,642,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(83,NULL,NULL,'Voluptatem a in nemo.',NULL,NULL,402,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(84,NULL,NULL,'Pariatur iste et molestias ut officia numquam.',NULL,NULL,273,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(85,NULL,NULL,'Iste velit placeat magnam.',NULL,NULL,521,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(86,NULL,NULL,'Voluptatum omnis quis asperiores consequatur.',NULL,NULL,923,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(87,NULL,NULL,'Sequi autem et explicabo.',NULL,NULL,750,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(88,NULL,NULL,'Dolor veritatis veritatis est voluptas.',NULL,NULL,219,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(89,NULL,NULL,'Accusamus quibusdam harum rerum voluptas doloribus.',NULL,NULL,714,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(90,NULL,NULL,'Sunt reprehenderit sed et perferendis.',NULL,NULL,257,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(91,NULL,NULL,'Et fugiat quo reprehenderit quas voluptas ut rerum.',NULL,NULL,865,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(92,NULL,NULL,'Aperiam rerum quas suscipit ut quis et.',NULL,NULL,815,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(93,NULL,NULL,'Velit sed voluptatem laudantium voluptatem.',NULL,NULL,833,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(94,NULL,NULL,'Tempora architecto quod voluptas et.',NULL,NULL,796,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(95,NULL,NULL,'Quia sed delectus molestiae.',NULL,NULL,417,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(96,NULL,NULL,'Voluptatem adipisci vel consequatur ut ut.',NULL,NULL,327,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(97,NULL,NULL,'Ad pariatur a voluptatem eaque quia facilis tenetur atque.',NULL,NULL,956,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(98,NULL,NULL,'Ratione quaerat ratione ullam consectetur eum.',NULL,NULL,503,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(99,NULL,NULL,'Labore doloribus nisi molestias mollitia nam.',NULL,NULL,336,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(100,NULL,NULL,'Ab corporis minus ipsa alias velit autem.',NULL,NULL,395,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(101,NULL,NULL,'Atque sed libero voluptatum eum et voluptatum qui.',NULL,NULL,905,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(102,NULL,NULL,'Delectus saepe aut quis repellendus possimus quos non.',NULL,NULL,517,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(103,NULL,NULL,'Cupiditate quisquam quidem quibusdam.',NULL,NULL,1000,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(104,NULL,NULL,'Adipisci eligendi consequuntur eligendi error.',NULL,NULL,527,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(105,NULL,NULL,'Et error amet sunt possimus ut.',NULL,NULL,698,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(106,NULL,NULL,'Id rerum et voluptates beatae ex totam maxime.',NULL,NULL,348,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(107,NULL,NULL,'Aut necessitatibus consequatur sequi nihil voluptatibus.',NULL,NULL,350,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(108,NULL,NULL,'Rerum quia dolorum suscipit velit in.',NULL,NULL,906,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(109,NULL,NULL,'Ratione doloremque cum sed ducimus autem suscipit aperiam magni.',NULL,NULL,281,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(110,NULL,NULL,'Voluptatem enim earum labore soluta ex et.',NULL,NULL,716,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(111,NULL,NULL,'Sit earum autem quisquam est vel.',NULL,NULL,444,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(112,NULL,NULL,'Nihil commodi doloremque ea.',NULL,NULL,355,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(113,NULL,NULL,'Aut impedit molestias in minus et sint.',NULL,NULL,372,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(114,NULL,NULL,'Blanditiis dolorum ducimus quaerat necessitatibus in et explicabo culpa.',NULL,NULL,816,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(115,NULL,NULL,'Est earum qui autem sequi est et atque.',NULL,NULL,573,NULL,1,0,'2019-09-01 21:15:06','2019-09-01 21:15:06'),(116,NULL,1,'抢劫罪一般判多少年',NULL,NULL,0,NULL,1,0,'2019-09-09 06:34:49','2019-09-09 06:34:49'),(117,3,1,'8484848dwfe8f4e8f4e8',NULL,NULL,NULL,NULL,1,0,'2019-09-19 03:20:14','2019-09-19 03:20:14'),(118,NULL,1,'848485151515',NULL,NULL,NULL,NULL,1,0,'2019-09-19 03:32:37','2019-09-19 03:32:37'),(119,3,1,'848485151515',NULL,NULL,NULL,NULL,1,0,'2019-09-19 03:34:29','2019-09-19 03:34:29');
 /*!40000 ALTER TABLE `jyfb_hot_article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1060,7 +1023,7 @@ CREATE TABLE `jyfb_ingots_log` (
   `type` tinyint(4) DEFAULT NULL COMMENT '类型：1增加2减少',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态：0禁用1正常',
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否删除：0否1是',
-  `remark` varchar(200) DEFAULT NULL COMMENT '到期时间',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '添加时间',
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -1094,6 +1057,8 @@ CREATE TABLE `jyfb_laywer` (
   `qq` varchar(20) DEFAULT NULL COMMENT 'QQ号码',
   `wechat` varchar(30) DEFAULT NULL COMMENT '微信号码',
   `company` varchar(100) DEFAULT NULL COMMENT '单位名称',
+  `province` varchar(100) DEFAULT NULL COMMENT '省份',
+  `city` varchar(100) DEFAULT NULL COMMENT '城市',
   `cate_id` int(10) DEFAULT NULL COMMENT '律师职务分类',
   `summary` text COMMENT '职位描述',
   `status` tinyint(4) DEFAULT '1' COMMENT '状态：0禁用1正常',
@@ -1111,7 +1076,7 @@ CREATE TABLE `jyfb_laywer` (
 
 LOCK TABLES `jyfb_laywer` WRITE;
 /*!40000 ALTER TABLE `jyfb_laywer` DISABLE KEYS */;
-INSERT INTO `jyfb_laywer` VALUES (1,'律师甲','执业律师','13655454556','07711515155',NULL,NULL,NULL,'江城律师事务所',1,'地产，婚姻家庭，医药行业',1,0,'2019-09-09 08:14:00','2019-09-09 08:14:00'),(2,'律师乙','执业律师','17788486595','07711515155',NULL,NULL,NULL,'江城律师事务所',NULL,'地产，婚姻家庭',1,0,'2019-09-09 08:21:41','2019-09-09 08:21:41');
+INSERT INTO `jyfb_laywer` VALUES (1,'律师甲','执业律师','13655454556','07711515155',NULL,NULL,NULL,'江城律师事务所',NULL,NULL,1,'地产，婚姻家庭，医药行业',1,0,'2019-09-09 08:14:00','2019-09-09 08:14:00'),(2,'律师乙','执业律师','17788486595','07711515155',NULL,NULL,NULL,'江城律师事务所',NULL,NULL,2,'地产，婚姻家庭',1,0,'2019-09-09 08:21:41','2019-09-09 08:21:41');
 /*!40000 ALTER TABLE `jyfb_laywer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1258,7 +1223,7 @@ CREATE TABLE `jyfb_notary_office` (
   `wechat` varchar(30) DEFAULT NULL COMMENT '微信号码',
   `summary` varchar(200) DEFAULT NULL COMMENT '简介',
   `comments_count` int(11) DEFAULT NULL COMMENT '评论总数',
-  `avg_point` decimal(10,2) DEFAULT NULL COMMENT '服务分',
+  `score` decimal(10,2) DEFAULT NULL COMMENT '服务分',
   `address` varchar(255) DEFAULT NULL COMMENT '详细地址',
   `lng` decimal(10,4) DEFAULT NULL COMMENT '经度',
   `lat` decimal(10,4) DEFAULT NULL COMMENT '纬度',
@@ -1299,7 +1264,7 @@ CREATE TABLE `jyfb_notary_office_comment` (
   PRIMARY KEY (`id`),
   KEY `office-user_id` (`user_id`),
   KEY `office-office_id` (`office_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='公证处评论表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='公证处评论表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1308,7 +1273,7 @@ CREATE TABLE `jyfb_notary_office_comment` (
 
 LOCK TABLES `jyfb_notary_office_comment` WRITE;
 /*!40000 ALTER TABLE `jyfb_notary_office_comment` DISABLE KEYS */;
-INSERT INTO `jyfb_notary_office_comment` VALUES (1,1,1,5,'55','2019-09-10 01:26:17','2019-09-10 01:26:19');
+INSERT INTO `jyfb_notary_office_comment` VALUES (2,1,3,1,'4','2019-09-24 02:17:45','2019-09-24 02:17:48');
 /*!40000 ALTER TABLE `jyfb_notary_office_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1394,7 +1359,7 @@ CREATE TABLE `jyfb_specialist` (
   `telephone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '固定电话',
   `company` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '单位名称',
   `comments_count` int(11) DEFAULT NULL COMMENT '评论总数',
-  `avg_point` decimal(10,0) DEFAULT NULL COMMENT '服务平均分',
+  `score` decimal(10,0) DEFAULT NULL COMMENT '服务平均分',
   `summary` text COLLATE utf8mb4_unicode_ci COMMENT '描述',
   `status` tinyint(4) DEFAULT '1' COMMENT '状态：0禁用1正常',
   `is_deleted` tinyint(4) DEFAULT '0' COMMENT '是否删除：0否1是',
@@ -1560,8 +1525,42 @@ CREATE TABLE `jyfb_user` (
 
 LOCK TABLES `jyfb_user` WRITE;
 /*!40000 ALTER TABLE `jyfb_user` DISABLE KEYS */;
-INSERT INTO `jyfb_user` VALUES (1,'admin0','$2y$10$u8sYmc1tqDO8/hfkNsncruswlaQ19A6zUn2rdeqmK3QDUjTrNbWP.','j',NULL,NULL,'15678837701',0,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,0,1,0,'2019-09-06 06:27:32','2019-09-06 06:27:32'),(3,'admin1','$2y$10$JR/rR6Scoe1OhnV4MHVwre1NG4fLtqukxiiMcMm11ZElXCkl3nm3.','l',NULL,NULL,'15678837702',1,NULL,0,NULL,NULL,NULL,0,NULL,'jsuCs1fd8WSsXxnVBLMYD62X2kCLMh4Cahv5QthOF9vy63KhfWpRP7xjIlQ7',NULL,'8aa35d','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZXYubGFyYXZlbC5jb21cL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNTY4Nzk3MjEzLCJleHAiOjE1Njg4MDA4MTMsIm5iZiI6MTU2ODc5NzIxMywianRpIjoiVjJTVUxUZzc1UEtOQWRaNiIsInN1YiI6MywicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.LvtMNSM1CaaQKkBqwKK4UCWo_YHk563pSBVIG3qdWFE',0,1,0,'2019-09-06 06:32:40','2019-09-18 09:00:13'),(4,'admin3','$2y$10$IHwgmSqoUBRF8Ju8NjN4zOjvdzoA42urM6sdfz.Mg7TGCAcg0GFt2','k',NULL,NULL,'15678837703',1,NULL,0,NULL,NULL,NULL,0,NULL,'VIic78TXC3BHW5oqNbB61pkREfhy8D8P6zAQSDMXYhCftc1zN4rxovJsZZiL',NULL,'86b27a',NULL,0,1,0,'2019-09-06 06:50:00','2019-09-06 06:50:00'),(5,'admin4','$2y$10$rzDQc8Ni09SEwtFPnzKkQudYuyZv4qoP1EnB4EVWa2aiJEldDo09C','m',NULL,NULL,'15678837704',1,NULL,1,'','127.0.0.1','2019-09-06 07:43:02',0,NULL,'J3QTjrc9xB9ZEKHhASfYDO50fZfTEuj1Gkz9Fe2OhhWfEKWIb2xNegxUrF7k',NULL,'b09493',NULL,0,1,0,'2019-09-06 06:51:39','2019-09-06 07:43:02'),(6,'admin5','$2y$10$WxZiza3M/K3IdnJZExheBu6m//eahbX6JV1FsrKZvkTrDyb3Ucze6','n',NULL,NULL,'15678837705',1,NULL,0,'127.0.0.1',NULL,NULL,0,NULL,NULL,NULL,'ce2010',NULL,0,1,0,'2019-09-06 06:53:32','2019-09-06 06:53:32');
+INSERT INTO `jyfb_user` VALUES (1,'admin0','$2y$10$u8sYmc1tqDO8/hfkNsncruswlaQ19A6zUn2rdeqmK3QDUjTrNbWP.','j',NULL,NULL,'15678837701',0,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,0,1,0,'2019-09-06 06:27:32','2019-09-06 06:27:32'),(3,'admin1','$2y$10$JR/rR6Scoe1OhnV4MHVwre1NG4fLtqukxiiMcMm11ZElXCkl3nm3.','l',NULL,NULL,'15678837702',1,NULL,0,NULL,NULL,NULL,0,NULL,'jsuCs1fd8WSsXxnVBLMYD62X2kCLMh4Cahv5QthOF9vy63KhfWpRP7xjIlQ7',NULL,'8aa35d','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZXYubGFyYXZlbC5jb21cL2FwaVwvdjFcL2xvZ2luIiwiaWF0IjoxNTY4OTcyMzU5LCJleHAiOjE1Njg5NzU5NTksIm5iZiI6MTU2ODk3MjM1OSwianRpIjoibTNVVnRUT2xPa09aNFZlSiIsInN1YiI6MywicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.nissz1wUEbuNmijkcHFPptDnko926w4zXRc7m6PuaeA',0,1,0,'2019-09-06 06:32:40','2019-09-20 09:39:19'),(4,'admin3','$2y$10$IHwgmSqoUBRF8Ju8NjN4zOjvdzoA42urM6sdfz.Mg7TGCAcg0GFt2','k',NULL,NULL,'15678837703',1,NULL,0,NULL,NULL,NULL,0,NULL,'VIic78TXC3BHW5oqNbB61pkREfhy8D8P6zAQSDMXYhCftc1zN4rxovJsZZiL',NULL,'86b27a','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZXYubGFyYXZlbC5jb21cL2FwaVwvdjFcL2dvb2RzIiwiaWF0IjoxNTY5MzA0NTk5LCJleHAiOjE1NjkzMTQ5MTIsIm5iZiI6MTU2OTMxMTMxMiwianRpIjoiZ3Nkbjk5U0x0WjJQc0NSNSIsInN1YiI6NCwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Oxf3G-0lsH0m3x5RNe1n3f8BQXsyQnTtizGPrJV-xJw',0,1,0,'2019-09-06 06:50:00','2019-09-24 07:48:32'),(5,'admin4','$2y$10$rzDQc8Ni09SEwtFPnzKkQudYuyZv4qoP1EnB4EVWa2aiJEldDo09C','m',NULL,NULL,'15678837704',1,NULL,1,'','127.0.0.1','2019-09-06 07:43:02',0,NULL,'J3QTjrc9xB9ZEKHhASfYDO50fZfTEuj1Gkz9Fe2OhhWfEKWIb2xNegxUrF7k',NULL,'b09493',NULL,0,1,0,'2019-09-06 06:51:39','2019-09-06 07:43:02'),(6,'admin5','$2y$10$WxZiza3M/K3IdnJZExheBu6m//eahbX6JV1FsrKZvkTrDyb3Ucze6','n',NULL,NULL,'15678837705',1,NULL,0,'127.0.0.1',NULL,NULL,0,NULL,NULL,NULL,'ce2010',NULL,0,1,0,'2019-09-06 06:53:32','2019-09-06 06:53:32');
 /*!40000 ALTER TABLE `jyfb_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jyfb_user_address`
+--
+
+DROP TABLE IF EXISTS `jyfb_user_address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `jyfb_user_address` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL COMMENT '用户id',
+  `receiver` varchar(30) DEFAULT NULL COMMENT '收货人',
+  `receiver_mobile` varchar(15) DEFAULT NULL COMMENT '收货人手机号码',
+  `province` varchar(100) DEFAULT NULL COMMENT '省份',
+  `city` varchar(100) DEFAULT NULL COMMENT '城市',
+  `district` varchar(100) DEFAULT NULL COMMENT '区县',
+  `address` varchar(255) DEFAULT NULL COMMENT '详细地址',
+  `status` tinyint(4) DEFAULT NULL COMMENT '状态：0禁用1正常',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `address-user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='用户地址表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jyfb_user_address`
+--
+
+LOCK TABLES `jyfb_user_address` WRITE;
+/*!40000 ALTER TABLE `jyfb_user_address` DISABLE KEYS */;
+INSERT INTO `jyfb_user_address` VALUES (1,4,'123456','14625465655','广西','南宁','江南区','五一路中',1,'2019-09-24 05:53:11','2019-09-24 06:23:28'),(2,3,'test','13645484152','福建省','泉州市','荔湾区','宦西溪路2号',1,'2019-09-24 05:53:11','2019-09-24 05:53:14'),(4,4,'dddddd','15896558940','广西','南宁','江南','五一路中',NULL,'2019-09-24 06:33:58','2019-09-24 06:33:58');
+/*!40000 ALTER TABLE `jyfb_user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1635,7 +1634,7 @@ CREATE TABLE `jyfb_user_sign` (
 
 LOCK TABLES `jyfb_user_sign` WRITE;
 /*!40000 ALTER TABLE `jyfb_user_sign` DISABLE KEYS */;
-INSERT INTO `jyfb_user_sign` VALUES (1,3,6,6,'2019-09-18 05:08:11',NULL,5,'2019-09-09 02:31:45','2019-09-18 05:08:11');
+INSERT INTO `jyfb_user_sign` VALUES (1,3,7,7,'2019-09-19 01:43:03',NULL,6,'2019-09-09 02:31:45','2019-09-19 01:43:03');
 /*!40000 ALTER TABLE `jyfb_user_sign` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1760,4 +1759,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-18 17:33:20
+-- Dump completed on 2019-09-24 17:25:48

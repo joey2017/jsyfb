@@ -26,6 +26,6 @@ class NotaryOfficeComment extends Model
 
     public function notaryOffice()
     {
-        return $this->belongsTo(NotaryOffice::class,'user_id');
+        return $this->belongsTo(NotaryOffice::class,'office_id');
     }
 }

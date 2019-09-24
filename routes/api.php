@@ -66,6 +66,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
 
         //公证处列表
         Route::get('/notarys/offices','NotaryOfficeController@index')->name('notarys-offices.index');
+        //公证处评论删除
+        Route::delete('/notarys-offices/comments/{comment}','NotaryOfficeCommentController@destory')->name('notarys-offices-comments.destory');
 
         //答题表
         Route::get('/answer/lists','AnswerListController@index')->name('answer-lists.index');
@@ -84,6 +86,32 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/attentions','AttentionController@index')->name('attentions.index');
         Route::get('/attentions/{attention}','AttentionController@show')->name('attentions.show');
 
+        //用户评论
+        Route::get('/users/comments/{user}','UserController@comments')->name('users.comments');
+
+        //用户收藏
+        Route::get('/users/collections/{user}','UserController@collections')->name('users.collections');
+
+        //浏览记录
+        Route::get('/users/browse-historys/{user}','UserController@browseHistorys')->name('users.browseHistorys');
+
+        //用户钱包明细
+        Route::get('/users/balance-logs/{user}','UserController@balanceLogs')->name('users.balanceLogs');
+
+        //用户地址
+        Route::get('/users/addresses','UserAddressController@index')->name('users-addresses.index');
+        Route::get('/users/address/{address}','UserAddressController@show')->name('users-addresses.show');
+        Route::post('/users/address','UserAddressController@store')->name('users-addresses.store');
+        Route::put('/users/address/{address}','UserAddressController@update')->name('users-addresses.update');
+
+        //商品列表
+        Route::get('/goods','GoodsController@index')->name('goods.index');
+        Route::get('/goods/{good}','GoodsController@show')->name('goods.show');
+
+        //用户兑换
+        Route::get('/exchanges','ExchangeController@index')->name('exchanges.index');
+        Route::get('/exchanges/{exchange}','ExchangeController@show')->name('exchanges.show');
+        Route::post('/exchanges','ExchangeController@store')->name('exchanges.store');
 
     });
 });

@@ -34,7 +34,7 @@ class ReservationController extends AdminController
         $grid->column('content', '预约内容');
         $grid->column('appointment', trans('admin.appointment'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Reservation::$_statuses[$status];
+            return Reservation::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

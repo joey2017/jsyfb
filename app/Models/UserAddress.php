@@ -4,22 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * App\Models\Reservation
- *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Reservation query()
- * @mixin \Eloquent
- */
-class Reservation extends Model
+class UserAddress extends Model
 {
     //
-    protected $table = 'jyfb_service_reservation';
+    protected $table = 'jyfb_user_address';
+
+    protected $fillable = [
+        'receiver','receiver_mobile','province','city','district','address','user_id'
+    ];
 
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 
     /**
      * @param int $status

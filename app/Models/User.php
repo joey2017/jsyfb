@@ -26,18 +26,6 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    public function getJWTIdentifier()
-    {
-        // TODO: Implement getJWTIdentifier() method.
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        // TODO: Implement getJWTCustomClaims() method.
-        return [];
-    }
-
     protected $table = 'jyfb_user';
     /**
      * The attributes that are mass assignable.
@@ -80,6 +68,19 @@ class User extends Authenticatable implements JWTSubject
     const INVALID = 0;
     const NORMAL  = 1;
 
+    public function getJWTIdentifier()
+    {
+        // TODO: Implement getJWTIdentifier() method.
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        // TODO: Implement getJWTCustomClaims() method.
+        return [];
+    }
+
+
     /*
      * 访问器
      */
@@ -105,11 +106,17 @@ class User extends Authenticatable implements JWTSubject
     //protected $visible = ['first_name', 'last_name'];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function userSign()
     {
         return $this->hasOne(UserSign::class, 'user_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function notice()
     {
         return $this->hasOne(Notice::class, 'user_id');
@@ -118,11 +125,27 @@ class User extends Authenticatable implements JWTSubject
     /*
      * 用户邀请人
      */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'inviter_id');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function notaryOfficeComments()
+    {
+        return $this->hasMany(NotaryOfficeComment::class, 'user_id');
+    }
+
+    /**
+     * @param int $status
+     * @return string
+     */
     public static function getStatusName(int $status):string
     {
         switch ($status)

@@ -28,6 +28,8 @@ class UserSignController extends Controller
      */
     public function show(User $user)
     {
+        //todo 数据没有的话需要初始化处理，否则返回404
+
         //$sign = UserSign::firstOrCreate(['user_id' => $user->id]);
         $sign = $user->userSign()->first();
         return $this->success(new UserSignResource($sign));
