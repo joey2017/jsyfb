@@ -24,6 +24,7 @@
         "medz/cors": "^1.4",
         "predis/predis": "^1.1",
         "tymon/jwt-auth": "^1.0.0",
+        "yansongda/laravel-pay": "^2.1",
         "zircote/swagger-php": "2.*"
     },
     "require-dev": {

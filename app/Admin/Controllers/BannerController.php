@@ -31,7 +31,7 @@ class BannerController extends AdminController
         $grid->column('image_path',trans('admin.image_path'));
         $grid->column('sort', trans('admin.sort'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Banner::$_statuses[$status];
+            return Banner::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

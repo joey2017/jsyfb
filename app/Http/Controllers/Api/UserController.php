@@ -233,7 +233,7 @@ class UserController extends Controller
      *   path="/users/browse-historys/{id}",
      *   tags={"User"},
      *   produces={"application/json"},
-     *   summary="我的收藏",
+     *   summary="浏览记录",
      *   security={
      *      {
      *          "Bearer":{}
@@ -259,7 +259,7 @@ class UserController extends Controller
      *   path="/users/balance-logs/{id}",
      *   tags={"User"},
      *   produces={"application/json"},
-     *   summary="我的收藏",
+     *   summary="钱包明细",
      *   security={
      *      {
      *          "Bearer":{}
