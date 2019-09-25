@@ -26,5 +26,5 @@ return array(
     '0d8253363903f0ac7b0978dcde4e28a0' => $vendorDir . '/beyondcode/laravel-dump-server/helpers.php',
     'ac0aa5b57142c92aeadc397fa46b9d39' => $vendorDir . '/darkaonline/l5-swagger/src/helpers.php',
     'e044f3da7a892bf7d8d04992ac00bea7' => $vendorDir . '/medz/cors/src/ThinkPHP/injection.php',
-    '868f7b8ff9807a9ca7220d283955c57d' => $baseDir . '/app/helpers/functions.php',
+    'fdb3b5f01b3ed818a713c5450349237f' => $baseDir . '/app/Helpers/functions.php',
 );

@@ -472,6 +472,141 @@
                 }
             }
         },
+        "/exchanges": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u6cd5\u5b9d\u5151\u6362\u5546\u54c1\u5217\u8868",
+                "description": "\u6cd5\u5b9d\u5151\u6362\u5546\u54c1\u5217\u8868",
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u65b0\u589e\u5151\u6362",
+                "description": "\u65b0\u589e\u5151\u6362",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "goods_id",
+                        "in": "formData",
+                        "description": "\u5546\u54c1id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "ingots",
+                        "in": "formData",
+                        "description": "\u6cd5\u5b9d\u6570\u91cf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "formData",
+                        "description": "\u5151\u6362\u5546\u54c1\u6570\u91cf",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "\u6210\u529f"
+                    },
+                    "403": {
+                        "description": "\u7981\u6b62\u8bbf\u95ee"
+                    },
+                    "500": {
+                        "description": "\u670d\u52a1\u5668\u9519\u8bef"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/exchanges/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5151\u6362\u8be6\u60c5",
+                "description": "\u5151\u6362\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5151\u6362\u8bb0\u5f55id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    },
+                    "404": {
+                        "description": "\u672a\u627e\u5230"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/goods": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5546\u54c1\u5217\u8868",
+                "responses": {
+                    "200": {
+                        "description": "\u83b7\u53d6\u5546\u54c1\u5217\u8868"
+                    }
+                }
+            }
+        },
+        "/goods/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u5546\u54c1\u8be6\u60c5",
+                "description": "\u5546\u54c1\u8be6\u60c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5546\u54c1id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "\u6210\u529f"
+                    }
+                }
+            }
+        },
         "/laywer": {
             "get": {
                 "tags": [
@@ -637,6 +772,29 @@
                         "Bearer": []
                     }
                 ]
+            }
+        },
+        "/notarys-offices/comments/{id}": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\u8bc4\u8bba\u5220\u9664",
+                "description": "\u516c\u8bc1\u5904\u8bc4\u8bba\u5220\u9664",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u8bc4\u8bbaid",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "\u6210\u529f"
+                    }
+                }
             }
         },
         "/notarys/offices": {
@@ -874,24 +1032,17 @@
                 ]
             }
         },
-        "/users/address/{id}": {
-            "put": {
+        "/users/address": {
+            "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "\u5730\u5740\u4fee\u6539\u4fdd\u5b58",
-                "description": "\u5730\u5740\u4fee\u6539\u4fdd\u5b58",
+                "summary": "\u65b0\u589e\u5730\u5740",
+                "description": "\u65b0\u589e\u5730\u5740",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "\u5730\u5740id",
-                        "required": true,
-                        "type": "integer"
-                    },
                     {
                         "name": "receiver",
                         "in": "formData",
@@ -953,17 +1104,24 @@
                 ]
             }
         },
-        "/users/address": {
-            "post": {
+        "/users/address/{id}": {
+            "put": {
                 "tags": [
                     "User"
                 ],
-                "summary": "\u65b0\u589e\u5730\u5740",
-                "description": "\u65b0\u589e\u5730\u5740",
+                "summary": "\u5730\u5740\u4fee\u6539\u4fdd\u5b58",
+                "description": "\u5730\u5740\u4fee\u6539\u4fdd\u5b58",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5730\u5740id",
+                        "required": true,
+                        "type": "integer"
+                    },
                     {
                         "name": "receiver",
                         "in": "formData",

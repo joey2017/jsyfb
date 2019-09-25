@@ -83,7 +83,7 @@ class ExchangeController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->input('ingots') < 0 || $request->input('quantity') < 0) {
+        if ($request->input('ingots') <= 0 || $request->input('quantity') <= 0) {
             return $this->failed('参数错误', 400);
         }
 
@@ -97,10 +97,10 @@ class ExchangeController extends Controller
 
         try {
             DB::transaction(function () use ($request) {
-                Ingots::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
+                Exchange::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id(),'created_at' => date('Y-m-d H:i:s')]));
                 $this->updateIngots($request->input('ingots'));
                 $this->insertIngotsLog($request->input('ingots'));
-                $this->updateStock($request->input('goods_id'),$request->input('ingots'));
+                $this->updateStock($request->input('goods_id'),$request->input('quantity'));
             });
 
         } catch (PDOException $exception) {
@@ -114,11 +114,12 @@ class ExchangeController extends Controller
      */
     protected function updateIngots($ingots)
     {
-        $ingot           = Ingots::firstOrFail(['user_id' => Auth::guard('api')->id()]);
+        $ingot           = Ingots::firstOrCreate(['user_id' => Auth::guard('api')->id()]);
         $ingot->quantity -= $ingots;
         $ingot->save();
 
-        $user = User::find(Auth::guard('api')->id());
+        //$user = User::find(Auth::guard('api')->id());
+        $user = Auth::guard('api')->user();
         $user->ingots -= $ingots;
         $ingot->save();
 

@@ -31,7 +31,7 @@ class IngotsController extends AdminController
         $grid->column('user.username', trans('admin.username'));
         $grid->column('quantity', trans('admin.quantity'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Ingots::$_statuses[$status];
+            return Ingots::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('expire_time', trans('admin.expire_time'));
         $grid->column('created_at', trans('admin.created_at'));

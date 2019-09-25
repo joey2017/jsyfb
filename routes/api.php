@@ -106,7 +106,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
 
         //商品列表
         Route::get('/goods','GoodsController@index')->name('goods.index');
-        Route::get('/goods/{good}','GoodsController@show')->name('goods.show');
+        Route::get('/goods/{goods}','GoodsController@show')->name('goods.show');
 
         //用户兑换
         Route::get('/exchanges','ExchangeController@index')->name('exchanges.index');
