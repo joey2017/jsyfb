@@ -17,6 +17,8 @@
 Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
     Route::post('/users','UserController@store')->name('users.store');
     Route::post('/login','UserController@login')->name('users.login');
+    Route::get('/banners','BannerController@index')->name('banners.index');
+
 
     Route::middleware('api.refresh')->group(function () {
         //用户留言
@@ -32,6 +34,10 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         //用户签到
         Route::get('/signs/{user}','UserSignController@show')->name('user-signs.show');
         Route::post('/signs/{user}','UserSignController@update')->name('user-signs.update');
+
+        //法宝获得渠道列表
+        Route::get('/ingots/config','IngotsConfigController@index')->name('ingots-configs.index');
+
 
         //消息列表
         Route::get('/notices','NoticeController@index')->name('notices.index');

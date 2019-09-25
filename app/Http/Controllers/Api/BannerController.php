@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Resources\Api\BannerResource;
+use App\Models\Banner;
+
+class BannerController extends Controller
+{
+    /**
+     * @SWG\Get(
+     *   path="/banners",
+     *   tags={"MainPage"},
+     *   summary="轮播图列表",
+     *   description="轮播图列表",
+     *   @SWG\Response(response=200,description="成功")
+     * )
+     */
+    public function index()
+    {
+        $banners = Banner::paginate(4);
+        return BannerResource::collection($banners);
+    }
+}
