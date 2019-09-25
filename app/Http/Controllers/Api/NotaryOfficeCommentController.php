@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class NotaryOfficeCommentController extends Controller
 {
     /**
-     * @SWG\delete(
+     * @SWG\Delete(
      *   path="/notarys-offices/comments/{id}",
      *   tags={"User"},
      *   summary="评论删除",
