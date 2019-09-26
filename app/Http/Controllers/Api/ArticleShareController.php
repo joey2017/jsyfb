@@ -62,7 +62,7 @@ class ArticleShareController extends Controller
                 //获得法宝
                 $config = IngotsConfig::getConfigByKey('share');
                 $times = Redis::get('ingots_share_' . Auth::guard('api')->id());
-                if ($config->limitation > 0 && (int)$times < $config->limitation) {
+                if ($config->limitation == 0 || ($config->limitation > 0 && (int)$times < $config->limitation)) {
                     $this->ingots->update($config->value, '好文分享获得法宝', 1);
                     //Redis::set('ingots_share_' . Auth::guard('api')->id(), $times + 1);
                     //Redis::expire('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")));
