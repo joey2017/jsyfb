@@ -32,8 +32,14 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         //用户退出
         Route::get('/logout','UserController@logout')->name('users.logout');
         //用户签到
-        Route::get('/signs/{user}','UserSignController@show')->name('user-signs.show');
-        Route::post('/signs/{user}','UserSignController@update')->name('user-signs.update');
+        Route::get('/signs/{user}','UserSignController@show')->name('users-signs.show');
+        Route::post('/signs/{user}','UserSignController@update')->name('users-signs.update');
+
+        //用户认证
+        Route::post('/users/auths','AuthenticationController@store')->name('users-auths.store');
+        //用户认证详情
+        Route::get('/users/auths/{authentication}','AuthenticationController@show')->name('users-auths.show');
+
 
         //法宝获得渠道列表
         Route::get('/ingots/config','IngotsConfigController@index')->name('ingots-configs.index');
@@ -92,19 +98,19 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/attentions','AttentionController@index')->name('attentions.index');
         Route::get('/attentions/{attention}','AttentionController@show')->name('attentions.show');
 
-        //用户评论
+        //我的评论
         Route::get('/users/comments/{user}','UserController@comments')->name('users.comments');
 
-        //用户收藏
+        //我的收藏
         Route::get('/users/collections/{user}','UserController@collections')->name('users.collections');
 
         //浏览记录
         Route::get('/users/browse-historys/{user}','UserController@browseHistorys')->name('users.browseHistorys');
 
-        //用户钱包明细
+        //钱包明细
         Route::get('/users/balance-logs/{user}','UserController@balanceLogs')->name('users.balanceLogs');
 
-        //用户地址
+        //地址
         Route::get('/users/addresses','UserAddressController@index')->name('users-addresses.index');
         Route::get('/users/address/{address}','UserAddressController@show')->name('users-addresses.show');
         Route::post('/users/address','UserAddressController@store')->name('users-addresses.store');
@@ -114,7 +120,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/goods','GoodsController@index')->name('goods.index');
         Route::get('/goods/{goods}','GoodsController@show')->name('goods.show');
 
-        //用户兑换
+        //法宝兑换
         Route::get('/exchanges','ExchangeController@index')->name('exchanges.index');
         Route::get('/exchanges/{exchange}','ExchangeController@show')->name('exchanges.show');
         Route::post('/exchanges','ExchangeController@store')->name('exchanges.store');

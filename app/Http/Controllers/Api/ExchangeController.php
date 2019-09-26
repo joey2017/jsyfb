@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\ExchangeResource;
 use App\Models\Exchange;
 use App\Models\Goods;
-use App\Models\Ingots;
-use App\Models\IngotsLog;
-use App\Models\User;
+use App\Services\IngotsService;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +14,13 @@ use Illuminate\Support\Facades\Log;
 
 class ExchangeController extends Controller
 {
+
+    protected $ingots;
+
+    public function __construct(IngotsService $ingotsService)
+    {
+        $this->ingots = $ingotsService;
+    }
 
     /**
      * @SWG\Get(
@@ -88,40 +93,27 @@ class ExchangeController extends Controller
         }
 
         if ($request->input('ingots') > Auth::guard('api')->user()->ingots) {
-            return $this->failed('法宝数量不足',400);
+            return $this->failed('法宝数量不足', 400);
         }
 
         if ($request->input('quantity') > Goods::findOrFail($request->input('goods_id'))->stock) {
-            return $this->failed('商品数量不足',400);
+            return $this->failed('商品数量不足', 400);
         }
 
+        $result = false;
+
         try {
-            DB::transaction(function () use ($request) {
-                Exchange::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id(),'created_at' => date('Y-m-d H:i:s')]));
-                $this->updateIngots($request->input('ingots'));
-                $this->insertIngotsLog($request->input('ingots'));
-                $this->updateStock($request->input('goods_id'),$request->input('quantity'));
+            $result = DB::transaction(function () use ($request) {
+                Exchange::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id(), 'created_at' => date('Y-m-d H:i:s')]));
+                $this->ingots->update($request->input('ingots'), '兑换商品', 2);
+                $this->updateStock($request->input('goods_id'), $request->input('quantity'));
+                return true;
             });
 
         } catch (PDOException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
-        return $this->setStatusCode(201)->success('兑换成功');
-    }
-
-    /**
-     * @param $ingots
-     */
-    protected function updateIngots($ingots)
-    {
-        $ingot           = Ingots::firstOrCreate(['user_id' => Auth::guard('api')->id()]);
-        $ingot->quantity -= $ingots;
-        $ingot->save();
-
-        //$user = User::find(Auth::guard('api')->id());
-        $user = Auth::guard('api')->user();
-        $user->ingots -= $ingots;
-        $ingot->save();
+        return $result ? $this->setStatusCode(201)->success('兑换成功') : $this->failed('兑换失败');
 
     }
 
@@ -135,17 +127,4 @@ class ExchangeController extends Controller
         $goods->save();
     }
 
-    /**
-     * @param $ingots
-     */
-    protected function insertIngotsLog($ingots)
-    {
-        IngotsLog::create([
-            'user_id' => Auth::guard('api')->id(),
-            'cost'    => $ingots,
-            'descr'   => '兑换商品',
-            'type'    => '2',
-            'remark'  => '',
-        ]);
-    }
 }

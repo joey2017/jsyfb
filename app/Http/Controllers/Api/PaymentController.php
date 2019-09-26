@@ -24,13 +24,13 @@ class PaymentController extends Controller
     /**
      * @param Request $request
      */
-    public function wechatpay(Request $request)
+    public function wechatpay($content, $fee, $openid)
     {
         $order = [
-            'out_trade_no' => time(),
-            'body'         => 'subject-测试',
-            'total_fee'    => '1',
-            'openid'       => 'onkVf1FjWS5SBIixxxxxxxxx',
+            'out_trade_no' => 'CZ'.$this->generateSn(),
+            'body'         => $content,
+            'total_fee'    => $fee,
+            'openid'       => $openid,
         ];
         //$result = Pay::wechat()->mp($order);
         //$result = Pay::wechat()->scan($order);
@@ -38,5 +38,10 @@ class PaymentController extends Controller
         //$result = Pay::wechat()->wap($order);
         //$result = Pay::wechat()->transfer($order);
         $result = Pay::wechat()->miniapp($order);
+    }
+
+    public function generateSn()
+    {
+        return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
     }
 }

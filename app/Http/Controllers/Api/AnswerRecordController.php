@@ -6,11 +6,20 @@ use App\Http\Requests\Api\AnswerRecordRequest;
 use App\Http\Resources\Api\AnswerRecordResource;
 use App\Models\AnswerList;
 use App\Models\AnswerRecord;
+use App\Models\IngotsConfig;
+use App\Services\IngotsService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AnswerRecordController extends Controller
 {
+    protected $ingots;
+
+    public function __construct(IngotsService $ingotsService)
+    {
+        $this->ingots = $ingotsService;
+    }
+
     /**
      * @SWG\Get(
      *   path="/answer/records",
@@ -88,7 +97,17 @@ class AnswerRecordController extends Controller
             ['user_id' => Auth::guard('api')->id(),'date' => Carbon::now()->toDateString()],
             $data
         ));
+
         return $this->setStatusCode(201)->success('提交成功');
+    }
+
+    protected function updateIngots()
+    {
+        //获得法宝
+        $config = IngotsConfig::getConfigByKey('game');
+        $times = Redis::get('ingots_share_' . Auth::guard('api')->id());
+        $this->ingots->update();
+
     }
 
 }

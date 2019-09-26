@@ -19,7 +19,25 @@ class Balance extends Model
     protected $table = 'jyfb_balance';
 
     // 状态
-    public static $_statuses = ['禁用', '正常'];
+    const INVALID = 0;
+    const NORMAL  = 1;
+
+    /**
+     * @param int $status
+     * @return string
+     */
+    public static function getStatusName(int $status):string
+    {
+        switch ($status)
+        {
+            case self::INVALID:
+                return '禁用';
+            case self::NORMAL:
+                return '正常';
+            default:
+                return '正常';
+        }
+    }
 
     public function user()
     {

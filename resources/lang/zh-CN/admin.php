@@ -111,6 +111,7 @@ return [
     'keyword'               => '关键字',
     'content'               => '内容',
     'like_count'            => '点赞数',
+    'browse_count'          => '浏览次数',
     'user_title'            => '职位',
     'expire_time'           => '到期时间',
     'quantity'              => '数量',

@@ -31,7 +31,7 @@ class BalanceController extends AdminController
         $grid->column('user.username', trans('admin.username'));
         $grid->column('amount', trans('admin.amount'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Balance::$_statuses[$status];
+            return Balance::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

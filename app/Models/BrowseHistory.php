@@ -19,6 +19,8 @@ class BrowseHistory extends Model
     //
     protected $table = 'jyfb_browse_history';
 
+    protected $fillable = ['user_id', 'article_id'];
+
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;

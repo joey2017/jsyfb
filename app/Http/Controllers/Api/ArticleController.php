@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\ArticleRequest;
 use App\Http\Resources\Api\ArticleResource;
 use App\Models\Article;
+use App\Models\BrowseHistory;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -36,6 +40,16 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        try {
+            DB::transaction(function() use ($article){
+                $article->browse_count += 1;
+                $article->save();
+                BrowseHistory::create(['user_id' => Auth::guard('api')->id(), 'article_id' => $article->id]);
+            });
+        } catch (QueryException $exception) {
+            Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
+        }
+
         return $this->success(new ArticleResource($article));
     }
 
@@ -61,7 +75,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Article::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id()]));
+        Article::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
         return $this->setStatusCode(201)->success('提交成功');
     }
 

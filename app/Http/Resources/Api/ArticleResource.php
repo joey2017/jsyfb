@@ -22,6 +22,7 @@ class ArticleResource extends JsonResource
             'content'        => $this->content,
             'interpretation' => $this->interpretation,
             'measures'       => $this->measures,
+            'browse_count'   => $this->browse_count,
             'like_count'     => $this->like_count,
             'share_count'    => $this->share_count,
             'status'         => Article::getStatusName($this->status),

@@ -19,7 +19,6 @@ class ArticleRequest extends FormRequest
 
     public function messages()
     {
-
         return [
             'spec_id.required' => '专家ID必须填写',
             'spec_id.integer'  => '专家ID为整数',

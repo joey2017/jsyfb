@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\BalanceLogRequest;
 use App\Http\Resources\Api\BalanceLogResource;
 use App\Models\BalanceLog;
+use App\Services\PaymentService;
 use Illuminate\Support\Facades\Auth;
 
 class BalanceLogController extends Controller
 {
+    protected $payment;
+
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->payment = $paymentService;
+    }
+
     /**
      *
      * @SWG\Get(
@@ -50,8 +59,9 @@ class BalanceLogController extends Controller
      *   @SWG\Response(response="401", description="未授权")
      * )
      */
-    public function store()
+    public function store(BalanceLogRequest $request)
     {
+        $this->payment->wechatpay('用户微信充值',$request->input('amount'),1);
         return $this->setStatusCode('201')->success('充值成功');
     }
 

@@ -11,23 +11,23 @@ use Illuminate\Support\Facades\Log;
 
 class IngotsService
 {
-    public function increment($quantity, $descr, $type)
+    public function update($quantity, $descr, $type)
     {
         try {
-            DB::transaction(function () use ($quantity, $descr) {
-                $user         = Auth::guard('api')->user();
-                $user->ingots += $quantity;
+            DB::transaction(function () use ($quantity, $descr, $type) {
+                $user = Auth::guard('api')->user();
+                $type == 1 ? $user->ingots += $quantity : $user->ingots -= $quantity;
                 $user->save();
 
-                $ingot           = Ingots::firstOrCreate(['user_id' => $user->id]);
-                $ingot->quantity += $quantity;
+                $ingot = Ingots::firstOrCreate(['user_id' => $user->id]);
+                $type == 1 ? $ingot->quantity += $quantity : $ingot->quantity -= $quantity;
                 $ingot->save();
 
                 IngotsLog::create([
                     'user_id' => $user->id,
                     'cost'    => $quantity,
                     'descr'   => $descr,
-                    'type'    => '1',
+                    'type'    => $type,
                 ]);
             });
         } catch (PDOException $exception) {
@@ -36,27 +36,5 @@ class IngotsService
 
     }
 
-    public function decrement($quantity, $descr)
-    {
-        try {
-            DB::transaction(function () use ($quantity, $descr) {
-                $user         = Auth::guard('api')->user();
-                $user->ingots -= $quantity;
 
-                $ingot           = Ingots::firstOrCreate(['user_id' => Auth::guard('api')->id()]);
-                $ingot->quantity -= $quantity;
-                $ingot->save();
-
-                IngotsLog::create([
-                    'user_id' => $user->id,
-                    'cost'    => $quantity,
-                    'descr'   => $descr,
-                    'type'    => '2',
-                ]);
-            });
-        } catch (PDOException $exception) {
-            Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
-        }
-
-    }
 }

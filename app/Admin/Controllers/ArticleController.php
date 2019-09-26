@@ -43,6 +43,7 @@ class ArticleController extends AdminController
         $grid->column('interpretation',trans('admin.interpretation'));
         $grid->column('measures',trans('admin.measures'));
         $grid->column('like_count', trans('admin.like_count'));
+        $grid->column('browse_count', trans('admin.browse_count'));
         //$grid->column('comments_count', trans('admin.comments_count'));
         /*
         $grid->column('status', trans('admin.status'))->display(function ($status) {
@@ -84,6 +85,7 @@ class ArticleController extends AdminController
         $show->field('interpretation', trans('admin.interpretation'));
         $show->field('measures', trans('admin.measures'));
         $show->field('like_count', trans('admin.like_count'));
+        $show->field('browse_count', trans('admin.browse_count'));
         //$show->field('status', trans('admin.status'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
