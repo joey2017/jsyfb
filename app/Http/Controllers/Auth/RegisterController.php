@@ -64,7 +64,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
@@ -74,6 +74,7 @@ class RegisterController extends Controller
             //'email'    => $data['email'],
             'email'           => '12345678@qq.com',
             'password'        => Hash::make($data['password']),
+            //'password'        => bcrypt($data['password']),
             'mobile'          => $data['mobile'],
             'invitation_code' => substr(uniqid(), 7),
             'reg_ip'          => $this->_request->getClientIp(),
