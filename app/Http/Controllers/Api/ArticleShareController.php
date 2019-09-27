@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Article;
 use App\Models\ArticleShare;
-use App\Models\IngotsConfig;
 use App\Services\IngotsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redis;
 
 class ArticleShareController extends Controller
 {
@@ -52,31 +50,19 @@ class ArticleShareController extends Controller
         $article = Article::findOrFail($article_id);
 
         $result = false;
-
         try {
-
             $result = DB::transaction(function () use ($article) {
                 ArticleShare::create(['user_id' => Auth::guard('api')->id(), 'article_id' => $article->id]);
                 $article->share_count += 1;
                 $article->save();
                 //获得法宝
-                $config = IngotsConfig::getConfigByKey('share');
-                $times = Redis::get('ingots_share_' . Auth::guard('api')->id());
-                if ($config->limitation == 0 || ($config->limitation > 0 && (int)$times < $config->limitation)) {
-                    $this->ingots->update($config->value, '好文分享获得法宝', 1);
-                    //Redis::set('ingots_share_' . Auth::guard('api')->id(), $times + 1);
-                    //Redis::expire('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")));
-                    Redis::set('ingots_share_' . Auth::guard('api')->id(), $times + 1);
-                    Redis::expireAt('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")));
-                    //Redis::setex('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")), $times + 1);
-                }
+                $this->ingots->limitation('share','好文分享获得法宝');
                 return true;
             });
-
         } catch (\PDOException $e) {
             Log::channel('mysqllog')->error('mysql错误：', ['msg' => $e->getMessage()]);
         } catch (\Throwable $exception) {
-            Log::error('throwable错误：', ['msg' => $exception->getMessage()]);
+            Log::error('throwable错误：', ['msg' => $exception->getMessage(),['info' => $exception->getTraceAsString()]]);
         }
 
         return $result ? $this->setStatusCode(201)->success('分享成功') : $this->failed('分享失败');

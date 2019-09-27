@@ -6,11 +6,9 @@ use App\Http\Requests\Api\AnswerRecordRequest;
 use App\Http\Resources\Api\AnswerRecordResource;
 use App\Models\AnswerList;
 use App\Models\AnswerRecord;
-use App\Models\IngotsConfig;
 use App\Services\IngotsService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
 
 class AnswerRecordController extends Controller
 {
@@ -91,7 +89,7 @@ class AnswerRecordController extends Controller
 
         if ($answer->correct == $request->input('answer')) {
             $data['score'] = 1;
-            $this->updateIngots();
+            $this->ingots->limitation('game','答题正确获得法宝');
         }
 
         AnswerRecord::create(array_merge(
@@ -100,20 +98,6 @@ class AnswerRecordController extends Controller
             $data
         ));
 
-        return $this->setStatusCode(201)->success(['提交成功',$data['score']]);
+        return $this->setStatusCode(201)->success(['提交成功',$answer->correct]);
     }
-
-    protected function updateIngots()
-    {
-        //获得法宝
-        $config = IngotsConfig::getConfigByKey('game');
-        $times = Redis::get('ingots_game_' . Auth::guard('api')->id());
-
-        if ($config->limitation == 0 || ($config->limitation > 0 && (int)$times < $config->limitation)) {
-            $this->ingots->update($config->value, '答题正确获得法宝', 1);
-            Redis::set('ingots_game_' . Auth::guard('api')->id(), $times + 1, 'EX',  mktime(23, 59, 59, date("m"), date("d"), date("Y")));
-        }
-
-    }
-
 }
