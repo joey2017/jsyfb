@@ -125,6 +125,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/exchanges/{exchange}','ExchangeController@show')->name('exchanges.show');
         Route::post('/exchanges','ExchangeController@store')->name('exchanges.store');
 
+        //小程序授权登录
+        Route::get('/getWxUserInfo','WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
+
     });
 });
 

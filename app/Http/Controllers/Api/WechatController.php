@@ -15,9 +15,16 @@ class WechatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return string
-     * @throws \Exception
+     * @SWG\Post(
+     *   path="/getWxUserInfo",
+     *   tags={"Misc"},
+     *   summary="小程序授权登录接口",
+     *   description="小程序授权登录接口",
+     *   @SWG\Parameter(name="code", type="string", required=true, in="formData", description="临时登录code"),
+     *   @SWG\Parameter(name="encryptedData", type="string", required=true, in="formData", description="加密用户信息"),
+     *   @SWG\Parameter(name="iv", type="string", required=true, in="formData", description="iv"),
+     *   @SWG\Response(response=200,description="成功")
+     * )
      */
     public function getWxUserInfo(Request $request)
     {
@@ -31,6 +38,7 @@ class WechatController extends Controller
         $this->wxxcx->getLoginInfo($code);
 
         //获取解密后的用户信息
+        //response()->setStatusCode(201)->json();
         return $this->wxxcx->getUserInfo($encryptedData, $iv);
     }
 }
