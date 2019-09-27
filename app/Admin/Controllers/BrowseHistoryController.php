@@ -27,7 +27,7 @@ class BrowseHistoryController extends AdminController
         $grid = new Grid(new BrowseHistory);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('hotArticle.content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return BrowseHistory::getStatusName($status);

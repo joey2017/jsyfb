@@ -33,7 +33,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'username', 'mobile', 'password', 'invitation_code', 'reg_ip'
+        'username', 'mobile', 'password', 'invitation_code', 'reg_ip', 'avatar', 'openid', 'gender'
     ];
 
     /**
@@ -146,10 +146,9 @@ class User extends Authenticatable implements JWTSubject
      * @param int $status
      * @return string
      */
-    public static function getStatusName(int $status):string
+    public static function getStatusName(int $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case self::INVALID:
                 return '禁用';
             case self::NORMAL:

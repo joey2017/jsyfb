@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Article;
-use App\Models\Collect;
+use App\Models\Collection;
 use function App\Helpers\getAllUsersIdAndUsername;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -29,10 +29,10 @@ class CollectionController extends AdminController
         $grid = new Grid(new Collection);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('hotArticle.content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Collection::$_statuses[$status];
+            return Collection::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

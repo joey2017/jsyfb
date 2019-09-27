@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'admin',
+    'name' => '家有法宝管理后台',
 
     /*
     |--------------------------------------------------------------------------
@@ -299,7 +299,7 @@ return [
     | This value is used to set the background image of login page.
     |
     */
-    'login_background_image' => '',
+    'login_background_image' => '/image/backgroup-image.jpg',
 
     /*
     |--------------------------------------------------------------------------

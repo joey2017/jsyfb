@@ -98,6 +98,6 @@ class AnswerRecordController extends Controller
             $data
         ));
 
-        return $this->setStatusCode(201)->success(['提交成功',$answer->correct]);
+        return $this->setStatusCode(201)->success(['msg' => '提交成功','info' => $answer->correct]);
     }
 }

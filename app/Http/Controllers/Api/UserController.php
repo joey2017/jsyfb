@@ -115,7 +115,8 @@ class UserController extends Controller
      *   @SWG\Parameter(name="password", type="string", required=true, in="formData", description="登录密码"),
      *   @SWG\Parameter(name="client_type", type="integer", required=false, in="formData",
      *     description="调用此接口的客户端类型: 1-Android, 2-IOS. 非必填,所以 required 写了 false"),
-     *   @SWG\Response(response=200,description="成功")
+     *   @SWG\Response(response=201,description="成功"),
+     *   @SWG\Response(response=400,description="账号或密码错误"),
      * )
      */
     public function login(Request $request)
@@ -124,7 +125,6 @@ class UserController extends Controller
         $token = Auth::guard('api')->attempt(['username' => $request->username, 'password' => $request->password, 'status' => User::NORMAL]);
         if ($token) {
             // 先检查原先是否有存token，有就先失效，再存入新token
-            //dd($user = Auth::user());
             $user = Auth::guard('api')->user();
             if ($user->last_token) {
                 try {
@@ -134,6 +134,9 @@ class UserController extends Controller
                 }
             }
             $user->last_token = $token;
+            $user->login_num += 1;
+            $user->last_login_ip = $request->getClientIp();
+            $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
             return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token]);
         } else {

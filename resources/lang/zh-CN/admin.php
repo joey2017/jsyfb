@@ -162,7 +162,7 @@ return [
     'ingots'                => '元宝',
     'invitation_code'       => '邀请码',
     'is_vip'                => '是否vip',
-    'cost'                  => '消费金额',
+    'cost'                  => '消费法宝',
     'total_num'             => '发行总数',
     'type'                  => '类型',
     'condition'             => '使用条件',

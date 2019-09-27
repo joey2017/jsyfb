@@ -28,7 +28,7 @@ class BalanceController extends AdminController
         $grid = new Grid(new Balance);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('amount', trans('admin.amount'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Balance::getStatusName($status);

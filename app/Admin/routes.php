@@ -15,15 +15,11 @@ Route::group([
     $router->get('coupons/getInfo', 'CouponController@getInfo');
 
     $router->resources([
-        //'infoassets'              => InfoassetsController::class,
         'personnel/laywers'           => LaywerController::class,
         'personnel/specialists'       => SpecialistController::class,
         'personnel/categorys'         => BusinessCategoryController::class,
-        'balances'                    => BalanceController::class,
         'funds/balances'              => BalanceController::class,
         'funds/ingots'                => IngotsController::class,
-        'usercenter/collects'         => CollectController::class,
-        'usercenter/attentions'       => AttentionController::class,
         'usercenter/comments'         => ArticleCommentController::class,
         'usercenter/lists'            => UserController::class,
         'usercenter/signs'            => UserSignController::class,
@@ -31,9 +27,8 @@ Route::group([
         'legals/books'                => LegalBookController::class,
         'legals/columns'              => ColumnController::class,
         'articles/browse-history'     => BrowseHistoryController::class,
-        'articles/comments'           => ArticleCommentController::class,
+        //'articles/comments'           => ArticleCommentController::class,
         'articles/likes'              => ArticleLikeController::class,
-        'articles/collects'           => CollectController::class,
         'articles/specialist/advices' => SpecialistAdviceController::class,
         'answers/lists'               => AnswerListController::class,
         'answers/records'             => AnswerRecordController::class,
@@ -46,8 +41,6 @@ Route::group([
         'coupons'                     => CouponController::class,
         'questions/categorys'         => QuestionCategoryController::class,
         'questions'                   => QuestionController::class,
-        //'tools/laywers'           => LaywerOfficeController::class,
-        'tools/laywers'               => LaywerController::class,
         'tools/notarys/specialists'   => SpecialistController::class,
         'tools/notarys/comments'      => NotaryOfficeCommentController::class,
         'tools/notarys'               => NotaryOfficeController::class,
@@ -67,9 +60,7 @@ Route::group([
     $router->get('/admin/logs/{file}', 'Encore\Admin\LogViewer\LogController@index')->name('log-viewer-file');
     $router->get('/admin/logs/{file}/tail', 'Encore\Admin\LogViewer\LogController@tail')->name('log-viewer-tail');
 
-
 });
-
 
 Route::get('messages/create','MessageController@create');
 Route::post('messages','MessageController@store');

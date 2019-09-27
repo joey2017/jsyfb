@@ -36,7 +36,7 @@ class ArticleLikeController extends AdminController
         });
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('hotArticle.content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
 

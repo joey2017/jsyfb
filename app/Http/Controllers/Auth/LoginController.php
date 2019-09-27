@@ -65,11 +65,9 @@ class LoginController extends Controller
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
-        //dd(Auth::user());
         $this->guard()->user()->login_num += 1;
         $this->guard()->user()->last_login_ip = $request->getClientIp();
         $this->guard()->user()->last_login_time = date('Y-m-d H:i:s');
-        //dd($this->guard()->user());
         $this->guard()->user()->save();
 
         $this->clearLoginAttempts($request);

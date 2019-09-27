@@ -38,12 +38,14 @@ class ArticleController extends AdminController
             return new Table(['ID', '用户', '专家点评', '措施', '内容', '评论时间'], $comments->toArray());
         });
         */
+        $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
         $grid->column('specialist.name', trans('admin.specialist'));
-        $grid->column('interpretation',trans('admin.interpretation'));
-        $grid->column('measures',trans('admin.measures'));
+        //$grid->column('interpretation',trans('admin.interpretation'));
+        //$grid->column('measures',trans('admin.measures'));
         $grid->column('like_count', trans('admin.like_count'));
         $grid->column('browse_count', trans('admin.browse_count'));
+        $grid->column('share_count', trans('admin.share_count'));
         //$grid->column('comments_count', trans('admin.comments_count'));
         /*
         $grid->column('status', trans('admin.status'))->display(function ($status) {

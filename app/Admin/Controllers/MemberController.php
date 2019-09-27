@@ -30,12 +30,11 @@ class MemberController extends AdminController
         $grid->disableCreateButton();
         $grid->disableExport();
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('cost', trans('admin.cost'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Member::getStatusName($status);
         })->label(['warning','primary']);
-        $grid->column('expire_time', trans('admin.expire_time'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -55,7 +54,6 @@ class MemberController extends AdminController
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
         $show->field('cost', trans('admin.cost'));
-        $show->field('expire_time', trans('admin.expire_time'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -73,7 +71,6 @@ class MemberController extends AdminController
 
         $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername());
         $form->decimal('cost', trans('admin.cost'))->default(0.00);
-        $form->datetime('expire_time', trans('admin.expire_time'))->default(date('Y-m-d H:i:s'));
 
         return $form;
     }
