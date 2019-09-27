@@ -66,7 +66,8 @@ class ArticleShareController extends Controller
                     $this->ingots->update($config->value, '好文分享获得法宝', 1);
                     //Redis::set('ingots_share_' . Auth::guard('api')->id(), $times + 1);
                     //Redis::expire('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")));
-                    Redis::set('ingots_share_' . Auth::guard('api')->id(), $times + 1, 'EX',  mktime(23, 59, 59, date("m"), date("d"), date("Y")));
+                    Redis::set('ingots_share_' . Auth::guard('api')->id(), $times + 1);
+                    Redis::expireAt('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")));
                     //Redis::setex('ingots_share_' . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")), $times + 1);
                 }
                 return true;
