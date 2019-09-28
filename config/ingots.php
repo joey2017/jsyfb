@@ -37,4 +37,7 @@ return [
         'value' => 50,
         'limitation' => 1,
     ],
+
+    // VIP通道消耗
+    'vip' => 5,
 ];

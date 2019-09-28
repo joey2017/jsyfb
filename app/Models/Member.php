@@ -15,26 +15,28 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Member extends Model
 {
-    //
     protected $table = 'jyfb_member';
 
+    protected $fillable = ['user_id', 'cost'];
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
      * @param int $status
      * @return string
      */
-    public static function getStatusName(int $status):string
+    public static function getStatusName(int $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case self::INVALID:
                 return '禁用';
             case self::NORMAL:
