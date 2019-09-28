@@ -94,15 +94,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/legal/categories','LegalBookCategoryController@index')->name('legal-categories.index');
         Route::get('/legal/categories/{category}','LegalBookCategoryController@show')->name('legal-categories.show');
 
-        //关注
-        Route::get('/attentions','AttentionController@index')->name('attentions.index');
-        Route::get('/attentions/{attention}','AttentionController@show')->name('attentions.show');
-
         //我的评论
         Route::get('/users/comments/{user}','UserController@comments')->name('users.comments');
-
-        //我的收藏
-        Route::get('/users/collections/{user}','UserController@collections')->name('users.collections');
 
         //浏览记录
         Route::get('/users/browse-historys/{user}','UserController@browseHistorys')->name('users.browseHistorys');

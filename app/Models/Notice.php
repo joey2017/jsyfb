@@ -15,8 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notice extends Model
 {
-    //
     protected $table = 'jyfb_notice';
+
+    protected $fillable = ['user_id', 'cate_id', 'title', 'content'];
 
     // 状态
     const INVALID = 0;
@@ -24,13 +25,12 @@ class Notice extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public static function getStatusName(int $status):string
+    public static function getStatusName(int $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case self::INVALID:
                 return '未读';
             case self::NORMAL:
