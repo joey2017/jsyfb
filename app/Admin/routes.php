@@ -46,7 +46,7 @@ Route::group([
         'wechat-attentions'           => WechatAttentionController::class,
         'ingots-use-logs'             => IngotsUseLogController::class,
         'expert-advices'              => ExpertAdviceController::class,
-        'exclusive-legal-advices'     => ExclusiveLegalAdviceController::class,
+        //'exclusive-legal-advices'     => ExclusiveLegalAdviceController::class,
         'balance-logs'                => BalanceLogController::class,
         'user-signs'                  => UserSiginController::class,
         'services/reservations'       => ReservationController::class,
