@@ -7,6 +7,7 @@ use App\Http\Resources\Api\AnswerRecordResource;
 use App\Models\AnswerList;
 use App\Models\AnswerRecord;
 use App\Services\IngotsService;
+use App\Services\NoticeService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,9 +15,12 @@ class AnswerRecordController extends Controller
 {
     protected $ingots;
 
-    public function __construct(IngotsService $ingotsService)
+    protected $notice;
+
+    public function __construct(IngotsService $ingotsService,NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
+        $this->notice = $noticeService;
     }
 
     /**
@@ -75,6 +79,7 @@ class AnswerRecordController extends Controller
      *     @SWG\Parameter(name="answer_list_id",in="formData",description="请求参数-问题id",required=true,type="integer"),
      *     @SWG\Parameter(name="question",in="formData",description="请求参数-问题题目",required=true,type="string"),
      *     @SWG\Parameter(name="answer",in="formData",description="请求参数-问题答案",required=true,type="string"),
+     *     @SWG\Parameter(name="option",in="formData",description="请求参数-问题答案选项",required=true,type="string"),
      *     @SWG\Parameter(name="date",in="formData",description="请求参数-回答日期",required=false,type="string",format="date"),
      *     @SWG\Response(response=201,description="操作成功"),
      *     @SWG\Response(response=400,description="参数错误"),
@@ -86,10 +91,10 @@ class AnswerRecordController extends Controller
         $answer = AnswerList::findOrFail($request->input('answer_list_id'));
 
         $data = ['score' => 0,'correct' => $answer->correct];
-
-        if ($answer->correct == $request->input('answer')) {
+        if (strtoupper($answer->correct) == strtoupper($request->input('option'))) {
             $data['score'] = 1;
             $this->ingots->limitation('game','答题正确获得法宝');
+            $this->notice->add('每日答题','游戏闯关每日答题获得'.$this->ingots->getValueByKey('game')->value.'个法宝');
         }
 
         AnswerRecord::create(array_merge(

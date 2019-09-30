@@ -18,8 +18,10 @@ class UserSign extends Model
     //
     protected $table = 'jyfb_user_sign';
 
+    protected $fillable = ['user_id', 'successive_sign_count', 'count', 'last_sign_time', 'start_time', 'week_count'];
+
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

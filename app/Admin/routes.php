@@ -28,7 +28,7 @@ Route::group([
         'articles/browse-history'     => BrowseHistoryController::class,
         //'articles/comments'           => ArticleCommentController::class,
         'articles/likes'              => ArticleLikeController::class,
-        'articles/specialist/advices' => SpecialistAdviceController::class,
+        'articles/shares'             => ArticleShareController::class,
         'answers/lists'               => AnswerListController::class,
         'answers/records'             => AnswerRecordController::class,
         'articles'                    => ArticleController::class,

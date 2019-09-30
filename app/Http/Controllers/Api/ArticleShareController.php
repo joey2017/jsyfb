@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Article;
 use App\Models\ArticleShare;
 use App\Services\IngotsService;
+use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,9 +15,12 @@ class ArticleShareController extends Controller
 {
     protected $ingots;
 
-    public function __construct(IngotsService $ingotsService)
+    protected $notice;
+
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
+        $this->notice = $noticeService;
     }
 
     /**
@@ -25,7 +29,6 @@ class ArticleShareController extends Controller
      *     tags={"MainPage"},
      *     summary="文章转发",
      *     description="热门资讯转发",
-     *     operationId="articles-shares.store",
      *     produces={"application/json"},
      *     security={
      *      {
@@ -56,13 +59,15 @@ class ArticleShareController extends Controller
                 $article->share_count += 1;
                 $article->save();
                 //获得法宝
-                $this->ingots->limitation('share','好文分享获得法宝');
+                $this->ingots->limitation('share', '好文分享获得法宝');
+                //系统消息
+                $this->notice->add('好文分享','好文分享获得'.$this->ingots->getValueByKey('share')->value.'个法宝');
                 return true;
             });
         } catch (\PDOException $e) {
             Log::channel('mysqllog')->error('mysql错误：', ['msg' => $e->getMessage()]);
         } catch (\Throwable $exception) {
-            Log::error('throwable错误：', ['msg' => $exception->getMessage(),['info' => $exception->getTraceAsString()]]);
+            Log::error('throwable错误：', ['msg' => $exception->getMessage(), ['info' => $exception->getTraceAsString()]]);
         }
 
         return $result ? $this->setStatusCode(201)->success('分享成功') : $this->failed('分享失败');

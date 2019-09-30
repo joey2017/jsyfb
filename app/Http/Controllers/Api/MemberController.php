@@ -4,20 +4,35 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Member;
 use App\Services\IngotsService;
+use App\Services\NoticeService;
+use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MemberController extends Controller
 {
+    /**
+     * @var IngotsService
+     */
     protected $ingots;
 
     /**
-     * MemberController constructor.
-     * @param IngotsService $service
+     * @var NoticeService
      */
-    public function __construct(IngotsService $service)
+    protected $notice;
+
+
+    /**
+     * MemberController constructor.
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     */
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
-        $this->ingots = $service;
+        $this->ingots = $ingotsService;
+        $this->notice = $noticeService;
     }
 
     /**
@@ -36,12 +51,22 @@ class MemberController extends Controller
      *   @SWG\Parameter(in="formData",name="cost",type="integer",description="消费法宝数量",required=true),
      *   @SWG\Response(response="201", description="成功"),
      *   @SWG\Response(response="401", description="未授权")
+     *   @SWG\Response(response="500", description="服务器错误")
      * )
      */
     public function store(Request $request)
     {
-        Member::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
-        $this->ingots->update(config('ingots.vip'),'使用VIP通道咨询专家消耗法宝',2);
+        try {
+            DB::beginTransaction();
+            Member::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
+            $this->ingots->update(config('ingots.vip'), '使用VIP通道咨询专家消耗法宝', 2);
+            $this->notice->add('咨询专家', '使用VIP通道咨询专家消耗' . config('ingots.vip') . '个法宝');
+        } catch (PDOException $exception) {
+            DB::rollBack();
+            Log::channel('mysqllog')->error('mysql错误：'.$exception->getMessage(),['info' => $exception->getTraceAsString()]);
+            return $this->failed('VIP通道开通失败，请稍后重试',500);
+        }
+        DB::commit();
         return $this->setStatusCode('201')->success('VIP通道开通成功');
     }
 

@@ -113,16 +113,21 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function(){
         Route::get('/goods','GoodsController@index')->name('goods.index');
         Route::get('/goods/{goods}','GoodsController@show')->name('goods.show');
 
-        //法宝兑换
-        Route::get('/exchanges','ExchangeController@index')->name('exchanges.index');
-        Route::get('/exchanges/{exchange}','ExchangeController@show')->name('exchanges.show');
-        Route::post('/exchanges','ExchangeController@store')->name('exchanges.store');
-
         //小程序授权登录
         Route::get('/getWxUserInfo','WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
         //意见反馈保存
         Route::post('/feedbacks','FeedbackController@store')->name('feedback.store');
+
+        //VIP通过咨询专家
+        Route::post('/members','MemberController@store')->name('members.store');
+
+        //法宝兑换
+        Route::post('/exchanges','ExchangeController@store')->name('exchanges.store');
+        Route::get('/exchanges','ExchangeController@index')->name('exchanges.index');
+        Route::get('/exchanges/{exchange}','ExchangeController@show')->name('exchanges.show');
+
+
 
     });
 });

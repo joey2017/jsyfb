@@ -6,6 +6,7 @@ use App\Http\Resources\Api\ExchangeResource;
 use App\Models\Exchange;
 use App\Models\Goods;
 use App\Services\IngotsService;
+use App\Services\NoticeService;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,11 +16,25 @@ use Illuminate\Support\Facades\Log;
 class ExchangeController extends Controller
 {
 
+    /**
+     * @var IngotsService
+     */
     protected $ingots;
 
-    public function __construct(IngotsService $ingotsService)
+    /**
+     * @var NoticeService
+     */
+    protected $notice;
+
+    /**
+     * ExchangeController constructor.
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     */
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
+        $this->notice = $noticeService;
     }
 
     /**
@@ -88,25 +103,36 @@ class ExchangeController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->input('ingots') <= 0 || $request->input('quantity') <= 0) {
+        $quantity = $request->input('quantity', 0);
+        $ingots   = $request->input('ingots', 0);
+        $goods_id = $request->input('goods_id', 0);
+
+        if ($ingots <= 0 || $quantity <= 0) {
             return $this->failed('参数错误', 400);
         }
 
-        if ($request->input('ingots') > Auth::guard('api')->user()->ingots) {
+        if ($ingots > Auth::guard('api')->user()->ingots) {
             return $this->failed('法宝数量不足', 400);
         }
 
-        if ($request->input('quantity') > Goods::findOrFail($request->input('goods_id'))->stock) {
+        if ($quantity > Goods::findOrFail($goods_id)->stock) {
             return $this->failed('商品数量不足', 400);
         }
 
         $result = false;
 
         try {
-            $result = DB::transaction(function () use ($request) {
-                Exchange::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id(), 'created_at' => date('Y-m-d H:i:s')]));
-                $this->ingots->update($request->input('ingots'), '兑换商品', 2);
-                $this->updateStock($request->input('goods_id'), $request->input('quantity'));
+            $result = DB::transaction(function () use ($ingots, $quantity, $goods_id) {
+                Exchange::create([
+                    'user_id'    => Auth::guard('api')->id(),
+                    'quantity'   => $quantity,
+                    'ingots'     => $ingots,
+                    'goods_id'   => $goods_id,
+                    'created_at' => date('Y-m-d H:i:s')
+                ]);
+                $this->ingots->update($ingots, '兑换商品', 2);
+                $goods = $this->updateStock($goods_id, $quantity);
+                $this->notice->add('法宝兑换', '使用' . $ingots . '个法宝兑换' . $quantity . '件商品,该商品为' . $goods->goods_name);
                 return true;
             });
 
@@ -117,14 +143,18 @@ class ExchangeController extends Controller
 
     }
 
+
     /**
+     * @param $goods_id
      * @param $quantity
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static|static[]
      */
     protected function updateStock($goods_id, $quantity)
     {
         $goods        = Goods::findOrFail($goods_id);
         $goods->stock -= $quantity;
         $goods->save();
+        return $goods;
     }
 
 }
