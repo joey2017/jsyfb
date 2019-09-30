@@ -28,7 +28,7 @@ class UserSignController extends AdminController
 
         $grid->column('id', __('Id'));
         //$grid->user()->username(trans('admin.username'));
-        $grid->column('user.username',trans('admin.username'));
+        $grid->column('user.nickname',trans('admin.nickname'));
         $grid->column('sign_count', trans('admin.sign_count'));
         $grid->column('count', trans('admin.count'));
         $grid->column('last_sign_time', trans('admin.last_sign_time'));

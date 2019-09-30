@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use function App\Helpers\getAllUsersIdAndUsername;
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Member;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -69,7 +69,7 @@ class MemberController extends AdminController
     {
         $form = new Form(new Member);
 
-        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername());
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname());
         $form->decimal('cost', trans('admin.cost'))->default(0.00);
 
         return $form;

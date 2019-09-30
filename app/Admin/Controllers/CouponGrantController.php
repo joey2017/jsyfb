@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use function App\Helpers\getAllUsersIdAndUsername;
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Coupon;
 use App\Models\CouponGrant;
 use Encore\Admin\Controllers\AdminController;
@@ -33,7 +33,7 @@ class CouponGrantController extends AdminController
         $grid = new Grid(new CouponGrant);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         //$grid->column('coupon.name', '优惠券名称');
         $grid->column('name', '优惠券名称');
         $grid->column('num', trans('admin.num'));
@@ -84,7 +84,7 @@ class CouponGrantController extends AdminController
     {
         $form = new Form(new CouponGrant);
 
-        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername())->required();
+        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndNickname())->required();
         $form->select('coupon_id', trans('admin.coupon'))->options(Coupon::where([['status',1],['total_num','>','distribute']])->pluck('name','id')->toArray())->required();
         $form->text('name', trans('admin.coupon_name'))->required();
         $form->text('total_num', '剩余发放数量')->readonly()->placeholder('剩余发放数量');

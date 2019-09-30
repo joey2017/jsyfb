@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use function App\Helpers\getAllUsersIdAndUsername;
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Notice;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -32,7 +32,7 @@ class NoticeController extends AdminController
         $grid->disableExport();
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username',trans('admin.username'));
+        $grid->column('user.nickname',trans('admin.nickname'));
         //$grid->column('cate_id', trans('admin.cate_id'));
         $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
@@ -76,7 +76,7 @@ class NoticeController extends AdminController
     {
         $form = new Form(new Notice);
 
-        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndUsername());
+        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname());
         //$form->number('cate_id', trans('admin.cate_id'));
         $form->text('title', trans('admin.title'));
         $form->textarea('content', trans('admin.content'));

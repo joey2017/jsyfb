@@ -88,6 +88,7 @@ class ArticleController extends AdminController
         $show->field('measures', trans('admin.measures'));
         $show->field('like_count', trans('admin.like_count'));
         $show->field('browse_count', trans('admin.browse_count'));
+        $show->field('share_count', trans('admin.share_count'));
         //$show->field('status', trans('admin.status'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));

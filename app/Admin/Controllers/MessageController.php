@@ -33,7 +33,7 @@ class MessageController extends AdminController
         $grid->model()->where('status',1)->where('is_deleted',0);
 
         $grid->column('id', __('Id'));
-        $grid->column('username', trans('admin.username'));
+        $grid->column('nickname', trans('admin.nickname'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
@@ -53,7 +53,7 @@ class MessageController extends AdminController
         $show = new Show(Message::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('username', trans('admin.username'));
+        $show->field('nickname', trans('admin.nickname'));
         $show->field('mobile', trans('admin.mobile'));
         $show->field('content', trans('admin.content'));
         $show->field('created_at', trans('admin.created_at'));
@@ -71,7 +71,7 @@ class MessageController extends AdminController
     {
         $form = new Form(new Message);
 
-        $form->text('username', trans('admin.username'));
+        $form->text('nickname', trans('admin.nickname'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->editor('content', trans('admin.content'));
         $form->switch('status', trans('admin.status'))->default(1);

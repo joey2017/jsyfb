@@ -73,7 +73,7 @@ class NotaryOfficeCommentController extends AdminController
         $form = new Form(new NotaryOfficeComment);
 
         $form->display('notaryOffice.name', '公证处名称');
-        $form->display('user.username', '评论者');
+        $form->display('user.nickname', '评论者');
         $form->number('score', trans('admin.score'));
         $form->textarea('content', trans('admin.content'));
 

@@ -29,7 +29,7 @@ class AnswerRecordController extends AdminController
         $grid = new Grid(new AnswerRecord);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('answerList.title', '题目');
         $grid->column('date', '答题日期');
         $grid->column('question', trans('admin.question'));
@@ -51,7 +51,7 @@ class AnswerRecordController extends AdminController
         $show = new Show(AnswerRecord::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', trans('admin.username'));
+        $show->field('user_id', trans('admin.user_id'));
         $show->answerList('题目',function($answerList){
             $answerList->title();
             $answerList->correct();
@@ -73,7 +73,7 @@ class AnswerRecordController extends AdminController
     protected function form()
     {
         $form = new Form(new AnswerRecord);
-        $form->select('user_id', trans('admin.username'))->options(User::where('status','1')->pluck('username','id')->toArray());
+        $form->select('user_id', trans('admin.nickname'))->options(User::where('status','1')->pluck('nickname','id')->toArray());
         $form->select('answer_list_id', '题目')->options(AnswerList::where('status','1')->pluck('title','id')->toArray());
         $form->datetime('date', trans('admin.date'))->default(date('Y-m-d H:i:s'));
         $form->text('question', trans('admin.question'));

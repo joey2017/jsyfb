@@ -16,7 +16,7 @@ class IngotsController extends AdminController
      *
      * @var string
      */
-    protected $title = '元宝';
+    protected $title = '法宝';
 
     /**
      * Make a grid builder.
@@ -28,7 +28,7 @@ class IngotsController extends AdminController
         $grid = new Grid(new Ingots);
 
         $grid->column('id', __('Id'));
-        $grid->column('user.username', trans('admin.username'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('quantity', trans('admin.quantity'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Ingots::getStatusName($status);

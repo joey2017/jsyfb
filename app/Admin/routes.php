@@ -44,9 +44,8 @@ Route::group([
         'tools/notarys/comments'      => NotaryOfficeCommentController::class,
         'tools/notarys'               => NotaryOfficeController::class,
         'wechat-attentions'           => WechatAttentionController::class,
-        'ingots-use-logs'             => IngotsUseLogController::class,
+        'ingots-logs'                 => IngotsLogController::class,
         'expert-advices'              => ExpertAdviceController::class,
-        //'exclusive-legal-advices'     => ExclusiveLegalAdviceController::class,
         'balance-logs'                => BalanceLogController::class,
         'user-signs'                  => UserSiginController::class,
         'services/reservations'       => ReservationController::class,
@@ -61,5 +60,5 @@ Route::group([
 
 });
 
-Route::get('messages/create','MessageController@create');
-Route::post('messages','MessageController@store');
+Route::get('messages/create', 'MessageController@create');
+Route::post('messages', 'MessageController@store');

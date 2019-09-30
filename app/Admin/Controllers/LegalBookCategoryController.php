@@ -49,8 +49,6 @@ class LegalBookCategoryController extends AdminController
         $form->text('title', trans('admin.title'))->rules('required');
         $form->text('path', trans('admin.path'));
         $form->image('logo');
-        $form->switch('status', trans('admin.status'))->default(1);
-        $form->switch('is_deleted', trans('admin.is_deleted'));
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));
 

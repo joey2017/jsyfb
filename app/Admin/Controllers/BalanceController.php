@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Balance;
-use function App\Helpers\getAllUsersIdAndUsername;
+use function App\Helpers\getAllUsersIdAndNickname;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -66,7 +66,7 @@ class BalanceController extends AdminController
     protected function form()
     {
         $form = new Form(new Balance);
-        $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndUsername())->rules('required');
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->rules('required');
         $form->number('amount', trans('admin.amount'));
 
         return $form;

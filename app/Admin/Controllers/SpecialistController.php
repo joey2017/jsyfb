@@ -28,8 +28,6 @@ class SpecialistController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', '姓名');
-        //$grid->column('class_id', trans('admin.class_id'));
-        //$grid->column('level', trans('admin.level'));
         $grid->column('title', trans('admin.user_title'));
         $grid->column('expertise', trans('admin.expertise'));
         $grid->column('mobile', trans('admin.mobile'));
@@ -59,8 +57,6 @@ class SpecialistController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('name', trans('admin.name'));
-        //$show->field('class_id', trans('admin.class_id'));
-        //$show->field('level', trans('admin.level'));
         $show->field('title', trans('admin.user_title'));
         $show->field('expertise', trans('admin.expertise'));
         $show->field('mobile', trans('admin.mobile'));
@@ -84,15 +80,12 @@ class SpecialistController extends AdminController
         $form = new Form(new Specialist);
 
         $form->text('name', trans('admin.name'));
-        //$form->number('class_id', trans('admin.class_id'));
-        //$form->number('level', trans('admin.level'));
         $form->text('title', trans('admin.user_title'));
         $form->text('expertise', trans('admin.expertise'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->text('telephone', trans('admin.telephone'));
         $form->text('company', trans('admin.company'));
         $form->text('summary', trans('admin.summary'));
-        $form->switch('status', trans('admin.status'))->default(1);
 
         return $form;
     }

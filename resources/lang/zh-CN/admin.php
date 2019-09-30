@@ -173,4 +173,8 @@ return [
     'coupon'                => '优惠券',
     'coupon_id'             => '优惠券id',
     'coupon_name'           => '优惠券名称',
+    'gender'                => '性别',
+    'province'              => '省份',
+    'city'                  => '城市',
+    'district'              => '区县',
 ];
