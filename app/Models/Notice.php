@@ -29,7 +29,7 @@ class Notice extends Model
     const INVALID = 0;
     const NORMAL  = 1;
 
-    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+    const STATUSES = [self::INVALID => '未读', self::NORMAL => '已读'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
