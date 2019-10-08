@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\BrowseHistory
  *
- * @property-read \App\Models\Article $hotArticle
+ * @property-read \App\Models\Article $article
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory newQuery()
@@ -16,29 +16,36 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BrowseHistory extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_browse_history';
 
+    /**
+     * @var array
+     */
     protected $fillable = ['user_id', 'article_id'];
 
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
 
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function hotArticle()
+    public function article()
     {
-        return $this->belongsTo(Article::class, 'article_id');
+        return $this->belongsTo(Article::class);
     }
 
     /**
@@ -49,11 +56,11 @@ class BrowseHistory extends Model
     {
         switch ($status) {
             case self::INVALID:
-                return '禁用';
+                return self::STATUSES[self::INVALID];
             case self::NORMAL:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
             default:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
         }
     }
 }

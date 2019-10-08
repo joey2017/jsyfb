@@ -53,7 +53,7 @@ class BannerController extends AdminController
         $show->field('picname', trans('admin.picname'));
         $show->field('image_path', trans('admin.image_path'));
         $show->field('sort', trans('admin.sort'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(Banner::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

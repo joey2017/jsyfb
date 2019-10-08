@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\BrowseHistory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -28,7 +29,7 @@ class BrowseHistoryController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
-        $grid->column('hotArticle.content', trans('admin.content'));
+        $grid->column('article.content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return BrowseHistory::getStatusName($status);
         })->label(['warning','primary']);
@@ -57,11 +58,8 @@ class BrowseHistoryController extends AdminController
             $user->field('nickname',trans('admin.nickname'));
             $user->field('mobile',trans('admin.mobile'));
             $user->field('gender',trans('admin.gender'));
-            //$user->field('province',trans('admin.province'));
-            //$user->field('city',trans('admin.city'));
-            //$user->field('district',trans('admin.district'));
         });
-        $show->hotArticle('文章信息',function($article){
+        $show->article('文章信息',function($article){
             $article->setResource('/admin/articles');
             $article->field('id',__('Id'));
             $article->field('title',trans('admin.title'));
@@ -72,7 +70,7 @@ class BrowseHistoryController extends AdminController
             $article->field('share_count',trans('admin.share_count'));
         });
         $show->field('article_id', trans('admin.article_id'));
-        $show->field('status', trans('admin.status'))->using(['1' => '男','2' => '女']);
+        $show->field('status', trans('admin.status'))->using(BrowseHistory::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -88,7 +86,7 @@ class BrowseHistoryController extends AdminController
     {
         $form = new Form(new BrowseHistory);
 
-        $form->number('user_id', trans('admin.user_id'))->required();
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
         $form->number('article_id', trans('admin.article_id'))->required();
 
         return $form;

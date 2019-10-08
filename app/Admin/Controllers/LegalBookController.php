@@ -29,25 +29,21 @@ class LegalBookController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', trans('admin.book_title'));
-        /*$grid->column('cate_id','分类')->display(function($cate_id){
-            return LegalBookCategory::find($cate_id)->title;
-        });*/
-        $grid->column('legalBookCategory.title','分类');
-        //$grid->legalBookCategory()->title();
+        $grid->column('legalBookCategory.title', '分类');
         $grid->column('detail', trans('admin.detail'));
-        $grid->column('status', trans('admin.status'))->using(['0' => '禁用','1' => '正常'])->label(['0' => 'danger','1'=>'primary']);
+        $grid->column('status', trans('admin.status'))->using(LegalBook::STATUSES)->label(['warning', 'primary']);
         /*$grid->column('status', trans('admin.status'))->using(['0' => '禁用','1' => '正常'])->icon([
             0 => 'toggle-off',
             1 => 'toggle-on',
         ], $default = '');*/
         //$grid->column('status')->loading([0, 1, 2, 3]);
 
-        $grid->filter(function ($filter){
+        $grid->filter(function ($filter) {
             /*$filter->scope('title', '最近修改')
                 ->whereDate('created_at', date('Y-m-d'))
                 ->orWhere('updated_at', date('Y-m-d'));
             */
-            
+
         });
 
 
@@ -69,9 +65,9 @@ class LegalBookController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('title', trans('admin.book_title'));
-        $show->field('cate_id', trans('admin.cate_id'))->using(LegalBookCategory::all()->pluck('title','id')->toArray());
+        $show->field('cate_id', '分类')->using(LegalBookCategory::all()->pluck('title', 'id')->toArray());
         $show->field('detail', trans('admin.detail'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(LegalBook::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -88,10 +84,8 @@ class LegalBookController extends AdminController
         $form = new Form(new LegalBook);
 
         $form->text('title', trans('admin.book_title'));
-        //dd(LegalBookCategory::all()->pluck('title', 'id'));
-        $form->select('cate_id','分类')->options(LegalBookCategory::all()->pluck('title', 'id'))->value(request('cate_id'));
-        //$form->textarea('detail', trans('admin.detail'));
-        $form->editor('detail',trans('admin.detail'));
+        $form->select('cate_id', '分类')->options(LegalBookCategory::all()->pluck('title', 'id'))->value(request('cate_id'));
+        $form->editor('detail', trans('admin.detail'));
 
         return $form;
     }

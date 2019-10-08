@@ -26,6 +26,8 @@ class ArticleShareController extends AdminController
     {
         $grid = new Grid(new ArticleShare);
 
+        $grid->disableCreateButton();
+
         $grid->actions(function($actions){
             // 去掉编辑
             $actions->disableEdit();
@@ -35,7 +37,7 @@ class ArticleShareController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
-        $grid->column('hotArticle.content', trans('admin.content'));
+        $grid->column('article.content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
 
         return $grid;

@@ -59,6 +59,7 @@ class ReservationController extends AdminController
         $show->field('spec_mobile', '预约专家手机');
         $show->field('content', '预约内容');
         $show->field('appointment', trans('admin.appointment'));
+        $show->field('status', trans('admin.status'))->using(Reservation::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

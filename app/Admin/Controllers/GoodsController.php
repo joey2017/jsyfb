@@ -27,12 +27,12 @@ class GoodsController extends AdminController
         $grid = new Grid(new Goods);
 
         $grid->column('id', __('Id'));
-        $grid->column('goods_name', __('Goods name'));
-        $grid->column('image', __('Image'));
-        $grid->column('exchange_price', __('Exchange price'));
-        $grid->column('stock', __('Stock'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('goods_name', trans('admin.goods_name'));
+        $grid->column('image', trans('admin.image'));
+        $grid->column('exchange_price', trans('admin.exchange_price'));
+        $grid->column('stock', trans('admin.stock'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -48,12 +48,12 @@ class GoodsController extends AdminController
         $show = new Show(Goods::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('goods_name', __('Goods name'));
-        $show->field('image', __('Image'));
-        $show->field('exchange_price', __('Exchange price'));
-        $show->field('stock', __('Stock'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('goods_name', trans('admin.goods_name'));
+        $show->field('image', trans('admin.image'));
+        $show->field('exchange_price', trans('admin.exchange_price'));
+        $show->field('stock', trans('admin.stock'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -67,10 +67,10 @@ class GoodsController extends AdminController
     {
         $form = new Form(new Goods);
 
-        $form->text('goods_name', __('Goods name'));
-        $form->image('image', __('Image'));
-        $form->number('exchange_price', __('Exchange price'));
-        $form->number('stock', __('Stock'));
+        $form->text('goods_name', trans('admin.goods_name'));
+        $form->image('image', trans('admin.image'));
+        $form->number('exchange_price', trans('admin.exchange_price'));
+        $form->number('stock', trans('admin.stock'));
 
         return $form;
     }

@@ -17,15 +17,24 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleComment extends Model
 {
     //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_article_comment';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function article()
     {
         return $this->belongsTo(Article::class, 'article_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 }

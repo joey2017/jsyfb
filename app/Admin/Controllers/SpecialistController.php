@@ -63,7 +63,7 @@ class SpecialistController extends AdminController
         $show->field('telephone', trans('admin.telephone'));
         $show->field('company', trans('admin.company'));
         $show->field('summary', trans('admin.summary'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(Specialist::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

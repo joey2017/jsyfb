@@ -59,7 +59,7 @@ class AnswerListController extends AdminController
         $show->field('C', trans('admin.C'));
         $show->field('D', trans('admin.D'));
         $show->field('correct', trans('admin.correct'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(AnswerList::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -81,7 +81,6 @@ class AnswerListController extends AdminController
         $form->text('C', trans('admin.C'));
         $form->text('D', trans('admin.D'));
         $form->text('correct', trans('admin.correct'));
-        $form->switch('status', trans('admin.status'))->default(1);
 
         return $form;
     }

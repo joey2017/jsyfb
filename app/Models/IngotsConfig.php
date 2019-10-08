@@ -16,7 +16,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class IngotsConfig extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_ingots_config';
 
     /**

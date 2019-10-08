@@ -15,28 +15,43 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notice extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_notice';
 
+    /**
+     * @var array
+     */
     protected $fillable = ['user_id', 'cate_id', 'title', 'content'];
 
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
 
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
+    /**
+     * @param int $status
+     * @return string
+     */
     public static function getStatusName(int $status): string
     {
         switch ($status) {
             case self::INVALID:
-                return '未读';
+                return self::STATUSES[self::INVALID];
             case self::NORMAL:
-                return '已读';
+                return self::STATUSES[self::NORMAL];
             default:
-                return '未知';
+                return self::STATUSES[self::NORMAL];
         }
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\ArticleLike
  *
- * @property-read \App\Models\Article $hotArticle
+ * @property-read \App\Models\Article $article
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike newQuery()
@@ -16,20 +16,35 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ArticleLike extends Model
 {
-    //
+
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_article_like';
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
-    public $fillable = ['user_id','article_id'];
+    /**
+     * @var array
+     */
+    public $fillable = ['user_id', 'article_id'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function hotArticle()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function article()
     {
-        return $this->belongsTo(Article::class,'article_id');
+        return $this->belongsTo(Article::class);
     }
 }

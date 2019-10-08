@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\IngotsLog;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -15,7 +16,7 @@ class IngotsLogController extends AdminController
      *
      * @var string
      */
-    protected $title = '元宝流水记录';
+    protected $title = '法宝流水';
 
     /**
      * Make a grid builder.
@@ -27,14 +28,18 @@ class IngotsLogController extends AdminController
         $grid = new Grid(new IngotsLog);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('cost', __('Cost'));
-        $grid->column('descr', __('Descr'));
-        $grid->column('type', __('Type'));
-        $grid->column('status', __('Status'));
-        $grid->column('remark', __('Remark'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('cost', trans('admin.ingot_cost'));
+        $grid->column('descr', trans('admin.descr'));
+        $grid->column('type', trans('admin.type'))->display(function ($type) {
+            return IngotsLog::getTypeName($type);
+        });
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
+            return IngotsLog::getStatusName($status);
+        })->label(['warning', 'primary']);
+        $grid->column('remark', trans('admin.remark'));
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -49,15 +54,15 @@ class IngotsLogController extends AdminController
     {
         $show = new Show(IngotsLog::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('cost', __('Cost'));
-        $show->field('descr', __('Descr'));
-        $show->field('type', __('Type'));
-        $show->field('status', __('Status'));
-        $show->field('remark', __('Remark'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', trans('Id'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('cost', trans('admin.ingot_cost'));
+        $show->field('descr', trans('admin.descr'));
+        $show->field('type', trans('admin.type'));
+        $show->field('status', trans('admin.status'))->using(IngotsLog::STATUSES);
+        $show->field('remark', trans('admin.remark'));
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -71,11 +76,11 @@ class IngotsLogController extends AdminController
     {
         $form = new Form(new IngotsLog);
 
-        $form->number('user_id', __('User id'));
-        $form->decimal('cost', __('Cost'));
-        $form->text('descr', __('Descr'));
-        $form->switch('type', __('Type'));
-        $form->text('remark', __('Remark'));
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
+        $form->number('cost', trans('admin.ingot_cost'));
+        $form->text('descr', trans('admin.descr'));
+        $form->radio('type', trans('admin.type'))->options([1 => '增加', 2 => '减少'])->default('1');
+        $form->text('remark', trans('admin.remark'));
 
         return $form;
     }

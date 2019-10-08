@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Authentication extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_user_authentication';
 }

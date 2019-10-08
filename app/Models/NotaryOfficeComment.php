@@ -17,15 +17,24 @@ use Illuminate\Database\Eloquent\Model;
 class NotaryOfficeComment extends Model
 {
     //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_notary_office_comment';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function notaryOffice()
     {
-        return $this->belongsTo(NotaryOffice::class,'office_id');
+        return $this->belongsTo(NotaryOffice::class, 'office_id');
     }
 }

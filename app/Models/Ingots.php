@@ -15,7 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ingots extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_ingots';
 
     /**
@@ -27,14 +29,18 @@ class Ingots extends Model
         'user_id', 'quantity', 'expire_time'
     ];
 
-    //TODO;
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
 
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -46,11 +52,11 @@ class Ingots extends Model
         switch ($status)
         {
             case self::INVALID:
-                return '禁用';
+                return self::STATUSES[self::INVALID];
             case self::NORMAL:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
             default:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
         }
     }
 }

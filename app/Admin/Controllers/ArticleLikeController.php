@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\ArticleLike;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -26,7 +27,7 @@ class ArticleLikeController extends AdminController
     {
         $grid = new Grid(new ArticleLike);
 
-        //$grid->disableCreateButton();
+        $grid->disableCreateButton();
 
         $grid->actions(function($actions){
             // 去掉编辑
@@ -37,7 +38,7 @@ class ArticleLikeController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
-        $grid->column('hotArticle.content', trans('admin.content'));
+        $grid->column('article.content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
 
         return $grid;
@@ -52,7 +53,7 @@ class ArticleLikeController extends AdminController
     {
         $form = new Form(new ArticleLike);
 
-        $form->number('user_id', trans('admin.user_id'));
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname());
         $form->number('article_id', trans('admin.article_id'));
 
         return $form;

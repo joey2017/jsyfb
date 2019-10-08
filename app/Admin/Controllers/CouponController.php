@@ -38,7 +38,7 @@ class CouponController extends AdminController
         $grid->column('end_time', trans('admin.end_time'));
         $grid->column('remark', trans('admin.remark'));
         $grid->column('status', trans('admin.status'))->display(function($status){
-            return Coupon::$_statuses[$status];
+            return Coupon::getStatusName($status);
         })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -66,7 +66,7 @@ class CouponController extends AdminController
         $show->field('start_time', trans('admin.start_time'));
         $show->field('end_time', trans('admin.end_time'));
         $show->field('remark', trans('admin.remark'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(Coupon::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -93,10 +93,5 @@ class CouponController extends AdminController
         $form->text('remark', trans('admin.remark'));
 
         return $form;
-    }
-
-    public function getInfo(Request $request)
-    {
-        return Coupon::findOrFail($request->get('id',0))->toJson();
     }
 }

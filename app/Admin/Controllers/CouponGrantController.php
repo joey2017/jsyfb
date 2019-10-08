@@ -42,7 +42,9 @@ class CouponGrantController extends AdminController
         $grid->column('start_time', trans('admin.start_time'));
         $grid->column('end_time', trans('admin.end_time'));
         $grid->column('remark', trans('admin.remark'));
-        $grid->column('status', trans('admin.status'));
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
+            return CouponGrant::getStatusName($status);
+        })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -68,6 +70,7 @@ class CouponGrantController extends AdminController
         $show->field('condition', trans('admin.condition'));
         $show->field('start_time', trans('admin.start_time'));
         $show->field('end_time', trans('admin.end_time'));
+        $show->field('status', trans('admin.status'))->using(CouponGrant::STATUSES);
         $show->field('remark', trans('admin.remark'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
@@ -85,7 +88,7 @@ class CouponGrantController extends AdminController
         $form = new Form(new CouponGrant);
 
         $form->select('user_id', trans('admin.username'))->options(getAllUsersIdAndNickname())->required();
-        $form->select('coupon_id', trans('admin.coupon'))->options(Coupon::where([['status',1],['total_num','>','distribute']])->pluck('name','id')->toArray())->required();
+        $form->select('coupon_id', trans('admin.coupon'))->options(Coupon::where([['status', 1], ['total_num', '>', 'distribute']])->pluck('name', 'id')->toArray())->required();
         $form->text('name', trans('admin.coupon_name'))->required();
         $form->text('total_num', '剩余发放数量')->readonly()->placeholder('剩余发放数量');
         $form->number('num', '发放数量')->required();
@@ -130,7 +133,7 @@ EOT;
 
                 return back()->with(compact('error'));
             }
-            if (Str::endsWith(\request()->route()->getName(),'.update')) {//编辑
+            if (Str::endsWith(\request()->route()->getName(), '.update')) {//编辑
                 DB::transaction(function () use ($originalData) {
                     DB::table((new Coupon)->getTable())->where('id', $originalData['coupon_id'])->where('status', 1)->decrement('distribute', $originalData['num']);
                 });
@@ -140,13 +143,13 @@ EOT;
         //保存后回调
         $form->saved(function (Form $form) {
             $grantData = $form->model()->toArray();
-            if (Str::endsWith(\request()->route()->getName(),'.store')) {//新增
+            if (Str::endsWith(\request()->route()->getName(), '.store')) {//新增
                 DB::transaction(function () use ($grantData) {
                     DB::table((new Coupon)->getTable())->where('id', $grantData['coupon_id'])->where('status', 1)->increment('distribute', $grantData['num']);
                 });
             }
 
-            if (Str::endsWith(\request()->route()->getName(),'.update')) {//编辑
+            if (Str::endsWith(\request()->route()->getName(), '.update')) {//编辑
                 DB::transaction(function () use ($grantData) {
                     DB::table((new Coupon)->getTable())->where('id', $grantData['coupon_id'])->where('status', 1)->increment('distribute', $grantData['num']);
                 });

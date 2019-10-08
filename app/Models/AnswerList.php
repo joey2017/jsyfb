@@ -20,29 +20,24 @@ class AnswerList extends Model
     protected $table = 'jyfb_answer_list';
 
     // 状态
-    /**
-     *
-     */
     const INVALID = 0;
-    /**
-     *
-     */
-    const NORMAL = 1;
+    const NORMAL  = 1;
+
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
 
     /**
      * @param int $status
      * @return string
      */
-    public static function getStatusName(int $status):string
+    public static function getStatusName(int $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case self::INVALID:
-                return '禁用';
+                return self::STATUSES[self::INVALID];
             case self::NORMAL:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
             default:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
         }
     }
 }

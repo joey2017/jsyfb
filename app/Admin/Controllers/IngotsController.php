@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Ingots;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
@@ -54,6 +55,7 @@ class IngotsController extends AdminController
         $show->field('user_id', trans('admin.user_id'));
         $show->field('quantity', trans('admin.quantity'));
         $show->field('expire_time', trans('admin.expire_time'));
+        $show->field('status', trans('admin.status'))->using(Ingots::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -69,8 +71,8 @@ class IngotsController extends AdminController
     {
         $form = new Form(new Ingots);
 
-        $form->select('user_id', trans('admin.username'))->options(User::where('status',1)->pluck('username','id')->toArray());
-        $form->number('quantity', trans('admin.quantity'));
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
+        $form->number('quantity', trans('admin.quantity'))->required();
         $form->datetime('expire_time', trans('admin.expire_time'))->default(date('Y-m-d H:i:s'));
 
         return $form;

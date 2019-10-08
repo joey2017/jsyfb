@@ -7,19 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleShare extends Model
 {
     //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_article_share';
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
-    public $fillable = ['user_id','article_id'];
+    /**
+     * @var array
+     */
+    public $fillable = ['user_id', 'article_id'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function hotArticle()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function article()
     {
-        return $this->belongsTo(Article::class,'article_id');
+        return $this->belongsTo(Article::class);
     }
 }

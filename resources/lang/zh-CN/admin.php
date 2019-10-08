@@ -177,4 +177,10 @@ return [
     'province'              => '省份',
     'city'                  => '城市',
     'district'              => '区县',
+    'goods_name'            => '商品名称',
+    'image'                 => '缩略图',
+    'exchange_price'        => '兑换价格（法宝）',
+    'stock'                 => '商品库存',
+    'balance_cost'          => '变动金额大小',
+    'ingot_cost'            => '变动法宝大小',
 ];

@@ -52,6 +52,7 @@ class BalanceController extends AdminController
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
         $show->field('amount', trans('admin.amount'));
+        $show->field('status', trans('admin.status'))->using(Balance::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

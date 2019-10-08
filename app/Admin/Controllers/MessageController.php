@@ -32,10 +32,16 @@ class MessageController extends AdminController
         $grid->disableExport();
         $grid->model()->where('status',1)->where('is_deleted',0);
 
+        $grid->actions(function ($actions) {
+            // 去掉查看
+            $actions->disableView();
+        });
+
         $grid->column('id', __('Id'));
-        $grid->column('nickname', trans('admin.nickname'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('content', trans('admin.content'));
+        $grid->column('status', trans('admin.status'))->using(Message::STATUSES);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -56,6 +62,7 @@ class MessageController extends AdminController
         $show->field('nickname', trans('admin.nickname'));
         $show->field('mobile', trans('admin.mobile'));
         $show->field('content', trans('admin.content'));
+        $show->field('status', trans('admin.status'))->using(Message::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -71,10 +78,9 @@ class MessageController extends AdminController
     {
         $form = new Form(new Message);
 
-        $form->text('nickname', trans('admin.nickname'));
+        $form->text('user.nickname', trans('admin.nickname'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->editor('content', trans('admin.content'));
-        $form->switch('status', trans('admin.status'))->default(1);
 
         return $form;
     }

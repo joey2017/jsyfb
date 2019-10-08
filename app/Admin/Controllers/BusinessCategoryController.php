@@ -51,6 +51,7 @@ class BusinessCategoryController extends AdminController
         $show->field('id', __('Id'));
         $show->field('title', trans('admin.title'));
         $show->field('descr', trans('admin.descr'));
+        $show->field('status', trans('admin.status'))->using(BusinessCategory::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

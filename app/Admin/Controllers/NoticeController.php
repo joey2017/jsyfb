@@ -38,7 +38,7 @@ class NoticeController extends AdminController
         $grid->column('content', trans('admin.content'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Notice::getStatusName($status);
-        })->label(['warning','success']);
+        })->label(['warning','primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -60,7 +60,7 @@ class NoticeController extends AdminController
         //$show->field('cate_id', trans('admin.cate_id'));
         $show->field('title', trans('admin.title'));
         $show->field('content', trans('admin.content'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(Notice::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -76,11 +76,9 @@ class NoticeController extends AdminController
     {
         $form = new Form(new Notice);
 
-        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname());
-        //$form->number('cate_id', trans('admin.cate_id'));
+        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname())->required();
         $form->text('title', trans('admin.title'));
         $form->textarea('content', trans('admin.content'));
-        $form->switch('status', trans('admin.status'));
 
         return $form;
     }

@@ -17,19 +17,31 @@ use Illuminate\Database\Eloquent\Model;
 class AnswerRecord extends Model
 {
     //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_everyday_answer_record';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
-        'user_id','answer_list_id','date','question','answer','correct','score'
+        'user_id', 'answer_list_id', 'date', 'question', 'answer', 'correct', 'score'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function answerList()
     {
-        return $this->belongsTo(AnswerList::class,'answer_list_id');
+        return $this->belongsTo(AnswerList::class, 'answer_list_id');
     }
 }

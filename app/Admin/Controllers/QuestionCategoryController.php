@@ -17,11 +17,18 @@ class QuestionCategoryController extends AdminController
      */
     protected $title = '热门问题分类';
 
+    /**
+     * @param Content $content
+     * @return Content
+     */
     public function index(Content $content)
     {
         return $content->title($this->title)->body($this->tree());
     }
 
+    /**
+     * @return Tree
+     */
     protected function tree()
     {
         return QuestionCategory::tree(function (Tree $tree) {
@@ -45,7 +52,6 @@ class QuestionCategoryController extends AdminController
         $form->text('title', trans('admin.title'))->rules('required');
         $form->text('path', trans('admin.path'));
         $form->image('logo');
-        //$form->switch('status', trans('admin.status'))->default(1);
 
         return $form;
     }

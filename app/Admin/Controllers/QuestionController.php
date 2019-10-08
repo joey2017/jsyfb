@@ -54,6 +54,7 @@ class QuestionController extends AdminController
         $show->field('id', __('Id'));
         $show->field('title', trans('admin.title'));
         $show->field('answer', trans('admin.answer'));
+        $show->field('status', trans('admin.status'))->using(Question::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

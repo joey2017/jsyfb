@@ -79,6 +79,7 @@ class UserController extends AdminController
         $show->field('ingots', trans('admin.ingots'));
         $show->field('invitation_code', trans('admin.invitation_code'));
         $show->field('is_vip', trans('admin.is_vip'));
+        $show->field('status', trans('admin.status'))->using(User::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\BalanceLog;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -27,15 +28,18 @@ class BalanceLogController extends AdminController
         $grid = new Grid(new BalanceLog);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('type', __('Type'));
-        $grid->column('cost', __('Cost'));
-        $grid->column('descr', __('Descr'));
-        $grid->column('remark', __('Remark'));
-        $grid->column('status', __('Status'));
-        $grid->column('is_deleted', __('Is deleted'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('type', trans('admin.type'))->display(function ($type) {
+            return BalanceLog::getTypeName($type);
+        });
+        $grid->column('cost', trans('admin.balance_cost'));
+        $grid->column('descr', trans('admin.descr'));
+        $grid->column('remark', trans('admin.remark'));
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
+            return BalanceLog::getStatusName($status);
+        })->label(['warning', 'primary']);
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -51,15 +55,14 @@ class BalanceLogController extends AdminController
         $show = new Show(BalanceLog::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('type', __('Type'));
-        $show->field('cost', __('Cost'));
-        $show->field('descr', __('Descr'));
-        $show->field('remark', __('Remark'));
-        $show->field('status', __('Status'));
-        $show->field('is_deleted', __('Is deleted'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('type', trans('admin.type'));
+        $show->field('cost', trans('admin.balance_cost'));
+        $show->field('descr', trans('admin.descr'));
+        $show->field('remark', trans('admin.remark'));
+        $show->field('status', trans('admin.status'))->using(BalanceLog::STATUSES);
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -73,13 +76,11 @@ class BalanceLogController extends AdminController
     {
         $form = new Form(new BalanceLog);
 
-        $form->number('user_id', __('User id'));
-        $form->switch('type', __('Type'));
-        $form->decimal('cost', __('Cost'));
-        $form->text('descr', __('Descr'));
-        $form->text('remark', __('Remark'));
-        $form->switch('status', __('Status'))->default(1);
-        $form->switch('is_deleted', __('Is deleted'));
+        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname());
+        $form->text('type', trans('admin.type'))->placeholder('输入类型1或2：1增加，2减少');
+        $form->decimal('cost', trans('admin.balance_cost'));
+        $form->text('descr', trans('admin.descr'));
+        $form->text('remark', trans('admin.remark'));
 
         return $form;
     }

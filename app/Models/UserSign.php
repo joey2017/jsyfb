@@ -15,13 +15,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserSign extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_user_sign';
 
+    /**
+     * @var array
+     */
     protected $fillable = ['user_id', 'successive_sign_count', 'count', 'last_sign_time', 'start_time', 'week_count'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

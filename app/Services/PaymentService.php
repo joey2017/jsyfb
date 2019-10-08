@@ -11,6 +11,11 @@ use Yansongda\LaravelPay\Facades\Pay;
 
 class PaymentService
 {
+    /**
+     * @param $amount
+     * @param $descr
+     * @param $type
+     */
     public function update($amount, $descr, $type)
     {
         try {
@@ -36,8 +41,11 @@ class PaymentService
 
     }
 
+
     /**
-     * @param Request $request
+     * @param $content
+     * @param $fee
+     * @param $openid
      */
     public function wechatpay($content, $fee, $openid)
     {
@@ -55,6 +63,9 @@ class PaymentService
         $result = Pay::wechat()->miniapp($order);
     }
 
+    /**
+     * @return string
+     */
     public function generateSn()
     {
         return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);

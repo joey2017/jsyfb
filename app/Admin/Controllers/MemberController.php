@@ -54,6 +54,7 @@ class MemberController extends AdminController
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
         $show->field('cost', trans('admin.cost'));
+        $show->field('status', trans('admin.status'))->using(Member::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

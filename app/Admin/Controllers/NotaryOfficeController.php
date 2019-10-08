@@ -28,7 +28,6 @@ class NotaryOfficeController extends AdminController
         $grid = new Grid(new NotaryOffice);
 
         $grid->column('id', __('Id'));
-        //$grid->column('name', trans('admin.name'));
 
         $grid->column('name', trans('admin.name'))->expand(function ($model) {
             $comments = $model->notaryOfficeComments()->take(10)->get()->map(function ($comment) {
@@ -81,7 +80,7 @@ class NotaryOfficeController extends AdminController
         $show->field('address', trans('admin.address'));
         $show->field('lng', trans('admin.lng'));
         $show->field('lat', trans('admin.lat'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(NotaryOffice::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Feedback;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -26,10 +27,20 @@ class FeedbackController extends AdminController
     {
         $grid = new Grid(new Feedback);
 
+        //禁用创建按钮
+        $grid->disableCreateButton();
+        //禁用导出数据按钮
+        $grid->disableExport();
+
+        $grid->actions(function ($actions) {
+            // 去掉查看
+            $actions->disableView();
+        });
+
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('content', __('Content'));
-        $grid->column('created_at', __('Created at'));
+        $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('content', trans('admin.content'));
+        $grid->column('created_at', trans('admin.created_at'));
 
         return $grid;
     }
@@ -45,9 +56,9 @@ class FeedbackController extends AdminController
         $show = new Show(Feedback::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('content', __('Content'));
-        $show->field('created_at', __('Created at'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('content', trans('admin.content'));
+        $show->field('created_at', trans('admin.content'));
 
         return $show;
     }
@@ -61,8 +72,8 @@ class FeedbackController extends AdminController
     {
         $form = new Form(new Feedback);
 
-        $form->number('user_id', __('User id'));
-        $form->text('content', __('Content'));
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
+        $form->text('content', trans('admin.content'))->required();
 
         return $form;
     }

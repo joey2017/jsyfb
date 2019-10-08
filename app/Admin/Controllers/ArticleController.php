@@ -41,19 +41,9 @@ class ArticleController extends AdminController
         $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
         $grid->column('specialist.name', trans('admin.specialist'));
-        //$grid->column('interpretation',trans('admin.interpretation'));
-        //$grid->column('measures',trans('admin.measures'));
         $grid->column('like_count', trans('admin.like_count'));
         $grid->column('browse_count', trans('admin.browse_count'));
         $grid->column('share_count', trans('admin.share_count'));
-        //$grid->column('comments_count', trans('admin.comments_count'));
-        /*
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            $statuses = ['禁用', '正常'];
-            $labels   = ['warning', 'info'];
-            return "<span class='label label-{$labels[$status]}'>" . $statuses[$status] . "</span>";
-        });
-        */
         $grid->column('status',trans('admin.status'))->display(function($status){
             return Article::getStatusName($status);
         })->label(['warning', 'primary']);
@@ -89,7 +79,7 @@ class ArticleController extends AdminController
         $show->field('like_count', trans('admin.like_count'));
         $show->field('browse_count', trans('admin.browse_count'));
         $show->field('share_count', trans('admin.share_count'));
-        //$show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(Article::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
@@ -105,7 +95,6 @@ class ArticleController extends AdminController
     {
         $form = new Form(new Article);
 
-        //$specs = Specialist::all()->pluck('name','id')->toArray();
         $specs = Specialist::where('status',1)->pluck('name','id')->toArray();
         $form->select('spec_id', '咨询专家')->options($specs);
         $form->textarea('content', '咨询内容');

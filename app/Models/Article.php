@@ -17,36 +17,53 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
-    protected $table = 'jyfb_hot_article';
+    /**
+     * @var string
+     */
+    protected $table = 'jyfb_article';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
-        'user_id','spec_id','content'
+        'user_id', 'spec_id', 'content'
     ];
 
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
 
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function articleComments()
     {
-        return $this->hasMany(ArticleComment::class, 'article_id');
+        return $this->hasMany(ArticleComment::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function specialist()
     {
         return $this->belongsTo(Specialist::class, 'spec_id');
     }
 
-    public static function getStatusName(int $status):string
+    /**
+     * @param int $status
+     * @return string
+     */
+    public static function getStatusName(int $status): string
     {
-        switch ($status)
-        {
+        switch ($status) {
             case self::INVALID:
-                return '禁用';
+                return self::STATUSES[self::INVALID];
             case self::NORMAL:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
             default:
-                return '正常';
+                return self::STATUSES[self::NORMAL];
         }
     }
 }

@@ -61,7 +61,7 @@ class LaywerController extends AdminController
         $show->field('email', trans('admin.email'));
         $show->field('company', trans('admin.company'));
         $show->field('summary', trans('admin.summary'));
-        $show->field('status', trans('admin.status'));
+        $show->field('status', trans('admin.status'))->using(Laywer::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 

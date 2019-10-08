@@ -14,10 +14,31 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Coupon extends Model
 {
-    //
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_coupon';
 
     // 状态
-    public static $_statuses = ['禁用', '正常'];
+    const INVALID = 0;
+    const NORMAL  = 1;
+
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
+    /**
+     * @param int $status
+     * @return string
+     */
+    public static function getStatusName(int $status): string
+    {
+        switch ($status) {
+            case self::INVALID:
+                return self::STATUSES[self::INVALID];
+            case self::NORMAL:
+                return self::STATUSES[self::NORMAL];
+            default:
+                return self::STATUSES[self::NORMAL];
+        }
+    }
 
 }

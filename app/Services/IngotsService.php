@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Redis;
 
 class IngotsService
 {
+    /**
+     * @param $quantity
+     * @param $descr
+     * @param $type
+     */
     public function update($quantity, $descr, $type)
     {
         try {
@@ -39,16 +44,28 @@ class IngotsService
 
     }
 
+    /**
+     * @param $key
+     * @return \Illuminate\Database\Eloquent\Model|null|object|static
+     */
     public function getValueByKey($key)
     {
         return IngotsConfig::getConfigByKey($key);
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     */
     public function getRedisValue($key)
     {
         return Redis::get("ingots_{$key}_" . Auth::guard('api')->id());
     }
 
+    /**
+     * @param $key
+     * @param $desc
+     */
     public function limitation($key, $desc)
     {
         $times = $this->getRedisValue($key);

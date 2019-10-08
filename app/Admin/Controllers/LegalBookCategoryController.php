@@ -18,11 +18,18 @@ class LegalBookCategoryController extends AdminController
     protected $title = '宝典分类';
 
 
+    /**
+     * @param Content $content
+     * @return Content
+     */
     public function index(Content $content)
     {
         return $content->title($this->title)->body($this->tree());
     }
 
+    /**
+     * @return Tree
+     */
     protected function tree()
     {
         return LegalBookCategory::tree(function (Tree $tree) {

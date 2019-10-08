@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\ArticleComment;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -27,7 +28,7 @@ class ArticleCommentController extends AdminController
         $grid = new Grid(new ArticleComment);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', trans('admin.user_id'));
+        $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('article_id', trans('admin.article_id'));
         $grid->column('interpretation', trans('admin.interpretation'));
         $grid->column('measures', trans('admin.measures'));
@@ -69,7 +70,7 @@ class ArticleCommentController extends AdminController
     {
         $form = new Form(new ArticleComment);
 
-        $form->number('user_id', trans('admin.user_id'));
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname());
         $form->number('article_id', trans('admin.article_id'));
         $form->textarea('interpretation', trans('admin.interpretation'));
         $form->textarea('measures', trans('admin.measures'));
