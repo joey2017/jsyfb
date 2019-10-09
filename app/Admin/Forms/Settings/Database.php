@@ -24,7 +24,6 @@ class Database extends Form
     public function handle(Request $request)
     {
         //dump($request->all());
-
         admin_success('Processed successfully.');
 
         return back();

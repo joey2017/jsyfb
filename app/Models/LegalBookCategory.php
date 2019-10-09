@@ -27,6 +27,11 @@ class LegalBookCategory extends Model
      */
     protected $table = 'jyfb_legal_book_category';
 
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;

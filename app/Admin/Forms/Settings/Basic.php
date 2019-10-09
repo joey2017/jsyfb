@@ -2,6 +2,7 @@
 
 namespace App\Admin\Forms\Settings;
 
+use App\Models\IngotsConfig;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class Basic extends Form
      *
      * @var string
      */
-    public $title = '基本';
+    public $title = '法宝获得配置';
 
     /**
      * Handle the form request.
@@ -23,7 +24,17 @@ class Basic extends Form
      */
     public function handle(Request $request)
     {
-        //dump($request->all());
+
+        foreach ($request->all() as $key => $value) {
+
+            if (false !== strpos($key, '_')) {
+                $result = explode('_', $key);
+                IngotsConfig::where('key', '=', $result[0])->update([$result[1] => $value]);
+            } else {
+                IngotsConfig::where('key', '=', $key)->update(['value' => $value]);
+            }
+            //IngotsConfig::updateOrCreate(['key' => $key],['value' => $value]);
+        }
 
         admin_success('Processed successfully.');
 
@@ -35,16 +46,17 @@ class Basic extends Form
      */
     public function form()
     {
-        $this->switch('website_enable', '站点开关')->help('站点关闭后将不能访问，后台可正常登录');
-        $this->text('website_title', '站点标题')->help("调用方式：config('website_title')");
-        $this->text('website_slogan', '站点标语')->help("站点口号，调用方式：config('website_slogan')");
-        $this->image('website_logo', '站点LOGO');
-        $this->image('website_text_logo', '站点LOGO文字');
-        $this->textarea('website_desc', '站点描述')->help('网站描述，有利于搜索引擎抓取相关信息');
-        $this->text('website_keywords', '站点关键词')->help('网站搜索引擎关键字');
-        $this->text('website_copyright', '版权信息')->help("调用方式：config('website_copyright')");
-        $this->text('website_icp', '备案信息')->help("调用方式：config('website_icp')");
-        $this->textarea('website_statistics', '网站统计代码')->help("网站统计代码，支持百度、Google、cnzz等，调用方式：config('website_statistics')");
+        $this->number('buy', '1元可购买法宝数量')->help('1元可购买法宝数量，须为整数');
+        $this->number('game', '游戏闯关获得法宝数量')->help('游戏闯关获得法宝数量，须为整数');
+        $this->number('game_limitation', '每天游戏闯关获得法宝次数')->help('游戏闯关获得法宝数量，0表示不限制');
+        $this->number('share', '好文分享获得法宝数量')->help('好文分享获得法宝数量，须为整数');
+        $this->number('share_limitation', '每天好文分享获得法宝次数')->help('好文分享获得法宝数量，0表示不限制');
+        $this->number('wechat', '关注微信公众号获得法宝数量')->help('关注微信公众号获得法宝数量，须为整数');
+        $this->number('invite', '邀请好友获得法宝数量')->help('邀请好友获得法宝数量，须为整数');
+        $this->number('invite_limitation', '每天邀请好友获得法宝次数')->help('邀请好友获得法宝数量，0表示不限制');
+        $this->number('verify', '实名认证获得法宝数量')->help('实名认证获得法宝数量，须为整数');
+        $this->number('sign', '每日签到获得法宝数量')->help('每日签到获得法宝数量，须为整数');
+        //$this->number('limitation', '好文分享获得法宝数量')->help('须为整数');
     }
 
     /**
@@ -54,8 +66,12 @@ class Basic extends Form
      */
     public function data()
     {
-        return [
-
-        ];
+        $results = IngotsConfig::all();
+        $data = [];
+        foreach ($results as $v) {
+            $data[$v['key']] = $v['value'];
+            $data[$v['key'].'_'.'limitation'] = $v['limitation'];
+        }
+        return $data;
     }
 }

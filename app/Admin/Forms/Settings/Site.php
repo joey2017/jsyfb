@@ -2,6 +2,7 @@
 
 namespace App\Admin\Forms\Settings;
 
+use App\Models\SystemConfig;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,10 @@ class Site extends Form
      */
     public function handle(Request $request)
     {
-        //dump($request->all());
+
+        foreach ($request->all() as $key => $value) {
+            SystemConfig::updateOrCreate(['key' => $key],['value' => $value]);
+        }
 
         admin_success('Processed successfully.');
 
@@ -35,9 +39,12 @@ class Site extends Form
      */
     public function form()
     {
-        $this->text('姓名')->rules('required');
-        $this->email('电子邮箱')->rules('email');
-        $this->datetime('创建时间');
+        $this->text('website_title', '站点标题')->help("调用方式：config('website_title')");
+        $this->image('website_logo', '站点LOGO');
+        $this->textarea('website_desc', '站点描述')->help('网站描述，有利于搜索引擎抓取相关信息');
+        $this->text('website_copyright', '版权信息')->help("调用方式：config('website_copyright')");
+        $this->text('website_icp', '备案信息')->help("调用方式：config('website_icp')");
+        $this->textarea('website_statistics', '网站统计代码')->help("网站统计代码，支持百度、Google、cnzz等，调用方式：config('website_statistics')");
     }
 
     /**
@@ -47,10 +54,6 @@ class Site extends Form
      */
     public function data()
     {
-        return [
-            'name'       => 'John Doe',
-            'email'      => 'John.Doe@gmail.com',
-            'created_at' => now(),
-        ];
+        return SystemConfig::all()->pluck('value','key')->toArray();
     }
 }

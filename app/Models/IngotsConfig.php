@@ -13,13 +13,22 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ingots query()
  * @mixin \Eloquent
  */
-
 class IngotsConfig extends Model
 {
     /**
      * @var string
      */
     protected $table = 'jyfb_ingots_config';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['key', 'value', 'limitation'];
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * @param $key

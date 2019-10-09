@@ -2,6 +2,7 @@
 
 namespace App\Admin\Forms\Settings;
 
+use App\Models\SystemConfig;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,10 @@ class Develop extends Form
      */
     public function handle(Request $request)
     {
-        //dump($request->all());
+
+        foreach ($request->all() as $key => $value) {
+            SystemConfig::updateOrCreate(['key' => $key],['value' => $value]);
+        }
 
         admin_success('Processed successfully.');
 
@@ -47,8 +51,8 @@ class Develop extends Form
     public function data()
     {
         return [
-            'dev_mode'   => 1,
-            'show_trace' => 1,
+            'dev_mode'   => SystemConfig::where('key', 'dev_mode')->first()->value,
+            'show_trace' => SystemConfig::where('key', 'show_trace')->first()->value,
         ];
     }
 }
