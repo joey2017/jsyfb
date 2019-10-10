@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -113,7 +112,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function userSign()
     {
-        return $this->hasOne(UserSign::class, 'user_id');
+        return $this->hasOne(UserSign::class);
     }
 
     /**
@@ -121,7 +120,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function notice()
     {
-        return $this->hasOne(Notice::class, 'user_id');
+        return $this->hasOne(Notice::class);
     }
 
     /*
@@ -137,7 +136,7 @@ class User extends Authenticatable implements JWTSubject
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function notaryOfficeComments()
     {

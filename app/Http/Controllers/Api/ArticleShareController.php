@@ -61,7 +61,7 @@ class ArticleShareController extends Controller
                 //获得法宝
                 $this->ingots->limitation('share', '好文分享获得法宝');
                 //系统消息
-                $this->notice->add('好文分享','好文分享获得'.$this->ingots->getValueByKey('share')->value.'个法宝');
+                $this->notice->add('好文分享','好文分享获得'.$this->ingots->getValueByKey('share')->value.'个法宝', Auth::guard('api')->id());
                 return true;
             });
         } catch (\PDOException $e) {

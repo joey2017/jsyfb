@@ -24,9 +24,11 @@ class Site extends Form
      */
     public function handle(Request $request)
     {
-
         foreach ($request->all() as $key => $value) {
-            SystemConfig::updateOrCreate(['key' => $key],['value' => $value]);
+            /*if (is_object($value) && $value->isValid()) {
+                $value = 'images/' . $value->originalName;
+            }*/
+            SystemConfig::updateOrCreate(['key' => $key], ['value' => $value]);
         }
 
         admin_success('Processed successfully.');
@@ -54,6 +56,6 @@ class Site extends Form
      */
     public function data()
     {
-        return SystemConfig::all()->pluck('value','key')->toArray();
+        return SystemConfig::all()->pluck('value', 'key')->toArray();
     }
 }

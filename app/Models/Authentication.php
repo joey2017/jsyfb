@@ -18,4 +18,20 @@ class Authentication extends Model
      * @var string
      */
     protected $table = 'jyfb_user_authentication';
+
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'realname', 'mobile', 'identity_card', 'hand_photo', 'remark'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -16,7 +16,7 @@ class UserSignController extends Controller
     protected $ingots;
     protected $notice;
 
-    public function __construct(IngotsService $ingotsService,NoticeService $noticeService)
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
         $this->notice = $noticeService;
@@ -69,11 +69,11 @@ class UserSignController extends Controller
     {
         try {
             if ($user->id != Auth::guard('api')->id()) {
-                return $this->failed('禁止访问',403);
+                return $this->failed('禁止访问', 403);
             }
 
-            $day = Carbon::now();
-            $sign = $user->userSign()->first();
+            $day            = Carbon::now();
+            $sign           = $user->userSign()->first();
             $last_sign_time = $sign->last_sign_time ?? 0;
             if ($day->toDateString() == Carbon::parse($last_sign_time)->toDateString()) {
                 return $this->failed('您今天已经签到过了');
@@ -88,16 +88,16 @@ class UserSignController extends Controller
             if ($sign->save()) {
 
                 //获得法宝
-                $this->ingots->limitation('sign','每日签到获得法宝');
+                $this->ingots->limitation('sign', '每日签到获得法宝');
                 //系统消息
-                $this->notice->add('签到成功','今日签到共获得'.$this->ingots->getValueByKey('sign')->value.'个法宝');
+                $this->notice->add('签到成功', '今日签到共获得' . $this->ingots->getValueByKey('sign')->value . '个法宝', Auth::guard('api')->id());
                 return $this->setStatusCode(201)->success('签到成功');
             }
 
         } catch (\PDOException $e) {
-            Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage()]);
+            Log::channel('mysqllog')->error('mysql错误：', ['msg' => $e->getMessage()]);
         }
 
-        return $this->failed('签到失败,请稍后重试',500);
+        return $this->failed('签到失败,请稍后重试', 500);
     }
 }

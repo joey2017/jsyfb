@@ -11,9 +11,7 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('admin.home');
-
-    $router->get('coupons/getInfo', 'CouponController@getInfo');
-
+    $router->resource('auth/users', AdminerController::class)->names('admin.auth.users');
     $router->resources([
         'personnel/laywers'         => LaywerController::class,
         'personnel/specialists'     => SpecialistController::class,
@@ -23,11 +21,11 @@ Route::group([
         'personnel/signs'           => UserSignController::class,
         'personnel/members'         => MemberController::class,
         'personnel/reservations'    => ReservationController::class,
+        'personnel/authentications' => AuthenticationController::class,
         'funds/balances/logs'       => BalanceLogController::class,
         'funds/balances'            => BalanceController::class,
         'funds/ingots/logs'         => IngotsLogController::class,
         'funds/ingots'              => IngotsController::class,
-        'usercenter/comments'       => ArticleCommentController::class,
         'articles/legals/categorys' => LegalBookCategoryController::class,
         'articles/legals/books'     => LegalBookController::class,
         'articles/browse-history'   => BrowseHistoryController::class,
@@ -51,6 +49,7 @@ Route::group([
         'goods-attrs'               => GoodsAttrController::class,
         'feedback'                  => FeedbackController::class,
         'exchanges'                 => ExchangeController::class,
+        'specialists/advices'       => SpecialistAdviceController::class,
 
     ]);
 

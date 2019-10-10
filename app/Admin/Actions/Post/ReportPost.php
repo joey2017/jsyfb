@@ -26,17 +26,9 @@ class ReportPost extends BatchAction
             4 => 'C++',
         ];
 
-        $this->text('title', '标题')->rules('string|min:100');
-        $this->textarea('reason', '理由');
-        $this->select('type', '类型')->options($options);
-        $this->multipleSelect('type_2')->options($options);
-        $this->datetime('created_at', '时间');
+        $this->radio('')->options($options);
+        $this->textarea('remark', '备注');
 
-        $this->checkbox('status')->options($options);
-        $this->radio('kind')->options($options);
-
-        $this->file('file');
-        $this->image('image');
     }
 
     /**
@@ -44,6 +36,6 @@ class ReportPost extends BatchAction
      */
     public function html()
     {
-        return "<a class='report-posts btn btn-sm btn-danger'>举报</a>";
+        return "<a class='report-posts btn btn-sm btn-info'>审核</a>";
     }
 }

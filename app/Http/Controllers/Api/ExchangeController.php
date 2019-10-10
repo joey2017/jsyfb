@@ -132,7 +132,7 @@ class ExchangeController extends Controller
                 ]);
                 $this->ingots->update($ingots, '兑换商品', 2);
                 $goods = $this->updateStock($goods_id, $quantity);
-                $this->notice->add('法宝兑换', '使用' . $ingots . '个法宝兑换' . $quantity . '件商品,该商品为' . $goods->goods_name);
+                $this->notice->add('法宝兑换', '使用' . $ingots . '个法宝兑换' . $quantity . '件商品,该商品为' . $goods->goods_name, Auth::guard('api')->id());
                 return true;
             });
 

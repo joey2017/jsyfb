@@ -17,7 +17,7 @@ class AnswerRecordController extends Controller
 
     protected $notice;
 
-    public function __construct(IngotsService $ingotsService,NoticeService $noticeService)
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
         $this->notice = $noticeService;
@@ -39,7 +39,7 @@ class AnswerRecordController extends Controller
      */
     public function index()
     {
-        $records = AnswerRecord::where('user_id',Auth::guard('api')->id())->paginate(5);
+        $records = AnswerRecord::where('user_id', Auth::guard('api')->id())->paginate(5);
         return AnswerRecordResource::collection($records);
     }
 
@@ -90,19 +90,19 @@ class AnswerRecordController extends Controller
     {
         $answer = AnswerList::findOrFail($request->input('answer_list_id'));
 
-        $data = ['score' => 0,'correct' => $answer->correct];
+        $data = ['score' => 0, 'correct' => $answer->correct];
         if (strtoupper($answer->correct) == strtoupper($request->input('option'))) {
             $data['score'] = 1;
-            $this->ingots->limitation('game','答题正确获得法宝');
-            $this->notice->add('每日答题','游戏闯关每日答题获得'.$this->ingots->getValueByKey('game')->value.'个法宝');
+            $this->ingots->limitation('game', '答题正确获得法宝');
+            $this->notice->add('每日答题', '游戏闯关每日答题获得' . $this->ingots->getValueByKey('game')->value . '个法宝', Auth::guard('api')->id());
         }
 
         AnswerRecord::create(array_merge(
             $request->all(),
-            ['user_id' => Auth::guard('api')->id(),'date' => Carbon::now()->toDateString()],
+            ['user_id' => Auth::guard('api')->id(), 'date' => Carbon::now()->toDateString()],
             $data
         ));
 
-        return $this->setStatusCode(201)->success(['msg' => '提交成功','info' => $answer->correct]);
+        return $this->setStatusCode(201)->success(['msg' => '提交成功', 'info' => $answer->correct]);
     }
 }

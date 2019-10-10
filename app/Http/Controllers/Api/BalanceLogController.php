@@ -72,11 +72,11 @@ class BalanceLogController extends Controller
         try {
             DB::beginTransaction();
             $this->payment->wechatpay('用户微信充值', $request->input('amount'), 1);
-            $this->notice->add('余额充值','微信充值成功'.$request->input('amount').'元');
+            $this->notice->add('余额充值', '微信充值成功' . $request->input('amount') . '元', Auth::guard('api')->id());
         } catch (PDOException $exception) {
             DB::rollBack();
-            Log::channel('mysqllog')->error('mysql错误：'.$exception->getMessage(),['info' => $exception->getTraceAsString()]);
-            return $this->failed('充值失败,请稍后重试',500);
+            Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
+            return $this->failed('充值失败,请稍后重试', 500);
         }
         DB::commit();
         return $this->setStatusCode('201')->success('充值成功');
