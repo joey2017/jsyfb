@@ -32,23 +32,29 @@ class NotaryOfficeController extends AdminController
         $grid->column('name', trans('admin.name'))->expand(function ($model) {
             $comments = $model->notaryOfficeComments()->take(10)->get()->map(function ($comment) {
                 return $comment->only(['id', 'user_id', 'score', 'content', 'created_at']);
+                //return $comment->only(['id', 'nickname', 'score', 'content', 'created_at']);
             });
-
+            /*
+            foreach ($comments as &$comment) {
+                $comment['user_id'] = User::findOrFail($comment['user_id'])->nickname;
+            }
+            */
             return new Table(['ID', '用户', '评分', '内容', '评论时间'], $comments->toArray());
         });
 
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('telephone', trans('admin.telephone'));
-        $grid->column('email', trans('admin.email'));
-        //$grid->column('qq', 'qq');
-        //$grid->column('wechat', trans('admin.wechat'));
+        //$grid->column('email', trans('admin.email'));
         $grid->column('summary', trans('admin.summary'));
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
+        $grid->column('province_code', trans('admin.province'));
+        $grid->column('city_code', trans('admin.city_code'));
+        $grid->column('district_code', trans('admin.district_code'));
         $grid->column('address', trans('admin.address'));
         $grid->column('lng', trans('admin.lng'));
         $grid->column('lat', trans('admin.lat'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
             return NotaryOffice::getStatusName($status);
         })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
@@ -71,12 +77,13 @@ class NotaryOfficeController extends AdminController
         $show->field('name', trans('admin.name'));
         $show->field('mobile', trans('admin.mobile'));
         $show->field('telephone', trans('admin.telephone'));
-        $show->field('email', trans('admin.email'));
-        //$show->field('qq', 'qq');
-        //$show->field('wechat', trans('admin.wechat'));
+        //$show->field('email', trans('admin.email'));
         $show->field('summary', trans('admin.summary'));
         $show->field('comments_count', trans('admin.comments_count'));
         $show->field('score', trans('admin.score'));
+        $show->field('province_code', trans('admin.province_code'));
+        $show->field('city_code', trans('admin.city_code'));
+        $show->field('district_code', trans('admin.district_code'));
         $show->field('address', trans('admin.address'));
         $show->field('lng', trans('admin.lng'));
         $show->field('lat', trans('admin.lat'));
@@ -99,12 +106,15 @@ class NotaryOfficeController extends AdminController
         $form->text('name', trans('admin.name'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->text('telephone', trans('admin.telephone'));
-        $form->email('email', trans('admin.email'));
-        //$form->text('qq', 'qq');
-        //$form->text('wechat', trans('admin.wechat'));
+        //$form->email('email', trans('admin.email'));
         $form->text('summary', trans('admin.summary'));
         $form->text('comments_count', trans('admin.comments_count'));
         $form->text('score', trans('admin.score'));
+        $form->distpicker([
+            'province' => '省份',
+            'city'     => '市',
+            'district' => '区'
+        ], '地域选择');
         $form->text('address', trans('admin.address'));
         $form->text('lng', trans('admin.lng'));
         $form->text('lat', trans('admin.lat'));

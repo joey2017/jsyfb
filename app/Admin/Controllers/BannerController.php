@@ -29,6 +29,7 @@ class BannerController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('picname', trans('admin.picname'));
         $grid->column('image_path',trans('admin.image_path'));
+        $grid->column('url',trans('admin.url'))->link();
         $grid->column('sort', trans('admin.sort'));
         $grid->column('status', trans('admin.status'))->display(function($status){
             return Banner::getStatusName($status);
@@ -52,6 +53,7 @@ class BannerController extends AdminController
         $show->field('id', __('Id'));
         $show->field('picname', trans('admin.picname'));
         $show->field('image_path', trans('admin.image_path'));
+        $show->field('url', trans('admin.url'))->link();
         $show->field('sort', trans('admin.sort'));
         $show->field('status', trans('admin.status'))->using(Banner::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
@@ -71,6 +73,7 @@ class BannerController extends AdminController
 
         $form->text('picname', trans('admin.picname'));
         $form->image('image_path', trans('admin.image_path'));
+        $form->text('url', trans('admin.url'));
         $form->text('sort', trans('admin.sort'));
 
         return $form;

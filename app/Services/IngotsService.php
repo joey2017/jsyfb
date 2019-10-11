@@ -14,21 +14,23 @@ use Illuminate\Support\Facades\Redis;
 
 class IngotsService
 {
+
     /**
      * @param $quantity
      * @param $descr
      * @param $type
+     * @param $user
      */
-    public function update($quantity, $descr, $type)
+    public function update($quantity, $descr, $type, $user)
     {
         try {
-            DB::transaction(function () use ($quantity, $descr, $type) {
-                $user = Auth::guard('api')->user();
-                $type == 1 ? $user->ingots += $quantity : $user->ingots -= $quantity;
+            DB::transaction(function () use ($quantity, $descr, $type, $user) {
+                //$user = Auth::guard('api')->user();
+                $type == IngotsLog::TYPE_INCRE ? $user->ingots += $quantity : $user->ingots -= $quantity;
                 $user->save();
 
                 $ingot = Ingots::firstOrCreate(['user_id' => $user->id]);
-                $type == 1 ? $ingot->quantity += $quantity : $ingot->quantity -= $quantity;
+                $type == IngotsLog::TYPE_INCRE ? $ingot->quantity += $quantity : $ingot->quantity -= $quantity;
                 $ingot->save();
 
                 IngotsLog::create([
@@ -75,7 +77,7 @@ class IngotsService
         }
 
         try {
-            $this->update($this->getValueByKey($key)->value, $desc, 1);
+            $this->update($this->getValueByKey($key)->value, $desc, IngotsLog::TYPE_INCRE, Auth::guard('api')->user());
         } catch (QueryException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }

@@ -27,6 +27,18 @@ class Authentication extends Model
         'user_id', 'realname', 'mobile', 'identity_card', 'hand_photo', 'remark'
     ];
 
+    const PENDING    = 0;
+    const PASSED     = 1;
+    const FAILED     = 2;
+    const INCOMPLETE = 3;
+
+    const STATUSES   = [
+        self::PENDING    => '待审核',
+        self::PASSED     => '审核通过',
+        self::FAILED     => '审核不通过',
+        self::INCOMPLETE => '资料不全',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

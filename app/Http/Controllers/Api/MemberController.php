@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\IngotsLog;
 use App\Models\Member;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
@@ -59,7 +60,7 @@ class MemberController extends Controller
         try {
             DB::beginTransaction();
             Member::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
-            $this->ingots->update(config('ingots.vip'), '使用VIP通道咨询专家消耗法宝', 2);
+            $this->ingots->update(config('ingots.vip'), '使用VIP通道咨询专家消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
             $this->notice->add('咨询专家', '使用VIP通道咨询专家消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id());
         } catch (PDOException $exception) {
             DB::rollBack();

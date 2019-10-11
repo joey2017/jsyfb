@@ -11,13 +11,15 @@ class NoticeService
     /**
      * @param $title
      * @param $content
+     * @param $user_id
+     * @param int $type
      */
-    public function add($title, $content, $user_id, $cate_id = 0)
+    public function add($title, $content, $user_id, $type = 0)
     {
         try {
             Notice::create([
                 'user_id' => $user_id,
-                'cate_id' => $cate_id,
+                'type'    => $type,
                 'title'   => $title,
                 'content' => $content,
             ]);

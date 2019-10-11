@@ -2,13 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\IngotsLog;
+use App\Services\IngotsService;
+use App\Services\NoticeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yansongda\LaravelPay\Facades\Pay;
 
 class PaymentController extends Controller
 {
     /**
+     * @var IngotsService
+     */
+    protected $ingots;
+
+    protected $notice;
+
+    /**
+     * PaymentController constructor.
+     * @param IngotsService $ingotsService
+     */
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
+    {
+        $this->ingots = $ingotsService;
+        $this->notice = $noticeService;
+    }
+
+    /**
      * @param Request $request
+     * @return mixed
      */
     public function alipay(Request $request)
     {
@@ -21,13 +43,16 @@ class PaymentController extends Controller
         return Pay::alipay()->web($order);
     }
 
+
     /**
-     * @param Request $request
+     * @param $content
+     * @param $fee
+     * @param $openid
      */
     public function wechatpay($content, $fee, $openid)
     {
         $order = [
-            'out_trade_no' => 'CZ'.$this->generateSn(),
+            'out_trade_no' => 'CZ' . $this->generateSn(),
             'body'         => $content,
             'total_fee'    => $fee,
             'openid'       => $openid,
@@ -40,8 +65,22 @@ class PaymentController extends Controller
         $result = Pay::wechat()->miniapp($order);
     }
 
+    /**
+     * @return string
+     */
     public function generateSn()
     {
-        return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+        return date('Ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+    }
+
+
+    /**
+     * @param Request $request
+     */
+    public function ingotspay(Request $request)
+    {
+        $ingots = $request->input('quantity');
+        $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
+        $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id());
     }
 }

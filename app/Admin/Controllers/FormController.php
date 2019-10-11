@@ -18,9 +18,9 @@ class FormController extends Controller
             ->body(Widgets\Tab::forms([
                 'basic'    => Settings\Basic::class,
                 'site'     => Settings\Site::class,
-                //'upload'   => Settings\Upload::class,
-                //'database' => Settings\Database::class,
                 //'develop'  => Settings\Develop::class,
+                //'database' => Settings\Database::class,
+                //'upload'   => Settings\Upload::class,
             ]));
     }
 

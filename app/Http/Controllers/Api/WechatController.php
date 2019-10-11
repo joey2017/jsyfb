@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\IngotsConfig;
+use App\Models\IngotsLog;
 use App\Models\User;
+use App\Services\IngotsService;
+use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Iwanli\Wxxcx\Wxxcx;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -11,11 +15,32 @@ use Tymon\JWTAuth\Facades\JWTFactory;
 
 class WechatController extends Controller
 {
+    /**
+     * @var Wxxcx
+     */
     protected $wxxcx;
 
-    function __construct(Wxxcx $wxxcx)
+    /**
+     * @var IngotsService
+     */
+    protected $ingots;
+
+    /**
+     * @var NoticeService
+     */
+    protected $notice;
+
+    /**
+     * WechatController constructor.
+     * @param Wxxcx $wxxcx
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     */
+    function __construct(Wxxcx $wxxcx, IngotsService $ingotsService, NoticeService $noticeService)
     {
-        $this->wxxcx = $wxxcx;
+        $this->wxxcx  = $wxxcx;
+        $this->ingots = $ingotsService;
+        $this->notice = $noticeService;
     }
 
     /**
@@ -38,6 +63,8 @@ class WechatController extends Controller
         $encryptedData = $request->input('encryptedData', '');
         $iv            = $request->input('iv', '');
 
+        $icode = $request->get('icode', '');
+
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $this->wxxcx->getLoginInfo($code);
 
@@ -52,12 +79,18 @@ class WechatController extends Controller
         $payload = JWTFactory::make(['openid' => $data->openid]);
         $token = JWTAuth::encode($payload);
         */
+        $inviter = '';
 
-        if ($existUser = User::where('openid',$data->openid)->first()) {
+        if ($icode !== '') {
+            $inviter = User::where('invitation_code', $icode)->first();
+        }
+
+        if ($existUser = User::where('openid', $data->openid)->first()) {
             $token = auth('api')->login($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $data));
-        };
+            $token = auth('api')->login($this->createUser($request, $data, $inviter->id));
+        }
+
         if ($token) {
             // 先检查原先是否有存token，有就先失效，再存入新token
             $user = auth('api')->user();
@@ -68,16 +101,27 @@ class WechatController extends Controller
                     //因为让一个过期的token再失效，会抛出异常，所以我们捕捉异常，不需要做任何处理
                 }
             }
-            $user->last_token = $token;
-            $user->login_num += 1;
-            $user->last_login_ip = $request->getClientIp();
+            $user->last_token      = $token;
+            $user->login_num       += 1;
+            $user->last_login_ip   = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
+
+            // 邀请人获得法宝
+            if ($inviter) {
+                $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
+            }
             return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token]);
         }
     }
 
-    protected function createUser($request, $data)
+    /**
+     * @param $request
+     * @param $data
+     * @param null $inviter_id
+     * @return $this|\Illuminate\Database\Eloquent\Model
+     */
+    protected function createUser($request, $data, $inviter_id = null)
     {
         return User::create([
             'username'        => $data->openid,
@@ -88,6 +132,7 @@ class WechatController extends Controller
             'avatar'          => $data->avatar,
             'gender'          => $data->gender,
             'invitation_code' => substr(uniqid(), 7),
+            'inviter_id'      => $inviter_id,
             'reg_ip'          => $request->getClientIp(),
         ]);
 

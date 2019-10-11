@@ -37,6 +37,20 @@ class IngotsLogController extends AdminController
         $grid->column('status', trans('admin.status'))->display(function ($status) {
             return IngotsLog::getStatusName($status);
         })->label(['warning', 'primary']);
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->disableIdFilter();
+            $filter->equal('type', trans('admin.type'))->select(IngotsLog::TYPES);
+            $filter->equal('status', trans('admin.status'))->select(IngotsLog::STATUSES);
+
+            //$filter->like('name');
+            /*
+            $filter->scope('elderly')->whereHas('profile', function ($query) {
+                $query->where('age', '>', 60);
+            });
+            */
+        });
+
         $grid->column('remark', trans('admin.remark'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));

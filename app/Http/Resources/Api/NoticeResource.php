@@ -18,7 +18,7 @@ class NoticeResource extends JsonResource
         return [
             'id'         => $this->id,
             'user_id'    => $this->user_id,
-            'cate_id'    => $this->cate_id,
+            'type'       => Notice::TYPES[$this->type],
             'title'      => $this->title,
             'content'    => $this->content,
             'status'     => Notice::getStatusName($this->status),

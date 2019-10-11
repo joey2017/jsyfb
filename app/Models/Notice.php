@@ -23,13 +23,15 @@ class Notice extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'cate_id', 'title', 'content'];
+    protected $fillable = ['user_id', 'type', 'title', 'content'];
 
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
 
     const STATUSES = [self::INVALID => '未读', self::NORMAL => '已读'];
+
+    const TYPES = ['系统消息', '站内信'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

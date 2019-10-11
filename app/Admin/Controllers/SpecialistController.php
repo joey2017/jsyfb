@@ -61,6 +61,7 @@ class SpecialistController extends AdminController
         $show->field('expertise', trans('admin.expertise'));
         $show->field('mobile', trans('admin.mobile'));
         $show->field('telephone', trans('admin.telephone'));
+        $show->field('score', trans('admin.score'));
         $show->field('company', trans('admin.company'));
         $show->field('summary', trans('admin.summary'));
         $show->field('status', trans('admin.status'))->using(Specialist::STATUSES);
@@ -84,6 +85,7 @@ class SpecialistController extends AdminController
         $form->text('expertise', trans('admin.expertise'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->text('telephone', trans('admin.telephone'));
+        $form->text('score', trans('admin.score'));
         $form->text('company', trans('admin.company'));
         $form->text('summary', trans('admin.summary'));
 

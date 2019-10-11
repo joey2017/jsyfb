@@ -175,8 +175,11 @@ return [
     'coupon_name'           => '优惠券名称',
     'gender'                => '性别',
     'province'              => '省份',
+    'province_code'         => '省份代码',
     'city'                  => '城市',
+    'city_code'             => '城市代码',
     'district'              => '区县',
+    'district_code'         => '区县代码',
     'goods_name'            => '商品名称',
     'image'                 => '缩略图',
     'exchange_price'        => '兑换价格（法宝）',
@@ -189,4 +192,5 @@ return [
     'hand_photo'            => '手持身份证照',
     'review_at'             => '审核时间',
     'veritied_at'           => '通过认证时间',
+    'url'                   => '跳转链接',
 ];

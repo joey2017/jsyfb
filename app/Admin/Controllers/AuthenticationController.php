@@ -40,6 +40,7 @@ class AuthenticationController extends AdminController
         //$grid->column('back_photo', trans('admin.nickname'));
         $grid->column('hand_photo', trans('admin.hand_photo'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('remark', trans('admin.remark'));
+        $grid->column('status', trans('admin.status'))->using(Authentication::STATUSES)->label();
         $grid->column('review_at', trans('admin.review_at'));
         $grid->column('veritied_at', trans('admin.veritied_at'));
         $grid->column('created_at', trans('admin.created_at'));
@@ -68,6 +69,7 @@ class AuthenticationController extends AdminController
         //$show->field('hand_photo', trans('admin.hand_photo'))->image();
         $show->hand_photo(trans('admin.hand_photo'))->image();
         $show->field('remark', trans('admin.remark'));
+        $show->field('status', trans('admin.status'))->using(Authentication::STATUSES);
         $show->field('review_at', trans('admin.review_at'));
         $show->field('veritied_at', trans('admin.veritied_at'));
         $show->field('created_at', trans('admin.created_at'));
@@ -85,14 +87,15 @@ class AuthenticationController extends AdminController
     {
         $form = new Form(new Authentication);
 
-        $form->number('user_id', trans('admin.user_id'));
+        $form->text('user_id', trans('admin.user_id'));
         $form->text('realname', trans('admin.realname'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->text('identity_card', trans('admin.identity_card'));
         //$form->text('front_photo', trans('admin.front_photo'));
         //$form->text('back_photo', trans('admin.back_photo'));
-        $form->text('hand_photo', trans('admin.hand_photo'));
+        $form->image('hand_photo', trans('admin.hand_photo'));
         $form->text('remark', trans('admin.remark'));
+        $form->select('status', trans('admin.status'))->options(Authentication::STATUSES);
         $form->datetime('review_at', trans('admin.review_at'))->default(date('Y-m-d H:i:s'));
         $form->datetime('veritied_at', trans('admin.veritied_at'))->default(date('Y-m-d H:i:s'));
 

@@ -30,6 +30,10 @@ class IngotsLog extends Model
 
     const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
 
+    const TYPE_INCRE = 1;
+    const TYPE_DECRE = 2;
+    const TYPES = [self::TYPE_INCRE => '收入', self::TYPE_DECRE => '支出'];
+
     /**
      * @param int $status
      * @return string
@@ -52,14 +56,7 @@ class IngotsLog extends Model
      */
     public static function getTypeName(int $type): string
     {
-        switch ($type) {
-            case 1:
-                return '收入';
-            case 2:
-                return '支出';
-            default:
-                return '收入';
-        }
+        return self::TYPES[$type];
     }
 
     /**

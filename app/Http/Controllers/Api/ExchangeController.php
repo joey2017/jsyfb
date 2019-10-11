@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\ExchangeResource;
 use App\Models\Exchange;
 use App\Models\Goods;
+use App\Models\IngotsLog;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Doctrine\DBAL\Driver\PDOException;
@@ -130,7 +131,7 @@ class ExchangeController extends Controller
                     'goods_id'   => $goods_id,
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
-                $this->ingots->update($ingots, '兑换商品', 2);
+                $this->ingots->update($ingots, '兑换商品', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
                 $goods = $this->updateStock($goods_id, $quantity);
                 $this->notice->add('法宝兑换', '使用' . $ingots . '个法宝兑换' . $quantity . '件商品,该商品为' . $goods->goods_name, Auth::guard('api')->id());
                 return true;
