@@ -32,7 +32,7 @@ Route::group([
         'articles/likes'            => ArticleLikeController::class,
         'articles/shares'           => ArticleShareController::class,
         'articles/answers/lists'    => AnswerListController::class,
-        'articles'                  => ArticleController::class,
+        'articles/cases'            => ArticleController::class,
         'messages'                  => MessageController::class,
         'notices'                   => NoticeController::class,
         'banners'                   => BannerController::class,
@@ -40,7 +40,7 @@ Route::group([
         'coupons'                   => CouponController::class,
         'questions/categorys'       => QuestionCategoryController::class,
         'questions'                 => QuestionController::class,
-        'notarys/specialists'       => SpecialistController::class,
+        'notarys/consultants'       => ConsultantController::class,
         'notarys/comments'          => NotaryOfficeCommentController::class,
         'notarys'                   => NotaryOfficeController::class,
         'wechat-attentions'         => WechatAttentionController::class,
@@ -50,6 +50,7 @@ Route::group([
         'feedback'                  => FeedbackController::class,
         'exchanges'                 => ExchangeController::class,
         'specialists/advices'       => SpecialistAdviceController::class,
+        //'consultants'               => ConsultantController::class,
 
     ]);
 

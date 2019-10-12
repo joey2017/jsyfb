@@ -10,17 +10,6 @@ use Encore\Admin\Show;
 
 class AdminerController extends UserController
 {
-    /**
-     * Title for current resource.
-     *
-     * @var string
-     */
-    protected $title = '专家与管理员关联';
-
-    protected function title()
-    {
-        return '专家与管理员关联';
-    }
 
     /**
      * Make a grid builder.
@@ -53,6 +42,15 @@ class AdminerController extends UserController
             $tools->batch(function (Grid\Tools\BatchActions $actions) {
                 $actions->disableDelete();
             });
+        });
+
+        $grid->filter(function(Grid\Filter $filter){
+            $filter->disableIdFilter();
+            //$filter->like('username',trans('admin.username'));
+            //$filter->like('name',trans('admin.name'));
+            $filter->where(function ($query) {
+                $query->where('username', 'like', "%{$this->input}%")->orWhere('name', 'like', "%{$this->input}%");
+            }, '关键字');
         });
 
         return $grid;

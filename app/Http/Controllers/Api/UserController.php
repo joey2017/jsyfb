@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\Api\BalanceLogResource;
 use App\Http\Resources\Api\BrowseHistoryResource;
-use App\Http\Resources\Api\CollectionResource;
 use App\Http\Resources\Api\NotaryOfficeCommentResource;
 use App\Http\Resources\Api\UserResource;
 use App\Models\BalanceLog;
 use App\Models\BrowseHistory;
-use App\Models\Collection;
 use App\Models\NotaryOfficeComment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -138,7 +136,7 @@ class UserController extends Controller
             $user->last_login_ip = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
-            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token]);
+            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token,'user' => new UserResource($user)]);
         } else {
             return $this->failed('帐号或密码错误', 400);
         }
@@ -203,33 +201,6 @@ class UserController extends Controller
         $comments = NotaryOfficeComment::where('user_id',$user->id)->paginate(5);
         return NotaryOfficeCommentResource::collection($comments);
     }
-
-    /**
-     * @SWG\Get(
-     *   path="/users/collections/{id}",
-     *   tags={"User"},
-     *   produces={"application/json"},
-     *   summary="我的收藏",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
-     *   @SWG\Response(response=200,description="成功"),
-     *   @SWG\Response(response=403,description="禁止访问"),
-     *   @SWG\Response(response=404,description="未找到")
-     * )
-     */
-    public function collections(User $user)
-    {
-        if (Auth::guard('api')->id() != $user->id) {
-            return $this->failed('禁止访问',403);
-        }
-        $collections = Collection::where('user_id',$user->id)->paginate(5);
-        return CollectionResource::collection($collections);
-    }
-
 
     /**
      * @SWG\Get(

@@ -3,11 +3,13 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Article;
-use App\Models\Specialist;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\DB;
+
 //use Encore\Admin\Widgets\Table;
 
 class ArticleController extends AdminController
@@ -41,6 +43,8 @@ class ArticleController extends AdminController
         $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
         $grid->column('specialist.name', trans('admin.specialist'));
+        $grid->column('interpretation', trans('admin.interpretation'));
+        $grid->column('measures', trans('admin.measures'));
         $grid->column('like_count', trans('admin.like_count'));
         $grid->column('browse_count', trans('admin.browse_count'));
         $grid->column('share_count', trans('admin.share_count'));
@@ -73,7 +77,9 @@ class ArticleController extends AdminController
         $show = new Show(Article::findOrFail($id));
 
         $show->field('id', __('Id'));
+        $show->field('title', trans('admin.title'));
         $show->field('content', trans('admin.content'));
+        $show->field('images', trans('admin.image'));
         $show->field('interpretation', trans('admin.interpretation'));
         $show->field('measures', trans('admin.measures'));
         $show->field('like_count', trans('admin.like_count'));
@@ -95,9 +101,17 @@ class ArticleController extends AdminController
     {
         $form = new Form(new Article);
 
-        $specs = Specialist::where('status',1)->pluck('name','id')->toArray();
-        $form->select('spec_id', '咨询专家')->options($specs);
-        $form->textarea('content', '咨询内容');
+        $admins = DB::table(config('admin.database.users_table'))->pluck('username','id')->toArray();
+        $form->select('user_id', '发布人')->options($admins)->required();
+        $form->text('title', trans('admin.title'))->required();
+        $form->textarea('content', trans('admin.content'))->required();
+        $form->image('images', trans('admin.image'))->required();
+        $form->textarea('interpretation', trans('admin.interpretation'));
+        $form->textarea('measures', trans('admin.measures'));
+
+        $form->saving(function(Form $form){
+            $form->model()->spec_id = config('admin.database.users_model')::findOrFail(Admin::user()->id)->related_spec_id;
+        });
 
         return $form;
     }
