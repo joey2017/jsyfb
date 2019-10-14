@@ -20,6 +20,13 @@ class CustomerController extends AdminController
 
     protected $wechat;
 
+    protected $url = [
+        'add'    => 'https://api.weixin.qq.com/customservice/kfaccount/add?access_token=%s',
+        'update' => 'https://api.weixin.qq.com/customservice/kfaccount/update?access_token=%s',
+        'del'    => 'https://api.weixin.qq.com/customservice/kfaccount/del?access_token=%s',
+        'list'   => 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=%s',
+    ];
+
     public function __construct(WechatService $service)
     {
         $this->wechat = $service;
@@ -40,8 +47,6 @@ class CustomerController extends AdminController
         $grid->column('status', trans('admin.status'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
-
-        $this->wechat->getAccessToken();
 
         return $grid;
     }

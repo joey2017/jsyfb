@@ -29,26 +29,8 @@ class WechatService
      */
     public function request($curl, $https = true, $method = 'GET', $data = null)
     {
-
-        $ch	= curl_init();
-
-        // CURL配置参数
-        $opt = array(
-            CURLOPT_URL				=> $curl,
-            CURLOPT_HEADER			=> false,
-            CURLOPT_TIMEOUT			=> 30,
-            CURLOPT_MAXREDIRS		=> 5,
-            CURLOPT_FOLLOWLOCATION	=> false,
-            CURLOPT_RETURNTRANSFER	=> false,
-            CURLOPT_CONNECTTIMEOUT	=> 15,
-        );
-
-        curl_setopt_array($ch, $opt);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return $result;
         return file_get_contents($curl);
+
         // 创建一个新cURL资源
         $ch = curl_init();
 
@@ -60,7 +42,7 @@ class WechatService
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         if ($https) {
-            //FALSE 禁止 cURL 验证对等证书（peer's certificate）。
+            //FALSE 禁止 cURL 验证对等证书（peer's certificate）
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true); //验证主机
         }
@@ -104,6 +86,7 @@ class WechatService
             } else {
                 file_put_contents($file, json_encode($res));
             }
+            chmod($file,0755);
         } else {
             $access_token = $data->access_token;
         }

@@ -42,7 +42,6 @@ Route::group([
         'questions/categorys'       => QuestionCategoryController::class,
         'questions'                 => QuestionController::class,
         'notarys/consultants'       => ConsultantController::class,
-        'notarys/comments'          => NotaryOfficeCommentController::class,
         'notarys'                   => NotaryOfficeController::class,
         'wechat-attentions'         => WechatAttentionController::class,
         'expert-advices'            => ExpertAdviceController::class,
