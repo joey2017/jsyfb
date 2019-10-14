@@ -27,7 +27,7 @@ class UserResource extends JsonResource
             'login_num'       => $this->login_num,
             'reg_ip'          => $this->reg_ip,
             'last_login_ip'   => $this->last_login_ip,
-            'last_login_time' => $this->last_login_time,
+            'last_login_time' => (string)$this->last_login_time,
             'is_verified'     => $this->is_verified,
             'ingots'          => $this->ingots,
             'invitation_code' => $this->invitation_code,

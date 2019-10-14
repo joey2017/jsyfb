@@ -29,7 +29,10 @@ class GoodsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('goods_name', trans('admin.goods_name'));
         $grid->column('image', trans('admin.image'));
+        $grid->column('detail', trans('admin.detail'));
         $grid->column('exchange_price', trans('admin.exchange_price'));
+        $grid->column('exchange_rule', trans('admin.exchange_rule'));
+        $grid->column('description', trans('admin.description'));
         $grid->column('stock', trans('admin.stock'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -50,7 +53,10 @@ class GoodsController extends AdminController
         $show->field('id', __('Id'));
         $show->field('goods_name', trans('admin.goods_name'));
         $show->field('image', trans('admin.image'));
+        $show->field('detail', trans('admin.detail'));
         $show->field('exchange_price', trans('admin.exchange_price'));
+        $show->field('exchange_rule', trans('admin.exchange_rule'));
+        $show->field('description', trans('admin.description'));
         $show->field('stock', trans('admin.stock'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
@@ -69,7 +75,10 @@ class GoodsController extends AdminController
 
         $form->text('goods_name', trans('admin.goods_name'));
         $form->image('image', trans('admin.image'));
+        $form->editor('detail', trans('admin.detail'));
         $form->number('exchange_price', trans('admin.exchange_price'));
+        $form->textarea('exchange_rule', trans('admin.exchange_rule'));
+        $form->textarea('description', trans('admin.description'));
         $form->number('stock', trans('admin.stock'));
 
         return $form;

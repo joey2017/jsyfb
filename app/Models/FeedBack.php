@@ -18,7 +18,7 @@ class FeedBack extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'content', 'created_at'];
+    protected $fillable = ['user_id', 'name', 'mobile', 'content', 'created_at'];
 
     /**
      * @var bool

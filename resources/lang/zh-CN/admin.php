@@ -21,7 +21,7 @@ return [
     'continue_editing'      => '继续编辑',
     'continue_creating'     => '继续创建',
     'view'                  => '查看',
-    'detail'                => '详细',
+    'detail'                => '详情',
     'browse'                => '浏览',
     'reset'                 => '重置',
     'export'                => '导出',
@@ -193,4 +193,5 @@ return [
     'review_at'             => '审核时间',
     'veritied_at'           => '通过认证时间',
     'url'                   => '跳转链接',
+    'exchange_rule'         => '兑换规则',
 ];

@@ -4,10 +4,34 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\FeedbackRequest;
 use App\Models\FeedBack;
+use App\Models\SystemConfig;
 use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
 {
+    /**
+     *
+     * @SWG\Get(
+     *   path="/feedbacks/create",
+     *   summary="意见反馈页面",
+     *   tags={"User"},
+     *   description="请求该接口需要先登录。",
+     *   produces={"application/json"},
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response="200", description="成功"),
+     *   @SWG\Response(response="401", description="未授权")
+     * )
+     */
+    public function create()
+    {
+        return $this->setStatusCode('200')->success(SystemConfig::all()->pluck('value','key')->toArray());
+    }
+
+
     /**
      *
      * @SWG\Post(
@@ -21,6 +45,8 @@ class FeedbackController extends Controller
      *          "Bearer":{}
      *      }
      *   },
+     *   @SWG\Parameter(in="formData",name="name",type="string",description="姓名",required=true),
+     *   @SWG\Parameter(in="formData",name="mobile",type="string",description="手机号码",required=true),
      *   @SWG\Parameter(in="formData",name="content",type="string",description="留言内容",required=true),
      *   @SWG\Response(response="201", description="成功"),
      *   @SWG\Response(response="401", description="未授权")

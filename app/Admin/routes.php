@@ -22,6 +22,7 @@ Route::group([
         'personnel/members'         => MemberController::class,
         'personnel/reservations'    => ReservationController::class,
         'personnel/authentications' => AuthenticationController::class,
+        'personnel/customers'       => CustomerController::class,
         'funds/balances/logs'       => BalanceLogController::class,
         'funds/balances'            => BalanceController::class,
         'funds/ingots/logs'         => IngotsLogController::class,
@@ -50,7 +51,6 @@ Route::group([
         'feedback'                  => FeedbackController::class,
         'exchanges'                 => ExchangeController::class,
         'specialists/advices'       => SpecialistAdviceController::class,
-        //'consultants'               => ConsultantController::class,
 
     ]);
 

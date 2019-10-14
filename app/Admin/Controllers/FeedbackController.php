@@ -39,6 +39,8 @@ class FeedbackController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('name', '姓名');
+        $grid->column('mobile', trans('admin.mobile'));
         $grid->column('content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
 
@@ -57,6 +59,8 @@ class FeedbackController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
+        $show->field('name', '姓名');
+        $show->field('mobile', trans('admin.mobile'));
         $show->field('content', trans('admin.content'));
         $show->field('created_at', trans('admin.content'));
 
@@ -73,6 +77,8 @@ class FeedbackController extends AdminController
         $form = new Form(new Feedback);
 
         $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
+        $form->text('name', '姓名')->required();
+        $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->text('content', trans('admin.content'))->required();
 
         return $form;
