@@ -45,10 +45,8 @@ class ArticleController extends AdminController
         })->label(['warning', 'primary']);
 
         $grid->filter(function ($filter) {
-
             // 去掉默认的 id 过滤器
             $filter->disableIdFilter();
-
             // 添加新的字段过滤器（通过内容过滤）
             $filter->like('content', '内容');
         });
