@@ -4,7 +4,6 @@ namespace App\Admin\Controllers;
 
 use App\Models\Article;
 use Encore\Admin\Controllers\AdminController;
-use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -19,7 +18,7 @@ class ArticleController extends AdminController
      *
      * @var string
      */
-    protected $title = '热门资讯';
+    protected $title = '热门文章';
 
     /**
      * Make a grid builder.

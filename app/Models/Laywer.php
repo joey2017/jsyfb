@@ -34,6 +34,12 @@ class Laywer extends Model
         return $this->belongsTo(BusinessCategory::class, 'cate_id');
     }
 
+
+    public function link()
+    {
+        return $this->hasMany(LaywerCategoryLink::class);
+    }
+
     /**
      * @param int $status
      * @return string

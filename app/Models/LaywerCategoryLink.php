@@ -21,4 +21,9 @@ class LaywerCategoryLink extends Model
      */
     public $timestamps = false;
 
+    public function category()
+    {
+        return $this->belongsTo(BusinessCategory::class,'cate_id');
+    }
+
 }
