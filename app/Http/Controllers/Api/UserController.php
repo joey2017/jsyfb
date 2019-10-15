@@ -3,13 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\UserRequest;
-use App\Http\Resources\Api\BalanceLogResource;
 use App\Http\Resources\Api\BrowseHistoryResource;
-use App\Http\Resources\Api\NotaryOfficeCommentResource;
 use App\Http\Resources\Api\UserResource;
-use App\Models\BalanceLog;
 use App\Models\BrowseHistory;
-use App\Models\NotaryOfficeComment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -176,31 +172,6 @@ class UserController extends Controller
         return $this->success(new UserResource($user));
     }
 
-    /**
-     * @SWG\Get(
-     *   path="/users/comments/{id}",
-     *   tags={"User"},
-     *   produces={"application/json"},
-     *   summary="我的评论",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
-     *   @SWG\Response(response=200,description="成功"),
-     *   @SWG\Response(response=403,description="禁止访问"),
-     *   @SWG\Response(response=404,description="未找到")
-     * )
-     */
-    public function comments(User $user)
-    {
-        if (Auth::guard('api')->id() != $user->id) {
-            return $this->failed('禁止访问',403);
-        }
-        $comments = NotaryOfficeComment::where('user_id',$user->id)->paginate(5);
-        return NotaryOfficeCommentResource::collection($comments);
-    }
 
     /**
      * @SWG\Get(
@@ -228,29 +199,4 @@ class UserController extends Controller
         return BrowseHistoryResource::collection($historys);
     }
 
-    /**
-     * @SWG\Get(
-     *   path="/users/balance-logs/{id}",
-     *   tags={"User"},
-     *   produces={"application/json"},
-     *   summary="钱包明细",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="用户id"),
-     *   @SWG\Response(response=200,description="成功"),
-     *   @SWG\Response(response=403,description="禁止访问"),
-     *   @SWG\Response(response=404,description="未找到")
-     * )
-     */
-    public function balanceLogs(User $user)
-    {
-        if (Auth::guard('api')->id() != $user->id) {
-            return $this->failed('禁止访问',403);
-        }
-        $historys = BalanceLog::where('user_id',$user->id)->paginate(5);
-        return BalanceLogResource::collection($historys);
-    }
 }

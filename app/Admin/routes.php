@@ -12,6 +12,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->resource('auth/users', AdminerController::class)->names('admin.auth.users');
+    Route::get('articles/comments/getcontent', 'ArticleCommentController@getContent');
     $router->resources([
         'personnel/laywers'         => LaywerController::class,
         'personnel/specialists'     => SpecialistController::class,
@@ -34,6 +35,7 @@ Route::group([
         'articles/shares'           => ArticleShareController::class,
         'articles/answers/lists'    => AnswerListController::class,
         'articles/cases'            => ArticleController::class,
+        'articles/comments'         => ArticleCommentController::class,
         'messages'                  => MessageController::class,
         'notices'                   => NoticeController::class,
         'banners'                   => BannerController::class,
@@ -50,6 +52,7 @@ Route::group([
         'feedback'                  => FeedbackController::class,
         'exchanges'                 => ExchangeController::class,
         'specialists/advices'       => SpecialistAdviceController::class,
+        'customers/reservations'    => ReservationController::class,
 
     ]);
 

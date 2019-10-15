@@ -26,7 +26,7 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'spec_id', 'content'
+        'admin_id', 'title', 'content', 'images'
     ];
 
     // 状态
@@ -46,9 +46,9 @@ class Article extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function specialist()
+    public function adminer()
     {
-        return $this->belongsTo(Specialist::class, 'spec_id');
+        return $this->belongsTo(config('admin.database.users_model'), 'admin_id');
     }
 
     /**

@@ -25,6 +25,12 @@ class Reservation extends Model
 
     const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
 
+    // 类型
+    const TYPE_LAYWER = 1;
+    const TYPE_NOTARY = 2;
+
+    const TYPES = [self::TYPE_LAYWER => '律师', self::TYPE_NOTARY => '公证处'];
+
     /**
      * @param int $status
      * @return string

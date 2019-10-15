@@ -119,6 +119,7 @@ return [
     'article_id'            => '文章Id',
     'path'                  => '路径',
     'cate_id'               => '分类Id',
+    'catetory'              => '分类',
     'book_title'            => '主题',
     'image_path'            => '图片路径',
     'picname'               => '图片名称',
@@ -194,4 +195,9 @@ return [
     'veritied_at'           => '通过认证时间',
     'url'                   => '跳转链接',
     'exchange_rule'         => '兑换规则',
+    'tag'                   => '标签',
+    'laywer'                => '律师',
+    'comment_content'       => '点评内容',
+    'case_type'             => '案件类型',
+    'sex'                   => '性别',
 ];

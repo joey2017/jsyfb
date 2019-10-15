@@ -55,6 +55,11 @@ class SpecialistAdvice extends Model
         return $this->belongsTo(Specialist::class, 'spec_id');
     }
 
+
+    public function laywer()
+    {
+        return $this->belongsTo(Laywer::class,'spec_id');
+    }
     /**
      * @param int $status
      * @return string

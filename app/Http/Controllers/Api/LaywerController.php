@@ -14,9 +14,9 @@ class LaywerController extends Controller
      *   summary="律师列表",
      *   @SWG\Parameter(in = "query",name = "name",description = "律师名称",required = false,type = "string"),
      *   @SWG\Parameter(in = "query",name = "cate_id",description = "职务分类id",required = false,type = "integer"),
-     *   @SWG\Parameter(in = "query",name = "province",description = "省份",required = false,type = "string"),
-     *   @SWG\Parameter(in = "query",name = "city",description = "城市",required = false,type = "string"),
-     *   @SWG\Parameter(in = "query",name = "score",description = "服务评分",required = false,type = "number"),
+     *   @SWG\Parameter(in = "query",name = "province_code",description = "省份代码",required = false,type = "string"),
+     *   @SWG\Parameter(in = "query",name = "city_code",description = "城市代码",required = false,type = "string"),
+     *   @SWG\Parameter(in = "query",name = "cate_id",description = "擅长",required = false,type = "integer"),
      *   @SWG\Response(response="200",description="获取律师列表")
      *
      * )

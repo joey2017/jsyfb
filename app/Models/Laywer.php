@@ -34,7 +34,6 @@ class Laywer extends Model
         return $this->belongsTo(BusinessCategory::class, 'cate_id');
     }
 
-
     /**
      * @param int $status
      * @return string
@@ -49,5 +48,13 @@ class Laywer extends Model
             default:
                 return self::STATUSES[self::NORMAL];
         }
+    }
+
+    /**
+     * @param $cate_id
+     */
+    public function setCateIdAttribute($cate_id)
+    {
+        $this->attributes['cate_id'] = trim(implode(',', $cate_id), ',');
     }
 }

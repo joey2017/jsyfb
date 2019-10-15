@@ -111,9 +111,9 @@ class NotaryOfficeController extends AdminController
         $form->text('comments_count', trans('admin.comments_count'));
         $form->text('score', trans('admin.score'));
         $form->distpicker([
-            'province' => '省份',
-            'city'     => '市',
-            'district' => '区'
+            'province_code' => '省份',
+            'city_code'     => '市',
+            'district_code' => '区'
         ], '地域选择');
         $form->text('address', trans('admin.address'));
         $form->text('lng', trans('admin.lng'));

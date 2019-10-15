@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllUsersIdAndNickname;
+use App\Models\Laywer;
 use App\Models\Specialist;
 use App\Models\SpecialistAdvice;
 use App\Models\User;
@@ -47,8 +48,11 @@ class SpecialistAdviceController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
-        $grid->column('specialist.name', trans('admin.specialist'));
-        $grid->column('cate_id', trans('admin.cate_id'))->using(SpecialistAdvice::CATES);
+        $grid->column('laywer.name', trans('admin.specialist'));
+        $grid->column('username', trans('admin.username'));
+        $grid->column('sex', trans('admin.sex'))->using([1 => '男', '2' => '女']);
+        $grid->column('mobile', trans('admin.mobile'));
+        $grid->column('type', trans('admin.case_type'))->using(SpecialistAdvice::CATES);
         $grid->column('question', trans('admin.question'));
         $grid->column('measures', trans('admin.measures'));
         $grid->column('status', trans('admin.status'))->using(SpecialistAdvice::STATUSES)->label(['warning', 'primary']);
@@ -73,9 +77,12 @@ class SpecialistAdviceController extends AdminController
             return User::findOrFail($user_id)->nickname;
         });
         $show->field('spec_id', trans('admin.specialist'))->as(function ($spec_id) {
-            return Specialist::findOrFail($spec_id)->name;
+            return Laywer::findOrFail($spec_id)->name;
         });
-        $show->field('cate_id', trans('admin.cate_id'))->using(SpecialistAdvice::CATES);
+        $show->field('username', trans('admin.username'));
+        $show->field('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
+        $show->field('mobile', trans('admin.mobile'));
+        $show->field('type', trans('admin.case_type'))->using(SpecialistAdvice::CATES);
         $show->field('question', trans('admin.question'));
         $show->field('measures', trans('admin.measures'));
         $show->field('status', trans('admin.status'))->using(SpecialistAdvice::STATUSES);
@@ -99,19 +106,21 @@ class SpecialistAdviceController extends AdminController
             $form->display('user.nickname', trans('admin.nickname'));
             $form->display('question', trans('admin.question'));
             $form->editor('measures', trans('admin.measures'));
+            // 发站内信
+            $form->saved(function (Form $form) {
+                $data = $form->model()->toArray();
+                $this->notice->add('问题回复通知', '<br>您的提问：<br>' . $data['question'] . '<br>回复如下：<br>' . $data['measures'], $data['user_id'], 1);
+            });
         } else {
             $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
-            $form->select('spec_id', '专家')->options(Specialist::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray())->required();
-            $form->select('cate_id', '专家分类')->options(SpecialistAdvice::CATES)->required();
+            $form->select('spec_id', trans('admin.specialist'))->options(Laywer::where([['status', 1], ['is_deleted', 0], ['tag', 'specialist']])->pluck('name', 'id')->toArray())->required();
+            $form->text('username', trans('admin.username'))->required();
+            $form->radio('sex', trans('admin.sex'))->options(['1' => '男', '2' => '女'])->default(1)->required();
+            $form->mobile('mobile', trans('admin.mobile'))->required();
+            $form->select('type', trans('admin.case_type'))->options(SpecialistAdvice::CATES)->required();
             $form->text('question', trans('admin.question'))->required();
-            $form->editor('measures', trans('admin.measures'))->required();
+            $form->editor('measures', trans('admin.measures'));
         }
-
-        // 发站内信
-        $form->saved(function (Form $form) {
-            $data = $form->model()->toArray();
-            $this->notice->add('问题回复通知', '<br>您的提问：<br>' . $data['question'] . '<br>回复如下：<br>' . $data['measures'], $data['user_id'], 1);
-        });
 
         return $form;
     }
