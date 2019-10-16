@@ -63,6 +63,7 @@ class WechatController extends Controller
         //encryptedData 和 iv 在小程序端使用 wx.getUserInfo 获取
         $encryptedData = $request->input('encryptedData', '');
         $iv            = $request->input('iv', '');
+        $rowData       = json_decode($request->input('rowData', ''),true);
 
         $icode = $request->get('icode', '');
 
@@ -70,8 +71,6 @@ class WechatController extends Controller
 
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $info = $this->wxxcx->getLoginInfo($code);
-
-        Log::error('openid:', $info);
 
         //获取解密后的用户信息
         //response()->setStatusCode(201)->json();
@@ -82,7 +81,7 @@ class WechatController extends Controller
             try {
                 $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
             } catch (\Exception $exception) {
-                Log::channel('mysqllog')->error('获取session_key失败',['info' => $exception->getMessage()]);
+                Log::channel('mysqllog')->error('获取session_key失败', ['info' => $exception->getMessage()]);
             }
             if (isset($data['code'])) {
                 Log::error('服务器解密数据失败', $data);
@@ -102,12 +101,12 @@ class WechatController extends Controller
             $inviter = User::where('invitation_code', $icode)->first();
         }
 
-        if ($existUser = User::where('openid', $data['openid'])->first()) {
+        if ($existUser = User::where('openid', $info['openid'])->first()) {
             //$token = auth('api')->login($existUser);
             $token = JWTAuth::fromUser($existUser);
         } else {
             //$token = auth('api')->login($this->createUser($request, $data, $inviter->id));
-            $token = JWTAuth::fromUser($this->createUser($request, $data, $inviter->id));
+            $token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter->id));
         }
 
         if ($token) {
@@ -135,12 +134,6 @@ class WechatController extends Controller
         }
     }
 
-
-    public function test()
-    {
-
-    }
-
     /**
      * @param $request
      * @param $data
@@ -152,10 +145,10 @@ class WechatController extends Controller
         return User::create([
             'username'        => $data['openid'],
             'password'        => bcrypt($data['openid']),
-            'mobile'          => $data['mobile'],
+            //'mobile'          => $data['mobile'],
             'openid'          => $data['openid'],
             'nickname'        => $data['nickname'],
-            'avatar'          => $data['avatar'],
+            'avatar'          => $data['avatarUrl'],
             'gender'          => $data['gender'],
             'invitation_code' => substr(uniqid(), 7),
             'inviter_id'      => $inviter_id,
