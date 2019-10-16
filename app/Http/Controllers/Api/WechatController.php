@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Iwanli\Wxxcx\Wxxcx;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -68,13 +69,16 @@ class WechatController extends Controller
         file_put_contents(__DIR__.'/userinfo.txt',json_encode($request->all()));
 
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
-        $this->wxxcx->getLoginInfo($code);
+        $info = $this->wxxcx->getLoginInfo($code);
 
         //获取解密后的用户信息
         //response()->setStatusCode(201)->json();
         //return $this->wxxcx->getUserInfo($encryptedData, $iv);
         //$token = auth('api')->tokenById($this->createUser($request, json_decode($data))->user()->id);
         $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
+
+        Log::channel('mysqllog')->info('info:'.$info);
+        Log::channel('mysqllog')->info('data:'.$data);
 
         /*
          * 自定义生成token
