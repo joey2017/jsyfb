@@ -105,7 +105,7 @@ class WechatController extends Controller
             $token = auth('api')->login($existUser);
             //$token = JWTAuth::fromUser($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $rowData, $inviter->id));
+            $token = auth('api')->login($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
             //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
         }
 
