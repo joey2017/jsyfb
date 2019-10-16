@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
+use function App\Helpers\getSystemConfigByKey;
 use App\Http\Requests\Api\AnswerRecordRequest;
 use App\Http\Resources\Api\AnswerRecordResource;
+use App\Http\Resources\Api\AnswerScoreResource;
 use App\Models\AnswerList;
 use App\Models\AnswerRecord;
+use App\Models\AnswerScore;
+use App\Models\User;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
+use App\Services\ScoreService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,10 +22,13 @@ class AnswerRecordController extends Controller
 
     protected $notice;
 
-    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
+    protected $score;
+
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService, ScoreService $scoreService)
     {
         $this->ingots = $ingotsService;
         $this->notice = $noticeService;
+        $this->score  = $scoreService;
     }
 
     /**
@@ -79,8 +87,8 @@ class AnswerRecordController extends Controller
      *     @SWG\Parameter(name="answer_list_id",in="formData",description="请求参数-问题id",required=true,type="integer"),
      *     @SWG\Parameter(name="question",in="formData",description="请求参数-问题题目",required=true,type="string"),
      *     @SWG\Parameter(name="answer",in="formData",description="请求参数-问题答案",required=true,type="string"),
-     *     @SWG\Parameter(name="option",in="formData",description="请求参数-问题答案选项",required=true,type="string"),
-     *     @SWG\Parameter(name="date",in="formData",description="请求参数-回答日期",required=false,type="string",format="date"),
+     *     @SWG\Parameter(name="option",in="formData",description="请求参数-问题答案选项(A,B,C,D)",required=true,type="string"),
+     *     @SWG\Parameter(name="date",in="formData",description="请求参数-回答日期(年月日)",required=false,type="string",format="date"),
      *     @SWG\Response(response=201,description="操作成功"),
      *     @SWG\Response(response=400,description="参数错误"),
      *     @SWG\Response(response=401,description="未授权")
@@ -88,11 +96,17 @@ class AnswerRecordController extends Controller
      */
     public function store(AnswerRecordRequest $request)
     {
-        $answer = AnswerList::findOrFail($request->input('answer_list_id'));
+        $id     = $request->input('answer_list_id');
+        $answer = AnswerList::findOrFail($id);
+
+        if ($result = AnswerRecord::where([['user_id', Auth::guard('api')->id()], ['answer_list_id', $id], ['correct', $answer->correct]])->exists()) {
+            return $this->failed('你已回答过该问题，请勿重复作答', 400);
+        }
 
         $data = ['score' => 0, 'correct' => $answer->correct];
         if (strtoupper($answer->correct) == strtoupper($request->input('option'))) {
-            $data['score'] = 1;
+            $data['score'] = 1 * getSystemConfigByKey('score_proportion');
+            $this->score->update($data['score']);
             $this->ingots->limitation('game', '答题正确获得法宝');
             $this->notice->add('每日答题', '游戏闯关每日答题获得' . $this->ingots->getValueByKey('game')->value . '个法宝', Auth::guard('api')->id());
         }
@@ -104,5 +118,45 @@ class AnswerRecordController extends Controller
         ));
 
         return $this->setStatusCode(201)->success(['msg' => '提交成功', 'info' => $answer->correct]);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/answer/ranking",
+     *   tags={"Misc"},
+     *   summary="每日答题记录排行榜",
+     *   description="每日答题记录排行榜",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response=200,description="成功")
+     * )
+     */
+    public function ranking()
+    {
+        $scores = AnswerScore::where('date', date('Y-m-d'))->orderBy('score','desc')->paginate(10);
+        return AnswerScoreResource::collection($scores);
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/answer/totalranking",
+     *   tags={"Misc"},
+     *   summary="每日答题总分排行榜",
+     *   description="每日答题总分排行榜",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response=200,description="成功")
+     * )
+     */
+    public function totalranking()
+    {
+        return User::where([['status', 1], ['is_deleted', 0]])->select(['nickname', 'avatar', 'score'])->orderBy('score','desc')->paginate(10);
     }
 }

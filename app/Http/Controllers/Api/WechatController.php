@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\Api\UserResource;
 use App\Models\IngotsConfig;
 use App\Models\IngotsLog;
 use App\Models\User;
@@ -45,7 +46,7 @@ class WechatController extends Controller
 
     /**
      * @SWG\Post(
-     *   path="/getWxUserInfo",
+     *   path="/getwxuserinfo",
      *   tags={"Misc"},
      *   summary="小程序授权登录接口",
      *   description="小程序授权登录接口",
@@ -110,9 +111,9 @@ class WechatController extends Controller
             // 邀请人获得法宝
             if ($inviter) {
                 $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友注册获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
-                $this->notice->add('邀请好友注册获得法宝奖励','邀请好友注册获得'.IngotsConfig::getConfigByKey('invite')->value.'法宝');
+                $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id);
             }
-            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token]);
+            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)]);
         }
     }
 

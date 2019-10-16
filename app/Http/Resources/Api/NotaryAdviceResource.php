@@ -17,6 +17,8 @@ class NotaryAdviceResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'notary_id'  => $this->notary_id,
+            'notary_name'=> $this->notary()->first()->name ?? '',
             'username'   => $this->username,
             'sex'        => constant::SEXS[$this->sex],
             'mobile'     => $this->mobile,

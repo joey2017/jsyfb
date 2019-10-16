@@ -32,6 +32,7 @@ class UserResource extends JsonResource
             'ingots'          => $this->ingots,
             'invitation_code' => $this->invitation_code,
             'is_vip'          => $this->is_vip,
+            'score'           => $this->score,
             'status'          => User::getStatusName($this->status),
             'created_at'      => (string)$this->created_at,
             'updated_at'      => (string)$this->updated_at

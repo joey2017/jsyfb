@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\constant;
+use App\Models\Region\Province;
 use App\Models\BusinessCategory;
 use App\Models\Laywer;
 use Encore\Admin\Controllers\AdminController;
@@ -38,11 +40,11 @@ class LaywerController extends AdminController
         $grid->column('province_code', trans('admin.province_code'));
         $grid->column('city_code', trans('admin.city_code'));
         //$grid->column('expertise', trans('admin.expertise'));
-        $grid->column('cate_id', trans('admin.catetory'))->display(function ($cate_id) {
+        $grid->column('cate_id', trans('admin.category'))->display(function ($cate_id) {
             if (false === strpos($cate_id, ',')) {
                 return BusinessCategory::find($cate_id)->title;
             }
-            return implode(',',BusinessCategory::findMany(explode(',', $cate_id))->pluck('title')->toArray());
+            return implode(',', BusinessCategory::findMany(explode(',', $cate_id))->pluck('title')->toArray());
         });
         $grid->column('summary', trans('admin.summary'));
         $grid->column('status', trans('admin.status'))->display(function ($status) {
@@ -50,6 +52,19 @@ class LaywerController extends AdminController
         })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('PROVINCE_NAME','PROVINCE_CODE')->toArray());
+                $filter->in('cate_id', trans('admin.category'))->select(constant::CASE_TYPES);
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->between('created_at', trans('admin.created_at'))->datetime();
+            });
+        });
 
         return $grid;
     }
@@ -105,7 +120,7 @@ class LaywerController extends AdminController
             'city_code'     => '市',
             'district_code' => '区'
         ], '地域选择');
-        $form->multipleSelect('cate_id', trans('admin.catetory'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray());
+        $form->multipleSelect('cate_id', trans('admin.category'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray());
         //$form->text('expertise', trans('admin.expertise'));
         $form->text('summary', trans('admin.summary'));
 

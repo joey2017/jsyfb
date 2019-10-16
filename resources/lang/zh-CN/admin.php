@@ -119,7 +119,7 @@ return [
     'article_id'            => '文章Id',
     'path'                  => '路径',
     'cate_id'               => '分类Id',
-    'catetory'              => '分类',
+    'category'              => '分类',
     'book_title'            => '主题',
     'image_path'            => '图片路径',
     'picname'               => '图片名称',
