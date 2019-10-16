@@ -32,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'username', 'mobile', 'password', 'invitation_code', 'reg_ip', 'avatar', 'openid', 'gender', 'inviter_id'
+        'username', 'mobile', 'password', 'invitation_code', 'reg_ip', 'avatar', 'openid', 'gender', 'inviter_id', 'status', 'nickname'
     ];
 
     /**
@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
     const UNCERTIFIED = 0;
     const CERTIFIED   = 1;
 
-    const VERIFIEDS   = [self::UNCERTIFIED => '否', self::CERTIFIED => '是'];
+    const VERIFIEDS = [self::UNCERTIFIED => '否', self::CERTIFIED => '是'];
 
     public function getJWTIdentifier()
     {
