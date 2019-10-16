@@ -71,6 +71,8 @@ class WechatController extends Controller
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $info = $this->wxxcx->getLoginInfo($code);
 
+        Log::error('openid:', $info);
+
         //获取解密后的用户信息
         //response()->setStatusCode(201)->json();
         //return $this->wxxcx->getUserInfo($encryptedData, $iv);
