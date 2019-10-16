@@ -66,7 +66,7 @@ class WechatController extends Controller
 
         $icode = $request->get('icode', '');
 
-        file_put_contents(__DIR__.'/userinfo.txt',json_encode($request->all()));
+        //file_put_contents(__DIR__.'/userinfo.txt',json_encode($request->all()));
 
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $info = $this->wxxcx->getLoginInfo($code);
