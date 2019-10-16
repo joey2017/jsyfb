@@ -51,7 +51,7 @@ class MemberController extends Controller
      *   },
      *   @SWG\Parameter(in="formData",name="cost",type="integer",description="消费法宝数量",required=true),
      *   @SWG\Response(response="201", description="成功"),
-     *   @SWG\Response(response="401", description="未授权")
+     *   @SWG\Response(response="401", description="未授权"),
      *   @SWG\Response(response="500", description="服务器错误")
      * )
      */

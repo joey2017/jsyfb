@@ -7,7 +7,6 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Encore\Admin\Widgets\Table;
 
 class NotaryOfficeController extends AdminController
 {
@@ -29,19 +28,7 @@ class NotaryOfficeController extends AdminController
 
         $grid->column('id', __('Id'));
 
-        $grid->column('name', trans('admin.name'))->expand(function ($model) {
-            $comments = $model->notaryOfficeComments()->take(10)->get()->map(function ($comment) {
-                return $comment->only(['id', 'user_id', 'score', 'content', 'created_at']);
-                //return $comment->only(['id', 'nickname', 'score', 'content', 'created_at']);
-            });
-            /*
-            foreach ($comments as &$comment) {
-                $comment['user_id'] = User::findOrFail($comment['user_id'])->nickname;
-            }
-            */
-            return new Table(['ID', '用户', '评分', '内容', '评论时间'], $comments->toArray());
-        });
-
+        $grid->column('name', trans('admin.name'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('telephone', trans('admin.telephone'));
         //$grid->column('email', trans('admin.email'));
