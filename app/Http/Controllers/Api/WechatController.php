@@ -65,7 +65,7 @@ class WechatController extends Controller
         $iv            = $request->input('iv', '');
         $rowData       = json_decode($request->input('rowData', ''),true);
 
-        Log::error('rowData:',[$request->input('rowData', '')]);
+        Log::error('rowData:',[$request->all()]);
 
         $icode = $request->get('icode', '');
 
