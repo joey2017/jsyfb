@@ -116,7 +116,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/goods/{goods}', 'GoodsController@show')->name('goods.show');
 
         //小程序授权登录
-        Route::get('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
+        Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
         //关于我们展示
         Route::get('/feedbacks/create', 'FeedbackController@create')->name('feedback.create');
