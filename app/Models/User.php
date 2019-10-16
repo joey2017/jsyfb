@@ -153,7 +153,7 @@ class User extends Authenticatable implements JWTSubject
      * @param int $status
      * @return string
      */
-    public static function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         switch ($status) {
             case self::INVALID:

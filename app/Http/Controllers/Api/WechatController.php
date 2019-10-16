@@ -105,7 +105,7 @@ class WechatController extends Controller
             $token = auth('api')->login($existUser);
             //$token = JWTAuth::fromUser($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
+            $token = auth('api')->login($this->createUser($request, $info, $rowData,$inviter ? $inviter->id : 0));
             //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
         }
 
@@ -140,18 +140,19 @@ class WechatController extends Controller
      * @param null $inviter_id
      * @return $this|\Illuminate\Database\Eloquent\Model
      */
-    protected function createUser($request, $data, $inviter_id = null)
+    protected function createUser($request, $row, $data, $inviter_id = null)
     {
         return User::create([
-            'username'        => $data['openId'],
-            'password'        => bcrypt($data['openId']),
+            'username'        => $row['openid'],
+            'password'        => bcrypt($row['openid']),
             //'mobile'          => $data['mobile'],
-            'openid'          => $data['openId'],
+            'openid'          => $row['openid'],
             'nickname'        => $data['nickName'],
             'avatar'          => $data['avatarUrl'],
             'gender'          => $data['gender'],
             'invitation_code' => substr(uniqid(), 7),
             'inviter_id'      => $inviter_id,
+            'status'          => 1,
             'reg_ip'          => $request->getClientIp(),
         ]);
 
