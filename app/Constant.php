@@ -2,7 +2,7 @@
 
 namespace App;
 
-class constant {
+class Constant {
     // 案件类型
     const CASE_TYPES = [
         1 => '房地产',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\constant;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,6 +22,8 @@ class UserResource extends JsonResource
             'nickname'        => $this->nickname,
             'avatar'          => $this->avatar,
             'email'           => $this->email,
+            'openid'          => $this->openid,
+            'gender'          => Constant::SEXS[$this->gender],
             'mobile'          => $this->mobile,
             'inviter_id'      => $this->inviter_id,
             'descr'           => $this->descr,
