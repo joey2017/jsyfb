@@ -18,7 +18,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     Route::post('/users', 'UserController@store')->name('users.store');
     Route::post('/login', 'UserController@login')->name('users.login');
     Route::get('/banners', 'BannerController@index')->name('banners.index');
-
+    //小程序授权登录
+    Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
     Route::middleware('api.refresh')->group(function () {
         //用户留言
@@ -114,9 +115,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //商品列表
         Route::get('/goods', 'GoodsController@index')->name('goods.index');
         Route::get('/goods/{goods}', 'GoodsController@show')->name('goods.show');
-
-        //小程序授权登录
-        Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
         //关于我们展示
         Route::get('/feedbacks/create', 'FeedbackController@create')->name('feedback.create');

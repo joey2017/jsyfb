@@ -120,6 +120,12 @@ class WechatController extends Controller
         }
     }
 
+
+    public function test()
+    {
+
+    }
+
     /**
      * @param $request
      * @param $data
