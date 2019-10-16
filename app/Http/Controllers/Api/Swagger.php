@@ -4,7 +4,7 @@
  * @SWG\Swagger(
  *     basePath="/",
  *     host=L5_SWAGGER_CONST_HOST,
- *     schemes={"http"},
+ *     schemes={"http","https"},
  *     @SWG\Info(
  *         version="1.0",
  *         title="家有法宝接口文档",

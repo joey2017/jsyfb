@@ -11,8 +11,6 @@ use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Iwanli\Wxxcx\Wxxcx;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Facades\JWTFactory;
 
 class WechatController extends Controller
 {
