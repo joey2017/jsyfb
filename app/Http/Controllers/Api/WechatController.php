@@ -63,9 +63,9 @@ class WechatController extends Controller
         //encryptedData 和 iv 在小程序端使用 wx.getUserInfo 获取
         $encryptedData = $request->input('encryptedData', '');
         $iv            = $request->input('iv', '');
-        $rowData       = json_decode($request->input('rowData', ''),true);
+        $rawData       = json_decode($request->input('rawData', ''),true);
 
-        Log::error('rowData:',[$request->all()]);
+        Log::error('rawData:',[$request->all()]);
 
         $icode = $request->get('icode', '');
 
@@ -107,7 +107,7 @@ class WechatController extends Controller
             $token = auth('api')->login($existUser);
             //$token = JWTAuth::fromUser($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $info, $rowData,$inviter ? $inviter->id : 0));
+            $token = auth('api')->login($this->createUser($request, $info, $rawData,$inviter ? $inviter->id : 0));
             //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
         }
 
