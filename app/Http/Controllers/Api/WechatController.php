@@ -11,6 +11,7 @@ use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Iwanli\Wxxcx\Wxxcx;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class WechatController extends Controller
 {
@@ -64,7 +65,7 @@ class WechatController extends Controller
 
         $icode = $request->get('icode', '');
 
-        file_put_contents('userinfo.txt',json_encode($request->all()));
+        file_put_contents(__DIR__.'/userinfo.txt',json_encode($request->all()));
 
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $this->wxxcx->getLoginInfo($code);
@@ -87,9 +88,11 @@ class WechatController extends Controller
         }
 
         if ($existUser = User::where('openid', $data->openid)->first()) {
-            $token = auth('api')->login($existUser);
+            //$token = auth('api')->login($existUser);
+            $token = JWTAuth::fromUser($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $data, $inviter->id));
+            //$token = auth('api')->login($this->createUser($request, $data, $inviter->id));
+            $token = JWTAuth::fromUser($this->createUser($request, $data, $inviter->id));
         }
 
         if ($token) {
