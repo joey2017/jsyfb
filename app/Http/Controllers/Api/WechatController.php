@@ -77,8 +77,8 @@ class WechatController extends Controller
         //$token = auth('api')->tokenById($this->createUser($request, json_decode($data))->user()->id);
         $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
 
-        Log::channel('mysqllog')->info('info:'.$info);
-        Log::channel('mysqllog')->info('data:'.$data);
+        Log::channel('mysqllog')->error('info:'.$info);
+        Log::channel('mysqllog')->error('data:'.$data);
 
         /*
          * 自定义生成token
