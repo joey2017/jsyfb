@@ -74,7 +74,7 @@ class WechatController extends Controller
         //response()->setStatusCode(201)->json();
         //return $this->wxxcx->getUserInfo($encryptedData, $iv);
         //$token = auth('api')->tokenById($this->createUser($request, json_decode($data))->user()->id);
-        $data = json_decode($this->wxxcx->getUserInfo($encryptedData, $iv));
+        $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
 
         /*
          * 自定义生成token
@@ -87,7 +87,7 @@ class WechatController extends Controller
             $inviter = User::where('invitation_code', $icode)->first();
         }
 
-        if ($existUser = User::where('openid', $data->openid)->first()) {
+        if ($existUser = User::where('openid', $data['openid'])->first()) {
             //$token = auth('api')->login($existUser);
             $token = JWTAuth::fromUser($existUser);
         } else {
@@ -135,13 +135,13 @@ class WechatController extends Controller
     protected function createUser($request, $data, $inviter_id = null)
     {
         return User::create([
-            'username'        => $data->openid,
-            'password'        => bcrypt($data->openid),
-            'mobile'          => $data->mobile,
-            'openid'          => $data->openid,
-            'nickname'        => $data->nickname,
-            'avatar'          => $data->avatar,
-            'gender'          => $data->gender,
+            'username'        => $data['openid'],
+            'password'        => bcrypt($data['openid']),
+            'mobile'          => $data['mobile'],
+            'openid'          => $data['openid'],
+            'nickname'        => $data['nickname'],
+            'avatar'          => $data['avatar'],
+            'gender'          => $data['gender'],
             'invitation_code' => substr(uniqid(), 7),
             'inviter_id'      => $inviter_id,
             'reg_ip'          => $request->getClientIp(),
