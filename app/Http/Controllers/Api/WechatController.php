@@ -75,10 +75,18 @@ class WechatController extends Controller
         //response()->setStatusCode(201)->json();
         //return $this->wxxcx->getUserInfo($encryptedData, $iv);
         //$token = auth('api')->tokenById($this->createUser($request, json_decode($data))->user()->id);
-        $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
 
-        if (isset($data['code'])) {
-            Log::error('服务器解密数据失败',$data);
+        if (isset($info['session_key'])) {
+            try {
+                $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
+            } catch (\Exception $exception) {
+                Log::channel('mysqllog')->error('获取session_key失败',['info' => $exception->getMessage()]);
+            }
+            if (isset($data['code'])) {
+                Log::error('服务器解密数据失败', $data);
+            }
+        } else {
+            Log::error('获取session_key失败', $info);
         }
 
         /*
