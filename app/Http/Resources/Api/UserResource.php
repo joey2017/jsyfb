@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
-use App\constant;
+use App\Constant;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
