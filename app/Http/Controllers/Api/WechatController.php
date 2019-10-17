@@ -153,6 +153,7 @@ class WechatController extends Controller
             'avatar'          => $data['avatarUrl'],
             'gender'          => $data['gender'],
             'raw_data'        => json_encode($data),
+            'session_key'     => $row['session_key'],
             'invitation_code' => substr(uniqid(), 7),
             'inviter_id'      => $inviter_id,
             'status'          => 1,
