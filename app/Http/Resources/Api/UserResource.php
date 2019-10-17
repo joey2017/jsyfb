@@ -23,7 +23,7 @@ class UserResource extends JsonResource
             'avatar'          => $this->avatar,
             'email'           => $this->email,
             'openid'          => $this->openid,
-            'gender'          => Constant::SEXS[$this->gender ?? 0],
+            'gender'          => Constant::SEXS[$this->gender ?? 1],
             'mobile'          => $this->mobile,
             'inviter_id'      => $this->inviter_id,
             'descr'           => $this->descr,
