@@ -12,6 +12,11 @@ class AnswerListController extends Controller
      *   path="/answer/lists",
      *   tags={"Misc"},
      *   summary="每日答题库",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   description="答题列表",
      *   @SWG\Response(response=200,description="成功")
      * )
@@ -28,6 +33,11 @@ class AnswerListController extends Controller
      *   tags={"Misc"},
      *   summary="题目详情",
      *   description="题目详情",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="答题id"),
      *   @SWG\Response(response=200,description="成功")
      * )

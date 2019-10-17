@@ -12,6 +12,11 @@ class GoodsController extends Controller
      *   path="/goods",
      *   tags={"User"},
      *   summary="商品列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response="200",description="获取商品列表")
      *
      * )
@@ -28,6 +33,11 @@ class GoodsController extends Controller
      *   tags={"User"},
      *   summary="商品详情",
      *   description="商品详情",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="商品id"),
      *   @SWG\Response(response=200,description="成功")
      * )

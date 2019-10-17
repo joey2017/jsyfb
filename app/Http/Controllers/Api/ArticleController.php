@@ -18,6 +18,11 @@ class ArticleController extends Controller
      *   tags={"MainPage"},
      *   summary="热门资讯",
      *   description="热门资讯列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -33,6 +38,11 @@ class ArticleController extends Controller
      *   tags={"MainPage"},
      *   summary="热门资讯详情",
      *   description="热门资讯详情",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Parameter(name="id", type="integer", required=true, in="path",description="资讯id"),
      *   @SWG\Response(response=200,description="成功")
      * )

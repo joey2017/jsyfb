@@ -13,6 +13,11 @@ class LegalBookCategoryController extends Controller
      *   tags={"LegalBook"},
      *   summary="家事宝典分类列表",
      *   description="家事宝典分类列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -28,6 +33,11 @@ class LegalBookCategoryController extends Controller
      *   summary="家事宝典分类详情",
      *   tags={"LegalBook"},
      *   produces={"application/json"},
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Parameter(in="path",name="id",type="string",description="家事宝典分类id",required=true),
      *   @SWG\Response(response="200", description="成功"),
      *   @SWG\Response(response="401", description="未授权"),

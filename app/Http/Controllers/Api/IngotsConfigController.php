@@ -13,6 +13,11 @@ class IngotsConfigController extends Controller
      *   tags={"MainPage"},
      *   summary="法宝获得渠道列表",
      *   description="法宝获得渠道列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */

@@ -15,6 +15,11 @@ class BusinessCategoryController extends Controller
      *   tags={"Tool"},
      *   description="业务分类",
      *   produces={"application/json"},
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response="200", description="成功"),
      *   @SWG\Response(response="401", description="未授权"),
      *   @SWG\Response(response="405", description="访问方式不正确")
