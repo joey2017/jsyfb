@@ -145,7 +145,7 @@ class WechatController extends Controller
     protected function createUser($request, $row, $data, $inviter_id = null)
     {
         return User::create([
-            'username'        => $row['openid'],
+            'username'        => $row['openid'].substr(uniqid(), 7),
             'password'        => bcrypt($row['openid']),
             //'mobile'          => $data['mobile'],
             'openid'          => $row['openid'],
