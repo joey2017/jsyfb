@@ -12,7 +12,7 @@
 以后大家就在这里愉快的对接口把!<br>
 状态码描述：200：OK，标准的响应成功状态码<br>
 201：Object created，创建、修改成功<br>
-202 Accepted：表示一个请求已经进入后台排队（异步任务）<br>
+202：Accepted：表示一个请求已经进入后台排队（异步任务）<br>
 204：No content，用户删除数据成功<br>
 206：Partial content，返回部分资源时使用<br>
 400：Bad request，请求验证失败<br>
