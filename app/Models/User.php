@@ -93,19 +93,23 @@ class User extends Authenticatable implements JWTSubject
     /*
      * 访问器
      */
+    /*
     public function getMobileAttribute($value)
     {
         //return $this->__toString($value);
     }
+    */
 
     /*
     * @param  string  $value
     * @return void
     */
+    /*
     public function setUsernameAttribute($value)
     {
         //$this->attributes['username'] = strtolower($value);
     }
+    */
 
     /**
      * 数组中的属性会被展示。
