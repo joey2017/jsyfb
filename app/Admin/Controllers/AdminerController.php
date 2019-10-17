@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Specialist;
+use App\Models\Laywer;
 use Encore\Admin\Controllers\UserController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -27,7 +27,7 @@ class AdminerController extends UserController
         $grid->column('name', trans('admin.name'));
         $grid->column('roles', trans('admin.roles'))->pluck('name')->label();
         $grid->column('related_spec_id', trans('admin.related_spec_id'))->display(function ($related_spec_id) {
-            return $related_spec_id ? Specialist::findOrFail($related_spec_id)->name : '';
+            return $related_spec_id ? Laywer::findOrFail($related_spec_id)->name : '';
         });
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -78,7 +78,7 @@ class AdminerController extends UserController
             return $permission->pluck('name');
         })->label();
         $show->field('related_spec_id', trans('admin.related_spec_id'))->as(function ($related_spec_id) {
-            return $related_spec_id ? Specialist::findOrFail($related_spec_id)->name : '';
+            return $related_spec_id ? Laywer::findOrFail($related_spec_id)->name : '';
         });
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
@@ -120,7 +120,7 @@ class AdminerController extends UserController
         $form->multipleSelect('roles', trans('admin.roles'))->options($roleModel::all()->pluck('name', 'id'));
         $form->multipleSelect('permissions', trans('admin.permissions'))->options($permissionModel::all()->pluck('name', 'id'));
 
-        $form->select('related_spec_id', trans('admin.related_spec_id'))->options(Specialist::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray());
+        $form->select('related_spec_id', trans('admin.related_spec_id'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray());
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

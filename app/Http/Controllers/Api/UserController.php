@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\UserRequest;
+use App\Http\Resources\Api\AttentionResource;
 use App\Http\Resources\Api\BrowseHistoryResource;
 use App\Http\Resources\Api\UserResource;
+use App\Models\Attention;
 use App\Models\BrowseHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -197,6 +199,22 @@ class UserController extends Controller
         }
         $historys = BrowseHistory::where('user_id',$user->id)->paginate(5);
         return BrowseHistoryResource::collection($historys);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/attentions",
+     *   tags={"User"},
+     *   summary="关注律师列表",
+     *   @SWG\Response(response="200",description="获取律师列表")
+     *
+     * )
+     */
+    public function attention()
+    {
+        $attentions = Attention::where('user_id',Auth::guard('api')->id())->paginate(5);
+        return AttentionResource::collection($attentions);
     }
 
 }

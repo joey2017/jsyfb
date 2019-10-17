@@ -15,7 +15,6 @@ Route::group([
     Route::get('articles/comments/getcontent', 'ArticleCommentController@getContent');
     $router->resources([
         'personnel/laywers'         => LaywerController::class,
-        'personnel/specialists'     => SpecialistController::class,
         'personnel/categorys'       => BusinessCategoryController::class,
         'personnel/answers/records' => AnswerRecordController::class,
         'personnel/lists'           => UserController::class,
@@ -24,6 +23,7 @@ Route::group([
         'personnel/reservations'    => ReservationController::class,
         'personnel/authentications' => AuthenticationController::class,
         'personnel/customers'       => CustomerController::class,
+        'personnel/attentions'      => AttentionController::class,
         //'funds/balances/logs'       => BalanceLogController::class,
         //'funds/balances'            => BalanceController::class,
         'funds/ingots/logs'         => IngotsLogController::class,

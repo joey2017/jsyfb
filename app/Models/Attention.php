@@ -13,13 +13,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Balance query()
  * @mixin \Eloquent
  */
-class ArticleShare extends Model
+class Attention extends Model
 {
-    //
     /**
      * @var string
      */
-    protected $table = 'jyfb_article_share';
+    protected $table = 'jyfb_attention';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['user_id', 'laywer_id', 'created_at'];
 
     /**
      * @var bool
@@ -27,9 +31,12 @@ class ArticleShare extends Model
     public $timestamps = false;
 
     /**
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public $fillable = ['user_id', 'article_id'];
+    public function laywer()
+    {
+        return $this->belongsTo(Laywer::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -37,13 +44,5 @@ class ArticleShare extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function article()
-    {
-        return $this->belongsTo(Article::class);
     }
 }

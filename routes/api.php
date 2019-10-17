@@ -80,7 +80,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //公证处列表
         Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
         //公证处评论删除
-        Route::delete('/notarys-offices/comments/{comment}', 'NotaryOfficeCommentController@destory')->name('notarys-offices-comments.destory');
+        Route::delete('/notarys-offices/comments/{comment}', 'NotaryOfficeCommentController@destroy')->name('notarys-offices-comments.destroy');
 
         //答题表
         Route::get('/answer/lists', 'AnswerListController@index')->name('answer-lists.index');
@@ -134,6 +134,10 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/notarys/advices', 'NotaryAdviceController@index')->name('notarys-advices.index');
         Route::post('/notarys/advices', 'NotaryAdviceController@store')->name('notarys-advices.store');
 
+        //关注律师
+        Route::post('/attentions','AttentionController@store')->name('attention.store');
+        //取消关注律师
+        Route::delete('/attentions/{attention}','AttentionController@destroy')->name('attention.destroy');
 
     });
 });
