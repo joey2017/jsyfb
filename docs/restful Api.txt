@@ -31,15 +31,17 @@
 500：系统错误
 
 200：OK，标准的响应成功状态码
-201：Object created，用于 store 操作
-204：No content，操作执行成功，但是没有返回任何内容
+201：Object created，创建、修改成功
+202 Accepted：表示一个请求已经进入后台排队（异步任务）
+204：No content，用户删除数据成功
 206：Partial content，返回部分资源时使用
 400：Bad request，请求验证失败
-401：Unauthorized，用户需要认证
+401：Unauthorized，表示用户没有权限（令牌、用户名、密码错误）
 403：Forbidden，用户认证通过但是没有权限执行该操作
 404：Not found，请求资源不存在
-500：Internal server error，通常我们并不会显示返回这个状态码，除非程序异常中断
-503：Service unavailable，一般也不会显示返回，通常用于排查问题用
+406：Not Acceptable，用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）
+410：Gone，用户请求的资源被永久删除，且不会再得到的。
+500：Internal server error，服务器发生错误，用户将无法判断发出的请求是否成功
 
 
 200 OK - [GET]：服务器成功返回用户请求的数据。
