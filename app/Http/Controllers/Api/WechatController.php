@@ -53,6 +53,8 @@ class WechatController extends Controller
      *   @SWG\Parameter(name="code", type="string", required=true, in="formData", description="临时登录code"),
      *   @SWG\Parameter(name="encryptedData", type="string", required=true, in="formData", description="加密用户信息"),
      *   @SWG\Parameter(name="iv", type="string", required=true, in="formData", description="iv"),
+     *   @SWG\Parameter(name="rawData", type="string", required=true, in="formData", description="用户微信原始信息"),
+     *   @SWG\Parameter(name="signature", type="string", required=true, in="formData", description="数据签名"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -64,8 +66,6 @@ class WechatController extends Controller
         $encryptedData = $request->input('encryptedData', '');
         $iv            = $request->input('iv', '');
         $rawData       = json_decode($request->input('rawData', ''),true);
-
-        Log::error('rawData:',[$request->all()]);
 
         $icode = $request->get('icode', '');
 
