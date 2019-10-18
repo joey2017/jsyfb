@@ -57,6 +57,10 @@ Route::group([
 
     ]);
 
+    //文章点评
+    $router->get('articles/addcomments/{id}', 'ArticleController@addcomments');
+    $router->match(['get', 'put'], 'articles/savecomments/{id}', 'ArticleController@savecomments');
+
     $router->get('forms/settings', 'FormController@settings');
     $router->get('forms/register', 'FormController@register');
 

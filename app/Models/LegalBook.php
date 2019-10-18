@@ -12,6 +12,22 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string|null $title 主题
+ * @property int|null $cate_id 宝典分类id
+ * @property string|null $detail 内容
+ * @property int|null $status 状态：0禁用1正常
+ * @property int|null $is_deleted 是否删除：0否1是
+ * @property \Illuminate\Support\Carbon|null $created_at 购买时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereCateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereDetail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereIsDeleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereUpdatedAt($value)
  */
 class LegalBook extends Model
 {

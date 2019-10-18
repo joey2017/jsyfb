@@ -39,13 +39,15 @@ class LaywerController extends AdminController
         $grid->column('company', trans('admin.company'));
         $grid->column('province_code', trans('admin.province_code'));
         $grid->column('city_code', trans('admin.city_code'));
-        //$grid->column('expertise', trans('admin.expertise'));
+        $grid->column('expertise', trans('admin.expertise'));
+        /*
         $grid->column('cate_id', trans('admin.category'))->display(function ($cate_id) {
             if (false === strpos($cate_id, ',')) {
                 return BusinessCategory::find($cate_id)->title;
             }
             return implode(',', BusinessCategory::findMany(explode(',', $cate_id))->pluck('title')->toArray());
         });
+        */
         $grid->column('summary', trans('admin.summary'));
         $grid->column('status', trans('admin.status'))->display(function ($status) {
             return Laywer::getStatusName($status);
@@ -89,8 +91,8 @@ class LaywerController extends AdminController
         $show->field('company', trans('admin.company'));
         $show->field('province_code', trans('admin.province_code'));
         $show->field('city_code', trans('admin.city_code'));
-        //$show->field('expertise', trans('admin.expertise'));
-        $show->field('cate_id', trans('admin.cate_id'));
+        $show->field('expertise', trans('admin.expertise'));
+        //$show->field('cate_id', trans('admin.cate_id'));
         $show->field('summary', trans('admin.summary'));
         $show->field('status', trans('admin.status'))->using(Laywer::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
@@ -121,7 +123,7 @@ class LaywerController extends AdminController
             'district_code' => '区'
         ], '地域选择');
         $form->multipleSelect('cate_id', trans('admin.category'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray());
-        //$form->text('expertise', trans('admin.expertise'));
+        $form->text('expertise', trans('admin.expertise'))->placeholder('请输入已选择分类里面的中文，如房地产，公司诉讼');
         $form->text('summary', trans('admin.summary'));
 
         return $form;

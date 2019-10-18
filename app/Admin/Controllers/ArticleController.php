@@ -2,14 +2,21 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Post\Comments;
 use App\Models\Article;
+use App\Models\ArticleComment;
+use App\Models\Laywer;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use Encore\Admin\Widgets\Table;
+use Illuminate\Support\Facades\URL;
 
 class ArticleController extends AdminController
 {
@@ -34,7 +41,12 @@ class ArticleController extends AdminController
             $comments = $model->articleComments()->take(10)->get()->map(function ($comment) {
                 return $comment->only(['id', 'laywer_id', 'interpretation', 'measures', 'content', 'created_at']);
             });
-            return new Table(['ID', '专家', '点评', '措施', '内容', '评论时间'], $comments->toArray());
+
+            $data = $comments->all();
+            foreach ($data as &$item) {
+                $item['laywer_id'] = Laywer::findOrFail($item['laywer_id'])->name;
+            }
+            return new Table(['ID', '专家', '点评', '措施', '内容', '评论时间'], $data);
         });
         $grid->column('content', trans('admin.content'));
         $grid->column('like_count', trans('admin.like_count'));
@@ -52,6 +64,10 @@ class ArticleController extends AdminController
         });
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->actions(function ($actions) {
+            $actions->add(new Comments);
+        });
 
         return $grid;
     }
@@ -102,5 +118,63 @@ class ArticleController extends AdminController
 //        });
 
         return $form;
+    }
+
+
+    /**
+     * @param $id
+     * @return Form
+     */
+    protected function commentform($id)
+    {
+        $form = new Form(Article::findOrFail($id));
+
+        $form->text('title', trans('admin.title'))->readonly();
+        $form->textarea('content', trans('admin.content'))->readonly();
+        $form->textarea('interpretation', trans('admin.interpretation'))->required();
+        $form->textarea('measures', trans('admin.measures'))->required();
+        $form->editor('comment_content', trans('admin.comment_content'));
+
+        $form->setAction('/admin/articles/savecomments/' . $id);
+
+        return $form;
+    }
+
+    /**
+     * @param $id
+     * @param Content $content
+     * @return Content
+     */
+    public function addcomments($id, Content $content)
+    {
+        return $content
+            ->title('专家点评')
+            ->description(trans('admin.create'))
+            ->body($this->commentform($id)->edit($id));
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function savecomments($id, Request $request)
+    {
+        if (!Admin::user()->isRole('laywer')) {
+            admin_error('保存失败', '你没有权限访问');
+            return back();
+        } else {
+            $data = [
+                'article_id'     => $id,
+                'interpretation' => $request->input('interpretation'),
+                'measures'       => $request->input('measures'),
+                'content'        => $request->input('comment_content'),
+                'laywer_id'      => Admin::user()->id,
+            ];
+
+            ArticleComment::create($data);
+
+            return redirect('/admin/articles/comments');
+        }
     }
 }

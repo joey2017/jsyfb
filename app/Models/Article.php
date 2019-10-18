@@ -14,6 +14,31 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int|null $admin_id 发布者id
+ * @property string|null $title 标题
+ * @property string|null $content 内容
+ * @property string|null $images 缩略图/封面图
+ * @property int|null $browse_count 浏览次数
+ * @property int|null $like_count 点赞数
+ * @property int|null $share_count 分享次数
+ * @property int $status 状态：0禁用1正常
+ * @property int $is_deleted 是否删除：0否1是
+ * @property \Illuminate\Support\Carbon|null $created_at 注册时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 修改时间
+ * @property-read \Encore\Admin\Auth\Database\Administrator|null $adminer
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereAdminId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereBrowseCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereImages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereIsDeleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereLikeCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereShareCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereUpdatedAt($value)
  */
 class Article extends Model
 {

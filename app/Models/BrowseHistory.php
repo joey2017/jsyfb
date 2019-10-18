@@ -13,6 +13,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int|null $user_id 用户id
+ * @property int|null $article_id 文章id
+ * @property int|null $status 状态：0禁用1正常
+ * @property int|null $is_deleted 是否删除：0否1是
+ * @property \Illuminate\Support\Carbon|null $created_at 创建时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 修改时间
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereArticleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereIsDeleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BrowseHistory whereUserId($value)
  */
 class BrowseHistory extends Model
 {

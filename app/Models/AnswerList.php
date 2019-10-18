@@ -11,6 +11,28 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string|null $title 题目
+ * @property string|null $A 选项A
+ * @property string|null $B 选项B
+ * @property string|null $C 选项C
+ * @property string|null $D 选项D
+ * @property string|null $correct 正确答案
+ * @property int $status 状态：0禁用1正常
+ * @property int $is_deleted 是否删除：0否1是
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereA($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereB($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereC($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereCorrect($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereD($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereIsDeleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerList whereUpdatedAt($value)
  */
 class AnswerList extends Model
 {

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BalanceLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BalanceLog query()
  * @mixin \Eloquent
+ * @property-read \App\Models\User $user
  */
 class BalanceLog extends Model
 {

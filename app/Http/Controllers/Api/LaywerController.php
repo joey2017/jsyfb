@@ -29,21 +29,32 @@ class LaywerController extends Controller
      */
     public function index(Request $request)
     {
-        /*
-        $data = $request->all();
+        $data  = $request->all();
         $model = DB::table((new Laywer())->getTable());
+
+        if (isset($data['province_code'])) {
+            $model->where('province_code', $data['province_code']);
+        }
+
         if (isset($data['city_code'])) {
             $model->where('city_code', $data['city_code']);
         }
 
         if (isset($data['cate_id'])) {
-            $model->whereRaw('cate_id REGEXP ?', [implode('|',$data['cate_id'])]);
+            $model->whereRaw('cate_id REGEXP ?', [is_array($data['cate_id']) ? implode('|', $data['cate_id']) : $data]);
         }
 
-        $laywers = $model->paginate(5);
-        */
-        $laywers = Laywer::paginate(5);
-        return LaywerResource::collection($laywers);
+        $laywers = $model->paginate(5)->toArray();
+
+        if (count($laywers['data']) > 0) {
+            foreach ($laywers['data'] as &$laywer) {
+                $laywer->status = Laywer::getStatusName($laywer->status);
+            }
+        }
+
+        return $laywers;
+        //$laywers = Laywer::paginate(5);
+        //return LaywerResource::collection($laywers);
     }
 
     /**

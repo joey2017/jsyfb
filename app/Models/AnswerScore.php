@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Notice query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int|null $user_id 用户id
+ * @property float|null $score 答题获得总分数
+ * @property string|null $date 日期
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerScore whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerScore whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerScore whereScore($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerScore whereUserId($value)
  */
 class AnswerScore extends Model
 {

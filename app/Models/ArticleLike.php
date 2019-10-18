@@ -13,6 +13,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int $user_id 用户id
+ * @property int $article_id 文章id
+ * @property string|null $created_at 创建时间
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike whereArticleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ArticleLike whereUserId($value)
  */
 class ArticleLike extends Model
 {

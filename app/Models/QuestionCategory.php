@@ -17,6 +17,26 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string|null $title 主题
+ * @property int|null $parent_id 父级id
+ * @property string|null $path 路径
+ * @property int $order
+ * @property string $logo
+ * @property int|null $status 状态：0禁用1正常
+ * @property int|null $is_deleted 是否删除：0否1是
+ * @property \Illuminate\Support\Carbon|null $created_at 购买时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereIsDeleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\QuestionCategory whereUpdatedAt($value)
  */
 class QuestionCategory extends Model
 {

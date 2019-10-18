@@ -30,7 +30,7 @@ class ArticleCommentController extends AdminController
     {
         $grid = new Grid(new ArticleComment);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('article.title', trans('admin.title'));
         $grid->column('article.content', trans('admin.content'));
         $grid->column('laywer.name', trans('admin.laywer'));

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CouponGrant newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\CouponGrant query()
  * @mixin \Eloquent
+ * @property-read \App\Models\Coupon $coupon
+ * @property-read \App\Models\User $user
  */
 class CouponGrant extends Model
 {

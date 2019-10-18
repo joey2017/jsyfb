@@ -11,6 +11,27 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property int|null $user_id 用户id
+ * @property int|null $cost 数量
+ * @property string|null $descr 描述
+ * @property int|null $type 类型：1增加2减少
+ * @property int $status 状态：0禁用1正常
+ * @property int $is_deleted 是否删除：0否1是
+ * @property string|null $remark 备注
+ * @property \Illuminate\Support\Carbon|null $created_at 添加时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereDescr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereIsDeleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereRemark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\IngotsLog whereUserId($value)
  */
 class IngotsLog extends Model
 {

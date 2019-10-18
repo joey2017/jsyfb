@@ -4,6 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Exchange
+ *
+ * @property int $id
+ * @property int|null $user_id 用户id
+ * @property int|null $goods_id 兑换的商品id
+ * @property int|null $ingots 使用法宝数量
+ * @property int|null $quantity 兑换商品数量
+ * @property int|null $status 状态：0禁用1正常
+ * @property string|null $created_at 创建时间
+ * @property-read \App\Models\Goods|null $goods
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereGoodsId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereIngots($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Exchange extends Model
 {
     /**
