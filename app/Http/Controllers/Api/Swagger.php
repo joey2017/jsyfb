@@ -21,6 +21,7 @@
 403：Forbidden，用户认证通过但是没有权限执行该操作<br>
 404：Not found，请求资源不存在<br>
 406：Not Acceptable，用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）<br>
+422：Unprocesable entity，用户未登录 <br>
 410：Gone，用户请求的资源被永久删除，且不会再得到的。<br>
 500：Internal server error，服务器发生错误，用户将无法判断发出的请求是否成功<br>",
  *         @SWG\Contact(name="joey", email="zongjun.li@outlook.com"),
