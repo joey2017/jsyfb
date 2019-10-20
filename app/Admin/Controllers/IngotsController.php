@@ -31,9 +31,9 @@ class IngotsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('quantity', trans('admin.quantity'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
             return Ingots::getStatusName($status);
-        })->label(['warning','primary']);
+        })->label(['warning', 'primary']);
         $grid->column('expire_time', trans('admin.expire_time'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -75,6 +75,25 @@ class IngotsController extends AdminController
         $form->number('quantity', trans('admin.quantity'))->required();
         $form->datetime('expire_time', trans('admin.expire_time'))->default(date('Y-m-d H:i:s'));
 
+        $user_id  = null;
+        $quantity = null;
+        $form->saving(function (Form $form) {
+            if (Ingots::findOrFail($form->user_id)) {
+                return admin_error('新增失败', '不允许新增重复的用户法宝数据');
+            }
+        });
+        $form->saved(function (Form $form) {
+            dump($form->model()->user_id);
+            $user_id  = $form->model()->user_id;
+            $quantity = $form->model()->quantity;
+            return User::where('id', $user_id)->first()->update(['ingots' => $quantity]);
+        });
+
+        /*
+        $form->deleted(function () use ($user_id, $quantity) {
+            return User::findOrFail($user_id)->update(['ingots' => $quantity]);
+        });
+        */
         return $form;
     }
 }
