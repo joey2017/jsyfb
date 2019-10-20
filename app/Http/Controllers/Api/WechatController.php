@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Iwanli\Wxxcx\Wxxcx;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class WechatController extends Controller
 {
@@ -65,7 +64,7 @@ class WechatController extends Controller
         //encryptedData 和 iv 在小程序端使用 wx.getUserInfo 获取
         $encryptedData = $request->input('encryptedData', '');
         $iv            = $request->input('iv', '');
-        $rawData       = json_decode($request->input('rawData', ''),true);
+        $rawData       = json_decode($request->input('rawData', ''), true);
 
         $icode = $request->get('icode', '');
 
@@ -82,6 +81,7 @@ class WechatController extends Controller
         if (isset($info['session_key'])) {
             try {
                 $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
+                Log::channel('mysqllog')->info('解密数据为：', $data);
             } catch (\Exception $exception) {
                 Log::channel('mysqllog')->error('获取session_key失败', ['info' => $exception->getMessage()]);
             }
@@ -107,7 +107,7 @@ class WechatController extends Controller
             $token = auth('api')->login($existUser);
             //$token = JWTAuth::fromUser($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $info, $rawData,$inviter ? $inviter->id : 0));
+            $token = auth('api')->login($this->createUser($request, $info, $rawData, $inviter ? $inviter->id : 0));
             //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
         }
 
@@ -134,6 +134,7 @@ class WechatController extends Controller
             }
             return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)]);
         }
+        return $this->failed('登录失败,请稍后重试');
     }
 
     /**
