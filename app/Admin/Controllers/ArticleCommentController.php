@@ -30,6 +30,12 @@ class ArticleCommentController extends AdminController
     {
         $grid = new Grid(new ArticleComment);
 
+        $grid->disableCreateButton();
+
+        if (Admin::user()->isRole('laywer')) {
+            $grid->model()->where('laywer_id', Admin::user()->related_spec_id);
+        }
+
         $grid->column('id', __('Id'))->sortable();
         $grid->column('article.title', trans('admin.title'));
         $grid->column('article.content', trans('admin.content'));
@@ -39,6 +45,11 @@ class ArticleCommentController extends AdminController
         $grid->column('content', trans('admin.comment_content'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->like('article.title', trans('admin.title'));
+        });
 
         return $grid;
     }
