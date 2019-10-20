@@ -23,6 +23,11 @@ class UserController extends Controller
      *     description="用户资料列表",
      *     operationId="user.index",
      *     produces={"application/json"},
+     *     security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *     },
      *     @SWG\Parameter(name="page",in="query",description="分页编号,默认1",type="integer"),
      *     @SWG\Parameter(name="pagesize",in="query",description="每页显示条数,默认10",type="integer"),
      *     @SWG\Response(
@@ -207,6 +212,11 @@ class UserController extends Controller
      *   path="/attentions",
      *   tags={"User"},
      *   summary="关注律师列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response="200",description="获取律师列表")
      *
      * )

@@ -18,6 +18,11 @@ class NotaryAdviceController extends Controller
      *   tags={"Tool"},
      *   summary="公证处咨询列表",
      *   description="公证处咨询列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
