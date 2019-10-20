@@ -74,7 +74,7 @@ class WechatController extends Controller
         if (isset($userInfo['session_key'])) {
             try {
                 $decryData = $this->wxxcx->getUserInfo($encryptedData, $iv);
-                Log::error('用户解密数据为：', ['info' => $decryData]);
+                Log::info('用户解密数据为：', ['info' => $decryData]);
             } catch (\Exception $exception) {
                 Log::error('解密用户数据失败', ['error' => $exception->getMessage()]);
             }
