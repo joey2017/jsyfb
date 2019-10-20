@@ -59,55 +59,40 @@ class WechatController extends Controller
      */
     public function getWxUserInfo(Request $request)
     {
-        //code 在小程序端使用 wx.login 获取
-        $code = $request->input('code', '');
         //encryptedData 和 iv 在小程序端使用 wx.getUserInfo 获取
+        $code          = $request->input('code', '');
         $encryptedData = $request->input('encryptedData', '');
         $iv            = $request->input('iv', '');
+        $icode         = $request->get('icode', '');
         $rawData       = json_decode($request->input('rawData', ''), true);
 
-        $icode = $request->get('icode', '');
-
-        //file_put_contents(__DIR__.'/userinfo.txt',json_encode($request->all()));
-
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
-        $info = $this->wxxcx->getLoginInfo($code);
+        $userInfo = $this->wxxcx->getLoginInfo($code);
 
+        $decryData = [];
         //获取解密后的用户信息
-        //response()->setStatusCode(201)->json();
-        //return $this->wxxcx->getUserInfo($encryptedData, $iv);
-        //$token = auth('api')->tokenById($this->createUser($request, json_decode($data))->user()->id);
-
-        if (isset($info['session_key'])) {
+        if (isset($userInfo['session_key'])) {
             try {
-                $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
-                Log::channel('mysqllog')->info('解密数据为：', ['error' => $data]);
+                $decryData = $this->wxxcx->getUserInfo($encryptedData, $iv);
+                Log::error('用户解密数据为：', ['info' => $decryData]);
             } catch (\Exception $exception) {
-                Log::channel('mysqllog')->error('获取session_key失败', ['info' => $exception->getMessage()]);
-            }
-            if (isset($data['code'])) {
-                Log::error('服务器解密数据失败', $data);
+                Log::error('解密用户数据失败', ['error' => $exception->getMessage()]);
             }
         } else {
-            Log::error('获取session_key失败', $info);
+            Log::error('获取session_key失败', $userInfo);
         }
 
-        /*
-         * 自定义生成token
-        $payload = JWTFactory::make(['openid' => $data->openid]);
-        $token = JWTAuth::encode($payload);
-        */
         $inviter = '';
 
         if ($icode !== '') {
             $inviter = User::where('invitation_code', $icode)->first();
         }
 
-        if ($existUser = User::where('openid', $info['openid'])->first()) {
+        if ($existUser = User::where('openid', $userInfo['openid'])->first()) {
             $token = auth('api')->login($existUser);
             //$token = JWTAuth::fromUser($existUser);
         } else {
-            $token = auth('api')->login($this->createUser($request, $info, $rawData, $inviter ? $inviter->id : 0));
+            $token = auth('api')->login($this->createUser($request, $userInfo, $decryData['openId'] ? $decryData : $rawData, $inviter ? $inviter->id : 0));
             //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
         }
 
