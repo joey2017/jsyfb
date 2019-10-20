@@ -81,7 +81,7 @@ class WechatController extends Controller
         if (isset($info['session_key'])) {
             try {
                 $data = $this->wxxcx->getUserInfo($encryptedData, $iv);
-                Log::channel('mysqllog')->info('解密数据为：', $data);
+                Log::channel('mysqllog')->info('解密数据为：', ['error' => $data]);
             } catch (\Exception $exception) {
                 Log::channel('mysqllog')->error('获取session_key失败', ['info' => $exception->getMessage()]);
             }
