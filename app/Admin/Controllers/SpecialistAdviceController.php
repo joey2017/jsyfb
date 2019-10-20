@@ -2,9 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Constant;
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Laywer;
-use App\Models\Specialist;
 use App\Models\SpecialistAdvice;
 use App\Models\User;
 use App\Services\NoticeService;
@@ -52,7 +52,7 @@ class SpecialistAdviceController extends AdminController
         $grid->column('username', trans('admin.username'));
         $grid->column('sex', trans('admin.sex'))->using([1 => '男', '2' => '女']);
         $grid->column('mobile', trans('admin.mobile'));
-        $grid->column('type', trans('admin.case_type'))->using(SpecialistAdvice::CATES);
+        $grid->column('type', trans('admin.case_type'))->using(Constant::CASE_TYPES);
         $grid->column('question', trans('admin.question'));
         $grid->column('measures', trans('admin.measures'));
         $grid->column('status', trans('admin.status'))->using(SpecialistAdvice::STATUSES)->label(['warning', 'primary']);
@@ -82,7 +82,7 @@ class SpecialistAdviceController extends AdminController
         $show->field('username', trans('admin.username'));
         $show->field('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
         $show->field('mobile', trans('admin.mobile'));
-        $show->field('type', trans('admin.case_type'))->using(SpecialistAdvice::CATES);
+        $show->field('type', trans('admin.case_type'))->using(Constant::CASE_TYPES);
         $show->field('question', trans('admin.question'));
         $show->field('measures', trans('admin.measures'));
         $show->field('status', trans('admin.status'))->using(SpecialistAdvice::STATUSES);
@@ -117,7 +117,7 @@ class SpecialistAdviceController extends AdminController
             $form->text('username', trans('admin.username'))->required();
             $form->radio('sex', trans('admin.sex'))->options(['1' => '男', '2' => '女'])->default(1)->required();
             $form->mobile('mobile', trans('admin.mobile'))->required();
-            $form->select('type', trans('admin.case_type'))->options(SpecialistAdvice::CATES)->required();
+            $form->select('type', trans('admin.case_type'))->options(Constant::CASE_TYPES)->required();
             $form->text('question', trans('admin.question'))->required();
             $form->editor('measures', trans('admin.measures'));
         }

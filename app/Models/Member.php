@@ -60,13 +60,6 @@ class Member extends Model
      */
     public static function getStatusName(int $status): string
     {
-        switch ($status) {
-            case self::INVALID:
-                return self::STATUSES[self::INVALID];
-            case self::NORMAL:
-                return self::STATUSES[self::NORMAL];
-            default:
-                return self::STATUSES[self::NORMAL];
-        }
+        return self::STATUSES[$status];
     }
 }

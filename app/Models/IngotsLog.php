@@ -61,14 +61,7 @@ class IngotsLog extends Model
      */
     public static function getStatusName(int $status): string
     {
-        switch ($status) {
-            case self::INVALID:
-                return self::STATUSES[self::INVALID];
-            case self::NORMAL:
-                return self::STATUSES[self::NORMAL];
-            default:
-                return self::STATUSES[self::NORMAL];
-        }
+        return self::STATUSES[$status];
     }
 
     /**
@@ -86,5 +79,13 @@ class IngotsLog extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
     }
 }

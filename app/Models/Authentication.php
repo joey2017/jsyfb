@@ -77,7 +77,7 @@ class Authentication extends Model
     const FAILED     = 2;
     const INCOMPLETE = 3;
 
-    const STATUSES   = [
+    const STATUSES = [
         self::PENDING    => '待审核',
         self::PASSED     => '审核通过',
         self::FAILED     => '审核不通过',
@@ -90,5 +90,14 @@ class Authentication extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @param int $status
+     * @return string
+     */
+    public function getStatusName(int $status): string
+    {
+        return self::STATUSES[$status];
     }
 }

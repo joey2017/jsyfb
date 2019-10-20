@@ -146,28 +146,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(User::class, 'inviter_id');
     }
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\hasMany
-     */
-    public function notaryOfficeComments()
-    {
-        return $this->hasMany(NotaryOfficeComment::class, 'user_id');
-    }
-
     /**
      * @param int $status
      * @return string
      */
     public static function getStatusName($status): string
     {
-        switch ($status) {
-            case self::INVALID:
-                return self::STATUSES[self::INVALID];
-            case self::NORMAL:
-                return self::STATUSES[self::NORMAL];
-            default:
-                return self::STATUSES[self::NORMAL];
-        }
+        return self::STATUSES[$status];
     }
 }

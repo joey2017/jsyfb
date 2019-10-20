@@ -87,14 +87,7 @@ class Laywer extends Model
      */
     public static function getStatusName(int $status): string
     {
-        switch ($status) {
-            case self::INVALID:
-                return self::STATUSES[self::INVALID];
-            case self::NORMAL:
-                return self::STATUSES[self::NORMAL];
-            default:
-                return self::STATUSES[self::NORMAL];
-        }
+        return self::STATUSES[$status];
     }
 
     /**
@@ -104,4 +97,5 @@ class Laywer extends Model
     {
         $this->attributes['cate_id'] = trim(implode(',', $cate_id), ',');
     }
+
 }

@@ -2,9 +2,9 @@
 
 namespace App\Admin\Controllers;
 
+use App\Constant;
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\NotaryAdvice;
-use App\Models\SpecialistAdvice;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -34,7 +34,7 @@ class NotaryAdviceController extends AdminController
         $grid->column('username', trans('admin.username'));
         $grid->column('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
         $grid->column('mobile', trans('admin.mobile'));
-        $grid->column('type', trans('admin.type'))->using(SpecialistAdvice::CATES);
+        $grid->column('type', trans('admin.type'))->using(Constant::CASE_TYPES);
         $grid->column('question', trans('admin.question'));
         $grid->column('status', trans('admin.status'))->using(NotaryAdvice::STATUSES);
         $grid->column('created_at', trans('admin.created_at'));
@@ -60,7 +60,7 @@ class NotaryAdviceController extends AdminController
         $show->field('username', trans('admin.username'));
         $show->field('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
         $show->field('mobile', trans('admin.mobile'));
-        $show->field('type', trans('admin.type'))->using(SpecialistAdvice::CATES);
+        $show->field('type', trans('admin.type'))->using(Constant::CASE_TYPES);
         $show->field('question', trans('admin.question'));
         $show->field('status', trans('admin.status'))->using(NotaryAdvice::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
@@ -82,7 +82,7 @@ class NotaryAdviceController extends AdminController
         $form->text('username', trans('admin.username'))->required();
         $form->radio('sex', trans('admin.sex'))->options(['1' => '男', '2' => '女'])->required();
         $form->mobile('mobile', trans('admin.mobile'))->required();
-        $form->select('type', trans('admin.type'))->options(SpecialistAdvice::CATES)->required();
+        $form->select('type', trans('admin.type'))->options(Constant::CASE_TYPES)->required();
         $form->textarea('question', trans('admin.question'))->required();
 
         return $form;

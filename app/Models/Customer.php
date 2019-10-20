@@ -27,4 +27,19 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $table = 'jyfb_customer';
+
+    // 状态
+    const INVALID = 0;
+    const NORMAL  = 1;
+
+    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
+    /**
+     * @param int $status
+     * @return string
+     */
+    public static function getStatusName(int $status): string
+    {
+        return self::STATUSES[$status];
+    }
 }
