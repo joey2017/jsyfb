@@ -4,6 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\LegalBookSection
+ *
+ * @property int $id
+ * @property string|null $name 主题
+ * @property int|null $cate_id 宝典分类id
+ * @property string|null $title 章节标题
+ * @property int|null $status 状态：0禁用1正常
+ * @property \Illuminate\Support\Carbon|null $created_at 购买时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LegalBook[] $legalBook
+ * @property-read int|null $legal_book_count
+ * @property-read \App\Models\LegalBookCategory|null $legalBookCategory
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereCateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class LegalBookSection extends Model
 {
     /**
@@ -36,5 +61,14 @@ class LegalBookSection extends Model
     public function legalBook()
     {
         return $this->hasMany(LegalBook::class,'section_id');
+    }
+
+    /**
+     * @param int $status
+     * @return string
+     */
+    public static function getStatusName(int $status): string
+    {
+        return self::STATUSES[$status];
     }
 }

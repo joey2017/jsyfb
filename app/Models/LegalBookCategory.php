@@ -39,6 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookCategory whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookCategory whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookCategory whereUpdatedAt($value)
+ * @property-read \App\Models\LegalBookSection $legalBookSection
  */
 class LegalBookCategory extends Model
 {

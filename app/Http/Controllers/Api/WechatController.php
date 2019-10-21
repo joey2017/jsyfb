@@ -91,9 +91,11 @@ class WechatController extends Controller
         if ($existUser = User::where('openid', $userInfo['openid'])->first()) {
             $token = auth('api')->login($existUser);
             //$token = JWTAuth::fromUser($existUser);
+            $statusCode = 200;
         } else {
             $token = auth('api')->login($this->createUser($request, $userInfo, $decryData['openId'] ? $decryData : $rawData, $inviter ? $inviter->id : 0));
             //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
+            $statusCode = 201;
         }
 
         if ($token) {
@@ -117,7 +119,7 @@ class WechatController extends Controller
                 $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友注册获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
                 $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id);
             }
-            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)]);
+            return $this->setStatusCode($statusCode)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)]);
         }
         return $this->failed('登录失败,请稍后重试');
     }

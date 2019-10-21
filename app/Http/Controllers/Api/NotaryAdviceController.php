@@ -28,7 +28,7 @@ class NotaryAdviceController extends Controller
      */
     public function index()
     {
-        $advices = NotaryAdvice::paginate(5);
+        $advices = NotaryAdvice::paginate(10);
         return NotaryAdviceResource::collection($advices);
     }
 

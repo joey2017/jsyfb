@@ -44,7 +44,7 @@ class BalanceLogController extends Controller
      */
     public function index()
     {
-        $logs = BalanceLog::where('user_id', Auth::guard('api')->id())->paginate(5);
+        $logs = BalanceLog::where('user_id', Auth::guard('api')->id())->paginate(10);
         return BalanceLogResource::collection($logs);
     }
 

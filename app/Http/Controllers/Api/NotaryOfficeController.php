@@ -25,7 +25,7 @@ class NotaryOfficeController extends Controller
      */
     public function index()
     {
-        $notarys = NotaryOffice::paginate(5);
+        $notarys = NotaryOffice::paginate(10);
         return NotaryOfficeResource::collection($notarys);
     }
 

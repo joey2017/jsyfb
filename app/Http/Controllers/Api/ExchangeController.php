@@ -54,7 +54,7 @@ class ExchangeController extends Controller
      */
     public function index()
     {
-        $exchanges = Exchange::paginate(5);
+        $exchanges = Exchange::paginate(10);
         return ExchangeResource::collection($exchanges);
     }
 

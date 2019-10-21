@@ -17,57 +17,6 @@ class UserController extends Controller
 {
     /**
      * @SWG\Get(
-     *     path="/users",
-     *     summary="用户资料管理",
-     *     tags={"User"},
-     *     description="用户资料列表",
-     *     operationId="user.index",
-     *     produces={"application/json"},
-     *     security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *     },
-     *     @SWG\Parameter(name="page",in="query",description="分页编号,默认1",type="integer"),
-     *     @SWG\Parameter(name="pagesize",in="query",description="每页显示条数,默认10",type="integer"),
-     *     @SWG\Response(
-     *         response=200,
-     *         description="用户列表",
-     *         @SWG\Schema(
-     *            type="json",
-     *            @SWG\Property(
-     *                 property="pages",
-     *                 @SWG\Property(property="totalnum",type="integer",description="记录总数"),
-     *                 @SWG\Property(property="totalpage",type="integer",description="总页数"),
-     *                 @SWG\Property(property="pagesize",type="integer",description="每页显示记录数"),
-     *                 @SWG\Property(property="page",type="integer",description="当前页数"),
-     *            ),
-     *            @SWG\Property(
-     *               property="lists",
-     *               @SWG\Items(
-     *                  @SWG\Property(property="id",type="integer",description="id",),
-     *                  @SWG\Property(property="username",type="string",description="用户名"),
-     *                  @SWG\Property(property="nickname",type="string",description="昵称"),
-     *                  @SWG\Property(property="avatar",type="string",description="头像"),
-     *                  @SWG\Property(property="mobile",type="string",description="手机号码"),
-     *                  @SWG\Property(property="descr",type="string",description="描述"),
-     *               )
-     *            ),
-     *         ),
-     *     ),
-     *     @SWG\Response(response=422,description="error")
-     * )
-     */
-    public function index()
-    {
-        $users = User::paginate(3);
-        //无分页信息
-        //return $this->success(UserResource::collection($users));
-        return UserResource::collection($users);
-    }
-
-    /**
-     * @SWG\Get(
      *   path="/users/{id}",
      *   tags={"User"},
      *   summary="用户详情",
@@ -202,7 +151,7 @@ class UserController extends Controller
         if (Auth::guard('api')->id() != $user->id) {
             return $this->failed('禁止访问',403);
         }
-        $historys = BrowseHistory::where('user_id',$user->id)->paginate(5);
+        $historys = BrowseHistory::where('user_id',$user->id)->paginate(10);
         return BrowseHistoryResource::collection($historys);
     }
 
@@ -223,7 +172,7 @@ class UserController extends Controller
      */
     public function attention()
     {
-        $attentions = Attention::where('user_id',Auth::guard('api')->id())->paginate(5);
+        $attentions = Attention::where('user_id',Auth::guard('api')->id())->paginate(10);
         return AttentionResource::collection($attentions);
     }
 

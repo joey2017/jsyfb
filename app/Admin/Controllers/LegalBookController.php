@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\LegalBook;
 use App\Models\LegalBookCategory;
+use App\Models\LegalBookSection;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -28,7 +29,7 @@ class LegalBookController extends AdminController
         $grid = new Grid(new LegalBook);
 
         $grid->column('id', __('Id'));
-        $grid->column('legalBookSection.title', trans('admin.section_title'))->link('/id/'.$grid->model()->id);
+        $grid->column('legalBookSection.title', trans('admin.section_title'));
         $grid->column('legalBookSection.cate_id', trans('admin.category'))->display(function ($cate_id) {
             return LegalBookCategory::findOrFail($cate_id)->title;
         });
@@ -41,7 +42,6 @@ class LegalBookController extends AdminController
             $filter->like('legalBookSection.title', trans('admin.section_title'));
 
         });
-
 
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -60,9 +60,10 @@ class LegalBookController extends AdminController
         $show = new Show(LegalBook::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('name', '分类主题');
-        $show->field('cate_id', trans('admin.category'))->using(LegalBookCategory::all()->pluck('title', 'id')->toArray());
-        $show->field('title', trans('admin.section_title'));
+        $show->field('section_id', trans('admin.section_title'))->as(function($section_id){
+            return LegalBookSection::findOrFail($section_id)->title;
+        });
+        $show->field('detail', trans('admin.detail'));
         $show->field('status', trans('admin.status'))->using(LegalBook::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
@@ -79,9 +80,9 @@ class LegalBookController extends AdminController
     {
         $form = new Form(new LegalBook);
 
-        $form->text('name', '分类主题');
-        $form->select('cate_id', trans('admin.category'))->options(LegalBookCategory::all()->pluck('title', 'id'))->value(request('cate_id'));
-        $form->editor('title', trans('admin.section_title'));
+        $options = LegalBookSection::where('status',1)->pluck('title', 'id')->toArray();
+        $form->select('section_id', trans('admin.section_title'))->options($options)->value(request('section_id'));
+        $form->editor('detail', trans('admin.detail'));
 
         return $form;
     }

@@ -97,6 +97,12 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/legal/categories', 'LegalBookCategoryController@index')->name('legal-categories.index');
         Route::get('/legal/categories/{category}', 'LegalBookCategoryController@show')->name('legal-categories.show');
 
+        //宝典章节
+        Route::get('/legal/sections/{cate_id}', 'LegalBookSectionController@show')->name('legal-sections.show');
+
+        //宝典章节详情
+        Route::get('/legal/books/{section_id}', 'LegalBookController@show')->name('legal-books.show');
+
         //我的评论
         Route::get('/users/comments/{user}', 'UserController@comments')->name('users.comments');
 

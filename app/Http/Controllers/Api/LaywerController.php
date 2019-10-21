@@ -44,7 +44,7 @@ class LaywerController extends Controller
             $model->whereRaw('cate_id REGEXP ?', [is_array($data['cate_id']) ? implode('|', $data['cate_id']) : $data]);
         }
 
-        $laywers = $model->paginate(5)->toArray();
+        $laywers = $model->paginate(10)->toArray();
 
         if (count($laywers['data']) > 0) {
             foreach ($laywers['data'] as &$laywer) {
@@ -53,7 +53,7 @@ class LaywerController extends Controller
         }
 
         return $laywers;
-        //$laywers = Laywer::paginate(5);
+        //$laywers = Laywer::paginate(10);
         //return LaywerResource::collection($laywers);
     }
 

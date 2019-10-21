@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereUpdatedAt($value)
+ * @property-read \App\Models\LegalBookSection|null $legalBookSection
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereSectionId($value)
  */
 class LegalBook extends Model
 {

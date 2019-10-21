@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\LegalBookCategory;
+use App\Models\LegalBookSection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LegalBookCategoryResource extends JsonResource
+class LegalBookSectionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +17,12 @@ class LegalBookCategoryResource extends JsonResource
     {
         return [
             'id'         => $this->id,
+            'name'       => $this->name,
+            'cate_id'    => $this->cate_id,
+            'category'   => $this->legalBookCategory()->first()->title ?? '',
+            'jump_url'   => 'articles/legals/books/{id}',
             'title'      => $this->title,
-            'parent_id'  => $this->parent_id,
-            'path'       => $this->path,
-            'jump_url'   => 'articles/legals/sections/{id}',
-            'order'      => $this->order,
-            'logo'       => $this->logo,
-            'status'     => LegalBookCategory::getStatusName($this->status),
+            'status'     => LegalBookSection::getStatusName($this->status),
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at
         ];

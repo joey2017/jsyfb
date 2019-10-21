@@ -23,7 +23,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $goods = Goods::paginate(5);
+        $goods = Goods::paginate(10);
         return GoodsResource::collection($goods);
     }
 

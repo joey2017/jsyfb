@@ -23,7 +23,7 @@ class AnswerListController extends Controller
      */
     public function index()
     {
-        $lists = AnswerList::paginate(5);
+        $lists = AnswerList::paginate(10);
         return AnswerListResource::collection($lists);
     }
 

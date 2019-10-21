@@ -55,14 +55,15 @@ class LegalBookCategoryController extends Controller
      */
     protected function tree($parent_id = 0)
     {
-        $rows = LegalBookCategory::where('parent_id',$parent_id)->orderBy('order','ASC')->get();
+        $rows  = LegalBookCategory::where('parent_id', $parent_id)->orderBy('order', 'ASC')->get();
         $array = [];
         if (sizeof($rows) != 0) {
-            foreach ($rows as &$val){
+            foreach ($rows as &$val) {
                 unset($val['is_deleted']);
-                $val['status'] = LegalBookCategory::getStatusName($val['status']);
-                $val['list'] = $this->tree($val['id']);
-                $array[] = $val;
+                $val['status']   = LegalBookCategory::getStatusName($val['status']);
+                $val['jump_url'] = 'articles/legals/sections/{id}';
+                $val['list']     = $this->tree($val['id']);
+                $array[]         = $val;
             }
         }
         return $array;
