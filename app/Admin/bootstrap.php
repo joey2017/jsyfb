@@ -36,9 +36,6 @@ Form::extend('jsonEditor', \Jxlwqq\JsonEditor\Editor::class);
 Form::extend('editor', WangEditor::class);
 
 Admin::css('/css/iconfont/iconfont.css');
-//Admin::css('/vendor/prism/prism.css');
-//Admin::js('/vendor/prism/prism.js');
-//Admin::js('/vendor/clipboard/dist/clipboard.min.js');
 
 Column::extend('openMap', OpenMap::class);
 Column::extend('floatBar', FloatBar::class);
@@ -56,6 +53,6 @@ Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
         //->right(new Actions\Feedback())
         //->right(new Actions\System());
 
-    $navbar->left(view('admin.search-bar'));
+    //$navbar->left(view('admin.search-bar'));
 
 });
