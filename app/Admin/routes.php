@@ -30,6 +30,7 @@ Route::group([
         'funds/ingots'              => IngotsController::class,
         'articles/legals/categorys' => LegalBookCategoryController::class,
         'articles/legals/books'     => LegalBookController::class,
+        'articles/legals/sections'  => LegalBookSectionController::class,
         'articles/browse-history'   => BrowseHistoryController::class,
         'articles/likes'            => ArticleLikeController::class,
         'articles/shares'           => ArticleShareController::class,

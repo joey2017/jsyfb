@@ -14,10 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $id
  * @property string|null $title 主题
- * @property int|null $cate_id 宝典分类id
+ * @property int|null $section_id 宝典分类id
  * @property string|null $detail 内容
  * @property int|null $status 状态：0禁用1正常
- * @property int|null $is_deleted 是否删除：0否1是
  * @property \Illuminate\Support\Carbon|null $created_at 购买时间
  * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBook whereCateId($value)
@@ -45,9 +44,9 @@ class LegalBook extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function legalBookCategory()
+    public function legalBookSection()
     {
-        return $this->belongsTo(LegalBookCategory::class, 'cate_id');
+        return $this->belongsTo(LegalBookSection::class, 'section_id');
     }
 
     /**

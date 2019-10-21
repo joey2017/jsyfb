@@ -119,7 +119,7 @@ return [
     'article_id'            => '文章Id',
     'path'                  => '路径',
     'cate_id'               => '分类Id',
-    'category'              => '分类',
+    'category'              => '所属分类',
     'book_title'            => '主题',
     'image_path'            => '图片路径',
     'picname'               => '图片名称',
@@ -200,4 +200,6 @@ return [
     'comment_content'       => '点评内容',
     'case_type'             => '案件类型',
     'sex'                   => '性别',
+    'section'               => '章节',
+    'section_title'         => '章节标题',
 ];

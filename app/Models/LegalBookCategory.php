@@ -63,9 +63,9 @@ class LegalBookCategory extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function legalBook()
+    public function legalBookSection()
     {
-        return $this->hasOne(LegalBook::class, 'cate_id');
+        return $this->hasOne(LegalBookSection::class, 'cate_id');
     }
 
     /**
