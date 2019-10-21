@@ -18,7 +18,7 @@ class LegalBookSectionController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(in = "query",name = "cate_id",description = "宝典分类id",required = false,type = "integer"),
+     *   @SWG\Parameter(in = "query",name = "id",description = "宝典分类id",required = false,type = "integer"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
