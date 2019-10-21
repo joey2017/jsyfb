@@ -9,7 +9,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class legalBookSectionController extends AdminController
+class LegalBookSectionController extends AdminController
 {
     /**
      * Title for current resource.
