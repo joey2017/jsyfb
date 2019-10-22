@@ -48,7 +48,8 @@ class LaywerController extends Controller
 
         if (count($laywers['data']) > 0) {
             foreach ($laywers['data'] as &$laywer) {
-                $laywer->status = Laywer::getStatusName($laywer->status);
+                $laywer->expertise = ['地产', '婚姻家庭'];
+                $laywer->status    = Laywer::getStatusName($laywer->status);
             }
         }
 
