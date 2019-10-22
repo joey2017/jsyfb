@@ -17,16 +17,18 @@ class NotaryAdviceResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'notary_id'  => $this->notary_id,
-            'notary_name'=> $this->notary()->first()->name ?? '',
-            'username'   => $this->username,
-            'sex'        => Constant::SEXS[$this->sex],
-            'mobile'     => $this->mobile,
-            'type'       => Constant::CASE_TYPES[$this->type],
-            'question'   => $this->question,
-            'status'     => NotaryAdvice::getStatusName($this->status),
-            'created_at' => (string)$this->created_at,
-            'updated_at' => (string)$this->updated_at
+            'id'          => $this->id,
+            'user_id'     => $this->user_id,
+            'notary_id'   => $this->notary_id,
+            'notary_name' => $this->notary()->first()->name ?? '',
+            'username'    => $this->username,
+            'sex'         => Constant::SEXS[$this->sex],
+            'mobile'      => $this->mobile,
+            'type'        => Constant::CASE_TYPES[$this->type],
+            'question'    => $this->question,
+            'status'      => NotaryAdvice::getStatusName($this->status),
+            'created_at'  => (string)$this->created_at,
+            'updated_at'  => (string)$this->updated_at
         ];
     }
 }
