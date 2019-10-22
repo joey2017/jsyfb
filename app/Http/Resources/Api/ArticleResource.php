@@ -20,7 +20,7 @@ class ArticleResource extends JsonResource
             'admin_id'     => $this->admin_id,
             'title'        => $this->title,
             'content'      => $this->content,
-            'images'       => $this->images,
+            'images'       => env('APP_UPLOAD_PATH').'/'.$this->images,
             'browse_count' => $this->browse_count,
             'like_count'   => $this->like_count,
             'share_count'  => $this->share_count,

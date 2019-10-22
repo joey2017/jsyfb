@@ -21,7 +21,7 @@ class QuestionCategoryResource extends JsonResource
             'parent_id'  => $this->parent_id,
             'path'       => $this->path,
             'order'      => $this->order,
-            'logo'       => $this->logo,
+            'logo'       => env('APP_UPLOAD_PATH').'/'.$this->logo,
             'status'     => QuestionCategory::getStatusName($this->status),
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at

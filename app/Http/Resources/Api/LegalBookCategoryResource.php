@@ -22,7 +22,7 @@ class LegalBookCategoryResource extends JsonResource
             'path'       => $this->path,
             'jump_url'   => 'articles/legals/sections/{id}',
             'order'      => $this->order,
-            'logo'       => $this->logo,
+            'logo'       => env('APP_UPLOAD_PATH').'/'.$this->logo,
             'status'     => LegalBookCategory::getStatusName($this->status),
             'created_at' => (string)$this->created_at,
             'updated_at' => (string)$this->updated_at

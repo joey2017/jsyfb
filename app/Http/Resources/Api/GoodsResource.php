@@ -17,7 +17,7 @@ class GoodsResource extends JsonResource
         return [
             'id'             => $this->id,
             'goods_name'     => $this->goods_name,
-            'image'          => $this->image,
+            'image'          => env('APP_UPLOAD_PATH').'/'.$this->image,
             'detail'         => $this->detail,
             'exchange_rule'  => $this->exchange_rule,
             'description'    => $this->description,

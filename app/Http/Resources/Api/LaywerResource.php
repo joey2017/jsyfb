@@ -21,7 +21,7 @@ class LaywerResource extends JsonResource
             'title'         => $this->title,
             'mobile'        => $this->mobile,
             'telephone'     => $this->telephone,
-            'avatar'        => $this->avatar,
+            'avatar'        => env('APP_UPLOAD_PATH').'/'.$this->avatar,
             'tag'           => $this->tag,
             'company'       => $this->company,
             'province_code' => $this->province_code,

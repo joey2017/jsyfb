@@ -18,7 +18,7 @@ class BannerResource extends JsonResource
         return [
             'id'         => $this->id,
             'picname'    => $this->picname,
-            'image_path' => $this->image_path,
+            'image_path' => env('APP_UPLOAD_PATH').'/'.$this->image_path,
             'sort'       => $this->sort,
             'status'     => Banner::getStatusName($this->status),
             'created_at' => (string)$this->created_at,
