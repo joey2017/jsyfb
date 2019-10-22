@@ -31,7 +31,7 @@ class NotaryOfficeController extends AdminController
         $grid->column('name', trans('admin.name'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('telephone', trans('admin.telephone'));
-        //$grid->column('email', trans('admin.email'));
+        $grid->column('picture', trans('admin.image'));
         $grid->column('summary', trans('admin.summary'));
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
@@ -93,7 +93,7 @@ class NotaryOfficeController extends AdminController
         $form->text('name', trans('admin.name'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->text('telephone', trans('admin.telephone'));
-        //$form->email('email', trans('admin.email'));
+        $form->image('picture', trans('admin.image'));
         $form->text('summary', trans('admin.summary'));
         $form->text('comments_count', trans('admin.comments_count'));
         $form->text('score', trans('admin.score'));

@@ -19,6 +19,7 @@ class NotaryOfficeResource extends JsonResource
             'id'             => $this->id,
             'name'           => $this->name,
             'mobile'         => $this->mobile,
+            'picture'        => $this->picture,
             'telephone'      => $this->telephone,
             'comments_count' => $this->comments_count,
             'score'          => $this->score,
