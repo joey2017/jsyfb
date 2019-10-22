@@ -123,7 +123,7 @@ class LaywerController extends AdminController
             'district_code' => '区'
         ], '地域选择');
         $form->multipleSelect('cate_id', trans('admin.category'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray());
-        $form->text('expertise', trans('admin.expertise'))->placeholder('请输入已选择分类里面的中文，如房地产，公司诉讼');
+        $form->text('expertise', trans('admin.expertise'))->placeholder('请输入已选择分类里面的中文，如房地产，公司诉讼，多个请用逗号间隔');
         $form->text('summary', trans('admin.summary'));
 
         return $form;

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\LaywerResource;
+use App\Models\Attention;
 use App\Models\Laywer;
+use App\Models\Region\City;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LaywerController extends Controller
@@ -46,10 +49,19 @@ class LaywerController extends Controller
 
         $laywers = $model->paginate(10)->toArray();
 
+        //已关注列表
+        $attentions = Attention::where('user_id',Auth::guard('api')->id())->pluck('laywer_id')->toArray();
+
         if (count($laywers['data']) > 0) {
             foreach ($laywers['data'] as &$laywer) {
                 $laywer->expertise = ['地产', '婚姻家庭'];
+                $laywer->city_name = City::firstOrCreate(['CITY_CODE' => $laywer->city_code])->CITY_NAME;
                 $laywer->status    = Laywer::getStatusName($laywer->status);
+                if (in_array($laywer->id,$attentions)) {
+                    $laywer->is_attention = true;
+                } else {
+                    $laywer->is_attention = false;
+                }
             }
         }
 
