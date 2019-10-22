@@ -50,7 +50,7 @@ class LegalBookSection extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function legalBookCategory()
+    public function category()
     {
         return $this->belongsTo(LegalBookCategory::class, 'cate_id');
     }
@@ -58,7 +58,7 @@ class LegalBookSection extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function legalBook()
+    public function book()
     {
         return $this->hasMany(LegalBook::class,'section_id');
     }

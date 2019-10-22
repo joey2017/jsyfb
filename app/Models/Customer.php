@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Customer
  *
  * @property int $id
- * @property string|null $nickname 名称
+ * @property string|null $username 用户名
+ * @property string|null $nickname 昵称
  * @property string|null $password 密码
  * @property int $status 状态：0正常，1禁用
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
@@ -26,7 +27,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Customer extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_customer';
+
+    /**
+     * @var array
+     */
+    protected $hidden = ['password'];
 
     // 状态
     const INVALID = 0;

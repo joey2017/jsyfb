@@ -29,11 +29,16 @@ class LegalBookSectionController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', '主题');
-        $grid->column('legalBookCategory.title', trans('admin.category'));
+        $grid->column('category.title', trans('admin.category'));
         $grid->column('title', trans('admin.section_title'));
         $grid->column('status', trans('admin.status'))->using(LegalBookSection::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function($filter){
+           $filter->disableIdFilter();
+           $filter->like('category.title',trans('admin.category'));
+        });
 
         return $grid;
     }
