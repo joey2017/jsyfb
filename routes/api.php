@@ -159,7 +159,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/provinces', 'LaywerController@provinces')->name('laywer.provinces');
 
         //指定省份城市列表
-        Route::get('/citys/{code}', 'LaywerController@citys')->name('laywer.citys');
+        Route::get('/citys', 'LaywerController@citys')->name('laywer.citys');
 
     });
 });

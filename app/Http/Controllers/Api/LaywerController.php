@@ -126,12 +126,13 @@ class LaywerController extends Controller
      *          "Bearer":{}
      *      }
      *   },
+     *   @SWG\Parameter(name="code", type="integer", required=true, in="query", description="省份代码"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function citys($code)
+    public function citys(Request $request)
     {
-        $citys = City::where('PROVINCE_CODE', $code)->pluck('CITY_NAME', 'CITY_CODE')->toArray();
+        $citys = City::where('PROVINCE_CODE', $request->input('code'))->pluck('CITY_NAME', 'CITY_CODE')->toArray();
         return $this->success($citys);
     }
 
