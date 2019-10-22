@@ -31,7 +31,7 @@ class NotaryOfficeController extends AdminController
         $grid->column('name', trans('admin.name'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('telephone', trans('admin.telephone'));
-        $grid->column('picture', trans('admin.image'));
+        $grid->column('picture', trans('admin.image'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('summary', trans('admin.summary'));
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
