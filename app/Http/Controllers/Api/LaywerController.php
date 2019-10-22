@@ -56,7 +56,8 @@ class LaywerController extends Controller
             foreach ($laywers['data'] as &$laywer) {
                 $laywer->expertise = ['地产', '婚姻家庭'];
                 //$laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
-                $laywer->status    = Laywer::getStatusName($laywer->status);
+                $laywer->status = Laywer::getStatusName($laywer->status);
+                $laywer->avatar = env('APP_UPLOAD_PATH') . '/' . $laywer->avatar;
                 if (in_array($laywer->id, $attentions)) {
                     $laywer->is_attention = true;
                 } else {
