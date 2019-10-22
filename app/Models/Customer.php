@@ -37,6 +37,8 @@ class Customer extends Model
      */
     protected $hidden = ['password'];
 
+    public $fillable = ['kf_account', 'password', 'kf_id', 'kf_nick', 'kf_wx', 'kf_headimgurl'];
+
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;

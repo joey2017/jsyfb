@@ -145,6 +145,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //取消关注律师
         Route::delete('/attentions/{attention}','AttentionController@destroy')->name('attention.destroy');
 
+        //专属顾问列表
+        Route::get('/customers', 'CustomerController@index')->name('customer.index');
+
     });
 });
 

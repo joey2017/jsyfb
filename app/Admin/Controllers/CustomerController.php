@@ -7,7 +7,6 @@ use App\Services\WechatService;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
-use Encore\Admin\Show;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
@@ -20,13 +19,20 @@ class CustomerController extends AdminController
      */
     protected $title = '客服';
 
+    /**
+     * @var WechatService
+     */
     protected $wechat;
 
+    /**
+     * @var array
+     */
     protected $url = [
         'add'    => 'https://api.weixin.qq.com/customservice/kfaccount/add?access_token=%s',
         'update' => 'https://api.weixin.qq.com/customservice/kfaccount/update?access_token=%s',
         'del'    => 'https://api.weixin.qq.com/customservice/kfaccount/del?access_token=%s',
         'list'   => 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=%s',
+        'ID'     => 'gh_f2d4ca265559',
     ];
 
     public function __construct(WechatService $service)
@@ -42,45 +48,36 @@ class CustomerController extends AdminController
     protected function grid()
     {
         $client   = new Client();
-        $response = $client->request('POST', sprintf($this->url['list'], $this->wechat->getAccessToken()));
+        $response = $client->request('GET', sprintf($this->url['list'], $this->wechat->getAccessToken()));
         $result   = \GuzzleHttp\json_decode($response->getBody(), true);
 
-        if (isset($result['errcode']) && $result['errcode'] !== 0) {
-            Log::error('小程序添加客服账号请求出错：', ['error' => $result]);
-        }
+        $insert = $this->insert($result['kf_list']);
 
-        dump($result);die;
+        if (!$insert) {
+            Log::error('后台更新客服数据失败：', $result);
+        }
 
         $grid = new Grid(new Customer);
 
+        $grid->disableCreateButton();
         $grid->column('id', __('Id'));
-        $grid->column('username', trans('admin.username'));
-        $grid->column('nickname', trans('admin.nickname'));
+        $grid->column('kf_account', trans('admin.kf_account'));
+        $grid->column('kf_nick', trans('admin.nickname'));
+        $grid->column('kf_wx', trans('admin.wechat'));
+        $grid->column('kf_headimgurl', trans('admin.avatar'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('status', trans('admin.status'))->using(Customer::STATUSES);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
+        $grid->actions(function ($actions) {
+            // 去掉编辑
+            $actions->disableEdit();
+
+            // 去掉查看
+            $actions->disableView();
+        });
+
         return $grid;
-    }
-
-    /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(Customer::findOrFail($id));
-
-        $show->field('id', __('Id'));
-        $show->field('username', trans('admin.username'));
-        $show->field('nickname', trans('admin.nickname'));
-        $show->field('status', trans('admin.status'))->using(Customer::STATUSES);
-        $show->field('created_at', trans('admin.created_at'));
-        $show->field('updated_at', trans('admin.updated_at'));
-
-        return $show;
     }
 
     /**
@@ -92,40 +89,24 @@ class CustomerController extends AdminController
     {
         $form = new Form(new Customer);
 
-        $form->text('username', trans('admin.username'));
-        $form->text('nickname', trans('admin.nickname'));
+        $form->text('kf_account', trans('admin.kf_account'));
+        $form->text('kf_nick', trans('admin.nickname'));
         $form->password('password', trans('admin.password'));
-
-        $form->saving(function (Form $form) {
-            $data = ['kf_account' => $form->username, 'nickname' => $form->nickname, 'password' => $form->password];
-            try {
-                $client   = new Client();
-                $response = $client->request('POST', sprintf($this->url['add'], $this->wechat->getAccessToken()), $data);
-                $result   = \GuzzleHttp\json_decode($response->getBody(), true);
-                if ($result['errcode'] !== 0) {
-                    Log::error('小程序添加客服账号请求出错：', ['error' => $result]);
-                }
-            } catch (\Exception $exception) {
-                Log::error('添加客服账号请求异常：' . $exception->getMessage(), ['exception' => $exception->getTraceAsString()]);
-            }
-
-        });
 
         return $form;
     }
 
 
     /**
-     * @param $url 请求网址
-     * @param bool $params 请求参数
-     * @param int $ispost 请求方式
-     * @param int $https https协议
+     * @param $url
+     * @param bool $params
+     * @param int $ispost
+     * @param int $https
      * @return bool|mixed
      */
     public static function curl($url, $params = false, $ispost = 0, $https = 0)
     {
-        $httpInfo = array();
-        $ch       = curl_init();
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36');
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
@@ -157,5 +138,22 @@ class CustomerController extends AdminController
         }
         curl_close($ch);
         return $response;
+    }
+
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    protected function insert($data)
+    {
+        if (empty($data)) {
+            return false;
+        }
+
+        foreach ($data as $datum) {
+            Customer::firstOrCreate(['kf_id' => $datum['kf_id'], 'kf_wx' => $datum['kf_wx']], $datum);
+        }
+        return true;
     }
 }

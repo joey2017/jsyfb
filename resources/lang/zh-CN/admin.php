@@ -202,4 +202,5 @@ return [
     'sex'                   => '性别',
     'section'               => '章节',
     'section_title'         => '章节标题',
+    'kf_account'            => '客服账号',
 ];

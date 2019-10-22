@@ -80,9 +80,9 @@ class WechatService
             $res          = json_decode($this->request($url, false));
             $access_token = $res->access_token;
             if ($access_token) {
-                $data['expire_time']  = time() + 7000;
-                $data['access_token'] = $access_token;
-                file_put_contents($file, json_encode($data));
+                $info['expire_time']  = time() + 7000;
+                $info['access_token'] = $access_token;
+                file_put_contents($file, json_encode($info));
             } else {
                 file_put_contents($file, json_encode($res));
             }
