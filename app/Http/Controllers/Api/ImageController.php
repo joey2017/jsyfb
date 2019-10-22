@@ -20,17 +20,18 @@ class ImageController extends Controller
 
         if ($validator->fails()) {
             Response::json([
-                'status' => false,
+                'status'  => false,
                 'message' => $validator->errors()
             ]);
         } else {
             try {
                 $file     = $request->file('file');//获取文件
                 $fileName = md5(time() . rand(0, 10000)) . '.' . $file->getClientOriginalName();//随机名称+获取客户的原始名称
-                $savePath = 'images/' . $fileName;//存储到指定文件，例如image/.filename public/.filename
+                $savePath = 'images/' . date('Y-m-d') . '/' . $fileName;//存储到指定文件，例如image/.filename public/.filename
+                //在.env修改默认驱动local为uploads
                 Storage::put($savePath, File::get($file));//通过Storage put方法存储   File::get获取到的是文件内容
             } catch (\Exception $exception) {
-                Log::error('图片上传出错：'.$exception->getMessage(),['info' => $exception->getTraceAsString()]);
+                Log::error('图片上传出错：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
             }
             if (Storage::exists($savePath)) {
                 $user = Auth::guard('api')->user();
