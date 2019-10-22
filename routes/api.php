@@ -155,6 +155,12 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //轮播图列表
         Route::get('/banners', 'BannerController@index')->name('banners.index');
 
+        //省份列表
+        Route::get('/provinces', 'LaywerController@provinces')->name('laywer.provinces');
+
+        //指定省份城市列表
+        Route::get('/citys/{code}', 'LaywerController@citys')->name('laywer.citys');
+
     });
 });
 

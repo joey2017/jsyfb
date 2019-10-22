@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use Encore\Admin\Widgets\Table;
-use Illuminate\Support\Facades\URL;
 
 class ArticleController extends AdminController
 {

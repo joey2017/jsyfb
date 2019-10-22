@@ -6,6 +6,7 @@ use App\Http\Resources\Api\LaywerResource;
 use App\Models\Attention;
 use App\Models\Laywer;
 use App\Models\Region\City;
+use App\Models\Region\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -54,10 +55,12 @@ class LaywerController extends Controller
 
         if (count($laywers['data']) > 0) {
             foreach ($laywers['data'] as &$laywer) {
-                $laywer->expertise = ['地产', '婚姻家庭'];
-                //$laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
-                $laywer->status = Laywer::getStatusName($laywer->status);
-                $laywer->avatar = env('APP_UPLOAD_PATH') . '/' . $laywer->avatar;
+                $laywer->expertise = json_decode($laywer->expertise, true);
+                $laywer->status    = Laywer::getStatusName($laywer->status);
+                $laywer->avatar    = env('APP_UPLOAD_PATH') . '/' . $laywer->avatar;
+                if (!empty($laywer->city_code)) {
+                    $laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
+                }
                 if (in_array($laywer->id, $attentions)) {
                     $laywer->is_attention = true;
                 } else {
@@ -90,5 +93,47 @@ class LaywerController extends Controller
     {
         return $this->success(new LaywerResource($laywer));
     }
+
+    /**
+     * @SWG\Get(
+     *   path="/provinces",
+     *   tags={"Tool"},
+     *   summary="全国省份",
+     *   description="全国省份数据",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response=200,description="成功")
+     * )
+     */
+    public function provinces()
+    {
+        $provinces = Province::all()->pluck('PROVINCE_NAME', 'PROVINCE_CODE')->toArray();
+        return $this->success($provinces);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/citys",
+     *   tags={"Tool"},
+     *   summary="指定省份城市",
+     *   description="指定省份城市",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response=200,description="成功")
+     * )
+     */
+    public function citys($code)
+    {
+        $citys = City::where('PROVINCE_CODE', $code)->pluck('CITY_NAME', 'CITY_CODE')->toArray();
+        return $this->success($citys);
+    }
+
 
 }

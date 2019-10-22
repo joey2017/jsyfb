@@ -110,21 +110,25 @@ class LaywerController extends AdminController
     {
         $form = new Form(new Laywer);
 
-        $form->text('name', trans('admin.name'));
+        $form->text('name', trans('admin.name'))->required();
         $form->text('title', trans('admin.user_title'));
-        $form->text('mobile', trans('admin.mobile'));
+        $form->mobile('mobile', trans('admin.mobile'));
         $form->text('telephone', trans('admin.telephone'));
-        $form->text('tag', trans('admin.tag'));
-        $form->image('avatar', trans('admin.avatar'));
-        $form->text('company', trans('admin.company'));
+        $form->text('tag', trans('admin.tag'))->placeholder('如果是专家填写specialist,其它留空');
+        $form->image('avatar', trans('admin.avatar'))->required();
+        $form->text('company', trans('admin.company'))->required();
         $form->distpicker([
             'province_code' => '省份',
             'city_code'     => '市',
             'district_code' => '区'
-        ], '地域选择');
-        $form->multipleSelect('cate_id', trans('admin.category'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray());
-        $form->text('expertise', trans('admin.expertise'))->placeholder('请输入已选择分类里面的中文，如房地产，公司诉讼，多个请用逗号间隔');
-        $form->text('summary', trans('admin.summary'));
+        ], '地域选择')->required();
+        $form->multipleSelect('cate_id', trans('admin.category'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray())->required();
+        //$form->text('expertise', trans('admin.expertise'))->placeholder('请输入已选择分类里面的中文，如房地产，公司诉讼，多个请用逗号间隔');
+        $form->text('summary', trans('admin.summary'))->required();
+
+        $form->saving(function (Form $form) {
+            $form->model()->expertise = BusinessCategory::findMany($form->cate_id)->pluck('title')->toJson(JSON_UNESCAPED_UNICODE);
+        });
 
         return $form;
     }
