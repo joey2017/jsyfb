@@ -82,6 +82,7 @@ class WechatController extends Controller
             Log::error('获取session_key失败', $userInfo);
         }
 
+        $decryData = json_decode($decryData,true);
         $inviter = '';
 
         if ($icode !== '') {
