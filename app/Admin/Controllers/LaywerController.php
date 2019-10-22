@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\constant;
+use App\Constant;
 use App\Models\Region\Province;
 use App\Models\BusinessCategory;
 use App\Models\Laywer;
@@ -60,7 +60,7 @@ class LaywerController extends AdminController
 
             $filter->column(1 / 2, function ($filter) {
                 $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('PROVINCE_NAME','PROVINCE_CODE')->toArray());
-                $filter->in('cate_id', trans('admin.category'))->select(constant::CASE_TYPES);
+                $filter->in('cate_id', trans('admin.category'))->select(Constant::CASE_TYPES);
             });
 
             $filter->column(1 / 2, function ($filter) {
