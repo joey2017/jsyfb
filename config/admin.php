@@ -395,13 +395,45 @@ return [
     |
     */
     'extensions' => [
-        'grid-lightbox' => [
+        'grid-lightbox'    => [
             // Set to `false` if you want to disable this extension
             'enable' => true,
         ],
         'china-distpicker' => [
             // 如果要关掉这个扩展，设置为false
             'enable' => true,
+        ],
+        'latlong'          => [
+
+            // Whether to enable this extension, defaults to true
+            'enable'    => true,
+
+            // Specify the default provider
+            'default'   => 'tencent',
+
+            // According to the selected provider above, fill in the corresponding api_key
+            'providers' => [
+
+                'google' => [
+                    'api_key' => '',
+                ],
+
+                'yadex' => [
+                    'api_key' => '',
+                ],
+
+                'baidu' => [
+                    'api_key' => '',
+                ],
+
+                'tencent' => [
+                    'api_key' => env('TENCENT_MAP_API_KEY'),
+                ],
+
+                'amap' => [
+                    'api_key' => '',
+                ],
+            ]
         ]
     ],
 ];

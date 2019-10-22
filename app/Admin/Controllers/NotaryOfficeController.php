@@ -106,6 +106,8 @@ class NotaryOfficeController extends AdminController
         $form->text('lng', trans('admin.lng'));
         $form->text('lat', trans('admin.lat'));
 
+        //$form->latlong('lng', 'lat', '经纬度');
+
         return $form;
     }
 }
