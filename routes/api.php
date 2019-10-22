@@ -79,6 +79,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //公证处列表
         Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
+        //公证处详情
+        Route::get('/notarys/offices/{office}', 'NotaryOfficeController@show')->name('notarys-offices.show');
+
         //公证处评论删除
         Route::delete('/notarys-offices/comments/{comment}', 'NotaryOfficeCommentController@destroy')->name('notarys-offices-comments.destroy');
 
@@ -147,6 +150,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //专属顾问列表
         Route::get('/customers', 'CustomerController@index')->name('customer.index');
+
 
     });
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\Api\NotaryAdviceResource;
 use App\Http\Resources\Api\NotaryOfficeResource;
 use App\Models\NotaryOffice;
 
@@ -27,6 +28,27 @@ class NotaryOfficeController extends Controller
     {
         $notarys = NotaryOffice::paginate(10);
         return NotaryOfficeResource::collection($notarys);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/notarys/offices/{id}",
+     *   tags={"Tool"},
+     *   summary="公证处详情",
+     *   description="公证处详情",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="公证处id"),
+     *   @SWG\Response(response=200,description="成功"),
+     * )
+     */
+    public function show(NotaryOffice $office)
+    {
+        return $this->success(new NotaryOfficeResource($office));
     }
 
 }
