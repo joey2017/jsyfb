@@ -33,6 +33,7 @@ class AttentionController extends Controller
      * @SWG\Post(
      *   path="/attention",
      *   tags={"Tool"},
+     *   summary="用户关注律师保存",
      *   description="用户关注律师保存",
      *   produces={"application/json"},
      *   security={
@@ -71,6 +72,7 @@ class AttentionController extends Controller
      * @SWG\Delete(
      *   path="/attention/{id}",
      *   tags={"Tool"},
+     *   summary="取消关注律师",
      *   description="取消关注律师",
      *   produces={"application/json"},
      *   security={

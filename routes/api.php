@@ -17,7 +17,8 @@
 Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     Route::post('/users', 'UserController@store')->name('users.store');
     Route::post('/login', 'UserController@login')->name('users.login');
-    Route::get('/banners', 'BannerController@index')->name('banners.index');
+    //图片上传
+    Route::post('/upload', 'ImageController@upload')->name('image.upload');
     //小程序授权登录
     Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
@@ -151,6 +152,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //专属顾问列表
         Route::get('/customers', 'CustomerController@index')->name('customer.index');
 
+        //轮播图列表
+        Route::get('/banners', 'BannerController@index')->name('banners.index');
 
     });
 });

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('test');
 });
 
 //Route::any('user/test', ['as' => 'user','uses' => 'UserController@test']);
