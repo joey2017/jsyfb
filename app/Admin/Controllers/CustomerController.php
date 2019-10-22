@@ -45,7 +45,7 @@ class CustomerController extends AdminController
         $response = $client->request('POST', sprintf($this->url['list'], $this->wechat->getAccessToken()));
         $result   = \GuzzleHttp\json_decode($response->getBody(), true);
 
-        if ($result['errcode'] !== 0) {
+        if (isset($result['errcode']) && $result['errcode'] !== 0) {
             Log::error('小程序添加客服账号请求出错：', ['error' => $result]);
         }
 
