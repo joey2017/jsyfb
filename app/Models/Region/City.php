@@ -41,4 +41,6 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
     protected $table = 'jyfb_city';
+
+    protected $fillable = ['CITY_CODE'];
 }
