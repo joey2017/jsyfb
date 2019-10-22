@@ -50,14 +50,14 @@ class LaywerController extends Controller
         $laywers = $model->paginate(10)->toArray();
 
         //已关注列表
-        $attentions = Attention::where('user_id',Auth::guard('api')->id())->pluck('laywer_id')->toArray();
+        $attentions = Attention::where('user_id', Auth::guard('api')->id())->pluck('laywer_id')->toArray();
 
         if (count($laywers['data']) > 0) {
             foreach ($laywers['data'] as &$laywer) {
                 $laywer->expertise = ['地产', '婚姻家庭'];
-                //$laywer->city_name = City::where(['CITY_CODE' => $laywer->city_code])->first()->CITY_NAME;
+                $laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
                 $laywer->status    = Laywer::getStatusName($laywer->status);
-                if (in_array($laywer->id,$attentions)) {
+                if (in_array($laywer->id, $attentions)) {
                     $laywer->is_attention = true;
                 } else {
                     $laywer->is_attention = false;
