@@ -55,7 +55,7 @@ class LaywerController extends Controller
         if (count($laywers['data']) > 0) {
             foreach ($laywers['data'] as &$laywer) {
                 $laywer->expertise = ['地产', '婚姻家庭'];
-                $laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
+                //$laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
                 $laywer->status    = Laywer::getStatusName($laywer->status);
                 if (in_array($laywer->id, $attentions)) {
                     $laywer->is_attention = true;
