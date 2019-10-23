@@ -434,6 +434,10 @@ return [
                     'api_key' => '',
                 ],
             ]
-        ]
+        ],
+        'login-captcha'    => [
+            // set to false if you want to disable this extension
+            'enable' => true,
+        ],
     ],
 ];
