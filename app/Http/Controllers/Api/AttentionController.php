@@ -31,7 +31,7 @@ class AttentionController extends Controller
     /**
      *
      * @SWG\Post(
-     *   path="/attention",
+     *   path="/attentions",
      *   tags={"Tool"},
      *   summary="用户关注律师保存",
      *   description="用户关注律师保存",
