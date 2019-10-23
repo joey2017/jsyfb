@@ -145,21 +145,25 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/notarys/advices', 'NotaryAdviceController@store')->name('notarys-advices.store');
 
         //关注律师
-        Route::post('/attentions','AttentionController@store')->name('attention.store');
+        Route::post('/attentions','AttentionController@store')->name('attentions.store');
         //取消关注律师
-        Route::delete('/attentions/{attention}','AttentionController@destroy')->name('attention.destroy');
+        Route::delete('/attentions/{attention}','AttentionController@destroy')->name('attentions.destroy');
 
         //专属顾问列表
-        Route::get('/customers', 'CustomerController@index')->name('customer.index');
+        Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
         //轮播图列表
         Route::get('/banners', 'BannerController@index')->name('banners.index');
 
         //省份列表
-        Route::get('/provinces', 'LaywerController@provinces')->name('laywer.provinces');
+        Route::get('/provinces', 'LaywerController@provinces')->name('laywers.provinces');
 
         //指定省份城市列表
-        Route::get('/citys', 'LaywerController@citys')->name('laywer.citys');
+        Route::get('/citys', 'LaywerController@citys')->name('laywers.citys');
+
+        //咨询专家保存
+        Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
+
 
     });
 });

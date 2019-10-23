@@ -48,6 +48,8 @@ class SpecialistAdvice extends Model
      */
     protected $table = 'jyfb_specialist_advice';
 
+    protected $fillable = ['user_id', 'laywer_id', 'username', 'sex', 'mobile', 'type', 'question'];
+
     // 状态
     const INVALID = 0;
     const NORMAL  = 1;
@@ -62,18 +64,9 @@ class SpecialistAdvice extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function specialist()
-    {
-        return $this->belongsTo(Specialist::class, 'spec_id');
-    }
-
-
     public function laywer()
     {
-        return $this->belongsTo(Laywer::class,'spec_id');
+        return $this->belongsTo(Laywer::class);
     }
     /**
      * @param int $status
