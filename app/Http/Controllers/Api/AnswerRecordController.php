@@ -48,7 +48,7 @@ class AnswerRecordController extends Controller
     public function index()
     {
         $records = AnswerRecord::where('user_id', Auth::guard('api')->id())->paginate(10);
-        return AnswerRecordResource::collection($records);
+        return $this->success(AnswerRecordResource::collection($records));
     }
 
     /**
@@ -68,7 +68,7 @@ class AnswerRecordController extends Controller
      */
     public function show(AnswerRecord $record)
     {
-        return $this->success(new AnswerRecordResource($record),'数据获取成功');
+        return $this->success(new AnswerRecordResource($record));
     }
 
     /**
@@ -117,7 +117,7 @@ class AnswerRecordController extends Controller
             $data
         ));
 
-        return $this->setStatusCode(201)->success(['msg' => '提交成功', 'info' => $answer->correct],'数据获取成功');
+        return $this->setStatusCode(201)->success($answer->correct,'success','提交成功');
     }
 
 
@@ -138,7 +138,7 @@ class AnswerRecordController extends Controller
     public function ranking()
     {
         $scores = AnswerScore::where('date', date('Y-m-d'))->orderBy('score','desc')->paginate(10);
-        return AnswerScoreResource::collection($scores);
+        return $this->success(AnswerScoreResource::collection($scores));
     }
 
     /**
@@ -157,6 +157,6 @@ class AnswerRecordController extends Controller
      */
     public function totalranking()
     {
-        return $this->success(User::where([['status', 1], ['is_deleted', 0]])->select(['nickname', 'avatar', 'score'])->orderBy('score','desc')->paginate(10),'数据获取成功');
+        return $this->success(User::where([['status', 1], ['is_deleted', 0]])->select(['nickname', 'avatar', 'score'])->orderBy('score','desc')->paginate(10));
     }
 }

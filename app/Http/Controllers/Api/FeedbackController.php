@@ -28,7 +28,7 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-        return $this->setStatusCode('200')->success(SystemConfig::all()->pluck('value','key')->toArray());
+        return $this->success(SystemConfig::all()->pluck('value','key')->toArray());
     }
 
 
@@ -55,7 +55,7 @@ class FeedbackController extends Controller
     public function store(FeedbackRequest $request)
     {
         FeedBack::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id(),'created_at' => date('Y-m-d H:i:s')]));
-        return $this->setStatusCode('201')->success('意见反馈成功');
+        return $this->created('意见反馈成功');
     }
 
 }

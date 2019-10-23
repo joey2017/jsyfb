@@ -68,7 +68,7 @@ class MemberController extends Controller
             return $this->failed('VIP通道开通失败，请稍后重试', 500);
         }
         DB::commit();
-        return $this->setStatusCode('201')->success('VIP通道开通成功');
+        return $this->created('VIP通道开通成功');
     }
 
 }

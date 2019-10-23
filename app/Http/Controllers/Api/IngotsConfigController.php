@@ -24,6 +24,6 @@ class IngotsConfigController extends Controller
     public function index()
     {
         $configs = IngotsConfig::paginate(10);
-        return IngotsConfigResource::collection($configs);
+        return $this->success(IngotsConfigResource::collection($configs));
     }
 }

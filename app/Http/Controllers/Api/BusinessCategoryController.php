@@ -28,6 +28,6 @@ class BusinessCategoryController extends Controller
     public function index()
     {
         $categories = BusinessCategory::paginate(10);
-        return BusinessCategoryResource::collection($categories);
+        return $this->success(BusinessCategoryResource::collection($categories));
     }
 }

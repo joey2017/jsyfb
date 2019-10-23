@@ -28,7 +28,7 @@ class UserAddressController extends Controller
     public function index()
     {
         $addresses = UserAddress::paginate(5);
-        return UserAddressResource::collection($addresses);
+        return $this->success(UserAddressResource::collection($addresses));
     }
 
     /**
@@ -81,7 +81,7 @@ class UserAddressController extends Controller
     public function store(UserAddressRequest $userAddressRequest)
     {
         UserAddress::create(array_merge($userAddressRequest->all(),['user_id' => Auth::guard('api')->id()]));
-        return $this->setStatusCode(201)->success('添加成功');
+        return $this->created('添加成功');
     }
 
 

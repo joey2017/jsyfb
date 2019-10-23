@@ -29,7 +29,7 @@ class NotaryAdviceController extends Controller
     public function index()
     {
         $advices = NotaryAdvice::paginate(10);
-        return NotaryAdviceResource::collection($advices);
+        return $this->success(NotaryAdviceResource::collection($advices));
     }
 
     /**
@@ -67,7 +67,7 @@ class NotaryAdviceController extends Controller
             return $this->failed('保存失败，请稍后重试', 500);
         }
         DB::commit();
-        return $this->setStatusCode('201')->success('保存成功');
+        return $this->created('保存成功');
     }
 
 }

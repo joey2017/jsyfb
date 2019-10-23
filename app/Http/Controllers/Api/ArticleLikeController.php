@@ -56,7 +56,7 @@ class ArticleLikeController extends Controller
                     $article->save();
                 });
 
-                return $this->setStatusCode(201)->success('取消点赞成功');
+                return $this->setStatusCode(201)->success('','success','取消点赞成功');
             }
             DB::transaction(function() use ($article){
                 ArticleLike::create(['user_id' => Auth::guard('api')->id(),'article_id' => $article->id]);
@@ -70,7 +70,8 @@ class ArticleLikeController extends Controller
             Log::error('throwable错误：',['msg' => $exception->getMessage()]);
         }
 
-        return $this->setStatusCode(201)->success('点赞成功');
+        //return $this->setStatusCode(201)->success('','点赞成功');
+        return $this->created('点赞成功');
     }
 
 }

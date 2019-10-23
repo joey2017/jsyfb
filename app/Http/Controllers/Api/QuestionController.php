@@ -24,6 +24,6 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::paginate(10);
-        return QuestionResource::collection($questions);
+        return $this->success(QuestionResource::collection($questions));
     }
 }

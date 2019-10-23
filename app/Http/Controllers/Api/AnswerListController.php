@@ -24,7 +24,7 @@ class AnswerListController extends Controller
     public function index()
     {
         $lists = AnswerList::paginate(10);
-        return AnswerListResource::collection($lists);
+        return $this->success(AnswerListResource::collection($lists));
     }
 
     /**
@@ -44,7 +44,7 @@ class AnswerListController extends Controller
      */
     public function show(AnswerList $list)
     {
-        return $this->success(new AnswerListResource($list),'数据获取成功');
+        return $this->success(new AnswerListResource($list));
     }
 
 }

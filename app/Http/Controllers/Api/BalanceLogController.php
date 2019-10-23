@@ -45,7 +45,7 @@ class BalanceLogController extends Controller
     public function index()
     {
         $logs = BalanceLog::where('user_id', Auth::guard('api')->id())->paginate(10);
-        return BalanceLogResource::collection($logs);
+        return $this->success(BalanceLogResource::collection($logs));
     }
 
     /**
@@ -79,7 +79,7 @@ class BalanceLogController extends Controller
             return $this->failed('充值失败,请稍后重试', 500);
         }
         DB::commit();
-        return $this->setStatusCode('201')->success('充值成功');
+        return $this->created('充值成功');
     }
 
 }

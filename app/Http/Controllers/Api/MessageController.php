@@ -32,7 +32,7 @@ class MessageController extends Controller
     public function store(MessageRequest $request)
     {
         Message::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id()]));
-        return $this->setStatusCode('201')->success('留言成功');
+        return $this->created('留言成功');
     }
 
 }

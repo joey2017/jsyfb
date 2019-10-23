@@ -63,7 +63,6 @@ class AttentionController extends Controller
             return $this->failed('关注律师失败，请稍后重试', 500);
         }
         DB::commit();
-        //return $this->setStatusCode('201')->success('关注成功');
         return $this->created('关注成功');
     }
 
@@ -94,7 +93,7 @@ class AttentionController extends Controller
         } catch (PDOException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
         }
-        return $result > 0 ? $this->setStatusCode(204)->success('取消关注成功') : $this->failed('取消关注失败，请稍后重试');
+        return $result > 0 ? $this->setStatusCode(204)->success('','success','取消关注成功') : $this->failed('取消关注失败，请稍后重试');
     }
 
 }

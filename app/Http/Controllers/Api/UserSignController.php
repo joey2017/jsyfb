@@ -41,7 +41,6 @@ class UserSignController extends Controller
     public function show(User $user)
     {
         $sign = UserSign::firstOrCreate(['user_id' => $user->id]);
-        //$sign = $user->userSign()->first();
         return $this->success(new UserSignResource($sign));
     }
 
@@ -73,7 +72,7 @@ class UserSignController extends Controller
             }
 
             $day            = Carbon::now();
-            $sign           = $user->userSign()->first();
+            $sign           = UserSign::firstOrCreate(['user_id' => $user->id],['week_count' => 0]);
             $last_sign_time = $sign->last_sign_time ?? 0;
             if ($day->toDateString() == Carbon::parse($last_sign_time)->toDateString()) {
                 return $this->failed('您今天已经签到过了');
@@ -91,7 +90,7 @@ class UserSignController extends Controller
                 $this->ingots->limitation('sign', '每日签到获得法宝');
                 //系统消息
                 $this->notice->add('签到成功', '今日签到共获得' . $this->ingots->getValueByKey('sign')->value . '个法宝', Auth::guard('api')->id());
-                return $this->setStatusCode(201)->success('签到成功');
+                return $this->created('签到成功');
             }
 
         } catch (\PDOException $e) {

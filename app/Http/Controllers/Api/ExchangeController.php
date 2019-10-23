@@ -55,7 +55,7 @@ class ExchangeController extends Controller
     public function index()
     {
         $exchanges = Exchange::paginate(10);
-        return ExchangeResource::collection($exchanges);
+        return $this->success(ExchangeResource::collection($exchanges));
     }
 
     /**
@@ -140,7 +140,7 @@ class ExchangeController extends Controller
         } catch (PDOException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
-        return $result ? $this->setStatusCode(201)->success('兑换成功') : $this->failed('兑换失败');
+        return $result ? $this->created('兑换成功') : $this->failed('兑换失败');
 
     }
 

@@ -29,6 +29,6 @@ class LegalBookSectionController extends Controller
             $condition = [['cate_id', $cate_id], $condition];
         }
         $sections = LegalBookSection::where($condition)->orderBy('id','desc')->paginate(10);
-        return LegalBookSectionResource::collection($sections);
+        return $this->success(LegalBookSectionResource::collection($sections));
     }
 }

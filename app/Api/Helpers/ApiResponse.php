@@ -24,9 +24,8 @@ trait ApiResponse
      * @param $statusCode
      * @return $this
      */
-    public function setStatusCode($statusCode, $httpCode = null)
+    public function setStatusCode($statusCode)
     {
-        $httpCode         = $httpCode ?? $statusCode;
         $this->statusCode = $statusCode;
         return $this;
     }
@@ -120,7 +119,7 @@ trait ApiResponse
      * @param string $status
      * @return mixed
      */
-    public function success($data, $message, $status = "success")
+    public function success($data, $status = "success", $message = '数据获取成功')
     {
         return $this->status($status, compact('data'), $message);
     }

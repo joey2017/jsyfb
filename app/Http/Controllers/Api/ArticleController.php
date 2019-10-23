@@ -29,7 +29,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::paginate(10);
-        return ArticleResource::collection($articles);
+        return $this->success(ArticleResource::collection($articles));
     }
 
     /**
@@ -59,7 +59,7 @@ class ArticleController extends Controller
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
 
-        return $this->success(new ArticleResource($article),'数据获取成功');
+        return $this->success(new ArticleResource($article));
     }
 
 }

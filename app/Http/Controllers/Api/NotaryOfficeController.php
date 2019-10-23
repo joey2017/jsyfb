@@ -26,7 +26,7 @@ class NotaryOfficeController extends Controller
     public function index()
     {
         $notarys = NotaryOffice::paginate(10);
-        return NotaryOfficeResource::collection($notarys);
+        return $this->success(NotaryOfficeResource::collection($notarys));
     }
 
 
@@ -47,7 +47,7 @@ class NotaryOfficeController extends Controller
      */
     public function show(NotaryOffice $office)
     {
-        return $this->success(new NotaryOfficeResource($office),'数据获取成功');
+        return $this->success(new NotaryOfficeResource($office));
     }
 
 }

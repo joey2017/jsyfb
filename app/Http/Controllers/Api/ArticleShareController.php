@@ -70,7 +70,7 @@ class ArticleShareController extends Controller
             Log::error('throwable错误：', ['msg' => $exception->getMessage(), ['info' => $exception->getTraceAsString()]]);
         }
 
-        return $result ? $this->setStatusCode(201)->success('分享成功') : $this->failed('分享失败');
+        return $result ? $this->created('分享成功') : $this->failed('分享失败');
     }
 
 }

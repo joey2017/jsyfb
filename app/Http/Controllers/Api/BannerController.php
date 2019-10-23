@@ -24,6 +24,6 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::paginate(4);
-        return BannerResource::collection($banners);
+        return $this->success(BannerResource::collection($banners));
     }
 }

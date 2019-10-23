@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\AuthenticationRequest;
 use App\Http\Resources\Api\AuthenticationResource;
 use App\Models\Authentication;
-use App\Models\UserAuthentication;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
@@ -65,7 +64,7 @@ class AuthenticationController extends Controller
     public function store(AuthenticationRequest $request)
     {
         Authentication::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id()]));
-        return $this->setStatusCode(201)->success('添加成功');
+        return $this->created('添加成功');
     }
 
 }

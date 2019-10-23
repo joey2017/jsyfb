@@ -52,7 +52,7 @@ class UserController extends Controller
     public function store(UserRequest $userRequest)
     {
         User::create($userRequest->all());
-        return $this->setStatusCode(201)->success('用户注册成功');
+        return $this->created('用户注册成功');
     }
 
     /**
@@ -88,7 +88,7 @@ class UserController extends Controller
             $user->last_login_ip = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
-            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token,'user' => new UserResource($user)],'success','数据获取成功');
+            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token,'user' => new UserResource($user)]);
         } else {
             return $this->failed('帐号或密码错误', 400);
         }
@@ -105,7 +105,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::guard('api')->logout();
-        return $this->success('退出成功...');
+        return $this->success('','success','退出成功...');
     }
 
     /**
@@ -152,7 +152,7 @@ class UserController extends Controller
             return $this->failed('禁止访问',403);
         }
         $historys = BrowseHistory::where('user_id',$user->id)->paginate(10);
-        return BrowseHistoryResource::collection($historys);
+        return $this->success(BrowseHistoryResource::collection($historys));
     }
 
 
@@ -173,7 +173,7 @@ class UserController extends Controller
     public function attention()
     {
         $attentions = Attention::where('user_id',Auth::guard('api')->id())->paginate(10);
-        return AttentionResource::collection($attentions);
+        return $this->success(AttentionResource::collection($attentions));
     }
 
 }

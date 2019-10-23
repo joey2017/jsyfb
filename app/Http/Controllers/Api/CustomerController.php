@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\CustomerResource;
 use App\Models\Customer;
-use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
@@ -25,6 +24,6 @@ class CustomerController extends Controller
     public function index()
     {
         $lists = Customer::where('status','=',1)->paginate(10);
-        return CustomerResource::collection($lists);
+        return $this->success(CustomerResource::collection($lists));
     }
 }
