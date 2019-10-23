@@ -103,10 +103,11 @@ class NotaryOfficeController extends AdminController
             'district_code' => '区'
         ], '地域选择');
         $form->text('address', trans('admin.address'));
-        $form->text('lng', trans('admin.lng'));
-        $form->text('lat', trans('admin.lat'));
+        //$form->text('lng', trans('admin.lng'));
+        //$form->text('lat', trans('admin.lat'));
 
         //$form->latlong('lng', 'lat', '经纬度');
+        $form->latlong('lng', 'lat', '经纬度')->height(500);
 
         return $form;
     }
