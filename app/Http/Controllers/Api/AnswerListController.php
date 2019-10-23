@@ -44,7 +44,7 @@ class AnswerListController extends Controller
      */
     public function show(AnswerList $list)
     {
-        return $this->success(new AnswerListResource($list));
+        return $this->success(new AnswerListResource($list),'数据获取成功');
     }
 
 }

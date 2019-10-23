@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\Api\NotaryAdviceResource;
 use App\Http\Resources\Api\NotaryOfficeResource;
 use App\Models\NotaryOffice;
 
@@ -48,7 +47,7 @@ class NotaryOfficeController extends Controller
      */
     public function show(NotaryOffice $office)
     {
-        return $this->success(new NotaryOfficeResource($office));
+        return $this->success(new NotaryOfficeResource($office),'数据获取成功');
     }
 
 }

@@ -69,9 +69,7 @@ class LaywerController extends Controller
             }
         }
 
-        return $this->success($laywers);
-        //$laywers = Laywer::paginate(10);
-        //return LaywerResource::collection($laywers);
+        return $this->success($laywers, '数据获取成功');
     }
 
     /**
@@ -91,7 +89,7 @@ class LaywerController extends Controller
      */
     public function show(Laywer $laywer)
     {
-        return $this->success(new LaywerResource($laywer));
+        return $this->success(new LaywerResource($laywer), '数据获取成功');
     }
 
     /**
@@ -111,7 +109,7 @@ class LaywerController extends Controller
     public function provinces()
     {
         $provinces = Province::all()->pluck('province_name', 'code')->toArray();
-        return $this->success(['0' => '全国'] + $provinces);
+        return $this->success(['0' => '全国'] + $provinces, '数据获取成功');
     }
 
 
@@ -138,7 +136,7 @@ class LaywerController extends Controller
         } else {
             $citys = City::where('province_code', $code)->pluck('city_name', 'code')->toArray();
         }
-        return $this->success($citys);
+        return $this->success($citys, '数据获取成功');
     }
 
 

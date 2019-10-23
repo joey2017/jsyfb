@@ -18,6 +18,29 @@
 }
 
 
+{
+    'code':200,
+    'status':'success',
+    'data':'5555',
+    'message':'错误信息'
+}
+
+status()  -> 
+
+created() -> code,message,status 无需返回data时用
+
+success() -> status,data,code 调用message返回message字段信息
+
+message() -> code,status,message
+
+
+
+failed()  ->  code,message,status 失败时无需返回data字段
+
+
+
+
+
 响应
 尽量使用 HTTP 状态码，常用的有：
 

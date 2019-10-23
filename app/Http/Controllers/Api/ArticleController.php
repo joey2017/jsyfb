@@ -59,7 +59,7 @@ class ArticleController extends Controller
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
 
-        return $this->success(new ArticleResource($article));
+        return $this->success(new ArticleResource($article),'数据获取成功');
     }
 
 }

@@ -68,7 +68,7 @@ class AnswerRecordController extends Controller
      */
     public function show(AnswerRecord $record)
     {
-        return $this->success(new AnswerRecordResource($record));
+        return $this->success(new AnswerRecordResource($record),'数据获取成功');
     }
 
     /**
@@ -117,7 +117,7 @@ class AnswerRecordController extends Controller
             $data
         ));
 
-        return $this->setStatusCode(201)->success(['msg' => '提交成功', 'info' => $answer->correct]);
+        return $this->setStatusCode(201)->success(['msg' => '提交成功', 'info' => $answer->correct],'数据获取成功');
     }
 
 
@@ -157,6 +157,6 @@ class AnswerRecordController extends Controller
      */
     public function totalranking()
     {
-        return User::where([['status', 1], ['is_deleted', 0]])->select(['nickname', 'avatar', 'score'])->orderBy('score','desc')->paginate(10);
+        return $this->success(User::where([['status', 1], ['is_deleted', 0]])->select(['nickname', 'avatar', 'score'])->orderBy('score','desc')->paginate(10),'数据获取成功');
     }
 }
