@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\NotaryOfficeResource;
 use App\Models\NotaryOffice;
+use GuzzleHttp\Client;
 
 class NotaryOfficeController extends Controller
 {
@@ -26,6 +27,9 @@ class NotaryOfficeController extends Controller
     public function index()
     {
         $notarys = NotaryOffice::paginate(10);
+        foreach ($notarys as $notary) {
+            $notary->distance = $this->distance();
+        }
         return $this->success(NotaryOfficeResource::collection($notarys));
     }
 
@@ -49,5 +53,35 @@ class NotaryOfficeController extends Controller
     {
         return $this->success(new NotaryOfficeResource($office));
     }
+
+
+    protected function distance()
+    {
+        $from = [
+            "lat" => 39.983171,
+            "lng" => 116.308479,
+        ];
+        $to = [
+            "lat" => 39.99606,
+            "lng" => 116.353455,
+        ];
+        if (isset($from['lng']) && isset($from['lat'])) {
+            $url    = 'https://apis.map.qq.com/ws/distance/v1/?';
+            $params = [
+                'mode' => 'driving',
+                'from' => implode(',', $from),//lat,lng
+                'to'   => implode(',', $to),
+                'key'  => env('TENCENT_MAP_API_KEY'),
+            ];
+            $url    = $url . http_build_query($params);
+
+            $client = new Client();
+            $response = $client->request('GET', $url);
+            $result   = \GuzzleHttp\json_decode($response->getBody(), true);
+            dd($result);
+        }
+        return $this->success('111');
+    }
+
 
 }
