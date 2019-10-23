@@ -75,7 +75,19 @@ class PaymentController extends Controller
 
 
     /**
-     * @param Request $request
+     * @SWG\Get(
+     *   path="/payment/ingotspay",
+     *   tags={"Misc"},
+     *   summary="咨询专属法顾消耗法宝支付接口",
+     *   description="咨询专属法顾消耗法宝支付接口",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="quantity", type="integer", required=true, in="formData", description="法宝数量"),
+     *   @SWG\Response(response=200,description="成功")
+     * )
      */
     public function ingotspay(Request $request)
     {
