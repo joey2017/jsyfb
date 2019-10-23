@@ -20,6 +20,7 @@
 401：Unauthorized，表示用户没有权限（令牌、用户名、密码错误）<br>
 403：Forbidden，用户认证通过但是没有权限执行该操作<br>
 404：Not found，请求资源不存在<br>
+405：Method error，请求方式不正确<br>
 406：Not Acceptable，用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）<br>
 422：Unprocesable entity，用户未登录 <br>
 410：Gone，用户请求的资源被永久删除，且不会再得到的。<br>
