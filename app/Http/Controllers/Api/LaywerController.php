@@ -69,7 +69,7 @@ class LaywerController extends Controller
             }
         }
 
-        return $laywers;
+        return $this->success($laywers);
         //$laywers = Laywer::paginate(10);
         //return LaywerResource::collection($laywers);
     }

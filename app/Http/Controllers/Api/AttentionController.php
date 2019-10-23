@@ -63,7 +63,8 @@ class AttentionController extends Controller
             return $this->failed('关注律师失败，请稍后重试', 500);
         }
         DB::commit();
-        return $this->setStatusCode('201')->success('关注成功');
+        //return $this->setStatusCode('201')->success('关注成功');
+        return $this->created('关注成功');
     }
 
     //todo 204状态码没有返回
