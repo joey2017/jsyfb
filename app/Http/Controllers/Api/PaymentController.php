@@ -75,7 +75,7 @@ class PaymentController extends Controller
 
 
     /**
-     * @SWG\Get(
+     * @SWG\Post(
      *   path="/payment/ingotspay",
      *   tags={"Misc"},
      *   summary="咨询专属法顾消耗法宝支付接口",
