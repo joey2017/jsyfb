@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\ArticleResource;
 use App\Models\Article;
+use App\Models\ArticleComment;
 use App\Models\BrowseHistory;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
@@ -58,8 +59,8 @@ class ArticleController extends Controller
         } catch (QueryException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
-
-        return $this->success(new ArticleResource($article));
+        $comments = ['comments' => ArticleComment::where('article_id',$article->id)->first()];
+        return $this->success(array_merge(new ArticleResource($article),$comments));
     }
 
 }

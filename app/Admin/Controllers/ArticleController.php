@@ -107,7 +107,7 @@ class ArticleController extends AdminController
         $admins = DB::table(config('admin.database.users_table'))->pluck('username', 'id')->toArray();
         $form->select('admin_id', '发布人')->options($admins)->required();
         $form->text('title', trans('admin.title'))->required();
-        $form->textarea('content', trans('admin.content'))->required();
+        $form->editor('content', trans('admin.content'))->required();
         $form->image('images', trans('admin.image'))->required();
 //        $form->textarea('interpretation', trans('admin.interpretation'));
 //        $form->textarea('measures', trans('admin.measures'));
