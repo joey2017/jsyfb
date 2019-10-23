@@ -118,7 +118,7 @@ class WechatController extends Controller
             // 邀请人获得法宝
             if ($inviter) {
                 $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友注册获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
-                $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id);
+                $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id,2);
             }
             return $this->setStatusCode($statusCode)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)],'success','登录成功');
         }

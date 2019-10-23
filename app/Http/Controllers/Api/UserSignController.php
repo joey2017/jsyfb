@@ -88,8 +88,8 @@ class UserSignController extends Controller
 
                 //获得法宝
                 $this->ingots->limitation('sign', '每日签到获得法宝');
-                //系统消息
-                $this->notice->add('签到成功', '今日签到共获得' . $this->ingots->getValueByKey('sign')->value . '个法宝', Auth::guard('api')->id());
+                //法宝消息
+                $this->notice->add('签到成功', '今日签到共获得' . $this->ingots->getValueByKey('sign')->value . '个法宝', Auth::guard('api')->id(),2);
                 return $this->created('签到成功');
             }
 

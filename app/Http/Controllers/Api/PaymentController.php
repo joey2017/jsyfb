@@ -81,6 +81,6 @@ class PaymentController extends Controller
     {
         $ingots = $request->input('quantity');
         $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
-        $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id());
+        $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(),2);
     }
 }

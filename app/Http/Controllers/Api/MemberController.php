@@ -61,7 +61,7 @@ class MemberController extends Controller
             DB::beginTransaction();
             Member::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
             $this->ingots->update(config('ingots.vip'), '使用VIP通道咨询专家消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
-            $this->notice->add('咨询专家', '使用VIP通道咨询专家消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id());
+            $this->notice->add('咨询专家', '使用VIP通道咨询专家消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(),2);
         } catch (PDOException $exception) {
             DB::rollBack();
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
