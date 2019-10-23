@@ -36,15 +36,15 @@ class LaywerController extends Controller
         $data  = $request->all();
         $model = DB::table((new Laywer())->getTable());
 
-        if (isset($data['province_code'])) {
+        if (!empty($data['province_code'])) {
             $model->where('province_code', $data['province_code']);
         }
 
-        if (isset($data['city_code'])) {
+        if (!empty($data['city_code'])) {
             $model->where('city_code', $data['city_code']);
         }
 
-        if (isset($data['cate_id'])) {
+        if (!empty($data['cate_id'])) {
             $model->whereRaw('cate_id REGEXP ?', [is_array($data['cate_id']) ? implode('|', $data['cate_id']) : $data]);
         }
 
