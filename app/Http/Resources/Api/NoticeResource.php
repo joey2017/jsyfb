@@ -22,7 +22,6 @@ class NoticeResource extends JsonResource
             'title'       => $this->title,
             'content'     => $this->content,
             'status'      => $this->status,
-            'status_text' => Notice::getStatusName($this->status),
             'created_at'  => (string)$this->created_at,
             'updated_at'  => (string)$this->updated_at
         ];
