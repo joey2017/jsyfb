@@ -47,7 +47,7 @@ class Notice extends Model
 
     const STATUSES = [self::INVALID => '未读', self::NORMAL => '已读'];
 
-    const TYPES = ['系统消息', '站内信'];
+    const TYPES = ['系统消息', '站内信', '法宝消息'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

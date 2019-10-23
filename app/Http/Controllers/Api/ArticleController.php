@@ -59,6 +59,7 @@ class ArticleController extends Controller
         } catch (QueryException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
+        //todo
         $comments = ['comments' => ArticleComment::where('article_id',$article->id)->first()->toArray()];
         return $this->success(new ArticleResource($article));
     }
