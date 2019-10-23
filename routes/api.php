@@ -164,6 +164,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //咨询专家保存
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
 
+        //vip通道法宝消费大小
+        Route::post('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
 
     });
 });
