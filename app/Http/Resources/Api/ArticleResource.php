@@ -18,7 +18,7 @@ class ArticleResource extends JsonResource
         return [
             'id'           => $this->id,
             'admin_id'     => $this->admin_id,
-            'admin_name'   => $this->adminer()->first()->name,
+            'admin_name'   => $this->adminer()->first()->name ?? '',
             'title'        => $this->title,
             'content'      => $this->content,
             'images'       => env('APP_UPLOAD_PATH') . '/' . $this->images,
