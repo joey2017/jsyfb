@@ -69,10 +69,10 @@ class SpecialistAdvice extends Model
         return $this->belongsTo(Laywer::class);
     }
     /**
-     * @param int $status
+     * @param string $status
      * @return string
      */
-    public static function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
     }

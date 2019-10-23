@@ -55,10 +55,10 @@ class Member extends Model
     }
 
     /**
-     * @param int $status
+     * @param string $status
      * @return string
      */
-    public static function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
     }

@@ -56,10 +56,10 @@ class IngotsLog extends Model
     const TYPES = [self::TYPE_INCRE => '收入', self::TYPE_DECRE => '支出'];
 
     /**
-     * @param int $status
+     * @param string $status
      * @return string
      */
-    public static function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
     }

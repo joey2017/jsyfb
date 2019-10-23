@@ -93,10 +93,10 @@ class Authentication extends Model
     }
 
     /**
-     * @param int $status
+     * @param string $status
      * @return string
      */
-    public function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
     }

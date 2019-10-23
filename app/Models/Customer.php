@@ -46,10 +46,10 @@ class Customer extends Model
     const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
 
     /**
-     * @param int $status
+     * @param string $status
      * @return string
      */
-    public static function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
     }

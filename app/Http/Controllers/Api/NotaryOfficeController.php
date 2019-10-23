@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\NotaryOfficeResource;
 use App\Models\NotaryOffice;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class NotaryOfficeController extends Controller
 {
@@ -19,16 +20,18 @@ class NotaryOfficeController extends Controller
      *          "Bearer":{}
      *      }
      *   },
+     *   @SWG\Parameter(in="query",name="location",type="string",description="纬度lat，经度lng坐标，用英文逗号分割(示例：lat,lng)",required=true),
      *   @SWG\Parameter(in="query",name="name",type="string",description="公证处名称",required=false),
      *   @SWG\Parameter(in="query",name="avg_point",type="string",description="服务评分",required=false),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function index()
+    public function index(Request $request)
     {
+        $from    = $request->input('location');
         $notarys = NotaryOffice::paginate(10);
-        foreach ($notarys as $notary) {
-            $notary->distance = $this->distance();
+        foreach ($notarys as &$notary) {
+            $notary->distance = $this->distance($from, [$notary->lat, $notary->lng]);
         }
         return $this->success(NotaryOfficeResource::collection($notarys));
     }
@@ -55,16 +58,13 @@ class NotaryOfficeController extends Controller
     }
 
 
-    protected function distance()
+    protected function distance($from, $to)
     {
-        $from = [
+        empty($from) && $from = [
             "lat" => 39.983171,
             "lng" => 116.308479,
         ];
-        $to = [
-            "lat" => 39.99606,
-            "lng" => 116.353455,
-        ];
+        $result = false;
         if (isset($from['lng']) && isset($from['lat'])) {
             $url    = 'https://apis.map.qq.com/ws/distance/v1/?';
             $params = [
@@ -73,14 +73,13 @@ class NotaryOfficeController extends Controller
                 'to'   => implode(',', $to),
                 'key'  => env('TENCENT_MAP_API_KEY'),
             ];
-            $url    = $url . http_build_query($params);
+            //$url    = $url . http_build_query($params);
 
-            $client = new Client();
-            $response = $client->request('GET', $url);
+            $client   = new Client();
+            $response = $client->request('GET', $url, ['query' => $params]);
             $result   = \GuzzleHttp\json_decode($response->getBody(), true);
-            dd($result);
         }
-        return $this->success('111');
+        return $result;
     }
 
 

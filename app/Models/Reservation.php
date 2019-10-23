@@ -58,10 +58,10 @@ class Reservation extends Model
     const TYPES = [self::TYPE_LAYWER => '律师', self::TYPE_NOTARY => '公证处'];
 
     /**
-     * @param int $status
+     * @param string $status
      * @return string
      */
-    public static function getStatusName(int $status): string
+    public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
     }
