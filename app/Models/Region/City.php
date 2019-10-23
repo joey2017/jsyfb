@@ -42,5 +42,5 @@ class City extends Model
 {
     protected $table = 'jyfb_city';
 
-    protected $fillable = ['CITY_CODE'];
+    protected $fillable = ['code'];
 }

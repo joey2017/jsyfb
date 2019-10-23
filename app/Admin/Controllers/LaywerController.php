@@ -59,7 +59,7 @@ class LaywerController extends AdminController
             $filter->disableIdFilter();
 
             $filter->column(1 / 2, function ($filter) {
-                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('PROVINCE_NAME','PROVINCE_CODE')->toArray());
+                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name','code')->toArray());
                 $filter->in('cate_id', trans('admin.category'))->select(Constant::CASE_TYPES);
             });
 

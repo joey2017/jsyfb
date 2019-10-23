@@ -59,7 +59,7 @@ class LaywerController extends Controller
                 $laywer->status    = Laywer::getStatusName($laywer->status);
                 $laywer->avatar    = env('APP_UPLOAD_PATH') . '/' . $laywer->avatar;
                 if (!empty($laywer->city_code)) {
-                    $laywer->city_name = City::where('CITY_CODE', $laywer->city_code)->first()->CITY_NAME;
+                    $laywer->city_name = City::where('code', $laywer->city_code)->first()->city_name;
                 }
                 if (in_array($laywer->id, $attentions)) {
                     $laywer->is_attention = true;
@@ -110,8 +110,8 @@ class LaywerController extends Controller
      */
     public function provinces()
     {
-        $provinces = Province::all()->pluck('PROVINCE_NAME', 'PROVINCE_CODE')->toArray();
-        return $this->success($provinces);
+        $provinces = Province::all()->pluck('province_name', 'code')->toArray();
+        return $this->success(['0' => '全国'] + $provinces);
     }
 
 
@@ -132,7 +132,12 @@ class LaywerController extends Controller
      */
     public function citys(Request $request)
     {
-        $citys = City::where('PROVINCE_CODE', $request->input('code'))->pluck('CITY_NAME', 'CITY_CODE')->toArray();
+        $code = $request->input('code');
+        if (empty($code)) {
+            $citys = ['0' => '全国'];
+        } else {
+            $citys = City::where('province_code', $code)->pluck('city_name', 'code')->toArray();
+        }
         return $this->success($citys);
     }
 
