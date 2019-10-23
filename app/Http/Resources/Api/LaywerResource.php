@@ -31,7 +31,7 @@ class LaywerResource extends JsonResource
             'district_code' => $this->district_code,
             'address'       => $this->address,
             'cate_id'       => $this->cate_id,
-            'expertise'     => $this->expertise,
+            'expertise'     => \GuzzleHttp\json_decode($this->expertise, true),
             'summary'       => $this->summary,
             'status'        => Laywer::getStatusName($this->status),
             'created_at'    => (string)$this->created_at,

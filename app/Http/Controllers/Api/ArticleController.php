@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\ArticleResource;
+use App\Http\Resources\Api\LaywerResource;
 use App\Models\Article;
 use App\Models\ArticleComment;
 use App\Models\BrowseHistory;
+use App\Models\Laywer;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +53,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         try {
-            DB::transaction(function() use ($article){
+            DB::transaction(function () use ($article) {
                 $article->browse_count += 1;
                 $article->save();
                 BrowseHistory::create(['user_id' => Auth::guard('api')->id(), 'article_id' => $article->id]);
@@ -59,9 +61,16 @@ class ArticleController extends Controller
         } catch (QueryException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
         }
+        $admin_name         = $article->adminer()->first()->name ?? '';
+        $info               = $article->toArray();
+        $info['images']     = env('APP_UPLOAD_PATH') . '/' . $info['images'];
+        $info['status']     = Article::getStatusName((int)$info['status']);
+        $info['admin_name'] = $admin_name;
         //todo
-        $comments = ['comments' => ArticleComment::where('article_id',$article->id)->first()->toArray()];
-        return $this->success(new ArticleResource($article));
+        $comments                            = ['comments' => ArticleComment::where('article_id', $article->id)->first()->toArray()];
+        $comments['comments']['laywer_info'] = new LaywerResource(Laywer::findOrFail($comments['comments']['laywer_id']));
+        return $this->success(array_merge($info, $comments));
+        //return $this->success(new ArticleResource($article));
     }
 
 }
