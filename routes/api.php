@@ -165,7 +165,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
 
         //vip通道法宝消费大小
-        Route::post('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
+        Route::get('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
 
         //个人法宝数量
         Route::get('/users/ingots', 'UserController@ingots')->name('user.ingots');
