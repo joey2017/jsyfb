@@ -166,8 +166,8 @@ class LaywerController extends Controller
      * @SWG\Get(
      *   path="/areas",
      *   tags={"Tool"},
-     *   summary="指定城市区域",
-     *   description="指定城市区域",
+     *   summary="指定城市区县",
+     *   description="指定城市区县",
      *   security={
      *      {
      *          "Bearer":{}
