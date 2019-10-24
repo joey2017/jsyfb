@@ -8,6 +8,7 @@ use App\Http\Resources\Api\BrowseHistoryResource;
 use App\Http\Resources\Api\UserResource;
 use App\Models\Attention;
 use App\Models\BrowseHistory;
+use App\Models\Ingots;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -173,6 +174,26 @@ class UserController extends Controller
     public function attention()
     {
         $attentions = Attention::where('user_id',Auth::guard('api')->id())->paginate(10);
+        return $this->success(AttentionResource::collection($attentions));
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/users/ingots",
+     *   tags={"User"},
+     *   summary="个人法宝数量",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response="200",description="个人法宝数量")
+     *
+     * )
+     */
+    public function ingots()
+    {
+        $ingots = Ingots::where('user_id',Auth::guard('api')->id())->first();
         return $this->success(AttentionResource::collection($attentions));
     }
 

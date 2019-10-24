@@ -117,7 +117,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/users/balance-logs/{user}', 'UserController@balanceLogs')->name('users.balanceLogs');
 
         //地址
-        Route::get('/users/addresses', 'UserAddressController@index')->name('users-addresses.index');
+        Route::get('/addresses', 'UserAddressController@index')->name('users-addresses.index');
         Route::get('/users/address/{address}', 'UserAddressController@show')->name('users-addresses.show');
         Route::post('/users/address', 'UserAddressController@store')->name('users-addresses.store');
         Route::put('/users/address/{address}', 'UserAddressController@update')->name('users-addresses.update');

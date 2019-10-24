@@ -13,7 +13,7 @@ class UserAddressController extends Controller
 
     /**
      * @SWG\Get(
-     *   path="/users/addresses",
+     *   path="/addresses",
      *   tags={"User"},
      *   summary="地址列表",
      *   description="地址列表",
@@ -27,13 +27,13 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        $addresses = UserAddress::paginate(5);
+        $addresses = UserAddress::where('user_id',Auth::guard('api')->id())->paginate(5);
         return $this->success(UserAddressResource::collection($addresses));
     }
 
     /**
      * @SWG\Get(
-     *   path="/users/addresses/{id}",
+     *   path="/users/address/{id}",
      *   tags={"User"},
      *   summary="地址详情",
      *   description="地址详情",
