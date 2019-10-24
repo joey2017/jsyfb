@@ -69,6 +69,7 @@ class CustomerController extends AdminController
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
+        /*
         $grid->actions(function ($actions) {
             // 去掉编辑
             $actions->disableEdit();
@@ -79,6 +80,9 @@ class CustomerController extends AdminController
             // 去掉删除
             $actions->disableDelete();
         });
+        */
+
+        $grid->disableActions();
 
         return $grid;
     }
