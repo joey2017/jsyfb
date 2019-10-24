@@ -105,10 +105,10 @@ class ExchangeController extends Controller
      */
     public function store(Request $request)
     {
-        $quantity   = $request->input('quantity', 0);
-        $ingots     = $request->input('ingots', 0);
-        $goods_id   = $request->input('goods_id', 0);
-        $address_id = $request->input('address_id', 0);
+        $quantity = $request->input('quantity', 0);
+        $ingots   = $request->input('ingots', 0);
+        $goods_id = $request->input('goods_id', 0);
+        $address  = $request->input('address', '');
 
         if ($ingots <= 0 || $quantity <= 0) {
             return $this->failed('参数错误', 400);
@@ -122,20 +122,20 @@ class ExchangeController extends Controller
             return $this->failed('商品数量不足', 400);
         }
 
-        if ($address_id == 0) {
+        if ($address == '') {
             return $this->failed('地址不能为空', 400);
         }
 
         $result = false;
 
         try {
-            $result = DB::transaction(function () use ($ingots, $quantity, $goods_id, $address_id) {
+            $result = DB::transaction(function () use ($ingots, $quantity, $goods_id, $address) {
                 Exchange::create([
                     'user_id'    => Auth::guard('api')->id(),
                     'quantity'   => $quantity,
                     'ingots'     => $ingots,
                     'goods_id'   => $goods_id,
-                    'address_id' => $address_id,
+                    'address'    => $address,
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
                 $this->ingots->update($ingots, '兑换商品', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
