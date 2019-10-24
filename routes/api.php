@@ -138,6 +138,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/notarys/advices', 'NotaryAdviceController@index')->name('notarys-advices.index');
         Route::post('/notarys/advices', 'NotaryAdviceController@store')->name('notarys-advices.store');
 
+        //关注律师列表
+        Route::get('/attentions','UserController@attention')->name('users.attentions');
+
         //关注律师
         Route::post('/attentions','AttentionController@store')->name('attentions.store');
         //取消关注律师
