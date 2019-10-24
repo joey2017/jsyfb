@@ -23,7 +23,7 @@ class UserAddressResource extends JsonResource
         $city          = City::where('code', '=', $this->city)->first();
         $city_name     = $city ? $city->city_name : '';
         $area          = Area::where('code', '=', $this->district)->first();
-        $area_name     = $area ? $area->city_name : '';
+        $area_name     = $area ? $area->area_name : '';
 
         return [
             'id'              => $this->id,
