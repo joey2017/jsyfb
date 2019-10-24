@@ -49,13 +49,17 @@ class AttentionController extends Controller
      */
     public function store(Request $request)
     {
+        $laywer_id = $request->input('laywer_id','');
+        if ($laywer_id == '') {
+            return $this->failed('缺少律师id参数');
+        }
         try {
             DB::beginTransaction();
-            if (Attention::where([['user_id', Auth::guard('api')->id()], ['laywer_id', $request->input('laywer_id')]])->exists()) {
+            if (Attention::where([['user_id', Auth::guard('api')->id()], ['laywer_id', $laywer_id]])->exists()) {
                 return $this->failed('您已关注该律师，无需重复关注');
             }
 
-            Attention::create(['user_id' => Auth::guard('api')->id(), 'laywer_id' => $request->input('laywer_id'), 'created_at' => date('Y-m-d H:i:s')]);
+            Attention::create(['user_id' => Auth::guard('api')->id(), 'laywer_id' => $laywer_id, 'created_at' => date('Y-m-d H:i:s')]);
             $this->notice->add('关注律师', '恭喜您关注律师成功', Auth::guard('api')->id());
         } catch (PDOException $exception) {
             DB::rollBack();
