@@ -24,6 +24,7 @@ Route::group([
         'personnel/authentications' => AuthenticationController::class,
         'personnel/customers'       => CustomerController::class,
         'personnel/attentions'      => AttentionController::class,
+        'personnel/addresses'       => UserAddressController::class,
         //'funds/balances/logs'       => BalanceLogController::class,
         //'funds/balances'            => BalanceController::class,
         'funds/ingots/logs'         => IngotsLogController::class,
