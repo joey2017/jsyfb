@@ -133,4 +133,35 @@ class UserAddressController extends Controller
 
         return $this->failed('修改失败,请稍后重试', 500);
     }
+
+
+    /**
+     *
+     * @SWG\Delete(
+     *   path="/users/address/{id}",
+     *   tags={"User"},
+     *   summary="删除地址",
+     *   description="删除地址",
+     *   produces={"application/json"},
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response="204", description="成功"),
+     *   @SWG\Response(response="401", description="未授权"),
+     *   @SWG\Response(response="500", description="服务器错误")
+     * )
+     */
+    public function destroy(UserAddress $address)
+    {
+        $result = null;
+        try {
+            $result = $address->delete();
+        } catch (PDOException $exception) {
+            Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
+        }
+        return $result > 0 ? $this->setStatusCode(204)->success('','success','删除成功') : $this->failed('删除失败，请稍后重试');
+    }
+
 }

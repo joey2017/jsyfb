@@ -114,6 +114,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/users/address/{address}', 'UserAddressController@show')->name('users-addresses.show');
         Route::post('/users/address', 'UserAddressController@store')->name('users-addresses.store');
         Route::put('/users/address/{address}', 'UserAddressController@update')->name('users-addresses.update');
+        Route::delete('/users/address/{address}','UserAddressController@destroy')->name('users-addresses.destroy');
 
         //商品列表
         Route::get('/goods', 'GoodsController@index')->name('goods.index');
