@@ -63,7 +63,7 @@ class AuthenticationController extends Controller
      */
     public function store(AuthenticationRequest $request)
     {
-        Authentication::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id()]));
+        Authentication::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
         return $this->created('添加成功');
     }
 

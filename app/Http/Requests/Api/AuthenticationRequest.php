@@ -16,14 +16,14 @@ class AuthenticationRequest extends FormRequest
         return [
             'realname'      => 'required|string',
             'mobile'        => 'required|regex:/^1[345789][0-9]{9}$/',
-            'email'         => 'sometimes|required|email',
-            'province'      => 'required|string',
-            'city'          => 'required|string',
-            'district'      => 'required|string',
-            'address'       => 'required|string',
+            //'email'         => 'sometimes|required|email',
+            //'province'      => 'required|string',
+            //'city'          => 'required|string',
+            //'district'      => 'required|string',
+            //'address'       => 'required|string',
             'identity_card' => 'required|string',
-            'front_photo'   => 'required|string',
-            'back_photo'    => 'required|string',
+            //'front_photo'   => 'required|string',
+            //'back_photo'    => 'required|string',
             'hand_photo'    => 'required|string',
         ];
     }
