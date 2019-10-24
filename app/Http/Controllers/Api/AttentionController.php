@@ -74,7 +74,7 @@ class AttentionController extends Controller
     /**
      *
      * @SWG\Delete(
-     *   path="/attention/{id}",
+     *   path="/attentions/{id}",
      *   tags={"Tool"},
      *   summary="取消关注律师",
      *   description="取消关注律师",
