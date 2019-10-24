@@ -17,8 +17,7 @@
 Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     Route::post('/users', 'UserController@store')->name('users.store');
     Route::post('/login', 'UserController@login')->name('users.login');
-    //图片上传
-    Route::post('/upload/image', 'ImageController@upload')->name('image.upload');
+
     //小程序授权登录
     Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
@@ -91,8 +90,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/answer/records', 'AnswerRecordController@index')->name('answer-records.index');
         Route::post('/answer/records', 'AnswerRecordController@store')->name('answer-records.store');
         Route::get('/answer/records/{record}', 'AnswerRecordController@show')->name('answer-records.show');
-        Route::get('/answer/totalranking','AnswerRecordController@totalranking')->name('answer-records.totalranking');
-        Route::get('/answer/ranking','AnswerRecordController@ranking')->name('answer-records.ranking');
+        Route::get('/answer/totalranking', 'AnswerRecordController@totalranking')->name('answer-records.totalranking');
+        Route::get('/answer/ranking', 'AnswerRecordController@ranking')->name('answer-records.ranking');
 
         //宝典分类
         Route::get('/legal/categories', 'LegalBookCategoryController@index')->name('legal-categories.index');
@@ -139,12 +138,12 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/notarys/advices', 'NotaryAdviceController@store')->name('notarys-advices.store');
 
         //关注律师列表
-        Route::get('/attentions','UserController@attention')->name('users.attentions');
+        Route::get('/attentions', 'UserController@attention')->name('users.attentions');
 
         //关注律师
-        Route::post('/attentions','AttentionController@store')->name('attentions.store');
+        Route::post('/attentions', 'AttentionController@store')->name('attentions.store');
         //取消关注律师
-        Route::delete('/attentions/{attention}','AttentionController@destroy')->name('attentions.destroy');
+        Route::delete('/attentions/{attention}', 'AttentionController@destroy')->name('attentions.destroy');
 
         //专属顾问列表
         Route::get('/customers', 'CustomerController@index')->name('customers.index');
@@ -159,7 +158,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/citys', 'LaywerController@citys')->name('laywers.citys');
 
         //指定城市区域列表
-        Route::get('/areas','LaywerController@areas')->name('laywers.areas');
+        Route::get('/areas', 'LaywerController@areas')->name('laywers.areas');
 
         //咨询专家保存
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
@@ -168,7 +167,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
 
         //个人法宝数量
-        Route::get('/users/ingots','UserController@ingots')->name('user.ingots');
+        Route::get('/users/ingots', 'UserController@ingots')->name('user.ingots');
 
         //用户信息
         Route::get('/users/{user}', 'UserController@show')->name('users.show');
@@ -177,8 +176,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
 
         //图片上传
-        //Route::post('/upload/image','ImageController@upload')->name('images.upload');
-
+        Route::post('/upload/image', 'ImageController@upload')->name('images.upload');
     });
 });
 
