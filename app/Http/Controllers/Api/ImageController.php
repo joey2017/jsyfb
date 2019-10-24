@@ -44,7 +44,7 @@ class ImageController extends Controller
                 $savePath = 'images/' . date('Y-m-d') . '/' . $fileName;//存储到指定文件，例如image/.filename public/.filename
                 //在.env修改默认驱动local为uploads
                 //Storage::put($savePath, File::get($file));//通过Storage put方法存储   File::get获取到的是文件内容
-                //Storage::exists($savePath)
+                Storage::exists($savePath);
 
                 if (Storage::disk('uploads')->put($savePath, File::get($file))) {
                     $user = Auth::guard('api')->user();
