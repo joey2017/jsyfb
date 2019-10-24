@@ -106,11 +106,14 @@ class ExchangeController extends Controller
     public function store(Request $request)
     {
         $quantity = $request->input('quantity', 0);
-        $ingots   = $request->input('ingots', 0);
         $goods_id = $request->input('goods_id', 0);
         $address  = $request->input('address', '');
 
-        if ($ingots <= 0 || $quantity <= 0) {
+        $goods = Goods::findOrFail($goods_id);
+
+        $ingots = $goods->exchange_price ?? $request->input('ingots', 0);
+
+        if ($ingots < 0 || $quantity <= 0) {
             return $this->failed('参数错误', 400);
         }
 
@@ -118,7 +121,7 @@ class ExchangeController extends Controller
             return $this->failed('法宝数量不足', 400);
         }
 
-        if ($quantity > Goods::findOrFail($goods_id)->stock) {
+        if ($quantity > $goods->stock) {
             return $this->failed('商品数量不足', 400);
         }
 

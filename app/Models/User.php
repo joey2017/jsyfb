@@ -191,6 +191,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Notice::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function ingots()
+    {
+        return $this->hasOne(Ingots::class);
+    }
+
     /*
      * 用户邀请人
      */
