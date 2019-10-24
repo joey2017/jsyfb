@@ -64,16 +64,16 @@ class NotaryOfficeController extends Controller
 
     protected function distance($from, $to)
     {
-        empty($from) && $from = [
+        empty($from) && $from = implode(',', [
             "lat" => 39.983171,
             "lng" => 116.308479,
-        ];
+        ]);
         $result = false;
         if (isset($from['lng']) && isset($from['lat'])) {
             $url    = 'https://apis.map.qq.com/ws/distance/v1/?';
             $params = [
                 'mode' => 'driving',
-                'from' => implode(',', $from),//lat,lng
+                'from' => $from,//lat,lng
                 'to'   => implode(',', $to),
                 'key'  => env('TENCENT_MAP_API_KEY'),
             ];
