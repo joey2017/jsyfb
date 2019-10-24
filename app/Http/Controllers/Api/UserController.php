@@ -84,12 +84,12 @@ class UserController extends Controller
                     //因为让一个过期的token再失效，会抛出异常，所以我们捕捉异常，不需要做任何处理
                 }
             }
-            $user->last_token = $token;
-            $user->login_num += 1;
-            $user->last_login_ip = $request->getClientIp();
+            $user->last_token      = $token;
+            $user->login_num       += 1;
+            $user->last_login_ip   = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
-            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token,'user' => new UserResource($user)],'success','登陆成功');
+            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)], 'success', '登陆成功');
         } else {
             return $this->failed('帐号或密码错误', 400);
         }
@@ -106,7 +106,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::guard('api')->logout();
-        return $this->success('','success','退出成功...');
+        return $this->success('', 'success', '退出成功...');
     }
 
     /**
@@ -150,9 +150,9 @@ class UserController extends Controller
     public function browseHistorys(User $user)
     {
         if (Auth::guard('api')->id() != $user->id) {
-            return $this->failed('禁止访问',403);
+            return $this->failed('禁止访问', 403);
         }
-        $historys = BrowseHistory::where('user_id',$user->id)->paginate(10);
+        $historys = BrowseHistory::where('user_id', $user->id)->paginate(10);
         return $this->success(BrowseHistoryResource::collection($historys));
     }
 
@@ -173,7 +173,7 @@ class UserController extends Controller
      */
     public function attention()
     {
-        $attentions = Attention::where('user_id',Auth::guard('api')->id())->paginate(10);
+        $attentions = Attention::where('user_id', Auth::guard('api')->id())->paginate(10);
         return $this->success(AttentionResource::collection($attentions));
     }
 
@@ -193,8 +193,8 @@ class UserController extends Controller
      */
     public function ingots()
     {
-        $ingots = Ingots::where('user_id',Auth::guard('api')->id())->first();
-        return $this->success(AttentionResource::collection($attentions));
+        $ingots = Ingots::firstOrCreate(['user_id' => Auth::guard('api')->id()], ['quantity' => 0]);
+        return $this->success(['quantity' => $ingots->quantity]);
     }
 
 }

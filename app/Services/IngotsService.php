@@ -29,7 +29,7 @@ class IngotsService
                 $type == IngotsLog::TYPE_INCRE ? $user->ingots += $quantity : $user->ingots -= $quantity;
                 $user->save();
 
-                $ingot = Ingots::firstOrCreate(['user_id' => $user->id]);
+                $ingot = Ingots::firstOrCreate(['user_id' => $user->id],['quantity' => 0]);
                 $type == IngotsLog::TYPE_INCRE ? $ingot->quantity += $quantity : $ingot->quantity -= $quantity;
                 $ingot->save();
 

@@ -29,8 +29,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/users/info', 'UserController@info')->name('users.info');
         //用户列表
         //Route::get('/users','UserController@index')->name('users.index');
-        //用户信息
-        Route::get('/users/{user}', 'UserController@show')->name('users.show');
+
         //用户退出
         Route::get('/logout', 'UserController@logout')->name('users.logout');
         //用户签到
@@ -56,8 +55,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/articles', 'ArticleController@index')->name('articles.index');
         //文章发布
         Route::post('/articles', 'ArticleController@store')->name('articles.store');
-        //文章详情
-        Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
 
         //点赞
         Route::post('/articles/likes', 'ArticleLikeController@store')->name('articles-likes.store');
@@ -166,6 +163,15 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //vip通道法宝消费大小
         Route::post('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
+
+        //个人法宝数量
+        Route::get('/users/ingots','UserController@ingots')->name('user.ingots');
+
+        //用户信息
+        Route::get('/users/{user}', 'UserController@show')->name('users.show');
+
+        //文章详情
+        Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
 
     });
 });

@@ -24,6 +24,7 @@ class UserAddressResource extends JsonResource
             'city'            => $this->city,
             'district'        => $this->district,
             'address'         => $this->address,
+            'pcda'            => $this->province.$this->city.$this->district.$this->address,
             'status'          => UserAddress::getStatusName($this->status),
             'created_at'      => (string)$this->created_at,
             'updated_at'      => (string)$this->updated_at
