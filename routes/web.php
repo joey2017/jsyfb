@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('errors.404');
+    //abort(404, '抱歉，未找到数据！');
 });
 
 //Route::any('user/test', ['as' => 'user','uses' => 'UserController@test']);
