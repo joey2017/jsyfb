@@ -95,7 +95,7 @@ class ExchangeController extends Controller
      *      }
      *     },
      *     @SWG\Parameter(name="goods_id",in="formData",required=true,description="商品id",type="integer"),
-     *     @SWG\Parameter(name="address_id",in="formData",required=true,description="地址id",type="integer"),
+     *     @SWG\Parameter(name="address",in="formData",required=true,description="地址",type="string"),
      *     @SWG\Parameter(name="ingots",in="formData",required=true,description="法宝数量",type="string"),
      *     @SWG\Parameter(name="quantity",in="formData",required=true,description="兑换商品数量",type="string"),
      *     @SWG\Response(response=201,description="成功"),
