@@ -3,6 +3,9 @@
 namespace App\Admin\Controllers;
 
 use App\Models\NotaryOffice;
+use App\Models\Region\Area;
+use App\Models\Region\City;
+use App\Models\Region\Province;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -35,9 +38,15 @@ class NotaryOfficeController extends AdminController
         $grid->column('summary', trans('admin.summary'));
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
-        $grid->column('province_code', trans('admin.province'));
-        $grid->column('city_code', trans('admin.city_code'));
-        $grid->column('district_code', trans('admin.district_code'));
+        $grid->column('province_code', trans('admin.province'))->display(function ($province_code) {
+            return Province::where('code', $province_code)->first()->province_name;
+        });
+        $grid->column('city_code', trans('admin.city_code'))->display(function ($city_code) {
+            return City::where('code', $city_code)->first()->city_name;
+        });
+        $grid->column('district_code', trans('admin.district_code'))->display(function ($district_code) {
+            return Area::where('code', $district_code)->first()->area_name;
+        });
         $grid->column('address', trans('admin.address'));
         $grid->column('lng', trans('admin.lng'));
         $grid->column('lat', trans('admin.lat'));
@@ -64,17 +73,20 @@ class NotaryOfficeController extends AdminController
         $show->field('name', trans('admin.name'));
         $show->field('mobile', trans('admin.mobile'));
         $show->field('telephone', trans('admin.telephone'));
-        //$show->field('email', trans('admin.email'));
         $show->field('summary', trans('admin.summary'));
         $show->field('comments_count', trans('admin.comments_count'));
         $show->field('score', trans('admin.score'));
-        $show->field('province_code', trans('admin.province_code'));
-        $show->field('city_code', trans('admin.city_code'));
-        $show->field('district_code', trans('admin.district_code'));
+        $show->field('province_code', trans('admin.province_code'))->as(function ($province_code) {
+            return Province::where('code', $province_code)->first()->province_name;
+        });
+        $show->field('city_code', trans('admin.city_code'))->as(function ($city_code) {
+            return City::where('code', $city_code)->first()->city_name;
+        });
+        $show->field('district_code', trans('admin.district_code'))->as(function ($district_code) {
+            return Area::where('code', $district_code)->first()->area_name;
+        });
         $show->field('address', trans('admin.address'));
-        //$show->field('lng', trans('admin.lng'));
-        //$show->field('lat', trans('admin.lat'));
-        $show->field('location',trans('经纬度'))->latlong('lat', 'long', $height = 400);
+        $show->field('location', trans('经纬度'))->latlong('lat', 'long', $height = 400);
         $show->field('status', trans('admin.status'))->using(NotaryOffice::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
@@ -104,9 +116,6 @@ class NotaryOfficeController extends AdminController
             'district_code' => '区'
         ], '地域选择');
         $form->text('address', trans('admin.address'));
-        //$form->text('lng', trans('admin.lng'));
-        //$form->text('lat', trans('admin.lat'));
-
         $form->latlong('lat', 'lng', '经纬度')->height(500);
 
         return $form;

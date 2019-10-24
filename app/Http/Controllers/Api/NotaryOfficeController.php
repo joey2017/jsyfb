@@ -66,8 +66,8 @@ class NotaryOfficeController extends Controller
     protected function distance($from, $to)
     {
         empty($from) && $from = implode(',', [
-            "lat" => 39.983171,
-            "lng" => 116.308479,
+            "lat" => 22.809098,
+            "lng" => 108.335280,
         ]);
         $result = false;
         if (!empty($from)) {
