@@ -81,7 +81,7 @@ class LegalBookController extends AdminController
         $form = new Form(new LegalBook);
 
         $options = LegalBookSection::where('status',1)->pluck('title', 'id')->toArray();
-        $form->select('section_id', trans('admin.section_title'))->options($options)->value(request('section_id'));
+        $form->select('section_id', trans('admin.section_title'))->options($options)->required();
         $form->editor('detail', trans('admin.detail'));
 
         return $form;
