@@ -72,8 +72,9 @@ class NotaryOfficeController extends AdminController
         $show->field('city_code', trans('admin.city_code'));
         $show->field('district_code', trans('admin.district_code'));
         $show->field('address', trans('admin.address'));
-        $show->field('lng', trans('admin.lng'));
-        $show->field('lat', trans('admin.lat'));
+        //$show->field('lng', trans('admin.lng'));
+        //$show->field('lat', trans('admin.lat'));
+        $show->field('location',trans('经纬度'))->latlong('lat', 'long', $height = 400);
         $show->field('status', trans('admin.status'))->using(NotaryOffice::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
