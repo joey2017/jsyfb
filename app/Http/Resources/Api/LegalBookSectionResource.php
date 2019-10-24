@@ -19,7 +19,7 @@ class LegalBookSectionResource extends JsonResource
             'id'         => $this->id,
             'name'       => $this->name,
             'cate_id'    => $this->cate_id,
-            'category'   => $this->legalBookCategory()->first()->title ?? '',
+            'category'   => $this->category()->first()->title ?? '',
             'jump_url'   => 'articles/legals/books/{id}',
             'title'      => $this->title,
             'status'     => LegalBookSection::getStatusName($this->status),
