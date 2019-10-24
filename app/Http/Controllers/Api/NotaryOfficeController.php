@@ -36,6 +36,7 @@ class NotaryOfficeController extends Controller
         foreach ($notarys['data'] as &$notary) {
             $notary->distance = $this->distance($from, [$notary->lat, $notary->lng]);
         }
+        array_multisort(array_column($notarys['data'],'distance'),SORT_ASC,$notarys['data']);
         //return $this->success(NotaryOfficeResource::collection($notarys));
         return $this->success($notarys);
     }
