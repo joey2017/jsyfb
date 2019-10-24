@@ -69,7 +69,7 @@ class NotaryOfficeController extends Controller
             "lng" => 116.308479,
         ]);
         $result = false;
-        if (isset($from['lng']) && isset($from['lat'])) {
+        if (!empty($from)) {
             $url    = 'https://apis.map.qq.com/ws/distance/v1/?';
             $params = [
                 'mode' => 'driving',
