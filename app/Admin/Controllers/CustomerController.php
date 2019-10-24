@@ -75,6 +75,9 @@ class CustomerController extends AdminController
 
             // 去掉查看
             $actions->disableView();
+
+            // 去掉删除
+            $actions->disableDelete();
         });
 
         return $grid;
@@ -92,6 +95,27 @@ class CustomerController extends AdminController
         $form->text('kf_account', trans('admin.kf_account'));
         $form->text('kf_nick', trans('admin.nickname'));
         $form->password('password', trans('admin.password'));
+
+        $form->savd(function (Form $form) {
+            try {
+                $data     = [
+                    'kf_account' => $form->model()->kf_account,
+                    'nickname'   => $form->model()->nickname,
+                    'kf_nick'    => $form->model()->kf_nick,
+                    'kf_id'      => $form->model()->kf_id,
+                ];
+                $client   = new Client();
+                $response = $client->request('GET', sprintf($this->url['del'], $this->wechat->getAccessToken()), ['form_data' => $data]);
+                $result   = \GuzzleHttp\json_decode($response->getBody(), true);
+                if ($result['errcode'] !== 0) {
+                    Log::error('调用微信删除客服接口失败：', $result);
+                    return admin_error('删除失败', '小程序端客服接口调用失败,无法删除');
+                }
+            } catch (\Exception $exception) {
+                Log::error('调用微信删除客服异常：', ['info' => $exception->getTraceAsString()]);
+            }
+
+        });
 
         return $form;
     }
