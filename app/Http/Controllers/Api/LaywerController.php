@@ -108,8 +108,19 @@ class LaywerController extends Controller
      */
     public function provinces()
     {
-        $provinces = Province::all()->pluck('province_name', 'code')->toArray();
-        return $this->success(['0' => '全国'] + $provinces);
+        $provinces = Province::all(['id', 'code', 'province_name', 'short_name', 'lng', 'lat', 'sort'])->toArray();
+        $other     = [
+            [
+                'id'            => '0',
+                'code'          => '0',
+                'province_name' => '全国',
+                'short_name'    => '全国',
+                'lng'           => '0',
+                'lat'           => '0',
+                'sort'          => '0',
+            ]
+        ];
+        return $this->success($other + $provinces);
     }
 
 
@@ -132,9 +143,20 @@ class LaywerController extends Controller
     {
         $code = $request->input('code');
         if (empty($code)) {
-            $citys = ['0' => '全国'];
+            $citys = [
+                [
+                    'id'            => '0',
+                    'code'          => '0',
+                    'city_name'     => '全国',
+                    'short_name'    => '全国',
+                    'province_code' => '0',
+                    'lng'           => '0',
+                    'lat'           => '0',
+                    'sort'          => '0',
+                ]
+            ];
         } else {
-            $citys = City::where('province_code', $code)->pluck('city_name', 'code')->toArray();
+            $citys = City::where('province_code', $code)->select(['id', 'code', 'city_name', 'short_name', 'province_code', 'lng', 'lat', 'sort'])->get()->toArray();
         }
         return $this->success($citys);
     }
