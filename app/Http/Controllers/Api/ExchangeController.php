@@ -95,6 +95,7 @@ class ExchangeController extends Controller
      *      }
      *     },
      *     @SWG\Parameter(name="goods_id",in="formData",required=true,description="商品id",type="integer"),
+     *     @SWG\Parameter(name="address_id",in="formData",required=true,description="地址id",type="integer"),
      *     @SWG\Parameter(name="ingots",in="formData",required=true,description="法宝数量",type="string"),
      *     @SWG\Parameter(name="quantity",in="formData",required=true,description="兑换商品数量",type="string"),
      *     @SWG\Response(response=201,description="成功"),
@@ -104,9 +105,10 @@ class ExchangeController extends Controller
      */
     public function store(Request $request)
     {
-        $quantity = $request->input('quantity', 0);
-        $ingots   = $request->input('ingots', 0);
-        $goods_id = $request->input('goods_id', 0);
+        $quantity   = $request->input('quantity', 0);
+        $ingots     = $request->input('ingots', 0);
+        $goods_id   = $request->input('goods_id', 0);
+        $address_id = $request->input('address_id', 0);
 
         if ($ingots <= 0 || $quantity <= 0) {
             return $this->failed('参数错误', 400);
@@ -120,20 +122,25 @@ class ExchangeController extends Controller
             return $this->failed('商品数量不足', 400);
         }
 
+        if ($address_id == 0) {
+            return $this->failed('地址不能为空', 400);
+        }
+
         $result = false;
 
         try {
-            $result = DB::transaction(function () use ($ingots, $quantity, $goods_id) {
+            $result = DB::transaction(function () use ($ingots, $quantity, $goods_id, $address_id) {
                 Exchange::create([
                     'user_id'    => Auth::guard('api')->id(),
                     'quantity'   => $quantity,
                     'ingots'     => $ingots,
                     'goods_id'   => $goods_id,
+                    'address_id' => $address_id,
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
                 $this->ingots->update($ingots, '兑换商品', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
                 $goods = $this->updateStock($goods_id, $quantity);
-                $this->notice->add('法宝兑换', '使用' . $ingots . '个法宝兑换' . $quantity . '件商品,该商品为' . $goods->goods_name, Auth::guard('api')->id(),2);
+                $this->notice->add('法宝兑换', '使用' . $ingots . '个法宝兑换' . $quantity . '件商品,该商品为' . $goods->goods_name, Auth::guard('api')->id(), 2);
                 return true;
             });
 
