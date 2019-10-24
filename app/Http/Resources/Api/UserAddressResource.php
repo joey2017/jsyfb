@@ -18,9 +18,13 @@ class UserAddressResource extends JsonResource
      */
     public function toArray($request)
     {
-        $province_name = Province::where('code', '=', $this->province)->first()->province_name;
-        $city_name     = City::where('code', '=', $this->city)->first()->city_name;
-        $area_name     = Area::where('code', '=', $this->district)->first()->area_name;
+        $province      = Province::where('code', '=', $this->province)->first();
+        $province_name = $province ? $province->province_name : '';
+        $city          = City::where('code', '=', $this->city)->first();
+        $city_name     = $city ? $city->city_name : '';
+        $area          = Area::where('code', '=', $this->district)->first();
+        $area_name     = $area ? $area->city_name : '';
+
         return [
             'id'              => $this->id,
             'user_id'         => $this->user_id,
