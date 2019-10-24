@@ -155,6 +155,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //指定省份城市列表
         Route::get('/citys', 'LaywerController@citys')->name('laywers.citys');
 
+        //指定城市区域列表
+        Route::get('/areas','LaywerController@areas')->name('laywers.areas');
+
         //咨询专家保存
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
 

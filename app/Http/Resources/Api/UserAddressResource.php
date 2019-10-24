@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\Region\Area;
+use App\Models\Region\City;
+use App\Models\Region\Province;
 use App\Models\UserAddress;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,16 +18,22 @@ class UserAddressResource extends JsonResource
      */
     public function toArray($request)
     {
+        $province_name = Province::where('code', '=', $this->province)->first()->province_name;
+        $city_name     = City::where('code', '=', $this->city)->first()->city_name;
+        $area_name     = Area::where('code', '=', $this->district)->first()->area_name;
         return [
             'id'              => $this->id,
             'user_id'         => $this->user_id,
             'receiver'        => $this->receiver,
             'receiver_mobile' => $this->receiver_mobile,
             'province'        => $this->province,
+            'province_name'   => $province_name,
             'city'            => $this->city,
+            'city_name'       => $city_name,
             'district'        => $this->district,
+            'district_name'   => $area_name,
             'address'         => $this->address,
-            'pcda'            => $this->province.$this->city.$this->district.$this->address,
+            'pcda'            => $province_name . $city_name . $area_name . $this->address,
             'status'          => UserAddress::getStatusName($this->status),
             'created_at'      => (string)$this->created_at,
             'updated_at'      => (string)$this->updated_at

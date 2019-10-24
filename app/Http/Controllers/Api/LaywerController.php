@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\LaywerResource;
 use App\Models\Attention;
 use App\Models\Laywer;
+use App\Models\Region\Area;
 use App\Models\Region\City;
 use App\Models\Region\Province;
 use Illuminate\Http\Request;
@@ -159,6 +160,43 @@ class LaywerController extends Controller
             $citys = City::where('province_code', $code)->select(['id', 'code', 'city_name', 'short_name', 'province_code', 'lng', 'lat', 'sort'])->get()->toArray();
         }
         return $this->success($citys);
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/areas",
+     *   tags={"Tool"},
+     *   summary="指定城市区域",
+     *   description="指定城市区域",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="code", type="integer", required=true, in="query", description="城市代码"),
+     *   @SWG\Response(response=200,description="成功")
+     * )
+     */
+    public function areas(Request $request)
+    {
+        $code = $request->input('code');
+        if (empty($code)) {
+            $areas = [
+                [
+                    'id'         => '0',
+                    'code'       => '0',
+                    'area_name'  => '全国',
+                    'short_name' => '全国',
+                    'city_code'  => '0',
+                    'lng'        => '0',
+                    'lat'        => '0',
+                    'sort'       => '0',
+                ]
+            ];
+        } else {
+            $areas = Area::where('city_code', $code)->select(['id', 'code', 'area_name', 'short_name', 'city_code', 'lng', 'lat', 'sort'])->get()->toArray();
+        }
+        return $this->success($areas);
     }
 
 
