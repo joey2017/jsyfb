@@ -203,4 +203,6 @@ return [
     'section'               => '章节',
     'section_title'         => '章节标题',
     'kf_account'            => '客服账号',
+    'receiver'              => '收货人',
+    'receiver_mobile'       => '收货人手机',
 ];

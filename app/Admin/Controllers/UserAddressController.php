@@ -2,6 +2,11 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
+use App\Models\Region\Area;
+use App\Models\Region\City;
+use App\Models\Region\Province;
+use App\Models\User;
 use App\Models\UserAddress;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -27,16 +32,22 @@ class UserAddressController extends AdminController
         $grid = new Grid(new UserAddress);
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('receiver', __('Receiver'));
-        $grid->column('receiver_mobile', __('Receiver mobile'));
-        $grid->column('province', __('Province'));
-        $grid->column('city', __('City'));
-        $grid->column('district', __('District'));
-        $grid->column('address', __('Address'));
-        $grid->column('status', __('Status'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('receiver', trans('admin.receiver'));
+        $grid->column('receiver_mobile', trans('admin.receiver_mobile'));
+        $grid->column('province', trans('admin.province'))->display(function ($province){
+            return Province::where('code',$province)->first()->province_name;
+        });
+        $grid->column('city', trans('admin.city'))->display(function ($city){
+            return City::where('code',$city)->first()->city_name;
+        });
+        $grid->column('district', trans('admin.district'))->display(function ($district){
+            return Area::where('code',$district)->first()->area_name;
+        });
+        $grid->column('address', trans('admin.address'));
+        $grid->column('status', trans('admin.status'))->using(UserAddress::STATUSES);
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -52,16 +63,24 @@ class UserAddressController extends AdminController
         $show = new Show(UserAddress::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('receiver', __('Receiver'));
-        $show->field('receiver_mobile', __('Receiver mobile'));
-        $show->field('province', __('Province'));
-        $show->field('city', __('City'));
-        $show->field('district', __('District'));
-        $show->field('address', __('Address'));
-        $show->field('status', __('Status'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('user_id', trans('admin.nickname'))->as(function ($user_id){
+            return User::findOrFail($user_id)->nickname;
+        });
+        $show->field('receiver', trans('admin.receiver'));
+        $show->field('receiver_mobile', trans('admin.receiver_mobile'));
+        $show->field('province', trans('admin.province'))->as(function ($province){
+            return Province::where('code',$province)->first()->province_name;
+        });
+        $show->field('city', trans('admin.city'))->as(function ($city){
+            return City::where('code',$city)->first()->city_name;
+        });
+        $show->field('district', trans('admin.district'))->as(function ($district){
+            return Area::where('code',$district)->first()->area_name;
+        });
+        $show->field('address', trans('admin.address'));
+        $show->field('status', trans('admin.status'))->using(UserAddress::STATUSES);
+        $show->field('created_at', trans('admin.created_at'));
+        $show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
@@ -75,14 +94,15 @@ class UserAddressController extends AdminController
     {
         $form = new Form(new UserAddress);
 
-        $form->number('user_id', __('User id'));
-        $form->text('receiver', __('Receiver'));
-        $form->text('receiver_mobile', __('Receiver mobile'));
-        $form->text('province', __('Province'));
-        $form->text('city', __('City'));
-        $form->text('district', __('District'));
-        $form->text('address', __('Address'));
-        $form->switch('status', __('Status'))->default(1);
+        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname());
+        $form->text('receiver', trans('admin.receiver'));
+        $form->mobile('receiver_mobile', trans('admin.receiver_mobile'));
+        $form->distpicker([
+            'province' => '省份',
+            'city'     => '市',
+            'district' => '区'
+        ], '地域选择');
+        $form->text('address', trans('admin.address'));
 
         return $form;
     }
