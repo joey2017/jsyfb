@@ -110,9 +110,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //浏览记录
         Route::get('/users/browse-historys/{user}', 'UserController@browseHistorys')->name('users.browseHistorys');
 
-        //钱包明细
-        Route::get('/users/balance-logs/{user}', 'UserController@balanceLogs')->name('users.balanceLogs');
-
         //地址
         Route::get('/addresses', 'UserAddressController@index')->name('users-addresses.index');
         Route::get('/users/address/{address}', 'UserAddressController@show')->name('users-addresses.show');
