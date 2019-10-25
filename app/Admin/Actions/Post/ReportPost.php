@@ -4,6 +4,7 @@ namespace App\Admin\Actions\Post;
 
 use App\Models\Authentication;
 use App\Models\User;
+use App\Services\NoticeService;
 use Doctrine\DBAL\Driver\PDOException;
 use Encore\Admin\Actions\BatchAction;
 use Illuminate\Database\Eloquent\Collection;
@@ -31,13 +32,17 @@ class ReportPost extends BatchAction
 
                 if ($data['status'] == Authentication::PASSED) {
                     $user->is_verified = User::CERTIFIED;
+                    $notice = trans('admin.auth_passed_notice');
                 } else {
                     $user->is_verified = User::UNCERTIFIED;
+                    $notice = trans('admin.auth_failed_notice');
                 }
                 $user->save();
+                $noticeService = new NoticeService();
+                $noticeService->add('实名认证申请审核通知', $notice, $user->id);
             }
         } catch (PDOException $exception) {
-            Log::channel('mysqllog')->error('mysql错误：'.$exception->getMessage(),['info' => $exception->getTraceAsString()]);
+            Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
         }
 
         return $this->response()->topCenter()->success($request->get('title'))->refresh();

@@ -210,4 +210,6 @@ return [
     'admin_publisher'       => '发布者',
     'specialist_comment'    => '专家点评',
     'no_permissions'        => '无权限访问',
+    'auth_passed_notice'    => '恭喜您，您提交的实名认证审核申请已通过',
+    'auth_failed_notice'    => '抱歉，因资料不全，实名认证申请没有通过，您可以重新提交申请'
 ];

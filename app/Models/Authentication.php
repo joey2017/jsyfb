@@ -100,4 +100,21 @@ class Authentication extends Model
     {
         return self::STATUSES[$status];
     }
+
+    /**
+     *
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        //删除回调
+        static::deleted(function ($model) {
+            if ($model->status == self::PASSED) {
+                $user = User::findOrFail($model->user_id);
+                $user->is_verified = User::UNCERTIFIED;
+                $user->save();
+            }
+        });
+    }
 }

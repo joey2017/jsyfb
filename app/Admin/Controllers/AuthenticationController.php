@@ -5,10 +5,13 @@ namespace App\Admin\Controllers;
 use App\Admin\Actions\Post\ReportPost;
 use App\Models\Authentication;
 use App\Models\User;
+use App\Services\NoticeService;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticationController extends AdminController
 {
@@ -18,6 +21,13 @@ class AuthenticationController extends AdminController
      * @var string
      */
     protected $title = '实名认证申请记录';
+
+    protected $notice;
+
+    public function __construct(NoticeService $noticeService)
+    {
+        $this->notice = $noticeService;
+    }
 
     /**
      * Make a grid builder.
@@ -95,15 +105,23 @@ class AuthenticationController extends AdminController
         $form->datetime('veritied_at', trans('admin.veritied_at'))->default(date('Y-m-d H:i:s'));
 
         $form->saved(function (Form $form) {
-            if ($form->model()->status == Authentication::PASSED) {
-                $user = User::findOrFail($form->model()->user_id);
-                $user->is_verified = User::CERTIFIED;
-                $user->save();
+            try {
+                DB::beginTransaction();
+                if ($form->model()->status == Authentication::PASSED) {
+                    $user              = User::findOrFail($form->model()->user_id);
+                    $user->is_verified = User::CERTIFIED;
+                    $user->save();
+                    $notice = trans('admin.auth_passed_notice');
+                } else {
+                    $notice = trans('admin.auth_failed_notice');
+                }
+                $this->notice->add('实名认证申请审核通知', $notice, $form->model()->user_id);
+            } catch (\Exception $exception) {
+                Log::error('实名认证审核操作错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
+                DB::rollBack();
             }
-        });
-        
-        $form->deleted(function ($form) {
 
+            DB::commit();
         });
 
         return $form;
