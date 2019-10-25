@@ -10,7 +10,6 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
 class ArticleCommentController extends AdminController
@@ -114,7 +113,7 @@ class ArticleCommentController extends AdminController
         $form->textarea('measures', trans('admin.measures'))->required();
         $form->editor('content', trans('admin.comment_content'));
 
-        $form->submitted(function (Form $form) {
+        $form->saving(function (Form $form) {
             if ($form->content == '') {
                 $error = new MessageBag([
                     'title'   => trans('admin.save_failed'),

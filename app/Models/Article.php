@@ -69,6 +69,30 @@ class Article extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function browseHistorys()
+    {
+        return $this->hasMany(BrowseHistory::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function shares()
+    {
+        return $this->hasMany(ArticleShare::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function likes()
+    {
+        return $this->hasMany(ArticleLike::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function adminer()
@@ -83,5 +107,19 @@ class Article extends Model
     public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
+    }
+
+    /**
+     * 关联删除
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($article) {
+            $article->articleComments()->delete();
+            $article->browseHistorys()->delete();
+            $article->shares()->delete();
+            $article->likes()->delete();
+        });
     }
 }

@@ -41,7 +41,7 @@ class BrowseHistoryController extends AdminController
         $grid->column('updated_at', trans('admin.updated_at'));
 
         $grid->actions(function ($actions) {
-            //$actions->disableView();
+            $actions->disableView();
             $actions->disableEdit();
         });
 

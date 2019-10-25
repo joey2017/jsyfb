@@ -108,10 +108,10 @@ class ArticleController extends AdminController
         $admins = DB::table(config('admin.database.users_table'))->pluck('username', 'id')->toArray();
         $form->select('admin_id', trans('admin.admin_publisher'))->options($admins)->required();
         $form->text('title', trans('admin.title'))->required();
-        $form->editor('content', trans('admin.content'))->required();
+        $form->editor('content', trans('admin.content'));
         $form->image('images', trans('admin.image'))->required();
 
-        $form->submitted(function (Form $form) {
+        $form->saving(function (Form $form) {
             if ($form->content == '') {
                 $error = new MessageBag([
                     'title'   => trans('admin.save_failed'),
@@ -141,6 +141,16 @@ class ArticleController extends AdminController
         $form->editor('comment_content', trans('admin.comment_content'));
 
         $form->setAction('/admin/articles/savecomments/' . $id);
+
+        $form->saving(function (Form $form) {
+            if ($form->content == '') {
+                $error = new MessageBag([
+                    'title'   => trans('admin.save_failed'),
+                    'message' => trans('admin.empty_content'),
+                ]);
+                return back()->with(compact('error'));
+            }
+        });
 
         return $form;
     }
