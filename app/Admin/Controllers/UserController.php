@@ -37,7 +37,6 @@ class UserController extends AdminController
             0 => 'info',
             1 => 'success',
         ]);
-        $grid->column('balance', trans('admin.balance'));
         $grid->column('ingots', trans('admin.ingots'));
         $grid->column('invitation_code', trans('admin.invitation_code'));
         $grid->column('is_vip', trans('admin.is_vip'))->using(['否','是'])->label([
@@ -75,7 +74,6 @@ class UserController extends AdminController
         $show->field('last_login_ip', trans('admin.last_login_ip'));
         $show->field('last_login_time', trans('admin.last_login_time'));
         $show->field('is_verified', trans('admin.is_verified'));
-        $show->field('balance', trans('admin.balance'));
         $show->field('ingots', trans('admin.ingots'));
         $show->field('invitation_code', trans('admin.invitation_code'));
         $show->field('is_vip', trans('admin.is_vip'));
@@ -106,7 +104,6 @@ class UserController extends AdminController
         $form->text('last_login_ip', trans('admin.last_login_ip'));
         $form->datetime('last_login_time', trans('admin.last_login_time'))->default(date('Y-m-d H:i:s'));
         $form->switch('is_verified', trans('admin.is_verified'));
-        $form->decimal('balance', trans('admin.balance'));
         $form->number('ingots', trans('admin.ingots'));
         $form->text('invitation_code', trans('admin.invitation_code'));
         $form->switch('is_vip', trans('admin.is_vip'));
