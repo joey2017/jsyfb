@@ -12,11 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('errors.404');
-    //abort(404, '抱歉，未找到数据！');
+    abort(404, '抱歉，未找到数据！');
+    //return view('errors.404');
 });
 
-//Route::any('user/test', ['as' => 'user','uses' => 'UserController@test']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
