@@ -52,6 +52,7 @@ return [
     'delete_failed'         => '删除失败 !',
     'update_succeeded'      => '更新成功 !',
     'save_succeeded'        => '保存成功 !',
+    'save_failed'           => '保存失败 !',
     'refresh_succeeded'     => '刷新成功 !',
     'login_successful'      => '登录成功 !',
     'choose'                => '选择',
@@ -205,4 +206,8 @@ return [
     'kf_account'            => '客服账号',
     'receiver'              => '收货人',
     'receiver_mobile'       => '收货人手机',
+    'empty_content'         => '内容不能为空',
+    'admin_publisher'       => '发布者',
+    'specialist_comment'    => '专家点评',
+    'no_permissions'        => '无权限访问',
 ];

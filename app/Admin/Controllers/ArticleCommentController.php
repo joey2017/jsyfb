@@ -11,6 +11,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 
 class ArticleCommentController extends AdminController
 {
@@ -48,7 +49,15 @@ class ArticleCommentController extends AdminController
 
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
-            $filter->like('article.title', trans('admin.title'));
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('article.title', trans('admin.title'));
+
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('laywer.name', trans('admin.laywer'));
+
+            });
         });
 
         return $grid;
@@ -97,35 +106,24 @@ class ArticleCommentController extends AdminController
             $form->textarea('article.content', trans('admin.content'))->readonly();
             $form->select('laywer_id', trans('admin.laywer'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray())->readOnly();
         } else {
-            $form->select('article_id', trans('admin.title'))->options(Article::where([['status', 1], ['is_deleted', 0]])->pluck('title', 'id')->toArray());
+            $form->select('article_id', trans('admin.title'))->options(Article::where([['status', 1], ['is_deleted', 0]])->pluck('title', 'id')->toArray())->required();
             $form->textarea('article.content', trans('admin.content'));
-            $form->select('laywer_id', trans('admin.laywer'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray());
+            $form->select('laywer_id', trans('admin.laywer'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray())->required();
         }
-        $form->textarea('interpretation', trans('admin.interpretation'));
-        $form->textarea('measures', trans('admin.measures'));
+        $form->textarea('interpretation', trans('admin.interpretation'))->required();
+        $form->textarea('measures', trans('admin.measures'))->required();
         $form->editor('content', trans('admin.comment_content'));
-        $script = <<<EOF
-$('.article_id').change(function(){
-    var val = $(this).val();
-    $.ajax({
-        url: '/admin/articles/comments/getcontent',
-        type: 'GET',
-        data: {'article_id':val},
-        dataType: 'JSON',
-        success: function(result){
-            $('.article_content_').val(result);
-        }
-    });
-});       
 
-EOF;
-        Admin::script($script);
+        $form->submitted(function (Form $form) {
+            if ($form->content == '') {
+                $error = new MessageBag([
+                    'title'   => trans('admin.save_failed'),
+                    'message' => trans('admin.empty_content'),
+                ]);
+                return back()->with(compact('error'));
+            }
+        });
+
         return $form;
-    }
-
-    public function getContent(Request $request)
-    {
-        $id = $request->input('article_id', '');
-        return Article::findOrFail($id)->content;
     }
 }

@@ -106,7 +106,7 @@ class ArticleController extends AdminController
         $form = new Form(new Article);
 
         $admins = DB::table(config('admin.database.users_table'))->pluck('username', 'id')->toArray();
-        $form->select('admin_id', '发布人')->options($admins)->required();
+        $form->select('admin_id', trans('admin.admin_publisher'))->options($admins)->required();
         $form->text('title', trans('admin.title'))->required();
         $form->editor('content', trans('admin.content'))->required();
         $form->image('images', trans('admin.image'))->required();
@@ -114,8 +114,8 @@ class ArticleController extends AdminController
         $form->submitted(function (Form $form) {
             if ($form->content == '') {
                 $error = new MessageBag([
-                    'title'   => '保存失败',
-                    'message' => '内容不能为空',
+                    'title'   => trans('admin.save_failed'),
+                    'message' => trans('admin.empty_content'),
                 ]);
 
                 return back()->with(compact('error'));
@@ -153,7 +153,7 @@ class ArticleController extends AdminController
     public function addcomments($id, Content $content)
     {
         return $content
-            ->title('专家点评')
+            ->title(trans('admin.specialist_comment'))
             ->description(trans('admin.create'))
             ->body($this->commentform($id)->edit($id));
     }
@@ -166,7 +166,7 @@ class ArticleController extends AdminController
     public function savecomments($id, Request $request)
     {
         if (!Admin::user()->isRole('laywer')) {
-            admin_error('保存失败', '你没有权限访问');
+            admin_error(trans('admin.save_failed'), trans('admin.no_permissions'));
             return back();
         } else {
             $data = [
