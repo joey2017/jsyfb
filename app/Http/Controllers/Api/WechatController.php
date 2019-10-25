@@ -54,6 +54,7 @@ class WechatController extends Controller
      *   @SWG\Parameter(name="iv", type="string", required=true, in="formData", description="iv"),
      *   @SWG\Parameter(name="rawData", type="string", required=true, in="formData", description="用户微信原始信息"),
      *   @SWG\Parameter(name="signature", type="string", required=true, in="formData", description="数据签名"),
+     *   @SWG\Parameter(name="icode", type="string", required=false, in="query", description="邀请码"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */

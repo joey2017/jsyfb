@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Actions\Post\ReportPost;
 use App\Models\Authentication;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -36,8 +37,6 @@ class AuthenticationController extends AdminController
         $grid->column('realname', trans('admin.realname'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('identity_card', trans('admin.identity_card'));
-        //$grid->column('front_photo', trans('admin.nickname'));
-        //$grid->column('back_photo', trans('admin.nickname'));
         $grid->column('hand_photo', trans('admin.hand_photo'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('remark', trans('admin.remark'));
         $grid->column('status', trans('admin.status'))->using(Authentication::STATUSES)->label();
@@ -64,9 +63,7 @@ class AuthenticationController extends AdminController
         $show->field('realname', trans('admin.realname'));
         $show->field('mobile', trans('admin.mobile'));
         $show->field('identity_card', trans('admin.identity_card'));
-        //$show->field('front_photo', trans('admin.nickname'));
-        //$show->field('back_photo', trans('admin.nickname'));
-        //$show->field('hand_photo', trans('admin.hand_photo'))->image();
+        $show->field('hand_photo', trans('admin.hand_photo'))->image();
         $show->hand_photo(trans('admin.hand_photo'))->image();
         $show->field('remark', trans('admin.remark'));
         $show->field('status', trans('admin.status'))->using(Authentication::STATUSES);
@@ -91,13 +88,23 @@ class AuthenticationController extends AdminController
         $form->text('realname', trans('admin.realname'));
         $form->mobile('mobile', trans('admin.mobile'));
         $form->text('identity_card', trans('admin.identity_card'));
-        //$form->text('front_photo', trans('admin.front_photo'));
-        //$form->text('back_photo', trans('admin.back_photo'));
         $form->image('hand_photo', trans('admin.hand_photo'));
         $form->text('remark', trans('admin.remark'));
         $form->select('status', trans('admin.status'))->options(Authentication::STATUSES);
         $form->datetime('review_at', trans('admin.review_at'))->default(date('Y-m-d H:i:s'));
         $form->datetime('veritied_at', trans('admin.veritied_at'))->default(date('Y-m-d H:i:s'));
+
+        $form->saved(function (Form $form) {
+            if ($form->model()->status == Authentication::PASSED) {
+                $user = User::findOrFail($form->model()->user_id);
+                $user->is_verified = User::CERTIFIED;
+                $user->save();
+            }
+        });
+        
+        $form->deleted(function ($form) {
+
+        });
 
         return $form;
     }
