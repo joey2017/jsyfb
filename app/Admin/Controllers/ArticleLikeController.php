@@ -29,7 +29,7 @@ class ArticleLikeController extends AdminController
 
         $grid->disableCreateButton();
 
-        $grid->actions(function($actions){
+        $grid->actions(function ($actions) {
             // 去掉编辑
             $actions->disableEdit();
             // 去掉查看
@@ -38,8 +38,20 @@ class ArticleLikeController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('article.title', trans('admin.title'));
+        $grid->column('article.images', trans('admin.image'));
         $grid->column('article.content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('article.title', trans('admin.title'));
+            });
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+        });
 
         return $grid;
     }

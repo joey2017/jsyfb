@@ -7,6 +7,7 @@ use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Yansongda\LaravelPay\Facades\Pay;
 
 class PaymentController extends Controller
@@ -91,8 +92,14 @@ class PaymentController extends Controller
      */
     public function ingotspay(Request $request)
     {
-        $ingots = $request->input('quantity');
-        $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
-        $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(),2);
+        try {
+            $ingots = $request->input('quantity');
+            $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
+            $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(), 2);
+        } catch (\Exception $exception) {
+            Log::error('咨询专属法顾支付法宝异常：'.$exception->getMessage(),['info' => $exception->getTraceAsString()]);
+        }
+
+        return $this->created('支付成功');
     }
 }

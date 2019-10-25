@@ -59,7 +59,7 @@ class ArticleController extends AdminController
             // 去掉默认的 id 过滤器
             $filter->disableIdFilter();
             // 添加新的字段过滤器（通过内容过滤）
-            $filter->like('content', '内容');
+            $filter->like('title', trans('admin.title'));
         });
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -109,12 +109,19 @@ class ArticleController extends AdminController
         $form->text('title', trans('admin.title'))->required();
         $form->editor('content', trans('admin.content'))->required();
         $form->image('images', trans('admin.image'))->required();
-//        $form->textarea('interpretation', trans('admin.interpretation'));
-//        $form->textarea('measures', trans('admin.measures'));
-//
-//        $form->saving(function (Form $form) {
-//            $form->model()->spec_id = config('admin.database.users_model')::findOrFail(Admin::user()->id)->related_spec_id;
-//        });
+
+        $result = false;
+
+        $result = $form->submitted(function(Form $form){
+           if ($form->content === '') {
+               return admin_error('保存失败','内容不能为空');
+           }
+           return true;
+        });
+
+        if ($result !== true) {
+            exit;
+        }
 
         return $form;
     }

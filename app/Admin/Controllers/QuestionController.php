@@ -31,13 +31,16 @@ class QuestionController extends AdminController
         $grid->column('title', trans('admin.title'));
         $grid->column('questionCategory.title', '分类');
         $grid->column('answer', trans('admin.answer'))->width(600);
-        //$grid->column('status', trans('admin.status'));
         $grid->column('status',trans('admin.status'))->display(function($status){
             return Question::getStatusName($status);
         })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
+        $grid->filter(function ($filter){
+            $filter->disableIdFilter();
+            $filter->like('title',trans('admin.title'));
+        });
         return $grid;
     }
 
@@ -70,9 +73,9 @@ class QuestionController extends AdminController
     {
         $form = new Form(new Question);
 
-        $form->text('title', trans('admin.title'));
-        $form->select('cate_id', trans('admin.cate_id'))->options(QuestionCategory::where('status',1)->pluck('title','id')->toArray());
-        $form->textarea('answer', trans('admin.answer'));
+        $form->text('title', trans('admin.title'))->required();
+        $form->select('cate_id', trans('admin.cate_id'))->options(QuestionCategory::where('status',1)->pluck('title','id')->toArray())->required();
+        $form->textarea('answer', trans('admin.answer'))->required();
 
         return $form;
     }

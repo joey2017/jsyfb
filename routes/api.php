@@ -178,6 +178,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //图片上传
         Route::post('/upload/image', 'ImageController@upload')->name('images.upload');
+
+        //支付法宝接口
+        Route::post('/payment/ingotspay','PaymentController@ingotspay')->name('payments.ingotspay');
     });
 });
 

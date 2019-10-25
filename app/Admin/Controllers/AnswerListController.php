@@ -39,6 +39,10 @@ class AnswerListController extends AdminController
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
+        $grid->filter(function ($filter){
+            $filter->like('title',trans('admin.title'));
+        });
+
         return $grid;
     }
 
@@ -75,12 +79,12 @@ class AnswerListController extends AdminController
     {
         $form = new Form(new AnswerList);
 
-        $form->text('title', trans('admin.title'));
-        $form->text('A', trans('admin.A'));
-        $form->text('B', trans('admin.B'));
-        $form->text('C', trans('admin.C'));
-        $form->text('D', trans('admin.D'));
-        $form->text('correct', trans('admin.correct'));
+        $form->text('title', trans('admin.title'))->required();
+        $form->text('A', trans('admin.A'))->required();
+        $form->text('B', trans('admin.B'))->required();
+        $form->text('C', trans('admin.C'))->required();
+        $form->text('D', trans('admin.D'))->required();
+        $form->text('correct', trans('admin.correct'))->required();
 
         return $form;
     }
