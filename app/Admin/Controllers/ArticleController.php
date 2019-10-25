@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use Encore\Admin\Widgets\Table;
+use Illuminate\Support\MessageBag;
 
 class ArticleController extends AdminController
 {
@@ -110,18 +111,16 @@ class ArticleController extends AdminController
         $form->editor('content', trans('admin.content'))->required();
         $form->image('images', trans('admin.image'))->required();
 
-        $result = false;
+        $form->submitted(function (Form $form) {
+            if ($form->content == '') {
+                $error = new MessageBag([
+                    'title'   => '保存失败',
+                    'message' => '内容不能为空',
+                ]);
 
-        $result = $form->submitted(function(Form $form){
-           if ($form->content === '') {
-               return admin_error('保存失败','内容不能为空');
-           }
-           return true;
+                return back()->with(compact('error'));
+            }
         });
-
-        if ($result !== true) {
-            exit;
-        }
 
         return $form;
     }
