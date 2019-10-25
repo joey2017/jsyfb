@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\IngotsLog;
+use App\Models\SystemConfig;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
@@ -92,8 +93,16 @@ class PaymentController extends Controller
      */
     public function ingotspay(Request $request)
     {
+        $ingots = $request->input('quantity','');
+
+        if ($ingots < 0 || $ingots == '') {
+            return $this->failed('支付法宝数量不能为空或小于0');
+        }
+        if ($ingots != SystemConfig::where('key' ,'vip_ingots')->first()->value) {
+            return $this->failed('法宝数量与系统设置值不相等');
+        };
+
         try {
-            $ingots = $request->input('quantity');
             $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
             $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(), 2);
         } catch (\Exception $exception) {
