@@ -17,6 +17,7 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $verified_status = $this->authen()->first()->status ?? '0';
         return [
             'id'                   => $this->id,
             'username'             => $this->username,
@@ -33,8 +34,8 @@ class UserResource extends JsonResource
             'last_login_ip'        => $this->last_login_ip,
             'last_login_time'      => (string)$this->last_login_time,
             'is_verified'          => $this->is_verified,
-            'verified_status'      => $this->authen()->first()->status ?? '',
-            'verified_status_text' => Authentication::getStatusName($this->authen()->first()->status),
+            'verified_status'      => $verified_status,
+            'verified_status_text' => Authentication::getStatusName($verified_status),
             'ingots'               => $this->ingots,
             'invitation_code'      => $this->invitation_code,
             'is_vip'               => $this->is_vip,
