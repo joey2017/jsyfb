@@ -17,11 +17,12 @@ class GoodsResource extends JsonResource
         return [
             'id'             => $this->id,
             'goods_name'     => $this->goods_name,
-            'image'          => env('APP_UPLOAD_PATH').'/'.$this->image,
+            'image'          => env('APP_UPLOAD_PATH') . '/' . $this->image,
             'detail'         => $this->detail,
+            'exchange_price' => $this->exchange_price,
             'exchange_rule'  => $this->exchange_rule,
             'description'    => $this->description,
-            'exchange_price' => $this->exchange_price,
+            'stock'          => $this->stock,
             'created_at'     => (string)$this->created_at,
             'updated_at'     => (string)$this->updated_at
         ];
