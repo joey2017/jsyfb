@@ -16,7 +16,7 @@ class MemberController extends AdminController
      *
      * @var string
      */
-    protected $title = '会员';
+    protected $title = 'vip通道';
 
     /**
      * Make a grid builder.
@@ -28,15 +28,23 @@ class MemberController extends AdminController
         $grid = new Grid(new Member);
 
         $grid->disableCreateButton();
-        $grid->disableExport();
+
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('cost', trans('admin.cost'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
-            return Member::getStatusName($status);
-        })->label(['warning','primary']);
+        $grid->column('status', trans('admin.status'))->using(Member::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->actions(function ($actions) {
+            $actions->disableView();
+            $actions->disableEdit();
+        });
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->like('user.nickname', trans('admin.nickname'));
+        });
 
         return $grid;
     }

@@ -24,6 +24,8 @@ class UserSignController extends AdminController
     {
         $grid = new Grid(new UserSign);
 
+        $grid->disableCreateButton();
+
         $grid->actions(function($actions){
             // 去掉编辑
             $actions->disableEdit();

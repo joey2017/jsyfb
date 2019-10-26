@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\Attention;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Grid;
+use Encore\Admin\Show;
 
 class AttentionController extends AdminController
 {
@@ -30,6 +31,7 @@ class AttentionController extends AdminController
         $grid->actions(function($actions){
             // 去掉编辑
             $actions->disableEdit();
+            $actions->disableView();
         });
 
         $grid->column('id', __('Id'));
@@ -39,15 +41,37 @@ class AttentionController extends AdminController
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();
-            $filter->column(1 / 2, function ($filter) {
-                $filter->like('laywer.name', trans('admin.name'));
-            });
 
             $filter->column(1 / 2, function ($filter) {
                 $filter->like('user.nickname', trans('admin.nickname'));
             });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('laywer.name', trans('admin.name'));
+            });
         });
 
         return $grid;
+    }
+
+    /**
+     * Make a show builder.
+     *
+     * @param mixed $id
+     * @return Show
+     */
+    protected function detail($id)
+    {
+        $show = new Show(Attention::findOrFail($id));
+        $show->field('id', __('Id'));
+        $show->field('user_id', trans('admin.user_id'));
+        $show->field('laywer_id', trans('admin.laywer_id'));
+        /*$show->laywer('律师信息',function ($laywer){
+            $laywer->setResoure('/admin/personnel/laywers');
+            $laywer->id();
+        });*/
+        $show->field('created_at', trans('admin.created_at'));
+
+        return $show;
     }
 }

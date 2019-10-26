@@ -84,6 +84,17 @@ class CustomerController extends AdminController
 
         $grid->disableActions();
 
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('kf_nick', trans('admin.nickname'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('kf_wx', trans('admin.wechat'));
+            });
+        });
+
         return $grid;
     }
 
@@ -118,6 +129,7 @@ class CustomerController extends AdminController
             } catch (\Exception $exception) {
                 Log::error('调用微信删除客服异常：', ['info' => $exception->getTraceAsString()]);
             }
+            return;
 
         });
 

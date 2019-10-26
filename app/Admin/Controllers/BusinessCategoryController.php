@@ -29,11 +29,14 @@ class BusinessCategoryController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('title', trans('admin.title'));
         $grid->column('descr', trans('admin.descr'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
-            return BusinessCategory::getStatusName($status);
-        })->label(['warning','primary']);
+        $grid->column('status', trans('admin.status'))->using(BusinessCategory::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->like('title', trans('admin.title'));
+        });
 
         return $grid;
     }
@@ -67,8 +70,8 @@ class BusinessCategoryController extends AdminController
     {
         $form = new Form(new BusinessCategory);
 
-        $form->text('title', trans('admin.title'));
-        $form->text('descr', trans('admin.descr'));
+        $form->text('title', trans('admin.title'))->required();
+        $form->text('descr', trans('admin.descr'))->required();
 
         return $form;
     }

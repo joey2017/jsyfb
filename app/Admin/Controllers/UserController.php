@@ -77,7 +77,6 @@ class UserController extends AdminController
         $show->field('nickname', trans('admin.nickname'));
         $show->field('email', trans('admin.email'));
         $show->field('mobile', trans('admin.mobile'));
-        $show->field('user.username', trans('admin.username'));
         $show->field('descr', trans('admin.descr'));
         $show->field('last_login_ip', trans('admin.last_login_ip'));
         $show->field('last_login_time', trans('admin.last_login_time'));

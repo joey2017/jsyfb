@@ -40,14 +40,6 @@ class LaywerController extends AdminController
         $grid->column('province_code', trans('admin.province_code'));
         $grid->column('city_code', trans('admin.city_code'));
         $grid->column('expertise', trans('admin.expertise'));
-        /*
-        $grid->column('cate_id', trans('admin.category'))->display(function ($cate_id) {
-            if (false === strpos($cate_id, ',')) {
-                return BusinessCategory::find($cate_id)->title;
-            }
-            return implode(',', BusinessCategory::findMany(explode(',', $cate_id))->pluck('title')->toArray());
-        });
-        */
         $grid->column('summary', trans('admin.summary'));
         $grid->column('status', trans('admin.status'))->display(function ($status) {
             return Laywer::getStatusName($status);
@@ -58,12 +50,15 @@ class LaywerController extends AdminController
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
 
-            $filter->column(1 / 2, function ($filter) {
+            $filter->column(1 / 3, function ($filter) {
                 $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name','code')->toArray());
+            });
+
+            $filter->column(1 / 3, function ($filter) {
                 $filter->in('cate_id', trans('admin.category'))->select(Constant::CASE_TYPES);
             });
 
-            $filter->column(1 / 2, function ($filter) {
+            $filter->column(1 / 3, function ($filter) {
                 $filter->between('created_at', trans('admin.created_at'))->datetime();
             });
         });
@@ -112,7 +107,7 @@ class LaywerController extends AdminController
 
         $form->text('name', trans('admin.name'))->required();
         $form->text('title', trans('admin.user_title'));
-        $form->mobile('mobile', trans('admin.mobile'));
+        $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->text('telephone', trans('admin.telephone'));
         $form->text('tag', trans('admin.tag'))->placeholder('如果是专家填写specialist,其它留空');
         $form->image('avatar', trans('admin.avatar'))->required();

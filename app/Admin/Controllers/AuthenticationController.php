@@ -49,11 +49,24 @@ class AuthenticationController extends AdminController
         $grid->column('identity_card', trans('admin.identity_card'));
         $grid->column('hand_photo', trans('admin.hand_photo'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('remark', trans('admin.remark'));
-        $grid->column('status', trans('admin.status'))->using(Authentication::STATUSES)->label();
+        $grid->column('status', trans('admin.status'))->using(Authentication::STATUSES)->label(['warning', 'primary']);
         $grid->column('review_at', trans('admin.review_at'));
         $grid->column('veritied_at', trans('admin.veritied_at'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('realname', trans('admin.realname'));
+            });
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+        });
 
         return $grid;
     }

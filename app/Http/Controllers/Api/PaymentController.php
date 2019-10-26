@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\IngotsLog;
+use App\Models\Member;
 use App\Models\SystemConfig;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yansongda\LaravelPay\Facades\Pay;
 
@@ -93,23 +95,26 @@ class PaymentController extends Controller
      */
     public function ingotspay(Request $request)
     {
-        $ingots = $request->input('quantity','');
+        $ingots = $request->input('quantity', '');
 
         if ($ingots < 0 || $ingots == '') {
             return $this->failed('支付法宝数量不能为空或小于0');
         }
 
-        if ($ingots != SystemConfig::where('key' ,'vip_ingots')->first()->value) {
+        if ($ingots != SystemConfig::where('key', 'vip_ingots')->first()->value) {
             return $this->failed('法宝数量与系统设置值不相等');
         };
 
         try {
+            DB::beginTransaction();
+            Member::create(['cost' => $ingots, 'user_id' => Auth::guard('api')->id()]);
             $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
-            $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(), 2);
+            $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . $ingots . '个法宝', Auth::guard('api')->id(), 2);
         } catch (\Exception $exception) {
-            Log::error('咨询专属法顾支付法宝异常：'.$exception->getMessage(),['info' => $exception->getTraceAsString()]);
+            DB::rollBack();
+            Log::error('咨询专属法顾支付法宝异常：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
         }
-
+        DB::commit();
         return $this->created('支付成功');
     }
 }

@@ -16,17 +16,14 @@ Route::group([
     $router->resources([
         'personnel/laywers'         => LaywerController::class,
         'personnel/categorys'       => BusinessCategoryController::class,
-        'personnel/answers/records' => AnswerRecordController::class,
+        //'personnel/answers/records' => AnswerRecordController::class,
         'personnel/lists'           => UserController::class,
-        'personnel/signs'           => UserSignController::class,
-        'personnel/members'         => MemberController::class,
-        'personnel/reservations'    => ReservationController::class,
+        //'personnel/signs'           => UserSignController::class,
+        //'personnel/members'         => MemberController::class,
         'personnel/authentications' => AuthenticationController::class,
         'personnel/customers'       => CustomerController::class,
-        'personnel/attentions'      => AttentionController::class,
+        //'personnel/attentions'      => AttentionController::class,
         'personnel/addresses'       => UserAddressController::class,
-        //'funds/balances/logs'       => BalanceLogController::class,
-        //'funds/balances'            => BalanceController::class,
         'funds/ingots/logs'         => IngotsLogController::class,
         'funds/ingots'              => IngotsController::class,
         'articles/legals/categorys' => LegalBookCategoryController::class,
@@ -41,8 +38,6 @@ Route::group([
         'messages'                  => MessageController::class,
         'notices'                   => NoticeController::class,
         'banners'                   => BannerController::class,
-        //'coupons/grants'            => CouponGrantController::class,
-        //'coupons'                   => CouponController::class,
         'questions/categorys'       => QuestionCategoryController::class,
         'questions'                 => QuestionController::class,
         'notarys/consultants'       => ConsultantController::class,
@@ -62,6 +57,23 @@ Route::group([
     //文章点评
     $router->get('articles/addcomments/{id}', 'ArticleController@addcomments');
     $router->match(['get', 'put'], 'articles/savecomments/{id}', 'ArticleController@savecomments');
+
+    //签到列表
+    $router->get('personnel/signs', 'UserSignController@index');
+    $router->delete('personnel/signs/{id}', 'UserSignController@destory');
+
+    //每日答题
+    $router->get('personnel/answers/records', 'AnswerRecordController@index');
+    $router->delete('personnel/answers/records/{id}', 'AnswerRecordController@destory');
+
+    //VIP通道
+    $router->get('personnel/members', 'MemberController@index');
+    $router->delete('personnel/members/{id}', 'MemberController@destory');
+
+    //关注律师
+    $router->get('personnel/attentions', 'AttentionController@index');
+    //$router->get('personnel/attentions/{id}','AttentionController@show');
+    $router->delete('personnel/attentions/{id}', 'AttentionController@destory');
 
     $router->get('forms/settings', 'FormController@settings');
     $router->get('forms/register', 'FormController@register');

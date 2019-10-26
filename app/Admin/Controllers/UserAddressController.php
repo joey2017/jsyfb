@@ -35,19 +35,32 @@ class UserAddressController extends AdminController
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('receiver', trans('admin.receiver'));
         $grid->column('receiver_mobile', trans('admin.receiver_mobile'));
-        $grid->column('province', trans('admin.province'))->display(function ($province){
-            return Province::where('code',$province)->first()->province_name;
+        $grid->column('province', trans('admin.province'))->display(function ($province) {
+            return Province::where('code', $province)->first()->province_name;
         });
-        $grid->column('city', trans('admin.city'))->display(function ($city){
-            return City::where('code',$city)->first()->city_name;
+        $grid->column('city', trans('admin.city'))->display(function ($city) {
+            return City::where('code', $city)->first()->city_name;
         });
-        $grid->column('district', trans('admin.district'))->display(function ($district){
-            return Area::where('code',$district)->first()->area_name;
+        $grid->column('district', trans('admin.district'))->display(function ($district) {
+            return Area::where('code', $district)->first()->area_name;
         });
         $grid->column('address', trans('admin.address'));
         $grid->column('status', trans('admin.status'))->using(UserAddress::STATUSES);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('receiver', trans('admin.receiver'));
+            });
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('receiver_mobile', trans('admin.mobile'));
+            });
+        });
 
         return $grid;
     }
@@ -63,19 +76,19 @@ class UserAddressController extends AdminController
         $show = new Show(UserAddress::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', trans('admin.nickname'))->as(function ($user_id){
+        $show->field('user_id', trans('admin.nickname'))->as(function ($user_id) {
             return User::findOrFail($user_id)->nickname;
         });
         $show->field('receiver', trans('admin.receiver'));
         $show->field('receiver_mobile', trans('admin.receiver_mobile'));
-        $show->field('province', trans('admin.province'))->as(function ($province){
-            return Province::where('code',$province)->first()->province_name;
+        $show->field('province', trans('admin.province'))->as(function ($province) {
+            return Province::where('code', $province)->first()->province_name;
         });
-        $show->field('city', trans('admin.city'))->as(function ($city){
-            return City::where('code',$city)->first()->city_name;
+        $show->field('city', trans('admin.city'))->as(function ($city) {
+            return City::where('code', $city)->first()->city_name;
         });
-        $show->field('district', trans('admin.district'))->as(function ($district){
-            return Area::where('code',$district)->first()->area_name;
+        $show->field('district', trans('admin.district'))->as(function ($district) {
+            return Area::where('code', $district)->first()->area_name;
         });
         $show->field('address', trans('admin.address'));
         $show->field('status', trans('admin.status'))->using(UserAddress::STATUSES);
@@ -94,15 +107,15 @@ class UserAddressController extends AdminController
     {
         $form = new Form(new UserAddress);
 
-        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname());
-        $form->text('receiver', trans('admin.receiver'));
-        $form->mobile('receiver_mobile', trans('admin.receiver_mobile'));
+        $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname())->required();
+        $form->text('receiver', trans('admin.receiver'))->required();
+        $form->mobile('receiver_mobile', trans('admin.receiver_mobile'))->required();
         $form->distpicker([
             'province' => '省份',
             'city'     => '市',
             'district' => '区'
-        ], '地域选择');
-        $form->text('address', trans('admin.address'));
+        ], '地域选择')->required();
+        $form->text('address', trans('admin.address'))->required();
 
         return $form;
     }
