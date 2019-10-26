@@ -20,6 +20,7 @@ class IngotsService
      * @param $descr
      * @param $type
      * @param $user
+     * @throws \Throwable
      */
     public function update($quantity, $descr, $type, $user)
     {
@@ -64,9 +65,11 @@ class IngotsService
         return Redis::get("ingots_{$key}_" . Auth::guard('api')->id());
     }
 
+
     /**
      * @param $key
      * @param $desc
+     * @throws \Throwable
      */
     public function limitation($key, $desc)
     {

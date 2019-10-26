@@ -4,7 +4,10 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Actions\Post\ReportPost;
 use App\Models\Authentication;
+use App\Models\IngotsConfig;
+use App\Models\IngotsLog;
 use App\Models\User;
+use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -22,10 +25,12 @@ class AuthenticationController extends AdminController
      */
     protected $title = '实名认证申请记录';
 
+    protected $ingots;
     protected $notice;
 
-    public function __construct(NoticeService $noticeService)
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
+        $this->ingots = $ingotsService;
         $this->notice = $noticeService;
     }
 
@@ -124,14 +129,19 @@ class AuthenticationController extends AdminController
                     $user              = User::findOrFail($form->model()->user_id);
                     $user->is_verified = User::CERTIFIED;
                     $user->save();
+
                     $notice = trans('admin.auth_passed_notice');
+                    //获得法宝
+                    $quantity = IngotsConfig::getConfigByKey('verify')->value;
+                    $this->ingots->update($quantity, '实名认证审核通过获得' . $quantity . '法宝', IngotsLog::TYPE_INCRE, $user);
                 } else {
                     $notice = trans('admin.auth_failed_notice');
                 }
+                //发消息
                 $this->notice->add('实名认证申请审核通知', $notice, $form->model()->user_id);
             } catch (\Exception $exception) {
-                Log::error('实名认证审核操作错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
                 DB::rollBack();
+                Log::error('实名认证审核操作错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
             }
 
             DB::commit();

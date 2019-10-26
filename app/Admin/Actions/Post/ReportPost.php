@@ -3,7 +3,10 @@
 namespace App\Admin\Actions\Post;
 
 use App\Models\Authentication;
+use App\Models\IngotsConfig;
+use App\Models\IngotsLog;
 use App\Models\User;
+use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Doctrine\DBAL\Driver\PDOException;
 use Encore\Admin\Actions\BatchAction;
@@ -30,14 +33,22 @@ class ReportPost extends BatchAction
 
                 $user = $result->user;
 
+                //审核通过
                 if ($data['status'] == Authentication::PASSED) {
                     $user->is_verified = User::CERTIFIED;
-                    $notice = trans('admin.auth_passed_notice');
+                    $notice            = trans('admin.auth_passed_notice');
+
+                    //获得法宝
+                    $quantity      = IngotsConfig::getConfigByKey('verify')->value;
+                    $ingotsService = new IngotsService();
+                    $ingotsService->update($quantity, '实名认证审核通过获得' . $quantity . '法宝', IngotsLog::TYPE_INCRE, $user);
                 } else {
                     $user->is_verified = User::UNCERTIFIED;
-                    $notice = trans('admin.auth_failed_notice');
+                    $notice            = trans('admin.auth_failed_notice');
                 }
+
                 $user->save();
+                //发消息
                 $noticeService = new NoticeService();
                 $noticeService->add('实名认证申请审核通知', $notice, $user->id);
             }
