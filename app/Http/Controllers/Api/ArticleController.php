@@ -67,8 +67,13 @@ class ArticleController extends Controller
         $info['status']     = Article::getStatusName((int)$info['status']);
         $info['admin_name'] = $admin_name;
         //todo
-        $comments                            = ['comments' => ArticleComment::where('article_id', $article->id)->first()->toArray()];
-        $comments['comments']['laywer_info'] = new LaywerResource(Laywer::findOrFail($comments['comments']['laywer_id']));
+        $comments['comments'] = [];
+        $result               = ArticleComment::where('article_id', $article->id)->first();
+        if ($result) {
+            $comments['comments']                = $result->toArray();
+            $comments['comments']['laywer_info'] = new LaywerResource(Laywer::findOrFail($comments['comments']['laywer_id']));
+        }
+
         return $this->success(array_merge($info, $comments));
         //return $this->success(new ArticleResource($article));
     }
