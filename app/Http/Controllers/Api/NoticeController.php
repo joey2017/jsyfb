@@ -39,8 +39,8 @@ class NoticeController extends Controller
     public function index()
     {
         //获取认证用户信息
-        $userId = Auth::guard('api')->id();
-        $notices = Notice::where('user_id',$userId)->paginate(10);
+        $userId  = Auth::guard('api')->id();
+        $notices = Notice::where('user_id', $userId)->paginate(10);
         return $this->success(NoticeResource::collection($notices));
     }
 
@@ -63,9 +63,11 @@ class NoticeController extends Controller
     public function show(Notice $notice)
     {
         if ($notice->user_id != Auth::guard('api')->id()) {
-            return $this->failed('禁止访问',403);
-
+            return $this->failed('禁止访问', 403);
         };
+        //修改状态
+        $notice->status = Notice::NORMAL;
+        $notice->save();
         return $this->success(new NoticeResource($notice));
     }
 
