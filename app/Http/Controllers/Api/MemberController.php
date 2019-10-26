@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\IngotsLog;
 use App\Models\Member;
+use App\Models\SystemConfig;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Doctrine\DBAL\Driver\PDOException;
@@ -59,9 +60,10 @@ class MemberController extends Controller
     {
         try {
             DB::beginTransaction();
+            $value = SystemConfig::where('key', '=', 'vip_ingots')->first()->value;
             Member::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));
-            $this->ingots->update(config('ingots.vip'), '使用VIP通道咨询专家消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
-            $this->notice->add('咨询专家', '使用VIP通道咨询专家消耗' . config('ingots.vip') . '个法宝', Auth::guard('api')->id(),2);
+            $this->ingots->update($value, '使用VIP通道咨询专家消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
+            $this->notice->add('咨询专家', '使用VIP通道咨询专家消耗' . $value . '个法宝', Auth::guard('api')->id(), 2);
         } catch (PDOException $exception) {
             DB::rollBack();
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
