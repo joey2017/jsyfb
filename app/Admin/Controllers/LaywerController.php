@@ -109,7 +109,7 @@ class LaywerController extends AdminController
         $form->text('title', trans('admin.user_title'));
         $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->text('telephone', trans('admin.telephone'));
-        $form->text('tag', trans('admin.tag'))->placeholder('如果是专家填写specialist,其它留空');
+        $form->text('tag', trans('admin.tag'))->placeholder('如果是专家填写specialist,律师填写laywer')->required();
         $form->image('avatar', trans('admin.avatar'))->required();
         $form->text('company', trans('admin.company'))->required();
         $form->distpicker([
