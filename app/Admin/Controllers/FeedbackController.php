@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Feedback;
+use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -34,7 +35,7 @@ class FeedbackController extends AdminController
 
         $grid->actions(function ($actions) {
             // 去掉查看
-            $actions->disableView();
+            //$actions->disableView();
         });
 
         $grid->column('id', __('Id'));
@@ -43,6 +44,19 @@ class FeedbackController extends AdminController
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('name', trans('admin.name'));
+            });
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+        });
 
         return $grid;
     }
@@ -58,7 +72,9 @@ class FeedbackController extends AdminController
         $show = new Show(Feedback::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('user_id', trans('admin.user_id'));
+        $show->field('user_id', trans('admin.user_id'))->as(function ($user_id) {
+            return User::findOrFail($user_id)->nickname;
+        });
         $show->field('name', '姓名');
         $show->field('mobile', trans('admin.mobile'));
         $show->field('content', trans('admin.content'));

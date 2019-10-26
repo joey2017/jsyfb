@@ -42,8 +42,12 @@ class NoticeController extends AdminController
 
         $grid->filter(function(Grid\Filter $filter){
             $filter->disableIdFilter();
-            $filter->equal('type',trans('admin.type'))->select(Notice::TYPES);
-            $filter->equal('status',trans('admin.status'))->select(Notice::STATUSES);
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('type', trans('admin.type'))->select(Notice::TYPES);
+            });
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('status', trans('admin.status'))->select(Notice::STATUSES);
+            });
         });
 
         $grid->column('created_at', trans('admin.created_at'));
@@ -84,9 +88,9 @@ class NoticeController extends AdminController
         $form = new Form(new Notice);
 
         $form->select('user_id', trans('admin.user_id'))->options(getAllUsersIdAndNickname())->required();
-        $form->text('type', trans('admin.type'));
-        $form->text('title', trans('admin.title'));
-        $form->textarea('content', trans('admin.content'));
+        $form->text('type', trans('admin.type'))->required();
+        $form->text('title', trans('admin.title'))->required();
+        $form->textarea('content', trans('admin.content'))->required();
 
         return $form;
     }

@@ -43,14 +43,14 @@ class SpecialistAdviceController extends AdminController
         $grid->disableExport();
 
         if (Admin::user()->isRole('laywer')) {
-            $grid->model()->where('spec_id', Admin::user()->related_spec_id);
+            $grid->model()->where('laywer_id', Admin::user()->related_spec_id);
         }
 
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('laywer.name', trans('admin.specialist'));
         $grid->column('username', trans('admin.username'));
-        $grid->column('sex', trans('admin.sex'))->using([1 => '男', '2' => '女']);
+        $grid->column('sex', trans('admin.sex'))->using(Constant::SEXS);
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('type', trans('admin.case_type'))->using(Constant::CASE_TYPES);
         $grid->column('question', trans('admin.question'));
@@ -58,6 +58,22 @@ class SpecialistAdviceController extends AdminController
         $grid->column('status', trans('admin.status'))->using(SpecialistAdvice::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 4, function ($filter) {
+                $filter->like('laywer.name', trans('admin.specialist'));
+            });
+            $filter->column(1 / 4, function ($filter) {
+                $filter->like('username', trans('admin.username'));
+            });
+            $filter->column(1 / 4, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+            $filter->column(1 / 4, function ($filter) {
+                $filter->equal('type')->select(Constant::CASE_TYPES);
+            });
+        });
 
         return $grid;
     }
@@ -76,11 +92,11 @@ class SpecialistAdviceController extends AdminController
         $show->field('user_id', trans('admin.nickname'))->as(function ($user_id) {
             return User::findOrFail($user_id)->nickname;
         });
-        $show->field('spec_id', trans('admin.specialist'))->as(function ($spec_id) {
-            return Laywer::findOrFail($spec_id)->name;
+        $show->field('laywer_id', trans('admin.specialist'))->as(function ($laywer_id) {
+            return Laywer::findOrFail($laywer_id)->name;
         });
         $show->field('username', trans('admin.username'));
-        $show->field('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
+        $show->field('sex', trans('admin.sex'))->using(Constant::SEXS);
         $show->field('mobile', trans('admin.mobile'));
         $show->field('type', trans('admin.case_type'))->using(Constant::CASE_TYPES);
         $show->field('question', trans('admin.question'));
@@ -113,9 +129,9 @@ class SpecialistAdviceController extends AdminController
             });
         } else {
             $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
-            $form->select('spec_id', trans('admin.specialist'))->options(Laywer::where([['status', 1], ['is_deleted', 0], ['tag', 'specialist']])->pluck('name', 'id')->toArray())->required();
+            $form->select('laywer_id', trans('admin.specialist'))->options(Laywer::where([['status', 1], ['is_deleted', 0], ['tag', 'specialist']])->pluck('name', 'id')->toArray())->required();
             $form->text('username', trans('admin.username'))->required();
-            $form->radio('sex', trans('admin.sex'))->options(['1' => '男', '2' => '女'])->default(1)->required();
+            $form->radio('sex', trans('admin.sex'))->options(Constant::SEXS)->default(1)->required();
             $form->mobile('mobile', trans('admin.mobile'))->required();
             $form->select('type', trans('admin.case_type'))->options(Constant::CASE_TYPES)->required();
             $form->text('question', trans('admin.question'))->required();

@@ -37,6 +37,11 @@ class GoodsController extends AdminController
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->like('goods_name', trans('admin.goods_name'));
+        });
+
         return $grid;
     }
 
