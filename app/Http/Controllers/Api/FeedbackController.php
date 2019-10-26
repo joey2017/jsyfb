@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\FeedbackRequest;
-use App\Models\FeedBack;
+use App\Models\Feedback;
 use App\Models\SystemConfig;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,7 +54,7 @@ class FeedbackController extends Controller
      */
     public function store(FeedbackRequest $request)
     {
-        FeedBack::create(array_merge($request->all(),['user_id' => Auth::guard('api')->id(),'created_at' => date('Y-m-d H:i:s')]));
+        Feedback::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id(), 'created_at' => date('Y-m-d H:i:s')]));
         return $this->created('意见反馈成功');
     }
 

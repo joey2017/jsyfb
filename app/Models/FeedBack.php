@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class FeedBack
+ * Class Feedback
  *
  * @package App\Models
  * @property int $id
@@ -15,18 +15,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $content 内容
  * @property string|null $created_at 创建时间
  * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack whereContent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack whereMobile($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FeedBack whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback whereMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Feedback whereUserId($value)
  * @mixin \Eloquent
  */
-class FeedBack extends Model
+class Feedback extends Model
 {
     /**
      * @var string
