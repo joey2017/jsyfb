@@ -51,7 +51,7 @@ class ExceptionReport
         AuthenticationException::class       => ['未授权', 401],
         ModelNotFoundException::class        => ['该模型未找到', 404],
         AuthorizationException::class        => ['没有此权限', 403],
-        ValidationException::class           => [],
+        ValidationException::class           => ['参数格式不正确', 423],
         UnauthorizedHttpException::class     => ['未登录或登录状态失效', 422],
         TokenInvalidException::class         => ['token不正确', 400],
         NotFoundHttpException::class         => ['没有找到该页面', 404],
@@ -103,7 +103,7 @@ class ExceptionReport
     {
         if ($this->exception instanceof ValidationException) {
             $error = array_first($this->exception->errors());
-            return $this->failed(array_first($error), $this->exception->status);
+            return $this->failed(array_first($error), 423);
         }
         $message = $this->doReport[$this->report];
         return $this->failed($message[0], $message[1]);
