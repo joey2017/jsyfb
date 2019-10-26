@@ -88,7 +88,7 @@ class AnswerRecordController extends Controller
      *     @SWG\Parameter(name="question",in="formData",description="请求参数-问题题目",required=true,type="string"),
      *     @SWG\Parameter(name="answer",in="formData",description="请求参数-问题答案",required=true,type="string"),
      *     @SWG\Parameter(name="option",in="formData",description="请求参数-问题答案选项(A,B,C,D)",required=true,type="string"),
-     *     @SWG\Parameter(name="date",in="formData",description="请求参数-回答日期(年月日)",required=false,type="string",format="date"),
+     *     @SWG\Parameter(name="date",in="formData",description="请求参数-回答日期(示例：2019-08-20)",required=false,type="string",format="date"),
      *     @SWG\Response(response=201,description="操作成功"),
      *     @SWG\Response(response=400,description="参数错误"),
      *     @SWG\Response(response=401,description="未授权")
