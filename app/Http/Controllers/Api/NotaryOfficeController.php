@@ -34,9 +34,10 @@ class NotaryOfficeController extends Controller
         //$notarys = NotaryOffice::paginate(10);
         $notarys = DB::table((new NotaryOffice)->getTable())->paginate(10)->toArray();
         foreach ($notarys['data'] as &$notary) {
+            $notary->picture  = env('APP_UPLOAD_PATH') . '/' . $notary->picture;
             $notary->distance = $this->distance($from, [$notary->lat, $notary->lng]);
         }
-        array_multisort(array_column($notarys['data'],'distance'),SORT_ASC,$notarys['data']);
+        array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
         //return $this->success(NotaryOfficeResource::collection($notarys));
         return $this->success($notarys);
     }
@@ -79,7 +80,7 @@ class NotaryOfficeController extends Controller
                 'key'  => env('TENCENT_MAP_API_KEY'),
             ];
             //$url    = $url . http_build_query($params);
-            $client   = new Client();
+            $client = new Client();
 
             try {
                 $response = $client->request('GET', $url, ['query' => $params]);
