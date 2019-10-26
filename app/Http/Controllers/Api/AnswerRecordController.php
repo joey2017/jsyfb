@@ -47,7 +47,7 @@ class AnswerRecordController extends Controller
      */
     public function index()
     {
-        $records = AnswerRecord::where('user_id', Auth::guard('api')->id())->paginate(10);
+        $records = AnswerRecord::where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
         return $this->success(AnswerRecordResource::collection($records));
     }
 

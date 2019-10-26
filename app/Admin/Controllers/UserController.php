@@ -8,6 +8,7 @@ use App\Models\IngotsLog;
 use App\Models\User;
 use App\Services\NoticeService;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -127,15 +128,15 @@ class UserController extends AdminController
                     IngotsLog::create([
                         'user_id' => $user_id,
                         'cost'    => abs($difference),
-                        'descr'   => '管理员【' . $username . '】修改您的法宝数量为' . $ingots,
+                        'descr'   => '管理员【' . Admin::user()->name . '】修改您的法宝数量为' . $ingots,
                         'type'    => $difference > 0 ? 2 : 1,
                     ]);
 
-                    $this->notice->add('法宝数量变动通知', '管理员【' . $username . '】修改您的法宝数量为' . $ingots, $user_id, 2);
+                    $this->notice->add('法宝数量变动通知', '管理员【' . Admin::user()->name . '】修改您的法宝数量为' . $ingots, $user_id, 2);
                 }
 
             } catch (\Exception $exception) {
-                Log::error('管理员修改用户【' . $username . '】法宝数量失败' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
+                Log::error('管理员' . Admin::user()->name . '修改用户【' . $username . '】法宝数量失败' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
             }
         });
 

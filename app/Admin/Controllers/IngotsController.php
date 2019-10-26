@@ -4,8 +4,11 @@ namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Ingots;
+use App\Models\IngotsLog;
 use App\Models\User;
+use App\Services\NoticeService;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
@@ -18,6 +21,13 @@ class IngotsController extends AdminController
      * @var string
      */
     protected $title = '法宝';
+
+    protected $notice;
+
+    public function __construct(NoticeService $noticeService)
+    {
+        $this->notice = $noticeService;
+    }
 
     /**
      * Make a grid builder.
@@ -83,24 +93,34 @@ class IngotsController extends AdminController
         $user_id  = null;
         $quantity = null;
         $form->saving(function (Form $form) {
-            if (Ingots::findOrFail($form->user_id)) {
-                admin_error('新增失败', '该用户法宝数据已存在，无需重复添加');
-                return back();
+            if (!$form->model()->id) {
+                if (Ingots::where('user_id', $form->user_id)->exists()) {
+                    admin_error('新增失败', '该用户法宝数据已存在，无需重复添加');
+                    return back();
+                }
             }
-            return;
         });
         $form->saved(function (Form $form) {
-            $user_id  = $form->model()->user_id;
-            $quantity = $form->model()->quantity;
-            User::where('id', $user_id)->first()->update(['ingots' => $quantity]);
-            //todo 发送消息给用户
+            $user_id    = $form->model()->user_id;
+            $quantity   = $form->model()->quantity;
+            $user       = User::findOrFail($user_id);
+            $difference = $quantity - $user->ingots;
+
+            $user->ingots = $quantity;
+
+            if ($user->save()) {
+                //法宝流水
+                IngotsLog::create([
+                    'user_id' => $user_id,
+                    'cost'    => abs($difference),
+                    'descr'   => '管理员【' . Admin::user()->name . '】修改您的法宝数量为' . $quantity,
+                    'type'    => $difference > 0 ? 1 : 2,
+                ]);
+                //todo 发送消息给用户
+                $this->notice->add('法宝数量变动通知', '管理员【' . Admin::user()->name . '】修改您的法宝数量为' . $quantity, $user_id, 2);
+            };
         });
 
-        /*
-        $form->deleted(function () use ($user_id, $quantity) {
-            return User::findOrFail($user_id)->update(['ingots' => $quantity]);
-        });
-        */
         return $form;
     }
 }
