@@ -29,7 +29,7 @@ class GoodsController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('goods_name', trans('admin.goods_name'));
         $grid->column('image', trans('admin.image'));
-        $grid->column('detail', trans('admin.detail'));
+        //$grid->column('detail', trans('admin.detail'));
         $grid->column('exchange_price', trans('admin.exchange_price'));
         $grid->column('exchange_rule', trans('admin.exchange_rule'));
         $grid->column('description', trans('admin.description'));
