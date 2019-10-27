@@ -183,13 +183,6 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(UserSign::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function notice()
-    {
-        return $this->hasOne(Notice::class);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

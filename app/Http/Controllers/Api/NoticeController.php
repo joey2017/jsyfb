@@ -14,7 +14,6 @@ class NoticeController extends Controller
      *     summary="消息列表",
      *     tags={"MainPage"},
      *     description="包含各种消息",
-     *     operationId="home.index",
      *     produces={"application/json"},
      *     security={
      *      {
@@ -33,7 +32,7 @@ class NoticeController extends Controller
      *         )
      *     ),
      *     @SWG\Response(response=401,description="未授权"),
-     *     @SWG\Response(response=422,description="error")
+     *     @SWG\Response(response=422,description="未登录")
      * )
      */
     public function index()

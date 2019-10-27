@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\UserResource;
 use App\Models\IngotsConfig;
 use App\Models\IngotsLog;
+use App\Models\Notice;
 use App\Models\User;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
@@ -121,6 +122,8 @@ class WechatController extends Controller
                 $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友注册获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
                 $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id,2);
             }
+            // 未读消息数量
+            $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
             return $this->setStatusCode($statusCode)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)],'success','登录成功');
         }
         return $this->failed('登录失败,请稍后重试');

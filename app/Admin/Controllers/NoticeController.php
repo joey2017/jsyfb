@@ -42,10 +42,13 @@ class NoticeController extends AdminController
 
         $grid->filter(function(Grid\Filter $filter){
             $filter->disableIdFilter();
-            $filter->column(1 / 2, function ($filter) {
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+            $filter->column(1 / 3, function ($filter) {
                 $filter->equal('type', trans('admin.type'))->select(Notice::TYPES);
             });
-            $filter->column(1 / 2, function ($filter) {
+            $filter->column(1 / 3, function ($filter) {
                 $filter->equal('status', trans('admin.status'))->select(Notice::STATUSES);
             });
         });

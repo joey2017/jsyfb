@@ -9,6 +9,7 @@ use App\Http\Resources\Api\UserResource;
 use App\Models\Attention;
 use App\Models\BrowseHistory;
 use App\Models\Ingots;
+use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
         return $this->success(new UserResource($user));
     }
 
@@ -89,7 +91,10 @@ class UserController extends Controller
             $user->last_login_ip   = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
-            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)], 'success', '登陆成功');
+
+            // 未读消息数量
+            $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
+            return $this->setStatusCode(201)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)], 'success', '登录成功');
         } else {
             return $this->failed('帐号或密码错误', 400);
         }
@@ -125,7 +130,8 @@ class UserController extends Controller
      */
     public function info()
     {
-        $user = Auth::guard('api')->user();
+        $user                = Auth::guard('api')->user();
+        $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
         return $this->success(new UserResource($user));
     }
 
