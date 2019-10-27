@@ -24,7 +24,11 @@ class LegalBookController extends Controller
      */
     public function show($section_id)
     {
-        $book = LegalBook::findOrFail($section_id);
+        $condition = ['status', 1];
+        if ($section_id > 0) {
+            $condition = [['section_id', $section_id], $condition];
+        }
+        $book = LegalBook::where($condition)->first();
         return $this->success(new LegalBookResource($book));
     }
 }
