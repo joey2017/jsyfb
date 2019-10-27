@@ -32,7 +32,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(10);
+        $articles = Article::orderBy('id', 'desc')->paginate(10);
         return $this->success(ArticleResource::collection($articles));
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\AnswerListResource;
 use App\Models\AnswerList;
+use App\Models\AnswerRecord;
+use Illuminate\Support\Facades\Auth;
 
 class AnswerListController extends Controller
 {
@@ -23,7 +25,10 @@ class AnswerListController extends Controller
      */
     public function index()
     {
-        $lists = AnswerList::paginate(10);
+        //用户已回答的题目
+        $records = AnswerRecord::where('user_id', Auth::guard('api')->id())->pluck('answer_list_id')->toArray();
+
+        $lists = AnswerList::whereNotIn('id', $records)->orderBy('id', 'desc')->paginate(10);
         return $this->success(AnswerListResource::collection($lists));
     }
 
