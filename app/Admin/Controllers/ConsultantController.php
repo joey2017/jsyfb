@@ -36,11 +36,22 @@ class ConsultantController extends AdminController
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
         $grid->column('summary', trans('admin.summary'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
+        $grid->column('status', trans('admin.status'))->display(function ($status) {
             return Consultant::getStatusName($status);
-        })->label(['warning','primary']);
+        })->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('name', '姓名');
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+        });
 
         return $grid;
     }
@@ -80,14 +91,14 @@ class ConsultantController extends AdminController
     {
         $form = new Form(new Consultant);
 
-        $form->text('name', trans('admin.name'));
+        $form->text('name', trans('admin.name'))->required();
         $form->text('title', trans('admin.user_title'));
-        $form->text('expertise', trans('admin.expertise'));
-        $form->mobile('mobile', trans('admin.mobile'));
+        $form->text('expertise', trans('admin.expertise'))->required();
+        $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->text('telephone', trans('admin.telephone'));
         $form->text('score', trans('admin.score'));
-        $form->text('company', trans('admin.company'));
-        $form->text('summary', trans('admin.summary'));
+        $form->text('company', trans('admin.company'))->required();
+        $form->text('summary', trans('admin.summary'))->required();
 
         return $form;
     }

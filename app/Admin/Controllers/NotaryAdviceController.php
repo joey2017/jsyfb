@@ -32,13 +32,23 @@ class NotaryAdviceController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('username', trans('admin.username'));
-        $grid->column('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
+        $grid->column('sex', trans('admin.sex'))->using(Constant::SEXS);
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('type', trans('admin.type'))->using(Constant::CASE_TYPES);
         $grid->column('question', trans('admin.question'));
         $grid->column('status', trans('admin.status'))->using(NotaryAdvice::STATUSES);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('username', trans('admin.username'));
+            });
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+        });
 
         return $grid;
     }

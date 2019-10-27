@@ -23,7 +23,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $banners = Banner::paginate(4);
+        $banners = Banner::orderBy('sort', 'asc')->orderBy('id', 'desc')->paginate(4);
         return $this->success(BannerResource::collection($banners));
     }
 }

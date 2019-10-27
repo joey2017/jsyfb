@@ -76,9 +76,9 @@ class BannerController extends AdminController
     {
         $form = new Form(new Banner);
 
-        $form->text('picname', trans('admin.picname'));
-        $form->image('image_path', trans('admin.image_path'));
-        $form->text('url', trans('admin.url'));
+        $form->text('picname', trans('admin.picname'))->required();
+        $form->image('image_path', trans('admin.image_path'))->required();
+        $form->text('url', trans('admin.url'))->required();
         $form->text('sort', trans('admin.sort'));
 
         return $form;

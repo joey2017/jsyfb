@@ -12,7 +12,12 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->resource('auth/users', AdminerController::class)->names('admin.auth.users');
-    Route::get('articles/comments/getcontent', 'ArticleCommentController@getContent');
+
+    //公证处省市区筛选
+    $router->get('notarys/provinces', 'NotaryOfficeController@provinces');
+    $router->get('notarys/citys/{code}', 'NotaryOfficeController@citys');
+    $router->get('notarys/areas/{code}', 'NotaryOfficeController@areas');
+
     $router->resources([
         'personnel/laywers'         => LaywerController::class,
         'personnel/categorys'       => BusinessCategoryController::class,

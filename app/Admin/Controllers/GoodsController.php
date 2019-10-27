@@ -78,13 +78,13 @@ class GoodsController extends AdminController
     {
         $form = new Form(new Goods);
 
-        $form->text('goods_name', trans('admin.goods_name'));
-        $form->image('image', trans('admin.image'));
+        $form->text('goods_name', trans('admin.goods_name'))->required();
+        $form->image('image', trans('admin.image'))->required();
         $form->editor('detail', trans('admin.detail'));
-        $form->number('exchange_price', trans('admin.exchange_price'));
+        $form->number('exchange_price', trans('admin.exchange_price'))->required();
         $form->textarea('exchange_rule', trans('admin.exchange_rule'));
         $form->textarea('description', trans('admin.description'));
-        $form->number('stock', trans('admin.stock'));
+        $form->number('stock', trans('admin.stock'))->required();
 
         return $form;
     }
