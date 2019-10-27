@@ -15,8 +15,8 @@ Route::group([
 
     //公证处省市区筛选
     $router->get('notarys/provinces', 'NotaryOfficeController@provinces');
-    $router->get('notarys/citys/{code}', 'NotaryOfficeController@citys');
-    $router->get('notarys/areas/{code}', 'NotaryOfficeController@areas');
+    $router->get('notarys/citys', 'NotaryOfficeController@citys');
+    $router->get('notarys/areas', 'NotaryOfficeController@areas');
 
     $router->resources([
         'personnel/laywers'         => LaywerController::class,

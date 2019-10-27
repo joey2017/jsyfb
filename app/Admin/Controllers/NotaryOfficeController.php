@@ -10,6 +10,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 
 class NotaryOfficeController extends AdminController
 {
@@ -63,6 +64,18 @@ class NotaryOfficeController extends AdminController
             });
             $filter->column(1 / 2, function ($filter) {
                 $filter->like('mobile', trans('admin.mobile'));
+            });
+
+            $filter->column(1 / 3, function ($filter) {
+                $filter->equal('province_code', trans('admin.province_code'))->select($this->provinces())->load('city_code', '/admin/notarys/citys');
+            });
+
+            $filter->column(1 / 3, function ($filter) {
+                $filter->equal('city_code', trans('admin.city_code'))->select()->load('district_code', '/admin/notarys/areas');
+            });
+
+            $filter->column(1 / 3, function ($filter) {
+                $filter->equal('district_code', trans('admin.district_code'))->select();
             });
         });
 
@@ -141,8 +154,9 @@ class NotaryOfficeController extends AdminController
         return $other + $provinces;
     }
 
-    public function citys($code)
+    public function citys(Request $request)
     {
+        $code = $request->input('q');
         if (empty($code)) {
             $citys = [
                 '0' => '全国',
@@ -153,8 +167,9 @@ class NotaryOfficeController extends AdminController
         return $citys;
     }
 
-    public function areas($code)
+    public function areas(Request $request)
     {
+        $code = $request->input('q');
         if (empty($code)) {
             $areas = [
                 '0' => '全国'

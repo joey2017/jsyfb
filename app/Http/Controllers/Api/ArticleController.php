@@ -6,6 +6,7 @@ use App\Http\Resources\Api\ArticleResource;
 use App\Http\Resources\Api\LaywerResource;
 use App\Models\Article;
 use App\Models\ArticleComment;
+use App\Models\ArticleLike;
 use App\Models\BrowseHistory;
 use App\Models\Laywer;
 use Illuminate\Database\QueryException;
@@ -67,6 +68,13 @@ class ArticleController extends Controller
         $info['images']     = env('APP_UPLOAD_PATH') . '/' . $info['images'];
         $info['status']     = Article::getStatusName((int)$info['status']);
         $info['admin_name'] = $admin_name;
+        $info['is_like']    = false;
+
+        if ($info['like_count'] > 0) {
+            if (ArticleLike::where([['user_id', Auth::guard('api')->id()], ['article_id', $info['id']]])->exists()) {
+                $info['is_like'] = true;
+            }
+        }
 
         $comments['comments'] = [];
         $result               = ArticleComment::where('article_id', $article->id)->first();

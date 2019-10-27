@@ -25,6 +25,7 @@ class ArticleLikeController extends Controller
      *      }
      *     },
      *     @SWG\Parameter(name="article_id",in="query",description="请求参数-资讯id",required=true,type="integer"),
+     *     @SWG\Parameter(name="cancel",in="query",description="请求参数为1时取消点赞，默认为0",required=false,type="integer"),
      *     @SWG\Response(response=201,description="操作成功"),
      *     @SWG\Response(response=400,description="参数错误"),
      *     @SWG\Response(response=401,description="未授权"),
