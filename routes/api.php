@@ -170,6 +170,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //个人法宝数量
         Route::get('/users/ingots', 'UserController@ingots')->name('user.ingots');
 
+        //法宝流水记录
+        Route::get('/users/ingots/log', 'UserController@ingotsLog')->name('users.ingotsLog');
+
         //用户信息
         Route::get('/users/{user}', 'UserController@show')->name('users.show');
 
@@ -181,6 +184,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //支付法宝接口
         Route::post('/payment/ingotspay','PaymentController@ingotspay')->name('payments.ingotspay');
+
+
     });
 });
 

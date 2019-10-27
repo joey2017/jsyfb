@@ -40,7 +40,25 @@ class NoticeController extends Controller
         //获取认证用户信息
         $userId  = Auth::guard('api')->id();
         $notices = Notice::where('user_id', $userId)->paginate(10);
-        return $this->success(NoticeResource::collection($notices));
+        /*
+         $output = [
+             'results' => [],
+             'meta' => [],
+         ];
+
+         // Get Results
+         $output['results'] = DB::table('users')->where('type','a')->orWhere('type','l')->take($per_page)->skip($per_page * ($page - 1))->get();
+
+         // Set Meta
+         $output['meta'] = [
+            'page'  => $page,
+            'per_page' => $per_page,
+            'count'  => DB::select('SELECT FOUND_ROWS()'),
+            'total_pages' => DB::table('users')->count()/$per_page
+         ];
+
+         */
+        return NoticeResource::collection($notices);
     }
 
     /**

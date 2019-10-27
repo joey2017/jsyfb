@@ -53,7 +53,7 @@ class IngotsLog extends Model
 
     const TYPE_INCRE = 1;
     const TYPE_DECRE = 2;
-    const TYPES = [self::TYPE_INCRE => '收入', self::TYPE_DECRE => '支出'];
+    const TYPES      = [self::TYPE_INCRE => '充值', self::TYPE_DECRE => '支出'];
 
     /**
      * @param string $status

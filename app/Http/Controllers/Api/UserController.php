@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\Api\AttentionResource;
 use App\Http\Resources\Api\BrowseHistoryResource;
+use App\Http\Resources\Api\IngotLogResource;
 use App\Http\Resources\Api\UserResource;
 use App\Models\Attention;
 use App\Models\BrowseHistory;
 use App\Models\Ingots;
+use App\Models\IngotsLog;
 use App\Models\Notice;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -181,6 +183,26 @@ class UserController extends Controller
     {
         $attentions = Attention::where('user_id', Auth::guard('api')->id())->paginate(10);
         return $this->success(AttentionResource::collection($attentions));
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/users/ingots/log",
+     *   tags={"User"},
+     *   summary="法宝流水记录列表",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response="200",description="获取法宝流水记录")
+     *
+     * )
+     */
+    public function ingotsLog()
+    {
+        $ingotLogs = IngotsLog::where([['user_id', Auth::guard('api')->id()], ['status', IngotsLog::NORMAL]])->paginate(10);
+        return $this->success(IngotLogResource::collection($ingotLogs));
     }
 
     /**
