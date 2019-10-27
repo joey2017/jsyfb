@@ -62,6 +62,7 @@ class LegalBookCategoryController extends Controller
                 unset($val['is_deleted']);
                 $val['status']   = LegalBookCategory::getStatusName($val['status']);
                 $val['jump_url'] = 'articles/legals/sections/{id}';
+                $val['logo']     = env('APP_UPLOAD_PATH') . '/' . $val['logo'];
                 $val['list']     = $this->tree($val['id']);
                 $array[]         = $val;
             }
