@@ -43,7 +43,7 @@ class PaymentController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="fee", type="int", required=true, in="formData", description="订单总金额，单位为分"),
+     *   @SWG\Parameter(name="fee", type="integer", required=true, in="formData", description="订单总金额，单位为分"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
