@@ -49,13 +49,10 @@ Route::group([
         'notarys/advices'           => NotaryAdviceController::class,
         'notarys'                   => NotaryOfficeController::class,
         'wechat-attentions'         => WechatAttentionController::class,
-        'expert-advices'            => ExpertAdviceController::class,
         'goods'                     => GoodsController::class,
-        'goods-attrs'               => GoodsAttrController::class,
         'feedback'                  => FeedbackController::class,
         'exchanges'                 => ExchangeController::class,
         'specialists/advices'       => SpecialistAdviceController::class,
-        'customers/reservations'    => ReservationController::class,
 
     ]);
 
@@ -65,20 +62,20 @@ Route::group([
 
     //签到列表
     $router->get('personnel/signs', 'UserSignController@index');
-    $router->delete('personnel/signs/{id}', 'UserSignController@destory');
+    $router->delete('personnel/signs/{id}', 'UserSignController@destroy');
 
     //每日答题
     $router->get('personnel/answers/records', 'AnswerRecordController@index');
-    $router->delete('personnel/answers/records/{id}', 'AnswerRecordController@destory');
+    $router->delete('personnel/answers/records/{id}', 'AnswerRecordController@destroy');
 
     //VIP通道
     $router->get('personnel/members', 'MemberController@index');
-    $router->delete('personnel/members/{id}', 'MemberController@destory');
+    $router->delete('personnel/members/{id}', 'MemberController@destroy');
 
     //关注律师
     $router->get('personnel/attentions', 'AttentionController@index');
     //$router->get('personnel/attentions/{id}','AttentionController@show');
-    $router->delete('personnel/attentions/{id}', 'AttentionController@destory');
+    $router->delete('personnel/attentions/{id}', 'AttentionController@destroy');
 
     $router->get('forms/settings', 'FormController@settings');
     $router->get('forms/register', 'FormController@register');
