@@ -86,3 +86,5 @@ api创建签到展示返回的数据不正确
 6.toArray（）调用前处理
 7.排序处理
 8.文章分享后回调以及重新打开链接跳到文章页
+9.http://dev.laravel.com/admin/articles/addcomments/1y页面的列表，查看，删除链接不正确
+

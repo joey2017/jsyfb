@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllLaywersIdAndName;
 use App\Models\Laywer;
 use Encore\Admin\Controllers\UserController;
 use Encore\Admin\Form;
@@ -120,7 +121,7 @@ class AdminerController extends UserController
         $form->multipleSelect('roles', trans('admin.roles'))->options($roleModel::all()->pluck('name', 'id'));
         $form->multipleSelect('permissions', trans('admin.permissions'))->options($permissionModel::all()->pluck('name', 'id'));
 
-        $form->select('related_spec_id', trans('admin.related_spec_id'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray());
+        $form->select('related_spec_id', trans('admin.related_spec_id'))->options(getAllLaywersIdAndName());
 
         $form->display('created_at', trans('admin.created_at'));
         $form->display('updated_at', trans('admin.updated_at'));

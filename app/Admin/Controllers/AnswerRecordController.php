@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\AnswerList;
 use App\Models\User;
 use App\Models\AnswerRecord;
@@ -89,7 +90,7 @@ class AnswerRecordController extends AdminController
     protected function form()
     {
         $form = new Form(new AnswerRecord);
-        $form->select('user_id', trans('admin.nickname'))->options(User::where('status', '1')->pluck('nickname', 'id')->toArray());
+        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname());
         $form->select('answer_list_id', '题目')->options(AnswerList::where('status', '1')->pluck('title', 'id')->toArray());
         $form->datetime('date', trans('admin.date'))->default(date('Y-m-d H:i:s'));
         $form->text('question', trans('admin.question'));

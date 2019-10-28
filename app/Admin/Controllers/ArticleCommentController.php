@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllArticlesIdAndTitle;
+use function App\Helpers\getAllLaywersIdAndName;
 use App\Models\Article;
 use App\Models\ArticleComment;
 use App\Models\Laywer;
@@ -98,16 +100,16 @@ class ArticleCommentController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new ArticleComment);
+        $form     = new Form(new ArticleComment);
 
         if ($form->isEditing()) {
-            $form->select('article_id', trans('admin.title'))->options(Article::where([['status', 1], ['is_deleted', 0]])->pluck('title', 'id')->toArray())->readOnly();
+            $form->select('article_id', trans('admin.title'))->options(getAllArticlesIdAndTitle())->readOnly();
             $form->textarea('article.content', trans('admin.content'))->readonly();
-            $form->select('laywer_id', trans('admin.laywer'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray())->readOnly();
+            $form->select('laywer_id', trans('admin.laywer'))->options(getAllLaywersIdAndName())->readOnly();
         } else {
-            $form->select('article_id', trans('admin.title'))->options(Article::where([['status', 1], ['is_deleted', 0]])->pluck('title', 'id')->toArray())->required();
+            $form->select('article_id', trans('admin.title'))->options(getAllArticlesIdAndTitle())->required();
             $form->textarea('article.content', trans('admin.content'));
-            $form->select('laywer_id', trans('admin.laywer'))->options(Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray())->required();
+            $form->select('laywer_id', trans('admin.laywer'))->options(getAllLaywersIdAndName())->required();
         }
         $form->textarea('interpretation', trans('admin.interpretation'))->required();
         $form->textarea('measures', trans('admin.measures'))->required();
