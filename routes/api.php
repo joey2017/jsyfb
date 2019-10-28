@@ -21,6 +21,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     //小程序授权登录
     Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
 
+    //小程序支付回调
+    Route::get('/payment/notify','PaymentController@notify')->name('payments.notify');
+
     Route::middleware('api.refresh')->group(function () {
         //用户留言
         Route::post('/messages', 'MessageController@store')->name('messages.store');

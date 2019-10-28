@@ -58,7 +58,7 @@ class NoticeController extends Controller
          ];
 
          */
-        return NoticeResource::collection($notices);
+        return $this->success(NoticeResource::collection($notices));
     }
 
     /**

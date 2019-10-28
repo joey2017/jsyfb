@@ -117,4 +117,11 @@ class PaymentController extends Controller
         DB::commit();
         return $this->created('支付成功');
     }
+
+
+    //微信支付回调通知
+    public function notify()
+    {
+
+    }
 }
