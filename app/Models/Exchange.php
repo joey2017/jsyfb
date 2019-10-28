@@ -62,6 +62,11 @@ class Exchange extends Model
         return $this->belongsTo(Goods::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * @param string $status
      * @return string

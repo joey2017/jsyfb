@@ -188,6 +188,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //支付法宝接口
         Route::post('/payment/ingotspay','PaymentController@ingotspay')->name('payments.ingotspay');
 
+        //微信支付接口
+        Route::post('/payment/wechatpay','PaymentController@wechatpay')->name('payments.wechatpay');
 
     });
 });

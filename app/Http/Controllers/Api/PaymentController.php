@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\IngotsLog;
 use App\Models\Member;
 use App\Models\SystemConfig;
+use App\Models\Unifiedorder;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
@@ -47,23 +48,44 @@ class PaymentController extends Controller
      *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function wechatpay($fee)
+    public function wechatpay(Request $request)
     {
-        $order = [
-            'out_trade_no' => 'CZ' . $this->generateSn(),
-            'body'         => '使用微信支付充值法宝，支付总金额' . $fee . '分',
-            'total_fee'    => $fee,
-            'openid'       => Auth::guard('api')->user()->openid,
-        ];
-        //$result = Pay::wechat()->mp($order);
-        //$result = Pay::wechat()->scan($order);
-        //$result = Pay::wechat()->app($order);
-        //$result = Pay::wechat()->wap($order);
-        //$result = Pay::wechat()->transfer($order);
-        $result = Pay::wechat()->miniapp($order);
-        // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
-        // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
-        // 后续调用不在本文档讨论范围内，请自行参考官方文档。
+        $fee = $request->input('fee','');
+
+        if ($fee <= 0 || !is_numeric($fee) || strpos($fee,".") !== false) {
+            return $this->failed('支付金额须大于0且为整数');
+        }
+        try {
+            $order = [
+                'out_trade_no' => 'CZ' . $this->generateSn(),
+                'body'         => '使用微信支付充值法宝，支付总金额' . $fee . '分',
+                'total_fee'    => $fee,
+                'openid'       => Auth::guard('api')->user()->openid,
+            ];
+
+            $unified = [
+                'user_id'      => Auth::guard('api')->id(),
+                'out_trade_no' => $order['out_trade_no'],
+                'description'  => $order['body'],
+                'total_fee'    => $order['total_fee'],
+                'pay_status'   => 0,
+            ];
+
+            Unifiedorder::create($unified);
+            //$result = Pay::wechat()->mp($order);
+            //$result = Pay::wechat()->scan($order);
+            //$result = Pay::wechat()->app($order);
+            //$result = Pay::wechat()->wap($order);
+            //$result = Pay::wechat()->transfer($order);
+            $result = Pay::wechat()->miniapp($order);
+            dd($request);
+            // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
+            // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
+            // 后续调用不在本文档讨论范围内，请自行参考官方文档。
+        } catch (\Exception $e) {
+            Log::error('微信支付失败：' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
+        }
+
     }
 
     /**
