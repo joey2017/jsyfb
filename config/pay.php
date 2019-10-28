@@ -43,7 +43,7 @@ return [
         'mch_id' => env('WECHAT_MCH_ID', ''),
 
         // 微信支付异步通知地址
-        'notify_url' => 'https://pay.weixin.qq.com/wxpay/pay.action',
+        'notify_url' => env('APP_URL').'/payment/notify',
 
         // 微信支付签名秘钥
         'key' => env('WECHAT_KEY', ''),

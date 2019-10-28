@@ -33,25 +33,19 @@ class PaymentController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function alipay(Request $request)
-    {
-
-        $order = [
-            'out_trade_no' => time(),
-            'total_amount' => '1',
-            'subject'      => 'test subject - 测试',
-        ];
-        return Pay::alipay()->web($order);
-    }
-
-
-    /**
-     * @param $content
-     * @param $fee
-     * @param $openid
+     * @SWG\Post(
+     *   path="/payment/wechatpay",
+     *   tags={"Misc"},
+     *   summary="微信支付接口",
+     *   description="咨询专属法顾消耗法宝支付接口",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="quantity", type="integer", required=true, in="formData", description="法宝数量"),
+     *   @SWG\Response(response=200,description="成功")
+     * )
      */
     public function wechatpay($content, $fee, $openid)
     {
@@ -67,6 +61,9 @@ class PaymentController extends Controller
         //$result = Pay::wechat()->wap($order);
         //$result = Pay::wechat()->transfer($order);
         $result = Pay::wechat()->miniapp($order);
+        // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
+        // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
+        // 后续调用不在本文档讨论范围内，请自行参考官方文档。
     }
 
     /**
