@@ -50,6 +50,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryOffice whereTelephone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryOffice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryOffice whereWechat($value)
+ * @property string|null $picture 图片
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryOffice wherePicture($value)
  */
 class NotaryOffice extends Model
 {

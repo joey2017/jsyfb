@@ -7,34 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Region\Province
  *
- * @property int $PROVINCE_ID 自增列
- * @property string $PROVINCE_CODE 省份代码
- * @property string $PROVINCE_NAME 省份名称
- * @property string $SHORT_NAME 简称
- * @property string|null $LNG 经度
- * @property string|null $LAT 纬度
- * @property int|null $SORT 排序
- * @property string|null $GMT_CREATE 创建时间
- * @property string|null $GMT_MODIFIED 修改时间
- * @property string|null $MEMO 备注
- * @property int|null $DATA_STATE 状态
- * @property string|null $TENANT_CODE 租户ID
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereDATASTATE($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereGMTCREATE($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereGMTMODIFIED($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereLAT($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereLNG($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereMEMO($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province wherePROVINCECODE($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province wherePROVINCEID($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province wherePROVINCENAME($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereSHORTNAME($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereSORT($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereTENANTCODE($value)
  * @mixin \Eloquent
+ * @property int $id 自增列
+ * @property string $code 省份代码
+ * @property string $province_name 省份名称
+ * @property string $short_name 简称
+ * @property string|null $lng 经度
+ * @property string|null $lat 纬度
+ * @property int|null $sort 排序
+ * @property int|null $status 状态
+ * @property \Illuminate\Support\Carbon|null $created_at 创建时间
+ * @property \Illuminate\Support\Carbon|null $updated_at 修改时间
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereProvinceName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereShortName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereSort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereUpdatedAt($value)
  */
 class Province extends Model
 {

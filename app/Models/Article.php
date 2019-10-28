@@ -39,6 +39,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Article whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BrowseHistory[] $browseHistorys
+ * @property-read int|null $browse_historys_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ArticleLike[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ArticleShare[] $shares
+ * @property-read int|null $shares_count
  */
 class Article extends Model
 {

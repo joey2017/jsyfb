@@ -28,6 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\LegalBookSection whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LegalBook[] $book
+ * @property-read int|null $book_count
+ * @property-read \App\Models\LegalBookCategory|null $category
  */
 class LegalBookSection extends Model
 {

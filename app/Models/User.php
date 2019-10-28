@@ -76,6 +76,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
+ * @property-read \App\Models\Authentication $authen
+ * @property-read \App\Models\Ingots $userIngots
  */
 class User extends Authenticatable implements JWTSubject
 {

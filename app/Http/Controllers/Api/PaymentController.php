@@ -6,6 +6,7 @@ use App\Models\IngotsLog;
 use App\Models\Member;
 use App\Models\SystemConfig;
 use App\Models\Unifiedorder;
+use App\Models\User;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
@@ -45,20 +46,27 @@ class PaymentController extends Controller
      *      }
      *   },
      *   @SWG\Parameter(name="fee", type="integer", required=true, in="formData", description="订单总金额，单位为分"),
+     *   @SWG\Parameter(name="quantity", type="integer", required=true, in="formData", description="购买法宝数量"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function wechatpay(Request $request)
     {
-        $fee = $request->input('fee','');
+        $fee    = $request->input('fee', '');
+        $ingots = $request->input('quantity', '');
 
-        if ($fee <= 0 || !is_numeric($fee) || strpos($fee,".") !== false) {
+        if ($fee <= 0 || !is_numeric($fee) || strpos($fee, ".") !== false) {
             return $this->failed('支付金额须大于0且为整数');
         }
+
+        if ($ingots <= 0 || !is_numeric($fee)) {
+            return $this->failed('购买法宝数量须大于0且为整数');
+        }
+
         try {
             $order = [
                 'out_trade_no' => 'CZ' . $this->generateSn(),
-                'body'         => '使用微信支付充值法宝，支付总金额' . $fee . '分',
+                'body'         => '使用微信支付购买法宝，支付总金额' . $fee . '分',
                 'total_fee'    => $fee,
                 'openid'       => Auth::guard('api')->user()->openid,
             ];
@@ -68,6 +76,7 @@ class PaymentController extends Controller
                 'out_trade_no' => $order['out_trade_no'],
                 'description'  => $order['body'],
                 'total_fee'    => $order['total_fee'],
+                'ingots'       => $ingots,
                 'pay_status'   => 0,
             ];
 
@@ -78,7 +87,6 @@ class PaymentController extends Controller
             //$result = Pay::wechat()->wap($order);
             //$result = Pay::wechat()->transfer($order);
             $result = Pay::wechat()->miniapp($order);
-            dd($request);
             // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
             // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
             // 后续调用不在本文档讨论范围内，请自行参考官方文档。
@@ -146,11 +154,22 @@ class PaymentController extends Controller
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
 
+            DB::beginTransaction();
+            //更新订单
+            $order             = Unifiedorder::where('out_trade_no', $data->all()['out_trade_no'])->first();
+            $order->pay_status = Unifiedorder::SUCCESS;
+            $order->save();
+            //更新法宝
+            $this->ingots->update($order['ingots'], '微信钱包购买' . $order['ingots'] . '法宝', IngotsLog::TYPE_INCRE, User::findOrFail($order['user_id']));
+            //发送消息
+            $this->notice->add('微信支付购买法宝', '您刚刚使用微信钱包支付' . ($order['total_fee'] / 100) . '元购买' . $order['ingots'] . '法宝');
+
             Log::debug('Wechat notify', $data->all());
         } catch (\Exception $e) {
+            DB::rollBack();
             Log::warning('微信支付回调通知验证失败' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
         }
-
+        DB::commit();
         return $pay->success();// laravel 框架中请直接 `return $pay->success()`
     }
 }

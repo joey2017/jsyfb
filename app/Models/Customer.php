@@ -24,6 +24,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $kf_account 客服账号
+ * @property int|null $kf_id 客服工号
+ * @property string|null $kf_nick 客服昵称
+ * @property string|null $kf_wx 微信号
+ * @property string|null $kf_headimgurl 头像
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereKfAccount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereKfHeadimgurl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereKfId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereKfNick($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Customer whereKfWx($value)
  */
 class Customer extends Model
 {

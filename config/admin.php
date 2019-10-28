@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => '家有法宝管理后台',
+    'name'       => '家有法宝管理后台',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>家有法宝</b>',
+    'logo'       => '<img src="' . env('APP_URL') . '/image/WechatIMG28.png" style="width:55px;height:55px;" alt="Admin logo">',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>La</b>',
+    'logo-mini'  => '<b>La</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ return [
     | This value is the path of laravel-admin bootstrap file.
     |
     */
-    'bootstrap' => app_path('Admin/bootstrap.php'),
+    'bootstrap'  => app_path('Admin/bootstrap.php'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     | access through the root path, just set the prefix to empty string.
     |
     */
-    'route' => [
+    'route'      => [
 
         'prefix' => env('ADMIN_ROUTE_PREFIX', 'admin'),
 
@@ -403,7 +403,7 @@ return [
             // 如果要关掉这个扩展，设置为false
             'enable' => true,
         ],
-        'latlong'          => [
+        'latlong'       => [
 
             // Whether to enable this extension, defaults to true
             'enable'    => true,
@@ -435,9 +435,19 @@ return [
                 ],
             ]
         ],
-        'login-captcha'    => [
+        'login-captcha' => [
             // set to false if you want to disable this extension
             'enable' => true,
         ],
+        'wang-editor'   => [
+
+            // 如果要关掉这个扩展，设置为false
+            'enable' => true,
+
+            // 编辑器的配置
+            'config' => [
+                'uploadImgServer' => '/upload'
+            ]
+        ]
     ],
 ];

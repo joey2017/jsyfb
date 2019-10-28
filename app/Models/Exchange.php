@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $address 地址
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereAddress($value)
  */
 class Exchange extends Model
 {

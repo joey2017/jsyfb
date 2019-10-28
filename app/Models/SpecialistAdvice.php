@@ -40,6 +40,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice whereUsername($value)
+ * @property int $laywer_id 律师或专家id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice whereLaywerId($value)
  */
 class SpecialistAdvice extends Model
 {
