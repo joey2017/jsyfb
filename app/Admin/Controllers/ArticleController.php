@@ -185,7 +185,7 @@ class ArticleController extends AdminController
                 'interpretation' => $request->input('interpretation'),
                 'measures'       => $request->input('measures'),
                 'content'        => $request->input('comment_content'),
-                'laywer_id'      => Admin::user()->user()->related_spec_id,
+                'laywer_id'      => Admin::user()->related_spec_id,
             ];
 
             ArticleComment::create($data);
