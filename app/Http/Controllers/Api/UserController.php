@@ -20,30 +20,6 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 class UserController extends Controller
 {
     /**
-     * @SWG\Get(
-     *   path="/users/{id}",
-     *   tags={"User"},
-     *   summary="用户详情",
-     *   description="用户详情接口",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path",description="用户id"),
-     *   @SWG\Response(
-     *     response=200,
-     *     description="成功"
-     *   )
-     * )
-     */
-    public function show(User $user)
-    {
-        $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
-        return $this->success(new UserResource($user));
-    }
-
-    /**
      * @SWG\Post(
      *   path="/users",
      *   tags={"User"},

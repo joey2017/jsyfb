@@ -41,7 +41,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //用户认证
         Route::post('/users/auths', 'AuthenticationController@store')->name('users-auths.store');
         //用户认证详情
-        Route::get('/users/auths/{authentication}', 'AuthenticationController@show')->name('users-auths.show');
+        Route::get('/users/auths', 'AuthenticationController@show')->name('users-auths.show');
 
 
         //法宝获得渠道列表

@@ -11,7 +11,7 @@ class AuthenticationController extends Controller
 {
     /**
      * @SWG\Get(
-     *   path="/users/auths/{id}",
+     *   path="/users/auths",
      *   tags={"User"},
      *   summary="认证详情",
      *   description="认证详情",
@@ -20,17 +20,17 @@ class AuthenticationController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="认证id"),
      *   @SWG\Response(response=200,description="成功"),
      *   @SWG\Response(response=404,description="未找到")
      * )
      */
-    public function show(Authentication $authentication)
+    public function show()
     {
-        if ($authentication->user_id != Auth::guard('api')->id()) {
-            return $this->failed('禁止访问', '403');
+        $condition = [['user_id', Auth::guard('api')->id()], ['status', 1]];
+        if ($authentication = Authentication::where($condition)->first()) {
+            return $this->success(new AuthenticationResource($authentication));
         }
-        return $this->success(new AuthenticationResource($authentication));
+        return $this->success([],'success');
     }
 
     /**
@@ -57,7 +57,7 @@ class AuthenticationController extends Controller
      */
     public function store(AuthenticationRequest $request)
     {
-        if (Authentication::where('user_id',Auth::guard('api')->id())->exists()) {
+        if (Authentication::where('user_id', Auth::guard('api')->id())->exists()) {
             return $this->failed('您的认证申请已提交，请耐心等待审核结果');
         }
         Authentication::create(array_merge($request->all(), ['user_id' => Auth::guard('api')->id()]));

@@ -37,23 +37,23 @@ class PaymentController extends Controller
      *   path="/payment/wechatpay",
      *   tags={"Misc"},
      *   summary="微信支付接口",
-     *   description="咨询专属法顾消耗法宝支付接口",
+     *   description="微信支付接口",
      *   security={
      *      {
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="quantity", type="integer", required=true, in="formData", description="法宝数量"),
+     *   @SWG\Parameter(name="fee", type="int", required=true, in="formData", description="订单总金额，单位为分"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function wechatpay($content, $fee, $openid)
+    public function wechatpay($fee)
     {
         $order = [
             'out_trade_no' => 'CZ' . $this->generateSn(),
-            'body'         => $content,
+            'body'         => '使用微信支付充值法宝，支付总金额' . $fee . '分',
             'total_fee'    => $fee,
-            'openid'       => $openid,
+            'openid'       => Auth::guard('api')->user()->openid,
         ];
         //$result = Pay::wechat()->mp($order);
         //$result = Pay::wechat()->scan($order);
@@ -119,6 +119,16 @@ class PaymentController extends Controller
     //微信支付回调通知
     public function notify()
     {
+        $pay = Pay::wechat(config('pay.wechat'));
 
+        try {
+            $data = $pay->verify(); // 是的，验签就这么简单！
+
+            Log::debug('Wechat notify', $data->all());
+        } catch (\Exception $e) {
+            Log::warning('微信支付回调通知验证失败' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
+        }
+
+        return $pay->success();// laravel 框架中请直接 `return $pay->success()`
     }
 }
