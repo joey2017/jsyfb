@@ -6,7 +6,7 @@ use Encore\Admin\Actions\RowAction;
 
 class Comments extends RowAction
 {
-    public $name = '评论';
+    public $name = '点评';
 
     public function href()
     {
