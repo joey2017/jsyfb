@@ -15,8 +15,8 @@ class UploadsController extends AdminController
             foreach ($file as $key => $value) {
                 $len = $key;
             }
-            if ($len > 25) {
-                return response()->json(['ResultData' => 6, 'info' => '最多可以上传25张图片']);
+            if ($len > 4) {
+                return response()->json(['ResultData' => 6, 'info' => '最多可以上传4张图片']);
             }
             $m      = 0;
             $k      = 0;
