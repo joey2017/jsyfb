@@ -6,11 +6,12 @@ use App\Constant;
 use App\Models\Region\Province;
 use App\Models\BusinessCategory;
 use App\Models\Laywer;
-use Encore\Admin\Admin;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\MessageBag;
 
 class LaywerController extends AdminController
 {
@@ -29,8 +30,9 @@ class LaywerController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Laywer);
-
-        if (Admin::user()->isRole())
+        if (Admin::user()->isRole('laywer')) {
+            $grid->model()->where('id', Admin::user()->related_spec_id);
+        }
 
         $grid->column('id', __('Id'));
         $grid->column('name', trans('admin.name'));
@@ -54,7 +56,7 @@ class LaywerController extends AdminController
             $filter->disableIdFilter();
 
             $filter->column(1 / 3, function ($filter) {
-                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name','code')->toArray());
+                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name', 'code')->toArray());
             });
 
             $filter->column(1 / 3, function ($filter) {
@@ -78,6 +80,14 @@ class LaywerController extends AdminController
     protected function detail($id)
     {
         $show = new Show(Laywer::findOrFail($id));
+
+        if (Admin::user()->isRole('laywer') && Admin::user()->related_spec_id != $id) {
+            $error = new MessageBag([
+                'title'   => '查看失败',
+                'message' => '您无权限访问查看',
+            ]);
+            return back()->with(compact('error'));
+        }
 
         $show->field('id', __('Id'));
         $show->field('name', trans('admin.name'));
@@ -108,6 +118,23 @@ class LaywerController extends AdminController
     {
         $form = new Form(new Laywer);
 
+        if ($form->isEditing()) {
+            $params = request()->route()->parameters();
+            foreach ($params as $param) {
+                $value = $param;
+            }
+            if ($value != Admin::user()->related_spec_id) {
+                /*$error = new MessageBag([
+                    'title'   => '查看失败',
+                    'message' => '您无权限访问查看',
+                ]);*/
+                //todo
+                admin_error('查看失败','您无权限访问查看');
+            }
+        } else {
+            return admin_error('查看失败1','您无权限创建律师');
+        }
+
         $form->text('name', trans('admin.name'))->required();
         $form->text('title', trans('admin.user_title'));
         $form->mobile('mobile', trans('admin.mobile'))->required();
@@ -121,7 +148,6 @@ class LaywerController extends AdminController
             'district_code' => '区'
         ], '地域选择')->required();
         $form->multipleSelect('cate_id', trans('admin.category'))->options(BusinessCategory::all()->pluck('title', 'id')->toArray())->required();
-        //$form->text('expertise', trans('admin.expertise'))->placeholder('请输入已选择分类里面的中文，如房地产，公司诉讼，多个请用逗号间隔');
         $form->text('summary', trans('admin.summary'))->required();
 
         $form->saving(function (Form $form) {
