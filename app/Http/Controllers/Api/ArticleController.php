@@ -79,8 +79,8 @@ class ArticleController extends Controller
         $comments['comments'] = [];
         $result               = ArticleComment::where('article_id', $article->id)->first();
         if ($result) {
-            $comments['comments']                = $result->toArray();
-            $comments['comments']['laywer_info'] = new LaywerResource(Laywer::findOrFail($comments['comments']['laywer_id']));
+            $comments['comments'][]                = $result->toArray();
+            $comments['comments'][0]['laywer_info'] = new LaywerResource(Laywer::findOrFail($comments['comments'][0]['laywer_id']));
         }
 
         return $this->success(array_merge($info, $comments));
