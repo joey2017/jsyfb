@@ -20,7 +20,7 @@ class BrowseHistoryResource extends JsonResource
             'user_id'         => $this->user_id,
             'article_id'      => $this->article_id,
             'article_title'   => $this->article()->first()->title ?? '',
-            'article_image'   => $this->article()->first()->images ?? '',
+            'article_image'   => env('APP_UPLOAD_PATH') . '/' . ($this->article()->first()->images ?? ''),
             'article_content' => $this->article()->first()->content ?? '',
             'like_count'      => $this->article()->first()->like_count ?? '',
             'share_count'     => $this->article()->first()->share_count ?? '',
