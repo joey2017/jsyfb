@@ -24,10 +24,10 @@ class LaywerController extends Controller
      *          "Bearer":{}
      *      }
      *   },
+     *   @SWG\Parameter(in = "query",name = "cate_id",description = "擅长",required = false,type = "integer"),
      *   @SWG\Parameter(in = "query",name = "name",description = "律师名称",required = false,type = "string"),
      *   @SWG\Parameter(in = "query",name = "province_code",description = "省份代码",required = false,type = "string"),
      *   @SWG\Parameter(in = "query",name = "city_code",description = "城市代码",required = false,type = "string"),
-     *   @SWG\Parameter(in = "query",name = "cate_id",description = "擅长",required = false,type = "integer"),
      *   @SWG\Response(response="200",description="获取律师列表")
      *
      * )
@@ -46,7 +46,7 @@ class LaywerController extends Controller
         }
 
         if (!empty($data['cate_id'])) {
-            $model->whereRaw('cate_id REGEXP ?', [is_array($data['cate_id']) ? implode('|', $data['cate_id']) : $data]);
+            $model->whereRaw('cate_id REGEXP ?', [is_array($data['cate_id']) ? implode('|', $data['cate_id']) : $data['cate_id']]);
         }
 
         $laywers = $model->paginate(10)->toArray();

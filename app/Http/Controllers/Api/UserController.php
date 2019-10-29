@@ -136,7 +136,7 @@ class UserController extends Controller
         if (Auth::guard('api')->id() != $user->id) {
             return $this->failed('禁止访问', 403);
         }
-        $historys = BrowseHistory::where('user_id', $user->id)->paginate(10);
+        $historys = BrowseHistory::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
         return $this->success(BrowseHistoryResource::collection($historys));
     }
 
@@ -157,7 +157,7 @@ class UserController extends Controller
      */
     public function attention()
     {
-        $attentions = Attention::where('user_id', Auth::guard('api')->id())->paginate(10);
+        $attentions = Attention::where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
         return $this->success(AttentionResource::collection($attentions));
     }
 
@@ -177,7 +177,7 @@ class UserController extends Controller
      */
     public function ingotsLog()
     {
-        $ingotLogs = IngotsLog::where([['user_id', Auth::guard('api')->id()], ['status', IngotsLog::NORMAL]])->paginate(10);
+        $ingotLogs = IngotsLog::where([['user_id', Auth::guard('api')->id()], ['status', IngotsLog::NORMAL]])->orderBy('id', 'desc')->paginate(10);
         return $this->success(IngotLogResource::collection($ingotLogs));
     }
 
