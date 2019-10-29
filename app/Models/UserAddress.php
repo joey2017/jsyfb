@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Specialist
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Specialist newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Specialist newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Specialist query()
- * @mixin \Eloquent
  * @property int $id
  * @property int|null $user_id 用户id
  * @property string|null $receiver 收货人

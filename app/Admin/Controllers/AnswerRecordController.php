@@ -35,6 +35,8 @@ class AnswerRecordController extends AdminController
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('question', trans('admin.question'));
         $grid->column('answer', trans('admin.answer'));
+        $grid->column('correct', trans('admin.correct'));
+        $grid->column('score', trans('admin.answer_score'));
         $grid->column('date', trans('admin.date_of_answer'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -69,13 +71,15 @@ class AnswerRecordController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('user_id', trans('admin.user_id'));
-        $show->answerList('题目', function ($answerList) {
+        $show->answerList(trans('admin.question'), function ($answerList) {
             $answerList->title();
             $answerList->correct();
         });
         $show->field('date', trans('admin.date'));
         $show->field('question', trans('admin.question'));
         $show->field('answer', trans('admin.answer'));
+        $show->field('correct', trans('admin.correct'));
+        $show->field('score', trans('admin.answer_score'));
         $show->field('created_at', trans('admin.created_at'));
         $show->field('updated_at', trans('admin.updated_at'));
 
