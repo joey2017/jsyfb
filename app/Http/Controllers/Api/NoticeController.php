@@ -39,7 +39,7 @@ class NoticeController extends Controller
     {
         //获取认证用户信息
         $userId  = Auth::guard('api')->id();
-        $notices = Notice::where('user_id', $userId)->paginate(10);
+        $notices = Notice::where('user_id', $userId)->orderBy('id', 'desc')->paginate(10);
         /*
          $output = [
              'results' => [],
