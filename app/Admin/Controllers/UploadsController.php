@@ -27,11 +27,11 @@ class UploadsController extends AdminController
                 if ($file[$i]->isValid()) {
                     if (in_array(strtolower($file[$i]->extension()), ['jpeg', 'jpg', 'gif', 'png'])) {
                         //$picname = $file[$i]->getClientOriginalName();//获取上传原文件名
-                        $ext     = $file[$i]->getClientOriginalExtension();//获取上传文件的后缀名
+                        $ext = $file[$i]->getClientOriginalExtension();//获取上传文件的后缀名
                         // 重命名
                         $filename = time() . str_random(6) . "." . $ext;
-                        if ($file[$i]->move("uploads/images", $filename)) {
-                            $newFileName = '/' . "uploads/images" . '/' . $filename;
+                        if ($file[$i]->move("uploads/images/" . date('Y-m-d') . '/', $filename)) {
+                            $newFileName = "/uploads/images" . date('Y-m-d') . '/' . $filename;
                             $m           = $m + 1;
                         } else {
                             $k = $k + 1;
