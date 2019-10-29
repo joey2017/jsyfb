@@ -103,12 +103,12 @@ class UserController extends AdminController
         $form = new Form(new User);
 
         $form->text('username', trans('admin.username'))->required();
-        $form->password('password', trans('admin.password'))->required();
+        $form->password('password', trans('admin.password'));
         $form->text('nickname', trans('admin.nickname'))->required();
         $form->image('avatar', trans('admin.avatar'))->required();
         $form->email('email', trans('admin.email'));
         $form->mobile('mobile', trans('admin.mobile'))->required();
-        $form->select('inviter_id', trans('admin.inviter'))->options(getAllUsersIdAndNickname())->required()->rules('integer');
+        $form->select('inviter_id', trans('admin.inviter'))->options(getAllUsersIdAndNickname());
         $form->select('status', trans('admin.status'))->options(User::STATUSES)->required()->rules('integer');
         $form->text('descr', trans('admin.descr'));
         $form->ip('last_login_ip', trans('admin.last_login_ip'));
