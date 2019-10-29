@@ -84,8 +84,8 @@ class WechatController extends Controller
             Log::error('获取session_key失败', $userInfo);
         }
 
-        $decryData = json_decode($decryData,true);
-        $inviter = '';
+        $decryData = is_array($decryData) ? $decryData : json_decode($decryData, true);
+        $inviter   = '';
 
         if ($icode !== '') {
             $inviter = User::where('invitation_code', $icode)->first();
@@ -120,11 +120,11 @@ class WechatController extends Controller
             // 邀请人获得法宝
             if ($inviter) {
                 $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友注册获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
-                $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id,2);
+                $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id, 2);
             }
             // 未读消息数量
             $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
-            return $this->setStatusCode($statusCode)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)],'success','登录成功');
+            return $this->setStatusCode($statusCode)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)], 'success', '登录成功');
         }
         return $this->failed('登录失败,请稍后重试');
     }
