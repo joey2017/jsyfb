@@ -27,7 +27,7 @@ class BusinessCategoryController extends Controller
      */
     public function index()
     {
-        $categories = BusinessCategory::paginate(10);
+        $categories = BusinessCategory::where('status', BusinessCategory::NORMAL)->get();
         return $this->success(BusinessCategoryResource::collection($categories));
     }
 }

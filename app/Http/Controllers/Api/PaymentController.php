@@ -87,6 +87,7 @@ class PaymentController extends Controller
             //$result = Pay::wechat()->wap($order);
             //$result = Pay::wechat()->transfer($order);
             $result = Pay::wechat()->miniapp($order);
+            return $result;
             // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
             // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
             // 后续调用不在本文档讨论范围内，请自行参考官方文档。
