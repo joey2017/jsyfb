@@ -23,7 +23,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $lists = Customer::where('status','=',1)->paginate(10);
+        $lists = Customer::where('status', '=', 1)->orderBy('id', 'desc')->paginate(10);
         return $this->success(CustomerResource::collection($lists));
     }
 }

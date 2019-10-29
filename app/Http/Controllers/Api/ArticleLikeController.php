@@ -71,7 +71,6 @@ class ArticleLikeController extends Controller
             Log::error('throwable错误：',['msg' => $exception->getMessage()]);
         }
 
-        //return $this->setStatusCode(201)->success('','点赞成功');
         return $this->created('点赞成功');
     }
 

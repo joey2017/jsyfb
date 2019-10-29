@@ -27,7 +27,7 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        $addresses = UserAddress::where('user_id',Auth::guard('api')->id())->paginate(5);
+        $addresses = UserAddress::where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
         return $this->success(UserAddressResource::collection($addresses));
     }
 

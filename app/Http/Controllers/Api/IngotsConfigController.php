@@ -25,7 +25,7 @@ class IngotsConfigController extends Controller
      */
     public function index()
     {
-        $configs = IngotsConfig::paginate(10);
+        $configs = IngotsConfig::all();
         return $this->success(IngotsConfigResource::collection($configs));
     }
 
@@ -45,6 +45,6 @@ class IngotsConfigController extends Controller
      */
     public function show()
     {
-        return $this->success(SystemConfig::where('key','=','vip_ingots')->first()->value);
+        return $this->success(SystemConfig::where('key', '=', 'vip_ingots')->first()->value ?? 0);
     }
 }

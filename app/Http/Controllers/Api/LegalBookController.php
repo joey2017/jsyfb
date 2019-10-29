@@ -24,7 +24,7 @@ class LegalBookController extends Controller
      */
     public function show($section_id)
     {
-        $condition = ['status', 1];
+        $condition = ['status', LegalBook::NORMAL];
         if ($section_id > 0) {
             $condition = [['section_id', $section_id], $condition];
         }

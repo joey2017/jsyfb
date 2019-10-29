@@ -31,14 +31,12 @@ class NotaryOfficeController extends Controller
     public function index(Request $request)
     {
         $from = $request->input('location');
-        //$notarys = NotaryOffice::paginate(10);
         $notarys = DB::table((new NotaryOffice)->getTable())->paginate(10)->toArray();
         foreach ($notarys['data'] as &$notary) {
             $notary->picture  = env('APP_UPLOAD_PATH') . '/' . $notary->picture;
             $notary->distance = $this->distance($from, [$notary->lat, $notary->lng]);
         }
         array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
-        //return $this->success(NotaryOfficeResource::collection($notarys));
         return $this->success($notarys);
     }
 
@@ -64,6 +62,12 @@ class NotaryOfficeController extends Controller
     }
 
 
+    /**
+     * @param $from
+     * @param $to
+     * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     protected function distance($from, $to)
     {
         empty($from) && $from = implode(',', [

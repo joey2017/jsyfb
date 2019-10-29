@@ -129,7 +129,7 @@ class PaymentController extends Controller
             return $this->failed('支付法宝数量不能为空或小于0');
         }
 
-        if ($ingots != SystemConfig::where('key', 'vip_ingots')->first()->value) {
+        if ($ingots != SystemConfig::where('key', 'vip_ingots')->first()->value ?? 0) {
             return $this->failed('法宝数量与系统设置值不相等');
         };
 

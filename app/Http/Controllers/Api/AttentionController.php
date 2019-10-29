@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Attention;
+use App\Models\Laywer;
 use App\Services\NoticeService;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,7 @@ class AttentionController extends Controller
             }
 
             Attention::create(['user_id' => Auth::guard('api')->id(), 'laywer_id' => $laywer_id, 'created_at' => date('Y-m-d H:i:s')]);
-            $this->notice->add('关注律师', '恭喜您关注律师成功', Auth::guard('api')->id());
+            $this->notice->add('关注律师', '恭喜您关注【' . Laywer::findOrFail($laywer_id)->name . '】律师成功', Auth::guard('api')->id());
         } catch (PDOException $exception) {
             DB::rollBack();
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);

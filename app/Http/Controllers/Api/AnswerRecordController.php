@@ -18,12 +18,27 @@ use Illuminate\Support\Facades\Auth;
 
 class AnswerRecordController extends Controller
 {
+    /**
+     * @var IngotsService
+     */
     protected $ingots;
 
+    /**
+     * @var NoticeService
+     */
     protected $notice;
 
+    /**
+     * @var ScoreService
+     */
     protected $score;
 
+    /**
+     * AnswerRecordController constructor.
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     * @param ScoreService $scoreService
+     */
     public function __construct(IngotsService $ingotsService, NoticeService $noticeService, ScoreService $scoreService)
     {
         $this->ingots = $ingotsService;
@@ -77,7 +92,6 @@ class AnswerRecordController extends Controller
      *     tags={"Misc"},
      *     summary="{答题记录保存}",
      *     description="每日答题记录保存",
-     *     operationId="answer-records.store",
      *     produces={"application/json"},
      *     security={
      *      {
@@ -100,7 +114,7 @@ class AnswerRecordController extends Controller
         $answer = AnswerList::findOrFail($id);
 
         if ($result = AnswerRecord::where([['user_id', Auth::guard('api')->id()], ['answer_list_id', $id], ['correct', $answer->correct]])->exists()) {
-            return $this->failed('你已回答过该问题，请勿重复作答', 400);
+            return $this->failed('您已回答过该问题，请勿重复作答', 400);
         }
 
         $data = ['score' => 0, 'correct' => $answer->correct];
@@ -157,6 +171,6 @@ class AnswerRecordController extends Controller
      */
     public function totalranking()
     {
-        return $this->success(User::where([['status', 1], ['is_deleted', 0]])->select(['id', 'nickname', 'avatar', 'score'])->orderBy('score', 'desc')->paginate(10));
+        return $this->success(User::where([['status', User::NORMAL], ['is_deleted', 0]])->select(['id', 'nickname', 'avatar', 'score'])->orderBy('score', 'desc')->paginate(10));
     }
 }

@@ -55,7 +55,7 @@ class LegalBookCategoryController extends Controller
      */
     protected function tree($parent_id = 0)
     {
-        $rows  = LegalBookCategory::where('parent_id', $parent_id)->orderBy('order', 'ASC')->get();
+        $rows  = LegalBookCategory::where('parent_id', $parent_id)->orderBy('order', 'asc')->get();
         $array = [];
         if (sizeof($rows) != 0) {
             foreach ($rows as &$val) {

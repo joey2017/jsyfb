@@ -13,10 +13,21 @@ use Illuminate\Support\Facades\Log;
 
 class ArticleShareController extends Controller
 {
+    /**
+     * @var IngotsService
+     */
     protected $ingots;
 
+    /**
+     * @var NoticeService
+     */
     protected $notice;
 
+    /**
+     * ArticleShareController constructor.
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     */
     public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;

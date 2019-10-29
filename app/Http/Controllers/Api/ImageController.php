@@ -39,14 +39,13 @@ class ImageController extends Controller
                 //存储到指定文件，例如image/.filename public/.filename
                 $savePath = 'images/' . date('Y-m-d') . '/' . $fileName;
                 //Storage::put($savePath, File::get($file));//通过Storage put方法存储   File::get获取到的是文件内容
-                Storage::exists($savePath);
+                //Storage::exists($savePath);
 
                 if (Storage::disk('uploads')->put($savePath, File::get($file))) {
                     $image = UserImage::create([
                         'user_id' => Auth::guard('api')->id(),
                         'path'    => $savePath
                     ]);
-                    //return $this->created('上传成功');
                     return $this->setStatusCode(201)->success(['image_url' => env('APP_UPLOAD_PATH') . '/' . $image->path], 'success', '上传成功');
                 }
             } catch (\Exception $exception) {

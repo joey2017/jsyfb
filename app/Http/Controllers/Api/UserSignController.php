@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\Log;
 
 class UserSignController extends Controller
 {
+    /**
+     * @var IngotsService
+     */
     protected $ingots;
+    /**
+     * @var NoticeService
+     */
     protected $notice;
 
+    /**
+     * UserSignController constructor.
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     */
     public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
@@ -63,7 +74,6 @@ class UserSignController extends Controller
      *     @SWG\Response(response=500,description="服务器错误")
      * )
      */
-    //todo 不需要传递User模型了吧？
     public function update(User $user)
     {
         try {

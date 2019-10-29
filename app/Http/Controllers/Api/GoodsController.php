@@ -23,7 +23,7 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $goods = Goods::where('stock', '>', 0)->paginate(10);
+        $goods = Goods::where('stock', '>', 0)->orderBy('id', 'desc')->paginate(10);
         return $this->success(GoodsResource::collection($goods));
     }
 
