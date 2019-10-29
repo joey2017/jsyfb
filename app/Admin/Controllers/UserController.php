@@ -51,6 +51,7 @@ class UserController extends AdminController
             1 => 'success',
         ]);
         $grid->column('ingots', trans('admin.ingots'));
+        $grid->column('score', trans('admin.answer_score'));
         $grid->column('invitation_code', trans('admin.invitation_code'));
         $grid->column('status', trans('admin.status'))->display(function ($status) {
             return User::getStatusName($status);
@@ -83,6 +84,7 @@ class UserController extends AdminController
         $show->field('last_login_time', trans('admin.last_login_time'));
         $show->field('is_verified', trans('admin.is_verified'))->using(User::VERIFIEDS);
         $show->field('ingots', trans('admin.ingots'));
+        $show->field('score', trans('admin.answer_score'));
         $show->field('invitation_code', trans('admin.invitation_code'));
         $show->field('status', trans('admin.status'))->using(User::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
