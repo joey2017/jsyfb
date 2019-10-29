@@ -31,7 +31,7 @@ class UploadsController extends AdminController
                         // 重命名
                         $filename = time() . str_random(6) . "." . $ext;
                         if ($file[$i]->move("uploads/images/" . date('Y-m-d') . '/', $filename)) {
-                            $newFileName = "/uploads/images" . date('Y-m-d') . '/' . $filename;
+                            $newFileName = "/uploads/images/" . date('Y-m-d') . '/' . $filename;
                             $m           = $m + 1;
                         } else {
                             $k = $k + 1;
