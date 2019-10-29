@@ -6,6 +6,7 @@ use App\Constant;
 use App\Models\Region\Province;
 use App\Models\BusinessCategory;
 use App\Models\Laywer;
+use Encore\Admin\Admin;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -28,6 +29,8 @@ class LaywerController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Laywer);
+
+        if (Admin::user()->isRole())
 
         $grid->column('id', __('Id'));
         $grid->column('name', trans('admin.name'));

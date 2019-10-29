@@ -26,7 +26,7 @@ class AuthenticationController extends Controller
      */
     public function show()
     {
-        $condition = [['user_id', Auth::guard('api')->id()], ['status', 1]];
+        $condition = ['user_id', Auth::guard('api')->id()];
         if ($authentication = Authentication::where($condition)->first()) {
             return $this->success(new AuthenticationResource($authentication));
         }

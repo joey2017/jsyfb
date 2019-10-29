@@ -439,15 +439,5 @@ return [
             // set to false if you want to disable this extension
             'enable' => true,
         ],
-        'wang-editor'   => [
-
-            // 如果要关掉这个扩展，设置为false
-            'enable' => true,
-
-            // 编辑器的配置
-            'config' => [
-                'uploadImgServer' => '/image/upload'
-            ]
-        ]
     ],
 ];
