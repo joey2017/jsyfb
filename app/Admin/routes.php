@@ -77,6 +77,9 @@ Route::group([
     //$router->get('personnel/attentions/{id}','AttentionController@show');
     $router->delete('personnel/attentions/{id}', 'AttentionController@destroy');
 
+    //图片上传
+    $router->post('uploads/images', 'UploadsController@images');
+
     $router->get('forms/settings', 'FormController@settings');
     $router->get('forms/register', 'FormController@register');
 
