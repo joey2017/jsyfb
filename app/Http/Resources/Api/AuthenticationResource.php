@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Models\Authentication;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthenticationResource extends JsonResource
@@ -31,6 +32,8 @@ class AuthenticationResource extends JsonResource
             //'back_photo'    => env('APP_UPLOAD_PATH').'/'.$this->back_photo,
             'hand_photo'    => env('APP_UPLOAD_PATH').'/'.$this->hand_photo,
             'remark'        => $this->remark,
+            'status'        => $this->status,
+            'status_text'   => Authentication::getStatusName($this->status),
             'review_at'     => $this->review_at,
             'veritied_at'   => $this->veritied_at,
             'created_at'    => (string)$this->created_at,

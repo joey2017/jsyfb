@@ -19,7 +19,7 @@ class BalanceLogResource extends JsonResource
             'id'         => $this->id,
             'user_id'    => $this->user_id,
             'type'       => $this->type,
-            'type_name'  => BalanceLog::getTypeName($this->type),
+            'type_name'  => BalanceLog::getTypeName($this->type ?? 1),
             'cost'       => $this->cost,
             'descr'      => $this->descr,
             'remark'     => $this->remark,
