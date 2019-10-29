@@ -64,7 +64,7 @@ class ArticleController extends Controller
         }
         $admin_name         = $article->adminer()->first()->name ?? '';
         $info               = $article->toArray();
-        $info['content']    = strip_tags($info['content']);
+        //$info['content']    = strip_tags($info['content']);
         $info['images']     = env('APP_UPLOAD_PATH') . '/' . $info['images'];
         $info['status']     = Article::getStatusName((int)$info['status']);
         $info['admin_name'] = $admin_name;
