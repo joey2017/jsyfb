@@ -50,6 +50,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //消息列表
         Route::get('/notices', 'NoticeController@index')->name('notices.index');
+        //未读消息
+        Route::get('/notices/unread', 'NoticeController@unread')->name('notices.unread');
         //消息详情
         Route::get('/notices/{notice}', 'NoticeController@show')->name('notices.show');
 

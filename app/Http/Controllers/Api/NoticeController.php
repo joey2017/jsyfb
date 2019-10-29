@@ -88,4 +88,26 @@ class NoticeController extends Controller
         return $this->success(new NoticeResource($notice));
     }
 
+
+    /**
+     * @SWG\Get(
+     *   path="/notices/unread",
+     *   tags={"MainPage"},
+     *   summary="未读消息数量",
+     *   description="未读消息数量",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response=200,description="成功"),
+     *   @SWG\Response(response=403,description="禁止访问")
+     * )
+     */
+    public function unread()
+    {
+        $notices = Notice::where([['user_id', Auth::guard('api')->id()], ['status', Notice::INVALID]])->count();
+        return $this->success(['count' => $notices]);
+    }
+
 }
