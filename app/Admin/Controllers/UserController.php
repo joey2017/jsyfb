@@ -109,6 +109,7 @@ class UserController extends AdminController
         $form->email('email', trans('admin.email'));
         $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->select('inviter_id', trans('admin.inviter'))->options(getAllUsersIdAndNickname())->required()->rules('integer');
+        $form->select('status', trans('admin.status'))->options(User::STATUSES)->required()->rules('integer');
         $form->text('descr', trans('admin.descr'));
         $form->ip('last_login_ip', trans('admin.last_login_ip'));
         $form->datetime('last_login_time', trans('admin.last_login_time'))->default(date('Y-m-d H:i:s'));
