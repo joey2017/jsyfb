@@ -109,7 +109,7 @@ class UserController extends Controller
     public function info()
     {
         $user                = Auth::guard('api')->user();
-        $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
+        $user->notices_count = Notice::where([['status', Notice::INVALID], ['user_id', $user->id]])->count();
         return $this->success(new UserResource($user));
     }
 
