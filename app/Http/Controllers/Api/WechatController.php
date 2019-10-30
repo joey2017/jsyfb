@@ -68,6 +68,8 @@ class WechatController extends Controller
         $icode         = $request->get('icode', '');
         $rawData       = json_decode($request->input('rawData', ''), true);
 
+        Log::info('icode:'.$icode);
+
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $userInfo = $this->wxxcx->getLoginInfo($code);
 
@@ -89,6 +91,7 @@ class WechatController extends Controller
 
         if ($icode !== '') {
             $inviter = User::where('invitation_code', $icode)->first();
+            Log::notice('inviter:'.$inviter);
         }
 
         if ($existUser = User::where('openid', $userInfo['openid'])->first()) {
@@ -118,7 +121,7 @@ class WechatController extends Controller
             $user->save();
 
             // 邀请人获得法宝
-            if ($inviter) {
+            if ($inviter && $statusCode == 201) {
                 $this->ingots->update(IngotsConfig::getConfigByKey('invite')->value, '邀请好友注册获得法宝奖励', IngotsLog::TYPE_INCRE, $inviter);
                 $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id, 2);
             }
