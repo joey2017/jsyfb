@@ -11,8 +11,6 @@
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user
 
 Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     Route::post('/users', 'UserController@store')->name('users.store');
@@ -20,6 +18,37 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
     //小程序授权登录
     Route::post('/getwxuserinfo', 'WechatController@getWxUserInfo')->name('wechat.getWxUserInfo');
+
+    //文章列表
+    Route::get('/articles', 'ArticleController@index')->name('articles.index');
+
+    //宝典分类
+    Route::get('/legal/categories', 'LegalBookCategoryController@index')->name('legal-categories.index');
+    Route::get('/legal/categories/{category}', 'LegalBookCategoryController@show')->name('legal-categories.show');
+
+    //宝典章节
+    Route::get('/legal/sections/{cate_id}', 'LegalBookSectionController@show')->name('legal-sections.show');
+
+    //宝典章节详情
+    Route::get('/legal/books/{section_id}', 'LegalBookController@show')->name('legal-books.show');
+
+    //轮播图列表
+    Route::get('/banners', 'BannerController@index')->name('banners.index');
+
+    //省份列表
+    Route::get('/provinces', 'LaywerController@provinces')->name('laywers.provinces');
+
+    //指定省份城市列表
+    Route::get('/citys', 'LaywerController@citys')->name('laywers.citys');
+
+    //指定城市区域列表
+    Route::get('/areas', 'LaywerController@areas')->name('laywers.areas');
+
+    //vip通道法宝消费大小
+    Route::get('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
+
+    //文章详情
+    Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
 
     //小程序支付回调
     Route::get('/payment/notify','PaymentController@notify')->name('payments.notify');
@@ -29,8 +58,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/messages', 'MessageController@store')->name('messages.store');
         //当前用户信息
         Route::get('/users/info', 'UserController@info')->name('users.info');
-        //用户列表
-        //Route::get('/users','UserController@index')->name('users.index');
 
         //用户退出
         Route::get('/logout', 'UserController@logout')->name('users.logout');
@@ -43,10 +70,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //用户认证详情
         Route::get('/users/auths', 'AuthenticationController@show')->name('users-auths.show');
 
-
         //法宝获得渠道列表
         Route::get('/ingots/config', 'IngotsConfigController@index')->name('ingots-configs.index');
-
 
         //消息列表
         Route::get('/notices', 'NoticeController@index')->name('notices.index');
@@ -55,18 +80,13 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //消息详情
         Route::get('/notices/{notice}', 'NoticeController@show')->name('notices.show');
 
-        //文章列表
-        Route::get('/articles', 'ArticleController@index')->name('articles.index');
-        //文章发布
-        Route::post('/articles', 'ArticleController@store')->name('articles.store');
-
         //点赞
         Route::post('/articles/likes', 'ArticleLikeController@store')->name('articles-likes.store');
 
         //分享
         Route::post('/articles/shares', 'ArticleShareController@store')->name('articles-shares.store');
 
-        //律师
+        //律师列表
         Route::get('/laywers', 'LaywerController@index')->name('laywers.index');
 
         //律师详情
@@ -76,16 +96,13 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/business/categories', 'BusinessCategoryController@index')->name('business-categories.index');
 
         //常见问题
-        Route::get('/questions', 'QuestionController@index')->name('questions.index');
-        Route::get('/questions/categories', 'QuestionCategoryController@index')->name('questions-categories.index');
+        //Route::get('/questions', 'QuestionController@index')->name('questions.index');
+        //Route::get('/questions/categories', 'QuestionCategoryController@index')->name('questions-categories.index');
 
         //公证处列表
         Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
         //公证处详情
         Route::get('/notarys/offices/{office}', 'NotaryOfficeController@show')->name('notarys-offices.show');
-
-        //公证处评论删除
-        Route::delete('/notarys-offices/comments/{comment}', 'NotaryOfficeCommentController@destroy')->name('notarys-offices-comments.destroy');
 
         //答题表
         Route::get('/answer/lists', 'AnswerListController@index')->name('answer-lists.index');
@@ -97,19 +114,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/answer/records/{record}', 'AnswerRecordController@show')->name('answer-records.show');
         Route::get('/answer/totalranking', 'AnswerRecordController@totalranking')->name('answer-records.totalranking');
         Route::get('/answer/ranking', 'AnswerRecordController@ranking')->name('answer-records.ranking');
-
-        //宝典分类
-        Route::get('/legal/categories', 'LegalBookCategoryController@index')->name('legal-categories.index');
-        Route::get('/legal/categories/{category}', 'LegalBookCategoryController@show')->name('legal-categories.show');
-
-        //宝典章节
-        Route::get('/legal/sections/{cate_id}', 'LegalBookSectionController@show')->name('legal-sections.show');
-
-        //宝典章节详情
-        Route::get('/legal/books/{section_id}', 'LegalBookController@show')->name('legal-books.show');
-
-        //我的评论
-        Route::get('/users/comments/{user}', 'UserController@comments')->name('users.comments');
 
         //浏览记录
         Route::get('/users/browse-historys/{user}', 'UserController@browseHistorys')->name('users.browseHistorys');
@@ -131,7 +135,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //意见反馈保存
         Route::post('/feedbacks', 'FeedbackController@store')->name('feedback.store');
 
-        //VIP通过咨询专家
+        //VIP通道咨询专家
         Route::post('/members', 'MemberController@store')->name('members.store');
 
         //法宝兑换
@@ -177,9 +181,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //法宝流水记录
         Route::get('/users/ingots/log', 'UserController@ingotsLog')->name('users.ingotsLog');
-
-        //用户信息
-        Route::get('/users/{user}', 'UserController@show')->name('users.show');
 
         //文章详情
         Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');

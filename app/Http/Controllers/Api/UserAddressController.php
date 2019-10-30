@@ -155,6 +155,9 @@ class UserAddressController extends Controller
      */
     public function destroy(UserAddress $address)
     {
+        if ($address->user_id != Auth::guard('api')->id()) {
+            return $this->failed('禁止访问', 403);
+        }
         $result = null;
         try {
             $result = $address->delete();
