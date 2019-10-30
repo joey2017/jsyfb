@@ -17,6 +17,7 @@ class Constant {
 
     // 性别
     const SEXS = [
+        0 => '女',
         1 => '男',
         2 => '女',
     ];
