@@ -43,7 +43,7 @@ class Exchange extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'goods_id', 'ingots', 'quantity', 'created_at'
+        'user_id', 'goods_id', 'ingots', 'address', 'quantity', 'receiver', 'receiver_mobile', 'created_at'
     ];
 
     /**

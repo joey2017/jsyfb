@@ -27,11 +27,22 @@ class ExchangeController extends AdminController
      */
     protected $title = '商品兑换';
 
+    /**
+     * @var IngotsService
+     */
     protected $ingots;
 
+    /**
+     * @var NoticeService
+     */
     protected $notice;
 
-    public function __construct(IngotsService $ingotsService,NoticeService $noticeService)
+    /**
+     * ExchangeController constructor.
+     * @param IngotsService $ingotsService
+     * @param NoticeService $noticeService
+     */
+    public function __construct(IngotsService $ingotsService, NoticeService $noticeService)
     {
         $this->ingots = $ingotsService;
         $this->notice = $noticeService;
@@ -54,10 +65,6 @@ class ExchangeController extends AdminController
         $grid->column('quantity', trans('admin.quantity'));
         $grid->column('status', trans('admin.status'))->using(Exchange::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
-
-        $grid->actions(function ($actions) {
-            $actions->disableEdit();
-        });
 
         return $grid;
     }
@@ -97,10 +104,19 @@ class ExchangeController extends AdminController
     {
         $form = new Form(new Exchange);
 
-        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
-        $form->select('goods_id', trans('admin.goods_name'))->options(Goods::where('stock', '>', 0)->pluck('goods_name', 'id')->toArray())->required();
-        $form->number('ingots', trans('admin.ingots'))->required();
-        $form->number('quantity', trans('admin.quantity'))->required();
+        if ($form->isCreating()) {
+            $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
+            $form->select('goods_id', trans('admin.goods_name'))->options(Goods::where('stock', '>', 0)->pluck('goods_name', 'id')->toArray())->required();
+            $form->number('ingots', trans('admin.ingots'))->required();
+            $form->number('quantity', trans('admin.quantity'))->required();
+        } else {
+            $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->readOnly();
+            $form->select('goods_id', trans('admin.goods_name'))->options(Goods::where('stock', '>', 0)->pluck('goods_name', 'id')->toArray())->readOnly();
+            $form->number('ingots', trans('admin.ingots'))->readonly();
+            $form->number('quantity', trans('admin.quantity'))->readonly();
+        }
+
+        $form->text('address', trans('admin.address'))->required();
 
         $form->saved(function (Form $form) {
             try {
