@@ -37,15 +37,14 @@ class ArticleController extends AdminController
         $grid = new Grid(new Article);
 
         $grid->column('id', __('Id'))->sortable();
-        //$grid->column('title', trans('admin.title'));
         $grid->column('title', trans('admin.title'))->expand(function ($model) {
             $comments = $model->articleComments()->take(10)->get()->map(function ($comment) {
                 return $comment->only(['id', 'laywer_id', 'interpretation', 'measures', 'content', 'created_at']);
             });
             if (!empty($comments)) {
                 $data = $comments->all();
-                foreach ($data as &$item) {
-                    $item['laywer_id'] = Laywer::findOrFail($item['laywer_id'])->name ?? '';
+                foreach ($data as $key => $item) {
+                    $data[$key]['laywer_id'] = Laywer::findOrFail($item['laywer_id'])->name ?? '';
                 }
             }
             return new Table(['ID', '专家', '点评', '措施', '内容', '评论时间'], $data ?? $comments->toArray());
