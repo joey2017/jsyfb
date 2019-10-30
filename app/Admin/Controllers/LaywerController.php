@@ -56,16 +56,17 @@ class LaywerController extends AdminController
             $filter->disableIdFilter();
 
             $filter->column(1 / 3, function ($filter) {
-                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name', 'code')->toArray());
+                $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name', 'code')->toArray())->load('city_code', '/admin/notarys/citys', 'code', 'city_name');
+            });
+
+            $filter->column(1 / 3, function ($filter) {
+                $filter->equal('city_code', trans('admin.city'))->select();
             });
 
             $filter->column(1 / 3, function ($filter) {
                 $filter->in('cate_id', trans('admin.category'))->select(Constant::CASE_TYPES);
             });
 
-            $filter->column(1 / 3, function ($filter) {
-                $filter->between('created_at', trans('admin.created_at'))->datetime();
-            });
         });
 
         return $grid;
