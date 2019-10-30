@@ -48,7 +48,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     Route::get('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
 
     //文章详情
-    Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
+    //Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
 
     //小程序支付回调
     Route::get('/payment/notify','PaymentController@notify')->name('payments.notify');
@@ -158,23 +158,8 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //专属顾问列表
         Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
-        //轮播图列表
-        Route::get('/banners', 'BannerController@index')->name('banners.index');
-
-        //省份列表
-        Route::get('/provinces', 'LaywerController@provinces')->name('laywers.provinces');
-
-        //指定省份城市列表
-        Route::get('/citys', 'LaywerController@citys')->name('laywers.citys');
-
-        //指定城市区域列表
-        Route::get('/areas', 'LaywerController@areas')->name('laywers.areas');
-
         //咨询专家保存
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
-
-        //vip通道法宝消费大小
-        Route::get('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
 
         //个人法宝数量
         Route::get('/users/ingots', 'UserController@ingots')->name('user.ingots');
