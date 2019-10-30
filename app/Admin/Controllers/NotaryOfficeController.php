@@ -67,11 +67,11 @@ class NotaryOfficeController extends AdminController
             });
 
             $filter->column(1 / 3, function ($filter) {
-                $filter->equal('province_code', trans('admin.province_code'))->select($this->provinces())->load('city_code', '/admin/notarys/citys');
+                $filter->equal('province_code', trans('admin.province_code'))->select($this->provinces())->load('city_code', '/admin/notarys/citys', 'code', 'city_name');
             });
 
             $filter->column(1 / 3, function ($filter) {
-                $filter->equal('city_code', trans('admin.city_code'))->select()->load('district_code', '/admin/notarys/areas');
+                $filter->equal('city_code', trans('admin.city_code'))->select()->load('district_code', '/admin/notarys/areas', 'code', 'area_name');
             });
 
             $filter->column(1 / 3, function ($filter) {
@@ -144,39 +144,31 @@ class NotaryOfficeController extends AdminController
         return $form;
     }
 
-
+    /**
+     * @return array
+     */
     public function provinces()
     {
-        $provinces = Province::all()->pluck('province_name', 'code')->toArray();
-        $other     = [
-            '0' => '全国',
-        ];
-        return $other + $provinces;
+        return Province::all()->pluck('province_name', 'code')->toArray();
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function citys(Request $request)
     {
         $code = $request->input('q');
-        if (empty($code)) {
-            $citys = [
-                '0' => '全国',
-            ];
-        } else {
-            $citys = City::where('province_code', $code)->pluck('city_name', 'code')->toArray();
-        }
-        return $citys;
+        return empty($code) ? [] : City::where('province_code', $code)->select(['city_name', 'code'])->get()->toArray();
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function areas(Request $request)
     {
         $code = $request->input('q');
-        if (empty($code)) {
-            $areas = [
-                '0' => '全国'
-            ];
-        } else {
-            $areas = Area::where('city_code', $code)->pluck('area_name', 'code')->toArray();
-        }
-        return $areas;
+        return empty($code) ? [] : Area::where('city_code', $code)->select(['area_name', 'code'])->get()->toArray();
     }
 }
