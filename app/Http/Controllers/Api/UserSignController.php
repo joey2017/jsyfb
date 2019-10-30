@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\UserSignResource;
+use App\Models\IngotsLog;
 use App\Models\User;
 use App\Models\UserSign;
 use App\Services\IngotsService;
@@ -82,7 +83,7 @@ class UserSignController extends Controller
             }
 
             $day            = Carbon::now();
-            $sign           = UserSign::firstOrCreate(['user_id' => $user->id],['week_count' => 0]);
+            $sign           = UserSign::firstOrCreate(['user_id' => $user->id], ['week_count' => 0]);
             $last_sign_time = $sign->last_sign_time ?? 0;
             if ($day->toDateString() == Carbon::parse($last_sign_time)->toDateString()) {
                 return $this->failed('您今天已经签到过了');
@@ -97,9 +98,10 @@ class UserSignController extends Controller
             if ($sign->save()) {
 
                 //获得法宝
-                $this->ingots->limitation('sign', '每日签到获得法宝');
+                //$this->ingots->limitation('sign', '每日签到获得法宝');
+                $this->ingots->update($this->ingots->getValueByKey('sign')->value, '每日签到获得法宝', IngotsLog::TYPE_INCRE, $user);
                 //法宝消息
-                $this->notice->add('签到成功', '今日签到共获得' . $this->ingots->getValueByKey('sign')->value . '个法宝', Auth::guard('api')->id(),2);
+                $this->notice->add('签到成功', '今日签到共获得' . $this->ingots->getValueByKey('sign')->value . '个法宝', Auth::guard('api')->id(), 2);
                 return $this->created('签到成功');
             }
 
