@@ -103,7 +103,7 @@ class UserController extends AdminController
         $form = new Form(new User);
 
         $form->text('username', trans('admin.username'))->required();
-        $form->password('password', trans('admin.password'));
+        //$form->password('password', trans('admin.password'));
         $form->text('nickname', trans('admin.nickname'))->required();
         $form->image('avatar', trans('admin.avatar'))->required();
         $form->email('email', trans('admin.email'));
