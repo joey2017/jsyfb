@@ -68,7 +68,7 @@ class ArticleController extends AdminController
             // 获取当前行主键值
             //$actions->getKey();
 
-            if (!ArticleComment::where('article_id',$actions->getKey())->exists()) {
+            if (!ArticleComment::where('article_id', $actions->getKey())->exists()) {
                 $actions->add(new Comments);
             }
 
@@ -158,6 +158,18 @@ class ArticleController extends AdminController
             }
         });
 
+        $form->tools(function (Form\Tools $tools) {
+
+            // 去掉`列表`按钮
+            $tools->disableList();
+
+            // 去掉`删除`按钮
+            $tools->disableDelete();
+
+            // 去掉`查看`按钮
+            $tools->disableView();
+        });
+
         return $form;
     }
 
@@ -181,7 +193,7 @@ class ArticleController extends AdminController
      */
     public function savecomments($id, Request $request)
     {
-        if (!Admin::user()->isRole('laywer')) {
+        if (!Admin::user()->inRoles(['laywer', 'administrator'])) {
             admin_error(trans('admin.save_failed'), trans('admin.no_permissions'));
             return back();
         } else {
