@@ -42,14 +42,13 @@ class ArticleController extends AdminController
             $comments = $model->articleComments()->take(10)->get()->map(function ($comment) {
                 return $comment->only(['id', 'laywer_id', 'interpretation', 'measures', 'content', 'created_at']);
             });
-            /*$data = [];
             if (!empty($comments)) {
                 $data = $comments->all();
                 foreach ($data as &$item) {
                     $item['laywer_id'] = Laywer::findOrFail($item['laywer_id'])->name ?? '';
                 }
-            }*/
-            return new Table(['ID', '专家', '点评', '措施', '内容', '评论时间'], $comments->toArray());
+            }
+            return new Table(['ID', '专家', '点评', '措施', '内容', '评论时间'], $data ?? $comments->toArray());
         });
         $grid->column('images', trans('admin.image'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('content', trans('admin.content'));
