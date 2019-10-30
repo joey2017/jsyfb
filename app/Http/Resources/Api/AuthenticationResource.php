@@ -30,7 +30,7 @@ class AuthenticationResource extends JsonResource
             'birthday'      => $this->birthday,
             //'front_photo'   => env('APP_UPLOAD_PATH').'/'.$this->front_photo,
             //'back_photo'    => env('APP_UPLOAD_PATH').'/'.$this->back_photo,
-            'hand_photo'    => env('APP_UPLOAD_PATH').'/'.$this->hand_photo,
+            'hand_photo'    => $this->hand_photo,
             'remark'        => $this->remark,
             'status'        => $this->status,
             'status_text'   => Authentication::getStatusName($this->status),
