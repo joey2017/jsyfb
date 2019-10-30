@@ -60,6 +60,8 @@ class ExchangeController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('goods.goods_name', trans('admin.goods_name'));
+        $grid->column('receiver', trans('admin.receiver'));
+        $grid->column('receiver_mobile', trans('admin.receiver_mobile'));
         $grid->column('address', trans('admin.address'));
         $grid->column('ingots', trans('admin.ingots'));
         $grid->column('quantity', trans('admin.quantity'));
@@ -86,6 +88,8 @@ class ExchangeController extends AdminController
         $show->field('goods_id', trans('admin.goods_name'))->as(function ($goods_id) {
             return Goods::findOrFail($goods_id)->goods_name;
         });
+        $show->field('receiver', trans('admin.receiver'));
+        $show->field('receiver_mobile', trans('admin.receiver_mobile'));
         $show->field('address', trans('admin.address'));
         $show->field('ingots', trans('admin.ingots'));
         $show->field('quantity', trans('admin.quantity'));
@@ -116,6 +120,8 @@ class ExchangeController extends AdminController
             $form->number('quantity', trans('admin.quantity'))->readonly();
         }
 
+        $form->text('receiver', trans('admin.receiver'))->required();
+        $form->text('receiver_mobile', trans('admin.receiver_mobile'))->required();
         $form->text('address', trans('admin.address'))->required();
 
         $form->saved(function (Form $form) {
