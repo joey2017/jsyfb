@@ -125,15 +125,11 @@ class LaywerController extends AdminController
                 $value = $param;
             }
             if ($value != Admin::user()->related_spec_id) {
-                /*$error = new MessageBag([
-                    'title'   => '查看失败',
-                    'message' => '您无权限访问查看',
-                ]);*/
-                //todo
-                admin_error('查看失败','您无权限访问查看');
+                admin_error('查看失败','您无权限访问查看该律师');
+                return $form;
             }
         } else {
-            return admin_error('查看失败1','您无权限创建律师');
+            return admin_error('查看失败','您无权限创建律师');
         }
 
         $form->text('name', trans('admin.name'))->required();
