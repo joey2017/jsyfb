@@ -113,6 +113,24 @@ class ExchangeController extends AdminController
             $form->select('goods_id', trans('admin.goods_name'))->options(Goods::where('stock', '>', 0)->pluck('goods_name', 'id')->toArray())->required();
             $form->number('ingots', trans('admin.ingots'))->required();
             $form->number('quantity', trans('admin.quantity'))->required();
+
+            $form->saved(function (Form $form) {
+                try {
+                    DB::transaction(function () use ($form) {
+                        //更新法宝数量
+                        $this->ingots->update($form->model()->ingots, '兑换商品', IngotsLog::TYPE_DECRE, User::findOrFail($form->model()->user_id));
+                        //更新库存
+                        $goods = $this->updateStock($form->model()->goods_id, $form->model()->quantity);
+                        //发消息
+                        $this->notice->add('法宝兑换', '后台管理员【' . Admin::user()->name . '】帮您使用' . $form->model()->ingots . '个法宝兑换' . $form->model()->quantity . '件商品,该商品为' . $goods->goods_name, $form->model()->user_id, 2);
+                        return true;
+                    });
+
+                } catch (PDOException $exception) {
+                    Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
+                }
+
+            });
         } else {
             $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->readOnly();
             $form->select('goods_id', trans('admin.goods_name'))->options(Goods::where('stock', '>', 0)->pluck('goods_name', 'id')->toArray())->readOnly();
@@ -123,24 +141,6 @@ class ExchangeController extends AdminController
         $form->text('receiver', trans('admin.receiver'))->required();
         $form->text('receiver_mobile', trans('admin.receiver_mobile'))->required();
         $form->text('address', trans('admin.address'))->required();
-
-        $form->saved(function (Form $form) {
-            try {
-                DB::transaction(function () use ($form) {
-                    //更新法宝数量
-                    $this->ingots->update($form->model()->ingots, '兑换商品', IngotsLog::TYPE_DECRE, User::findOrFail($form->model()->user_id));
-                    //更新库存
-                    $goods = $this->updateStock($form->model()->goods_id, $form->model()->quantity);
-                    //发消息
-                    $this->notice->add('法宝兑换', '后台管理员【' . Admin::user()->name . '】帮您使用' . $form->model()->ingots . '个法宝兑换' . $form->model()->quantity . '件商品,该商品为' . $goods->goods_name, $form->model()->user_id, 2);
-                    return true;
-                });
-
-            } catch (PDOException $exception) {
-                Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage());
-            }
-
-        });
 
         return $form;
     }
