@@ -41,9 +41,9 @@ class ArticleController extends AdminController
             $comments = $model->articleComments()->take(10)->get()->map(function ($comment) {
                 return $comment->only(['id', 'laywer_id', 'interpretation', 'measures', 'content', 'created_at']);
             });
-
-            $data = $comments->all();
-            if ($data) {
+            $data = [];
+            if (!empty($comments)) {
+                $data = $comments->all();
                 foreach ($data as &$item) {
                     $item['laywer_id'] = Laywer::findOrFail($item['laywer_id'])->name ?? '';
                 }
