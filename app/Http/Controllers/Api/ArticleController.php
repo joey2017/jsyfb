@@ -22,11 +22,6 @@ class ArticleController extends Controller
      *   tags={"MainPage"},
      *   summary="热门资讯",
      *   description="热门资讯列表",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -42,11 +37,6 @@ class ArticleController extends Controller
      *   tags={"MainPage"},
      *   summary="热门资讯详情",
      *   description="热门资讯详情",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Parameter(name="id", type="integer", required=true, in="path",description="资讯id"),
      *   @SWG\Response(response=200,description="成功")
      * )
@@ -64,7 +54,6 @@ class ArticleController extends Controller
         }
         $admin_name         = $article->adminer()->first()->name ?? '';
         $info               = $article->toArray();
-        //$info['content']    = strip_tags($info['content']);
         $info['images']     = env('APP_UPLOAD_PATH') . '/' . $info['images'];
         $info['status']     = Article::getStatusName((int)$info['status']);
         $info['admin_name'] = $admin_name;
@@ -84,7 +73,6 @@ class ArticleController extends Controller
         }
 
         return $this->success(array_merge($info, $comments));
-        //return $this->success(new ArticleResource($article));
     }
 
 }

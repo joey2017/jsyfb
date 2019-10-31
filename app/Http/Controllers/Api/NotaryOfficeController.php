@@ -17,11 +17,6 @@ class NotaryOfficeController extends Controller
      *   tags={"Tool"},
      *   summary="公证处列表",
      *   description="公证处列表",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Parameter(in="query",name="location",type="string",description="纬度lat，经度lng坐标，用英文逗号分割(示例：lat,lng)",required=true),
      *   @SWG\Parameter(in="query",name="name",type="string",description="公证处名称",required=false),
      *   @SWG\Parameter(in="query",name="avg_point",type="string",description="服务评分",required=false),

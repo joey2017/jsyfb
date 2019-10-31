@@ -13,11 +13,6 @@ class LegalBookController extends Controller
      *   tags={"LegalBook"},
      *   summary="家事宝典章节详情",
      *   description="家事宝典章节详情",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Parameter(name="id", type="integer", required=true, in="path", description="宝典章节id"),
      *   @SWG\Response(response=200,description="成功")
      * )

@@ -19,11 +19,6 @@ class LaywerController extends Controller
      *   path="/laywers",
      *   tags={"Tool"},
      *   summary="律师列表",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Parameter(in = "query",name = "cate_id",description = "擅长",required = false,type = "integer"),
      *   @SWG\Parameter(in = "query",name = "name",description = "律师名称",required = false,type = "string"),
      *   @SWG\Parameter(in = "query",name = "province_code",description = "省份代码",required = false,type = "string"),
@@ -99,11 +94,6 @@ class LaywerController extends Controller
      *   tags={"Tool"},
      *   summary="全国省份",
      *   description="全国省份数据",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -131,11 +121,6 @@ class LaywerController extends Controller
      *   tags={"Tool"},
      *   summary="指定省份城市",
      *   description="指定省份城市",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Parameter(name="code", type="integer", required=true, in="query", description="省份代码"),
      *   @SWG\Response(response=200,description="成功")
      * )
@@ -168,11 +153,6 @@ class LaywerController extends Controller
      *   tags={"Tool"},
      *   summary="指定城市区县",
      *   description="指定城市区县",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Parameter(name="code", type="integer", required=true, in="query", description="城市代码"),
      *   @SWG\Response(response=200,description="成功")
      * )

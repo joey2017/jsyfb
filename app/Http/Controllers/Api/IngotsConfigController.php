@@ -15,11 +15,6 @@ class IngotsConfigController extends Controller
      *   tags={"MainPage"},
      *   summary="法宝获得渠道配置列表",
      *   description="法宝获得渠道配置列表",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
@@ -35,16 +30,11 @@ class IngotsConfigController extends Controller
      *   tags={"MainPage"},
      *   summary="获得VIP通道法宝渠道配置值",
      *   description="获得VIP通道法宝渠道配置值",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function show()
     {
-        return $this->success(SystemConfig::where('key', '=', 'vip_ingots')->first()->value ?? 0);
+        return $this->success(SystemConfig::where('key', 'vip_ingots')->first()->value ?? 0);
     }
 }

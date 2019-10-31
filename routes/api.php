@@ -13,7 +13,6 @@
 
 
 Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
-    Route::post('/users', 'UserController@store')->name('users.store');
     Route::post('/login', 'UserController@login')->name('users.login');
 
     //小程序授权登录
@@ -44,11 +43,26 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     //指定城市区域列表
     Route::get('/areas', 'LaywerController@areas')->name('laywers.areas');
 
+    //律师列表
+    Route::get('/laywers', 'LaywerController@index')->name('laywers.index');
+
+    //业务分类
+    Route::get('/business/categories', 'BusinessCategoryController@index')->name('business-categories.index');
+
+    //公证处列表
+    Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
+
     //vip通道法宝消费大小
     Route::get('/ingots/vip', 'IngotsConfigController@show')->name('ingots-config.show');
 
+    //法宝获得渠道列表
+    Route::get('/ingots/config', 'IngotsConfigController@index')->name('ingots-configs.index');
+
     //文章详情
-    //Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
+    Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
+
+    //专属顾问列表
+    Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
     //小程序支付回调
     Route::get('/payment/notify','PaymentController@notify')->name('payments.notify');
@@ -71,7 +85,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::get('/users/auths', 'AuthenticationController@show')->name('users-auths.show');
 
         //法宝获得渠道列表
-        Route::get('/ingots/config', 'IngotsConfigController@index')->name('ingots-configs.index');
+        //Route::get('/ingots/config', 'IngotsConfigController@index')->name('ingots-configs.index');
 
         //消息列表
         Route::get('/notices', 'NoticeController@index')->name('notices.index');
@@ -87,20 +101,16 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/articles/shares', 'ArticleShareController@store')->name('articles-shares.store');
 
         //律师列表
-        Route::get('/laywers', 'LaywerController@index')->name('laywers.index');
+        //Route::get('/laywers', 'LaywerController@index')->name('laywers.index');
 
         //律师详情
         Route::get('/laywers/{laywer}', 'LaywerController@show')->name('laywers.show');
 
         //业务分类
-        Route::get('/business/categories', 'BusinessCategoryController@index')->name('business-categories.index');
-
-        //常见问题
-        //Route::get('/questions', 'QuestionController@index')->name('questions.index');
-        //Route::get('/questions/categories', 'QuestionCategoryController@index')->name('questions-categories.index');
+        //Route::get('/business/categories', 'BusinessCategoryController@index')->name('business-categories.index');
 
         //公证处列表
-        Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
+        //Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
         //公证处详情
         Route::get('/notarys/offices/{office}', 'NotaryOfficeController@show')->name('notarys-offices.show');
 
@@ -156,7 +166,7 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::delete('/attentions/{attention}', 'AttentionController@destroy')->name('attentions.destroy');
 
         //专属顾问列表
-        Route::get('/customers', 'CustomerController@index')->name('customers.index');
+        //Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
         //咨询专家保存
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
@@ -166,9 +176,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //法宝流水记录
         Route::get('/users/ingots/log', 'UserController@ingotsLog')->name('users.ingotsLog');
-
-        //文章详情
-        Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
 
         //图片上传
         Route::post('/upload/image', 'ImageController@upload')->name('images.upload');

@@ -21,23 +21,6 @@ class UserController extends Controller
 {
     /**
      * @SWG\Post(
-     *   path="/users",
-     *   tags={"User"},
-     *   summary="用户注册",
-     *   description="用户注册接口",
-     *   @SWG\Parameter(name="username", type="string", required=true, in="formData", description="用户名"),
-     *   @SWG\Parameter(name="password", type="string", required=true, in="formData", description="登录密码"),
-     *   @SWG\Response(response=200,description="成功")
-     * )
-     */
-    public function store(UserRequest $userRequest)
-    {
-        User::create($userRequest->all());
-        return $this->created('用户注册成功');
-    }
-
-    /**
-     * @SWG\Post(
      *   path="/login",
      *   tags={"User"},
      *   summary="登录接口(用户名+密码)",

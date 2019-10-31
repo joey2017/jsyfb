@@ -13,11 +13,6 @@ class BannerController extends Controller
      *   tags={"MainPage"},
      *   summary="轮播图列表",
      *   description="轮播图列表",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
      *   @SWG\Response(response=200,description="成功")
      * )
      */
