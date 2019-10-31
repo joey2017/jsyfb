@@ -193,21 +193,16 @@ class ArticleController extends AdminController
      */
     public function savecomments($id, Request $request)
     {
-        if (!Admin::user()->inRoles(['laywer', 'administrator'])) {
-            admin_error(trans('admin.save_failed'), trans('admin.no_permissions'));
-            return back();
-        } else {
-            $data = [
-                'article_id'     => $id,
-                'interpretation' => $request->input('interpretation'),
-                'measures'       => $request->input('measures'),
-                'content'        => $request->input('comment_content'),
-                'laywer_id'      => Admin::user()->related_spec_id,
-            ];
+        $data = [
+            'article_id'     => $id,
+            'interpretation' => $request->input('interpretation'),
+            'measures'       => $request->input('measures'),
+            'content'        => $request->input('comment_content'),
+            'laywer_id'      => Admin::user()->related_spec_id,
+        ];
 
-            ArticleComment::create($data);
+        ArticleComment::create($data);
 
-            return redirect('/admin/articles/comments');
-        }
+        return redirect('/admin/articles/comments');
     }
 }
