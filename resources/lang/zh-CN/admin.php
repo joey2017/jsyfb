@@ -213,6 +213,7 @@ return [
     'empty_content'        => '内容不能为空',
     'admin_publisher'      => '发布者',
     'specialist_comment'   => '专家点评',
+    'http_get_failed'      => '访问失败',
     'no_permissions'       => '无权限访问',
     'auth_passed_notice'   => '恭喜您，您提交的实名认证审核申请已通过',
     'auth_failed_notice'   => '抱歉，因资料不全，实名认证申请没有通过，您可以重新提交申请',

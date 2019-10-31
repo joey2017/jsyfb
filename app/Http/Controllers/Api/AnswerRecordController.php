@@ -121,8 +121,10 @@ class AnswerRecordController extends Controller
         if (strtoupper($answer->correct) == strtoupper($request->input('option'))) {
             $data['score'] = 1 * getSystemConfigByKey('score_proportion');
             $this->score->update($data['score'], Auth::guard('api')->user());
-            $this->ingots->limitation('game', '答题正确获得法宝');
-            $this->notice->add('每日答题', '游戏闯关每日答题获得' . $this->ingots->getValueByKey('game')->value . '个法宝', Auth::guard('api')->id(), 2);
+            $result = $this->ingots->limitation('game', '答题正确获得法宝');
+            if (false !== $result) {
+               $this->notice->add('每日答题', '游戏闯关每日答题获得' . $this->ingots->getValueByKey('game')->value . '个法宝', Auth::guard('api')->id(), 2);
+            }
         }
 
         AnswerRecord::create(array_merge(

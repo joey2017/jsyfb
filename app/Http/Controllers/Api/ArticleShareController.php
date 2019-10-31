@@ -70,9 +70,11 @@ class ArticleShareController extends Controller
                 $article->share_count += 1;
                 $article->save();
                 //获得法宝
-                $this->ingots->limitation('share', '好文分享获得法宝');
-                //法宝消息
-                $this->notice->add('好文分享','好文分享获得'.$this->ingots->getValueByKey('share')->value.'个法宝', Auth::guard('api')->id(),2);
+                $result = $this->ingots->limitation('share', '好文分享获得法宝');
+                if (false !== $result) {
+                    //法宝消息
+                    $this->notice->add('好文分享','好文分享获得'.$this->ingots->getValueByKey('share')->value.'个法宝', Auth::guard('api')->id(),2);
+                }
                 return true;
             });
         } catch (\PDOException $e) {

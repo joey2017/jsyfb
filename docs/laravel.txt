@@ -1,0 +1,6 @@
+访问当前路由
+$route = Route::current();
+
+$name = Route::currentRouteName();
+
+$action = Route::currentRouteAction();

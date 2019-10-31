@@ -76,7 +76,7 @@ class IngotsService
         $times = $this->getRedisValue($key);
 
         if ($this->getValueByKey($key)->limitation != 0 && (int)$times >= $this->getValueByKey($key)->limitation) {
-            return;
+            return false;
         }
 
         try {
@@ -87,7 +87,7 @@ class IngotsService
 
         Redis::set("ingots_{$key}_" . Auth::guard('api')->id(), $times + 1);
         Redis::expireAt("ingots_{$key}_" . Auth::guard('api')->id(), mktime(23, 59, 59, date("m"), date("d"), date("Y")));
-
+        return true;
     }
 
 
