@@ -54,6 +54,18 @@ class LaywerController extends AdminController
             $filter->disableIdFilter();
 
             $filter->column(1 / 3, function ($filter) {
+                $filter->like('name', trans('admin.name'));
+            });
+
+            $filter->column(1 / 3, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+
+            $filter->column(1 / 3, function ($filter) {
+                $filter->equal('company', trans('admin.company'));
+            });
+
+            $filter->column(1 / 3, function ($filter) {
                 $filter->equal('province_code', trans('admin.province'))->select(Province::all()->pluck('province_name', 'code')->toArray())->load('city_code', '/admin/notarys/citys', 'code', 'city_name');
             });
 

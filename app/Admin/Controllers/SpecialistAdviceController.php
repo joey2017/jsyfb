@@ -71,7 +71,7 @@ class SpecialistAdviceController extends AdminController
                 $filter->like('mobile', trans('admin.mobile'));
             });
             $filter->column(1 / 4, function ($filter) {
-                $filter->equal('type')->select(Constant::CASE_TYPES);
+                $filter->equal('type', trans('admin.type'))->select(Constant::CASE_TYPES);
             });
         });
 

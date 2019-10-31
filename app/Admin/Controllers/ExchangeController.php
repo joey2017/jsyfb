@@ -68,6 +68,27 @@ class ExchangeController extends AdminController
         $grid->column('status', trans('admin.status'))->using(Exchange::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
 
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('goods.goods_name', trans('admin.goods_name'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('receiver', trans('admin.receiver'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('receiver_mobile', trans('admin.receiver_mobile'));
+            });
+
+        });
+
         return $grid;
     }
 
