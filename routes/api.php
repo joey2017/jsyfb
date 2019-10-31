@@ -84,9 +84,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //用户认证详情
         Route::get('/users/auths', 'AuthenticationController@show')->name('users-auths.show');
 
-        //法宝获得渠道列表
-        //Route::get('/ingots/config', 'IngotsConfigController@index')->name('ingots-configs.index');
-
         //消息列表
         Route::get('/notices', 'NoticeController@index')->name('notices.index');
         //未读消息
@@ -100,17 +97,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         //分享
         Route::post('/articles/shares', 'ArticleShareController@store')->name('articles-shares.store');
 
-        //律师列表
-        //Route::get('/laywers', 'LaywerController@index')->name('laywers.index');
-
         //律师详情
         Route::get('/laywers/{laywer}', 'LaywerController@show')->name('laywers.show');
 
-        //业务分类
-        //Route::get('/business/categories', 'BusinessCategoryController@index')->name('business-categories.index');
-
-        //公证处列表
-        //Route::get('/notarys/offices', 'NotaryOfficeController@index')->name('notarys-offices.index');
         //公证处详情
         Route::get('/notarys/offices/{office}', 'NotaryOfficeController@show')->name('notarys-offices.show');
 
@@ -164,9 +153,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
         Route::post('/attentions', 'AttentionController@store')->name('attentions.store');
         //取消关注律师
         Route::delete('/attentions/{attention}', 'AttentionController@destroy')->name('attentions.destroy');
-
-        //专属顾问列表
-        //Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
         //咨询专家保存
         Route::post('/specialist/advices', 'SpecialistAdviceController@store')->name('specialist-advices.store');
