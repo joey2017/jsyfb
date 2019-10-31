@@ -5,7 +5,6 @@ namespace App\Admin\Controllers;
 use App\Admin\Actions\Post\Comments;
 use App\Models\Article;
 use App\Models\ArticleComment;
-use App\Models\Laywer;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -126,6 +125,7 @@ class ArticleController extends AdminController
 
                 return back()->with(compact('error'));
             }
+            return true;
         });
 
         return $form;
@@ -147,16 +147,6 @@ class ArticleController extends AdminController
         $form->editor('comment_content', trans('admin.comment_content'));
 
         $form->setAction('/admin/articles/savecomments/' . $id);
-
-        $form->saving(function (Form $form) {
-            if ($form->content == '') {
-                $error = new MessageBag([
-                    'title'   => trans('admin.save_failed'),
-                    'message' => trans('admin.empty_content'),
-                ]);
-                return back()->with(compact('error'));
-            }
-        });
 
         $form->tools(function (Form\Tools $tools) {
 
@@ -195,11 +185,19 @@ class ArticleController extends AdminController
     {
         $data = [
             'article_id'     => $id,
-            'interpretation' => $request->input('interpretation'),
-            'measures'       => $request->input('measures'),
+            'interpretation' => $request->input('interpretation', ''),
+            'measures'       => $request->input('measures', ''),
             'content'        => $request->input('comment_content'),
             'laywer_id'      => Admin::user()->related_spec_id,
         ];
+
+        if ($data['content'] == '') {
+            $error = new MessageBag([
+                'title'   => trans('admin.save_failed'),
+                'message' => trans('admin.empty_content'),
+            ]);
+            return back()->with(compact('error'));
+        }
 
         ArticleComment::create($data);
 
