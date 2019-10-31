@@ -40,6 +40,7 @@ class ArticleCommentController extends AdminController
 
         $grid->column('id', __('Id'))->sortable();
         $grid->column('article.title', trans('admin.title'));
+        $grid->column('article.images', trans('admin.image'))->lightbox(['width' => 50,'height' => 50]);
         $grid->column('article.content', trans('admin.content'));
         $grid->column('laywer.name', trans('admin.laywer'));
         $grid->column('interpretation', trans('admin.interpretation'));
@@ -75,14 +76,17 @@ class ArticleCommentController extends AdminController
         $show = new Show(ArticleComment::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('article_id', trans('admin.title'))->as(function ($article_id) {
-            return Article::findOrFail($article_id)->title;
-        });
-        $show->field('article_id', trans('admin.content'))->as(function ($article_id) {
-            return Article::findOrFail($article_id)->content;
-        });
+        $show->field('article_id', trans('admin.article_id'));
         $show->field('laywer_id', trans('admin.laywer'))->as(function ($laywer_id) {
             return Laywer::findOrFail($laywer_id)->name;
+        });
+        $show->article('文章信息',function($article){
+            $article->setResource('/admin/articles/cases');
+
+            $article->id();
+            $article->title(trans('admin.title'));
+            $article->images(trans('admin.image'));
+            $article->content(trans('admin.content'));
         });
         $show->field('interpretation', trans('admin.interpretation'));
         $show->field('measures', trans('admin.measures'));

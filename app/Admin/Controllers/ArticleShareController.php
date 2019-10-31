@@ -36,6 +36,7 @@ class ArticleShareController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('article.title', trans('admin.title'));
+        $grid->column('article.images', trans('admin.image'))->lightbox(['width' => 50,'height' => 50]);
         $grid->column('article.content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
 

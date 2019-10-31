@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Constant;
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\Ingots;
 use App\Models\IngotsLog;
@@ -40,10 +41,12 @@ class UserController extends AdminController
         $grid = new Grid(new User);
 
         $grid->column('id', __('Id'));
-        $grid->column('username', trans('admin.username'));
+        $grid->column('openid', trans('admin.openid'));
         $grid->column('nickname', trans('admin.nickname'));
-        $grid->column('email', trans('admin.email'));
+        //$grid->column('email', trans('admin.email'));
         $grid->column('mobile', trans('admin.mobile'));
+        $grid->column('avatar', trans('admin.avatar'));
+        $grid->column('gender', trans('admin.gender'))->using(Constant::SEXS);
         $grid->column('user.username', trans('admin.inviter'));
         $grid->column('last_login_time', trans('admin.last_login_time'));
         $grid->column('is_verified', trans('admin.is_verified'))->using(User::VERIFIEDS)->label([
