@@ -19,11 +19,8 @@ class LegalBookController extends Controller
      */
     public function show($section_id)
     {
-        $condition = ['status', LegalBook::NORMAL];
-        if ($section_id > 0) {
-            $condition = [['section_id', $section_id], $condition];
-        }
-        $book = LegalBook::where($condition)->first();
+        $condition = [['status', LegalBook::NORMAL], ['section_id', $section_id]];
+        $book      = LegalBook::where($condition)->first();
         return $this->success(new LegalBookResource($book));
     }
 }
