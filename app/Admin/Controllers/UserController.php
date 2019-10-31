@@ -41,11 +41,11 @@ class UserController extends AdminController
         $grid = new Grid(new User);
 
         $grid->column('id', __('Id'));
-        $grid->column('openid', trans('admin.openid'));
+        $grid->column('openid', __('OpenId'));
         $grid->column('nickname', trans('admin.nickname'));
         //$grid->column('email', trans('admin.email'));
         $grid->column('mobile', trans('admin.mobile'));
-        $grid->column('avatar', trans('admin.avatar'));
+        $grid->column('avatar', trans('admin.avatar'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('gender', trans('admin.gender'))->using(Constant::SEXS);
         $grid->column('user.username', trans('admin.inviter'));
         $grid->column('last_login_time', trans('admin.last_login_time'));

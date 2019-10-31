@@ -40,7 +40,13 @@ class AnswerListController extends AdminController
         $grid->column('updated_at', trans('admin.updated_at'));
 
         $grid->filter(function ($filter){
-            $filter->like('title',trans('admin.title'));
+            $filter->disableIdFilter();
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('id', __('Id'));
+            });
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('title', trans('admin.title'));
+            });
         });
 
         return $grid;
