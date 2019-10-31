@@ -36,13 +36,13 @@ class UserAddressController extends AdminController
         $grid->column('receiver', trans('admin.receiver'));
         $grid->column('receiver_mobile', trans('admin.receiver_mobile'));
         $grid->column('province', trans('admin.province'))->display(function ($province) {
-            return Province::where('code', $province)->first()->province_name;
+            return Province::where('code', $province)->first()->province_name ?? '';
         });
         $grid->column('city', trans('admin.city'))->display(function ($city) {
-            return City::where('code', $city)->first()->city_name;
+            return City::where('code', $city)->first()->city_name ?? '';
         });
         $grid->column('district', trans('admin.district'))->display(function ($district) {
-            return Area::where('code', $district)->first()->area_name;
+            return Area::where('code', $district)->first()->area_name ?? '';
         });
         $grid->column('address', trans('admin.address'));
         $grid->column('status', trans('admin.status'))->using(UserAddress::STATUSES);
@@ -82,13 +82,13 @@ class UserAddressController extends AdminController
         $show->field('receiver', trans('admin.receiver'));
         $show->field('receiver_mobile', trans('admin.receiver_mobile'));
         $show->field('province', trans('admin.province'))->as(function ($province) {
-            return Province::where('code', $province)->first()->province_name;
+            return Province::where('code', $province)->first()->province_name ?? '';
         });
         $show->field('city', trans('admin.city'))->as(function ($city) {
-            return City::where('code', $city)->first()->city_name;
+            return City::where('code', $city)->first()->city_name ?? '';
         });
         $show->field('district', trans('admin.district'))->as(function ($district) {
-            return Area::where('code', $district)->first()->area_name;
+            return Area::where('code', $district)->first()->area_name ?? '';
         });
         $show->field('address', trans('admin.address'));
         $show->field('status', trans('admin.status'))->using(UserAddress::STATUSES);
