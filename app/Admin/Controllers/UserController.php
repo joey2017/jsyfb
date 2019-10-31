@@ -40,6 +40,8 @@ class UserController extends AdminController
     {
         $grid = new Grid(new User);
 
+        $grid->disableCreateButton();
+
         $grid->column('id', __('Id'));
         $grid->column('openid', __('OpenId'));
         $grid->column('nickname', trans('admin.nickname'));
@@ -62,7 +64,25 @@ class UserController extends AdminController
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
-        $grid->disableCreateButton();
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('openid', __('OpenId'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('nickname', trans('admin.nickname'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('mobile', trans('admin.mobile'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('invitation_code', trans('admin.invitation_code'));
+            });
+        });
 
         return $grid;
     }
