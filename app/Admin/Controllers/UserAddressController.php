@@ -45,7 +45,7 @@ class UserAddressController extends AdminController
             return Area::where('code', $district)->first()->area_name ?? '';
         });
         $grid->column('address', trans('admin.address'));
-        $grid->column('status', trans('admin.status'))->using(UserAddress::STATUSES);
+        $grid->column('status', trans('admin.status'))->using(UserAddress::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
