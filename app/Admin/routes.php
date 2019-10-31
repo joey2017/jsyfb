@@ -58,7 +58,7 @@ Route::group([
 
     //文章点评
     $router->get('articles/addcomments/{id}', 'ArticleController@addcomments')->middleware('admin.role:laywer,administrator');
-    $router->match(['post', 'put'], 'articles/savecomments/{id}', 'ArticleController@savecomments');
+    $router->match(['post', 'put'], 'articles/savecomments/{id}', 'ArticleController@savecomments')->middleware('admin.role:laywer,administrator');
 
     //签到列表
     $router->get('personnel/signs', 'UserSignController@index');
