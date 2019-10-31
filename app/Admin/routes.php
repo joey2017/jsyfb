@@ -57,7 +57,7 @@ Route::group([
     ]);
 
     //文章点评
-    $router->get('articles/addcomments/{id}', 'ArticleController@addcomments')->middleware('admin.role:laywer');
+    $router->get('articles/addcomments/{id}', 'ArticleController@addcomments')->middleware('admin.role:laywer,administrator');
     $router->match(['post', 'put'], 'articles/savecomments/{id}', 'ArticleController@savecomments');
 
     //签到列表

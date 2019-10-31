@@ -16,10 +16,9 @@ class CheckRole
      * @param  string $role
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, $role1, $role2)
     {
-        //dd($role);
-        if (!$request->user('admin')->isRole($role)) {
+        if (!$request->user('admin')->inRoles([$role1, $role2])) {
 
             $error = new MessageBag([
                 'title'   => trans('admin.http_get_failed'),
