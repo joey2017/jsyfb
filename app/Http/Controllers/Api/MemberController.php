@@ -37,25 +37,7 @@ class MemberController extends Controller
         $this->notice = $noticeService;
     }
 
-    /**
-     *
-     * @SWG\Post(
-     *   path="/members",
-     *   summary="VIP通道咨询专家消费法宝",
-     *   tags={"MainPage"},
-     *   description="VIP通道咨询专家消费法宝",
-     *   produces={"application/json"},
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
-     *   @SWG\Parameter(in="formData",name="cost",type="integer",description="消费法宝数量",required=true),
-     *   @SWG\Response(response="201", description="成功"),
-     *   @SWG\Response(response="401", description="未授权"),
-     *   @SWG\Response(response="500", description="服务器错误")
-     * )
-     */
+
     public function store(Request $request)
     {
         try {

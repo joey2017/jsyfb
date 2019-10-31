@@ -18,6 +18,11 @@ class ImageController extends Controller
      *   tags={"Misc"},
      *   summary="文件上传接口",
      *   description="图片上传",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
      *   @SWG\Response(response=201,description="成功"),
      *   @SWG\Response(response=400,description="文件类型不符或上传失败"),
      * )
