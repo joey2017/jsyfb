@@ -46,7 +46,7 @@ class AnswerRecord extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'answer_list_id', 'date', 'question', 'answer', 'correct', 'score'
+        'user_id', 'answer_list_id', 'date', 'question', 'answer', 'correct', 'score', 'option'
     ];
 
     /**
