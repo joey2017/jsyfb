@@ -60,7 +60,8 @@ class CustomerController extends AdminController
         $grid = new Grid(new Customer);
 
         $grid->disableCreateButton();
-        $grid->column('id', __('Id'));
+
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('kf_account', trans('admin.kf_account'));
         $grid->column('kf_nick', trans('admin.nickname'));
         $grid->column('kf_wx', trans('admin.wechat'));
@@ -129,7 +130,7 @@ class CustomerController extends AdminController
             } catch (\Exception $exception) {
                 Log::error('调用微信删除客服异常：', ['info' => $exception->getTraceAsString()]);
             }
-            return;
+            return true;
 
         });
 

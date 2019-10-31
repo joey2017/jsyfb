@@ -26,7 +26,7 @@ class BusinessCategoryController extends AdminController
     {
         $grid = new Grid(new BusinessCategory);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('title', trans('admin.title'));
         $grid->column('descr', trans('admin.descr'));
         $grid->column('status', trans('admin.status'))->using(BusinessCategory::STATUSES)->label(['warning', 'primary']);

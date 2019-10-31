@@ -42,7 +42,7 @@ class UserController extends AdminController
 
         $grid->disableCreateButton();
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('openid', __('OpenId'));
         $grid->column('nickname', trans('admin.nickname'));
         //$grid->column('email', trans('admin.email'));
@@ -58,9 +58,7 @@ class UserController extends AdminController
         $grid->column('ingots', trans('admin.ingots'));
         $grid->column('score', trans('admin.answer_score'));
         $grid->column('invitation_code', trans('admin.invitation_code'));
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            return User::getStatusName($status);
-        })->label(['warning', 'primary']);
+        $grid->column('status', trans('admin.status'))->using(User::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 

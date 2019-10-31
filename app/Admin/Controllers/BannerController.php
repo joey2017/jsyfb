@@ -26,14 +26,12 @@ class BannerController extends AdminController
     {
         $grid = new Grid(new Banner);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('picname', trans('admin.picname'));
         $grid->column('image_path', trans('admin.image_path'))->lightbox(['width' => 50, 'height' => 50]);
         $grid->column('url', trans('admin.url'))->link();
         $grid->column('sort', trans('admin.sort'));
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            return Banner::getStatusName($status);
-        })->label(['warning', 'primary']);
+        $grid->column('status', trans('admin.status'))->using(Banner::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 

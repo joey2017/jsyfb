@@ -29,7 +29,7 @@ class NotaryAdviceController extends AdminController
     {
         $grid = new Grid(new NotaryAdvice);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('username', trans('admin.username'));
         $grid->column('sex', trans('admin.sex'))->using(Constant::SEXS);
@@ -68,7 +68,7 @@ class NotaryAdviceController extends AdminController
             return User::findOrFail($user_id)->nickname;
         });
         $show->field('username', trans('admin.username'));
-        $show->field('sex', trans('admin.sex'))->using(['1' => '男', '2' => '女']);
+        $show->field('sex', trans('admin.sex'))->using(Constant::SEXS);
         $show->field('mobile', trans('admin.mobile'));
         $show->field('type', trans('admin.type'))->using(Constant::CASE_TYPES);
         $show->field('question', trans('admin.question'));
@@ -90,7 +90,7 @@ class NotaryAdviceController extends AdminController
 
         $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
         $form->text('username', trans('admin.username'))->required();
-        $form->radio('sex', trans('admin.sex'))->options(['1' => '男', '2' => '女'])->required();
+        $form->radio('sex', trans('admin.sex'))->options(Constant::SEXS)->required();
         $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->select('type', trans('admin.type'))->options(Constant::CASE_TYPES)->required();
         $form->textarea('question', trans('admin.question'))->required();

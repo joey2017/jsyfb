@@ -31,7 +31,7 @@ class UserAddressController extends AdminController
     {
         $grid = new Grid(new UserAddress);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('receiver', trans('admin.receiver'));
         $grid->column('receiver_mobile', trans('admin.receiver_mobile'));

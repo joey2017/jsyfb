@@ -47,7 +47,7 @@ class AuthenticationController extends AdminController
             $tools->append(new ReportPost());
         });
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('realname', trans('admin.realname'));
         $grid->column('mobile', trans('admin.mobile'));

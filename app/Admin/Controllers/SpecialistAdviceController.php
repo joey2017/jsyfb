@@ -46,7 +46,7 @@ class SpecialistAdviceController extends AdminController
             $grid->model()->where('laywer_id', Admin::user()->related_spec_id);
         }
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('laywer.name', trans('admin.specialist'));
         $grid->column('username', trans('admin.username'));

@@ -26,7 +26,7 @@ class ConsultantController extends AdminController
     {
         $grid = new Grid(new Consultant);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('name', '姓名');
         $grid->column('title', trans('admin.user_title'));
         $grid->column('expertise', trans('admin.expertise'));
@@ -36,9 +36,7 @@ class ConsultantController extends AdminController
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
         $grid->column('summary', trans('admin.summary'));
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            return Consultant::getStatusName($status);
-        })->label(['warning', 'primary']);
+        $grid->column('status', trans('admin.status'))->using(Consultant::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -96,7 +94,7 @@ class ConsultantController extends AdminController
         $form->text('expertise', trans('admin.expertise'))->required();
         $form->mobile('mobile', trans('admin.mobile'))->required();
         $form->text('telephone', trans('admin.telephone'));
-        $form->text('score', trans('admin.score'));
+        $form->decimal('score', trans('admin.score'));
         $form->text('company', trans('admin.company'))->required();
         $form->text('summary', trans('admin.summary'))->required();
 

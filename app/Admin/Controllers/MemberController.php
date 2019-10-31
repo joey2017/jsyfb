@@ -29,7 +29,7 @@ class MemberController extends AdminController
 
         $grid->disableCreateButton();
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('cost', trans('admin.cost'));
         $grid->column('status', trans('admin.status'))->using(Member::STATUSES)->label(['warning', 'primary']);

@@ -30,7 +30,7 @@ class NotaryOfficeController extends AdminController
     {
         $grid = new Grid(new NotaryOffice);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
 
         $grid->column('name', trans('admin.name'));
         $grid->column('mobile', trans('admin.mobile'));
@@ -51,9 +51,7 @@ class NotaryOfficeController extends AdminController
         $grid->column('address', trans('admin.address'));
         $grid->column('lng', trans('admin.lng'));
         $grid->column('lat', trans('admin.lat'));
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            return NotaryOffice::getStatusName($status);
-        })->label(['warning', 'primary']);
+        $grid->column('status', trans('admin.status'))->using(NotaryOffice::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 

@@ -4,7 +4,6 @@ namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\AnswerList;
-use App\Models\User;
 use App\Models\AnswerRecord;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -31,7 +30,7 @@ class AnswerRecordController extends AdminController
 
         $grid->disableCreateButton();
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('question', trans('admin.question'));
         $grid->column('answer', trans('admin.answer'));

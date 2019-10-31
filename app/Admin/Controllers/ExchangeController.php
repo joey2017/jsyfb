@@ -57,7 +57,7 @@ class ExchangeController extends AdminController
     {
         $grid = new Grid(new Exchange);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('goods.goods_name', trans('admin.goods_name'));
         $grid->column('receiver', trans('admin.receiver'));

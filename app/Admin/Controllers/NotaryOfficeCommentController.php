@@ -26,7 +26,7 @@ class NotaryOfficeCommentController extends AdminController
     {
         $grid = new Grid(new NotaryOfficeComment);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('notaryOffice.name', '公证处名称');
         $grid->column('user.username','评论者');
         $grid->column('score', trans('admin.score'));

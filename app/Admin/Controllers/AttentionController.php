@@ -29,16 +29,16 @@ class AttentionController extends AdminController
         $grid->disableCreateButton();
         $grid->disableExport();
 
+        $grid->column('id', __('Id'))->sortable();
+        $grid->column('user.nickname', trans('admin.nickname'));
+        $grid->column('laywer.name', trans('admin.laywer'));
+        $grid->column('created_at', trans('admin.created_at'));
+
         $grid->actions(function($actions){
             // 去掉编辑
             $actions->disableEdit();
             $actions->disableView();
         });
-
-        $grid->column('id', __('Id'));
-        $grid->column('user.nickname', trans('admin.nickname'));
-        $grid->column('laywer.name', trans('admin.laywer'));
-        $grid->column('created_at', trans('admin.created_at'));
 
         $grid->filter(function($filter){
             $filter->disableIdFilter();

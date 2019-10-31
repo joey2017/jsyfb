@@ -4,7 +4,6 @@ namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllArticlesIdAndTitle;
 use function App\Helpers\getAllLaywersIdAndName;
-use App\Models\Article;
 use App\Models\ArticleComment;
 use App\Models\Laywer;
 use Encore\Admin\Controllers\AdminController;
@@ -104,7 +103,7 @@ class ArticleCommentController extends AdminController
      */
     protected function form()
     {
-        $form     = new Form(new ArticleComment);
+        $form = new Form(new ArticleComment);
 
         if ($form->isEditing()) {
             $form->select('article_id', trans('admin.title'))->options(getAllArticlesIdAndTitle())->readOnly();
@@ -127,6 +126,7 @@ class ArticleCommentController extends AdminController
                 ]);
                 return back()->with(compact('error'));
             }
+            return true;
         });
 
         return $form;

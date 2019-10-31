@@ -39,7 +39,7 @@ class MessageController extends AdminController
             //$actions->disableView();
         });
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('content', trans('admin.content'));

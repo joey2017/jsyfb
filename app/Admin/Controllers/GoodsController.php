@@ -26,7 +26,7 @@ class GoodsController extends AdminController
     {
         $grid = new Grid(new Goods);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('goods_name', trans('admin.goods_name'));
         $grid->column('image', trans('admin.image'))->lightbox(['width' => 50, 'height' => 50]);
         //$grid->column('detail', trans('admin.detail'));

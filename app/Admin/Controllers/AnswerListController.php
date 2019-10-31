@@ -26,7 +26,7 @@ class AnswerListController extends AdminController
     {
         $grid = new Grid(new AnswerList);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('title', '题目');
         $grid->column('A', trans('admin.A'));
         $grid->column('B', trans('admin.B'));

@@ -38,7 +38,7 @@ class FeedbackController extends AdminController
             //$actions->disableView();
         });
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('name', '姓名');
         $grid->column('mobile', trans('admin.mobile'));

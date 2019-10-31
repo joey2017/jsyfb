@@ -31,14 +31,12 @@ class NoticeController extends AdminController
         $grid->disableCreateButton();
         $grid->disableExport();
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname',trans('admin.nickname'));
         $grid->column('type', trans('admin.type'))->using(Notice::TYPES);
         $grid->column('title', trans('admin.title'));
         $grid->column('content', trans('admin.content'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
-            return Notice::getStatusName($status);
-        })->label(['warning','primary']);
+        $grid->column('status', trans('admin.status'))->using(Notice::STATUSES)->label(['warning', 'primary']);
 
         $grid->filter(function(Grid\Filter $filter){
             $filter->disableIdFilter();

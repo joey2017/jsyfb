@@ -26,7 +26,7 @@ class WechatAttentionController extends AdminController
     {
         $grid = new Grid(new WechatAttention);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user_id', trans('admin.user_id'));
         $grid->column('username', trans('admin.username'));
         $grid->column('nickname', trans('admin.nickname'));

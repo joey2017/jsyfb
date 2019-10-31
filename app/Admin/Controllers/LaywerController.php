@@ -34,7 +34,7 @@ class LaywerController extends AdminController
             $grid->model()->where('id', Admin::user()->related_spec_id);
         }
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('name', trans('admin.name'));
         $grid->column('title', trans('admin.user_title'));
         $grid->column('mobile', trans('admin.mobile'));
@@ -46,9 +46,7 @@ class LaywerController extends AdminController
         $grid->column('city_code', trans('admin.city_code'));
         $grid->column('expertise', trans('admin.expertise'));
         $grid->column('summary', trans('admin.summary'));
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            return Laywer::getStatusName($status);
-        })->label(['warning', 'primary']);
+        $grid->column('status', trans('admin.status'))->using(Laywer::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 

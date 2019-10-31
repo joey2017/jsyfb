@@ -27,7 +27,7 @@ class LegalBookSectionController extends AdminController
     {
         $grid = new Grid(new LegalBookSection);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('name', '主题');
         $grid->column('category.title', trans('admin.category'));
         $grid->column('title', trans('admin.section_title'));

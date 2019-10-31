@@ -27,17 +27,12 @@ class IngotsLogController extends AdminController
     {
         $grid = new Grid(new IngotsLog);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('cost', trans('admin.ingot_cost'));
         $grid->column('descr', trans('admin.descr'));
-        $grid->column('type', trans('admin.type'))->display(function ($type) {
-            return IngotsLog::getTypeName($type);
-        });
-        $grid->column('status', trans('admin.status'))->display(function ($status) {
-            return IngotsLog::getStatusName($status);
-        })->label(['warning', 'primary']);
-
+        $grid->column('type', trans('admin.type'))->using(IngotsLog::TYPES);
+        $grid->column('status', trans('admin.status'))->using(IngotsLog::STATUSES)->label(['warning', 'primary']);
         $grid->filter(function (Grid\Filter $filter) {
             $filter->disableIdFilter();
             $filter->equal('type', trans('admin.type'))->select(IngotsLog::TYPES);
@@ -93,7 +88,7 @@ class IngotsLogController extends AdminController
         $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
         $form->number('cost', trans('admin.ingot_cost'));
         $form->text('descr', trans('admin.descr'));
-        $form->radio('type', trans('admin.type'))->options([1 => '增加', 2 => '减少'])->default('1');
+        $form->radio('type', trans('admin.type'))->options(IngotsLog::TYPES)->default('1');
         $form->text('remark', trans('admin.remark'));
 
         return $form;

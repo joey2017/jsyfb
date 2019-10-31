@@ -28,13 +28,15 @@ class LegalBookController extends AdminController
     {
         $grid = new Grid(new LegalBook);
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         $grid->column('legalBookSection.title', trans('admin.section_title'));
         $grid->column('legalBookSection.cate_id', trans('admin.category'))->display(function ($cate_id) {
             return LegalBookCategory::findOrFail($cate_id)->title;
         });
         $grid->column('detail', trans('admin.detail'));
         $grid->column('status', trans('admin.status'))->using(LegalBook::STATUSES)->label(['warning', 'primary']);
+        $grid->column('created_at', trans('admin.created_at'));
+        $grid->column('updated_at', trans('admin.updated_at'));
 
         $grid->filter(function ($filter) {
 
@@ -42,9 +44,6 @@ class LegalBookController extends AdminController
             $filter->like('legalBookSection.title', trans('admin.section_title'));
 
         });
-
-        $grid->column('created_at', trans('admin.created_at'));
-        $grid->column('updated_at', trans('admin.updated_at'));
 
         return $grid;
     }
@@ -80,7 +79,7 @@ class LegalBookController extends AdminController
     {
         $form = new Form(new LegalBook);
 
-        $options = LegalBookSection::where('status',1)->pluck('title', 'id')->toArray();
+        $options = LegalBookSection::where('status', LegalBookSection::NORMAL)->pluck('title', 'id')->toArray();
         $form->select('section_id', trans('admin.section_title'))->options($options)->required();
         $form->editor('detail', trans('admin.detail'));
 
