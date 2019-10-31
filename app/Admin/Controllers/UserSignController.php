@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\UserSign;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
 class UserSignController extends AdminController
@@ -42,6 +43,21 @@ class UserSignController extends AdminController
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
+        $grid->filter(function ($filter) {
+            $filter->disableIdFilter();
+            $filter->like('user.nickname', trans('admin.nickname'));
+        });
+
         return $grid;
+    }
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        return new Form(new UserSign);
     }
 }

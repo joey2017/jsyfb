@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\Attention;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
@@ -73,5 +74,16 @@ class AttentionController extends AdminController
         $show->field('created_at', trans('admin.created_at'));
 
         return $show;
+    }
+
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        return new Form(new Attention);
     }
 }

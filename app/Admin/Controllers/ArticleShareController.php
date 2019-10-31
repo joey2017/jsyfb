@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Models\ArticleShare;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Form;
 use Encore\Admin\Grid;
 
 class ArticleShareController extends AdminController
@@ -41,7 +42,7 @@ class ArticleShareController extends AdminController
         $grid->column('created_at', trans('admin.created_at'));
 
         $grid->filter(function ($filter) {
-            $filter->disabledIdFilter();
+            $filter->disableIdFilter();
             $filter->column(1 / 2, function ($filter) {
                 $filter->like('user.nickname', trans('admin.nickname'));
             });
@@ -53,4 +54,14 @@ class ArticleShareController extends AdminController
         return $grid;
     }
 
+
+    /**
+     * Make a form builder.
+     *
+     * @return Form
+     */
+    protected function form()
+    {
+        return new Form(new ArticleShare);
+    }
 }

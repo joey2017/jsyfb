@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\ArticleLike;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -62,11 +61,6 @@ class ArticleLikeController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new ArticleLike);
-
-        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname());
-        $form->number('article_id', trans('admin.article_id'));
-
-        return $form;
+        return new Form(new ArticleLike);
     }
 }

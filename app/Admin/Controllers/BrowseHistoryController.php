@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\BrowseHistory;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -104,11 +103,6 @@ class BrowseHistoryController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new BrowseHistory);
-
-        $form->select('user_id', trans('admin.nickname'))->options(getAllUsersIdAndNickname())->required();
-        $form->number('article_id', trans('admin.article_id'))->required();
-
-        return $form;
+        return new Form(new BrowseHistory);
     }
 }

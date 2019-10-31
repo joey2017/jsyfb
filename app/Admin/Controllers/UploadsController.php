@@ -8,6 +8,10 @@ use Encore\Admin\Controllers\AdminController;
 class UploadsController extends AdminController
 {
 
+    /**
+     * @param Request $request
+     * @return array|\Illuminate\Http\JsonResponse
+     */
     public function images(Request $request)
     {
         $file = $request->file("mypic");
