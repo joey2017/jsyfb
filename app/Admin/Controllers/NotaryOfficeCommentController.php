@@ -29,12 +29,23 @@ class NotaryOfficeCommentController extends AdminController
         $grid = new Grid(new NotaryOfficeComment);
 
         $grid->column('id', __('Id'))->sortable();
-        $grid->column('office.name', '公证处名称');
-        $grid->column('user.username', '评论者');
+        $grid->column('office.name', trans('admin.office_name'));
+        $grid->column('user.username', trans('admin.comment_person'));
         $grid->column('score', trans('admin.score'));
         $grid->column('content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
+
+        $grid->filter(function (Grid\Filter $filter) {
+            $filter->disableIdFilter();
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('office.name', trans('admin.office_name'));
+            });
+
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('user.username', trans('admin.comment_person'));
+            });
+        });
 
         return $grid;
     }
@@ -50,9 +61,8 @@ class NotaryOfficeCommentController extends AdminController
         $show = new Show(NotaryOfficeComment::findOrFail($id));
 
         $show->field('id', __('Id'));
-        //$show->field('office.name', '公证处名称');
-        //$show->field('user.username', '评论者');
-        $show->office('公证处名称', function ($office) {
+
+        $show->office(trans('admin.office_name'), function ($office) {
             $office->setResource('/admin/notarys');
             $office->name(trans('admin.name'));
             $office->mobile(trans('admin.mobile'));
@@ -81,8 +91,8 @@ class NotaryOfficeCommentController extends AdminController
     {
         $form = new Form(new NotaryOfficeComment);
 
-        $form->select('office_id', '公证处名称')->options(getAllNotarysIdAndName())->required();
-        $form->select('user_id', '评论者')->options(getAllUsersIdAndNickname())->required();
+        $form->select('office_id', trans('admin.office_name'))->options(getAllNotarysIdAndName())->required();
+        $form->select('user_id', trans('admin.comment_person'))->options(getAllUsersIdAndNickname())->required();
         $form->number('score', trans('admin.score'))->required();
         $form->textarea('content', trans('admin.content'));
 

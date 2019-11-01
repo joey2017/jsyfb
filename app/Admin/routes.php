@@ -17,7 +17,6 @@ Route::group([
     $router->get('notarys/provinces', 'NotaryOfficeController@provinces');
     $router->get('notarys/citys', 'NotaryOfficeController@citys');
     $router->get('notarys/areas', 'NotaryOfficeController@areas');
-
     $router->resources([
         'personnel/laywers'         => LaywerController::class,
         'personnel/categorys'       => BusinessCategoryController::class,
