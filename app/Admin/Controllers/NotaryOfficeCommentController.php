@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use function App\Helpers\getAllNotarysIdAndName;
 use function App\Helpers\getAllUsersIdAndNickname;
+use App\Models\NotaryOffice;
 use App\Models\NotaryOfficeComment;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -95,6 +96,14 @@ class NotaryOfficeCommentController extends AdminController
         $form->select('user_id', trans('admin.comment_person'))->options(getAllUsersIdAndNickname())->required();
         $form->number('score', trans('admin.score'))->required();
         $form->textarea('content', trans('admin.content'));
+
+        $form->saved(function (Form $form) {
+            $notary                 = NotaryOffice::findOrFail($form->model()->office_id);
+            $score                  = $notary->comments_count * $notary->score + $form->model()->score;
+            $notary->comments_count += 1;
+            $notary->score          = $score / $notary->comments_count;
+            return $notary->save();
+        });
 
         return $form;
     }
