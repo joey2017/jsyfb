@@ -33,7 +33,6 @@ class LegalBookController extends AdminController
         $grid->column('legalBookSection.cate_id', trans('admin.category'))->display(function ($cate_id) {
             return LegalBookCategory::findOrFail($cate_id)->title;
         });
-        //$grid->column('detail', trans('admin.detail'));
         $grid->column('detail-hide', trans('admin.detail'))->expand(function ($model) {
             return $model->detail;
         });

@@ -40,7 +40,9 @@ class ArticleCommentController extends AdminController
         $grid->column('id', __('Id'))->sortable();
         $grid->column('article.title', trans('admin.title'));
         $grid->column('article.images', trans('admin.image'))->lightbox(['width' => 50,'height' => 50]);
-        $grid->column('article.content', trans('admin.content'));
+        $grid->column('content-hide', trans('admin.content'))->expand(function ($model) {
+            return $model->article()->first()->content ?? '';
+        });
         $grid->column('laywer.name', trans('admin.laywer'));
         $grid->column('interpretation', trans('admin.interpretation'));
         $grid->column('measures', trans('admin.measures'));

@@ -31,7 +31,10 @@ class ArticleLikeController extends AdminController
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('article.title', trans('admin.title'));
         $grid->column('article.images', trans('admin.image'))->lightbox(['width' => 50,'height' => 50]);
-        $grid->column('article.content', trans('admin.content'));
+        //$grid->column('article.content', trans('admin.content'));
+        $grid->column('content-hide', trans('admin.content'))->expand(function ($model) {
+            return $model->article()->first()->content ?? '';
+        });
         $grid->column('created_at', trans('admin.created_at'));
 
         $grid->actions(function ($actions) {
