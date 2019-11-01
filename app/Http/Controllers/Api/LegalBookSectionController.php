@@ -20,6 +20,9 @@ class LegalBookSectionController extends Controller
      */
     public function show($cate_id)
     {
+        if ($cate_id <= 0) {
+            return $this->failed('参数id数值不正确');
+        }
         $condition = [['status', LegalBookSection::NORMAL], ['cate_id', $cate_id]];
         $sections  = LegalBookSection::where($condition)->orderBy('id','desc')->paginate(10);
         return $this->success(LegalBookSectionResource::collection($sections));

@@ -19,6 +19,9 @@ class LegalBookController extends Controller
      */
     public function show($section_id)
     {
+        if ($section_id <= 0) {
+            return $this->failed('参数id数值不正确');
+        }
         $condition = [['status', LegalBook::NORMAL], ['section_id', $section_id]];
         $book      = LegalBook::where($condition)->first();
         return $this->success(new LegalBookResource($book));
