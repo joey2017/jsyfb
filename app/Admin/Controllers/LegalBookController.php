@@ -33,7 +33,10 @@ class LegalBookController extends AdminController
         $grid->column('legalBookSection.cate_id', trans('admin.category'))->display(function ($cate_id) {
             return LegalBookCategory::findOrFail($cate_id)->title;
         });
-        $grid->column('detail', trans('admin.detail'));
+        //$grid->column('detail', trans('admin.detail'));
+        $grid->column('detail-hide', trans('admin.detail'))->expand(function ($model) {
+            return $model->detail;
+        });
         $grid->column('status', trans('admin.status'))->using(LegalBook::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -59,7 +62,7 @@ class LegalBookController extends AdminController
         $show = new Show(LegalBook::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('section_id', trans('admin.section_title'))->as(function($section_id){
+        $show->field('section_id', trans('admin.section_title'))->as(function ($section_id) {
             return LegalBookSection::findOrFail($section_id)->title;
         });
         $show->field('detail', trans('admin.detail'));
