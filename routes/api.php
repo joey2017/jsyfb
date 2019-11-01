@@ -26,10 +26,10 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
     Route::get('/legal/categories/{category}', 'LegalBookCategoryController@show')->name('legal-categories.show');
 
     //宝典章节
-    Route::get('/legal/sections/{cate_id}', 'LegalBookSectionController@show')->name('legal-sections.show');
+    Route::get('/legal/sections/{cate}', 'LegalBookSectionController@show')->name('legal-sections.show');
 
     //宝典章节详情
-    Route::get('/legal/books/{section_id}', 'LegalBookController@show')->name('legal-books.show');
+    Route::get('/legal/books/{section}', 'LegalBookController@show')->name('legal-books.show');
 
     //轮播图列表
     Route::get('/banners', 'BannerController@index')->name('banners.index');

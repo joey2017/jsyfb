@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\LegalBookSectionResource;
+use App\Models\LegalBookCategory;
 use App\Models\LegalBookSection;
 use Illuminate\Support\Facades\DB;
 
@@ -18,12 +19,9 @@ class LegalBookSectionController extends Controller
      *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function show($cate_id)
+    public function show(LegalBookCategory $cate)
     {
-        if ($cate_id <= 0) {
-            return $this->failed('参数id数值不正确');
-        }
-        $condition = [['status', LegalBookSection::NORMAL], ['cate_id', $cate_id]];
+        $condition = [['status', LegalBookSection::NORMAL], ['cate_id', $cate->id]];
         $sections  = LegalBookSection::where($condition)->orderBy('id','desc')->paginate(10);
         return $this->success(LegalBookSectionResource::collection($sections));
     }

@@ -134,12 +134,14 @@ class LaywerController extends AdminController
             foreach ($params as $param) {
                 $value = $param;
             }
-            if ($value != Admin::user()->related_spec_id) {
+            if (Admin::user()->isRole('laywer') && ($value != Admin::user()->related_spec_id)) {
                 admin_error('查看失败','您无权限访问查看该律师');
                 return $form;
             }
         } else {
-            return admin_error('查看失败','您无权限创建律师');
+            if (Admin::user()->isRole('laywer')) {
+                return admin_error('查看失败', '您无权限创建律师');
+            }
         }
 
         $form->text('name', trans('admin.name'))->required();

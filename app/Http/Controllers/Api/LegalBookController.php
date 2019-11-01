@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\LegalBookResource;
 use App\Models\LegalBook;
+use App\Models\LegalBookSection;
 
 class LegalBookController extends Controller
 {
@@ -17,12 +18,9 @@ class LegalBookController extends Controller
      *   @SWG\Response(response=200,description="成功")
      * )
      */
-    public function show($section_id)
+    public function show(LegalBookSection $section)
     {
-        if ($section_id <= 0) {
-            return $this->failed('参数id数值不正确');
-        }
-        $condition = [['status', LegalBook::NORMAL], ['section_id', $section_id]];
+        $condition = [['status', LegalBook::NORMAL], ['section_id', $section->id]];
         $book      = LegalBook::where($condition)->first();
         return $this->success(new LegalBookResource($book));
     }
