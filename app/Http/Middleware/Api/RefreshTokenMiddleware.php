@@ -4,8 +4,8 @@ namespace App\Http\Middleware\Api;
 
 use Auth;
 use Closure;
-use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -37,7 +37,6 @@ class RefreshTokenMiddleware extends BaseMiddleware
             }
             throw new UnauthorizedHttpException('jwt-auth', '未登录');
         } catch (TokenExpiredException $exception) {
-            Log::notice('TokenExpiredException:' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
             // 此处捕获到了 token 过期所抛出的 TokenExpiredException 异常，我们在这里需要做的是刷新该用户的 token 并将它添加到响应头中
             try {
                 // 刷新用户的 token
@@ -49,10 +48,12 @@ class RefreshTokenMiddleware extends BaseMiddleware
                 $user->last_token = $token;
                 $user->save();
             } catch (JWTException $exception) {
-                Log::warning('JWTException:' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
                 // 如果捕获到此异常，即代表 refresh 也过期了，用户无法刷新令牌，需要重新登录。
                 throw new UnauthorizedHttpException('jwt-auth', $exception->getMessage());
             }
+        } catch (TokenBlacklistedException $exception) {
+            //当用户退出之后，token就会被拉黑，就会返回TokenBlacklistedException
+            throw new UnauthorizedHttpException('jwt-auth', '未登录');
         }
 
         // 在响应头中返回新的 token
