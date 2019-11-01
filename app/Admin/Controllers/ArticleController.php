@@ -43,7 +43,10 @@ class ArticleController extends AdminController
             return new Table(['ID', '专家', '点评', '措施', '内容', '评论时间'], $comments->toArray());
         });
         $grid->column('images', trans('admin.image'))->lightbox(['width' => 50, 'height' => 50]);
-        $grid->column('content', trans('admin.content'));
+        //$grid->column('content', trans('admin.content'));
+        $grid->column('content-hide', trans('admin.content'))->expand(function ($model) {
+            return $model->content;
+        });
         $grid->column('like_count', trans('admin.like_count'));
         $grid->column('browse_count', trans('admin.browse_count'));
         $grid->column('share_count', trans('admin.share_count'));
