@@ -22,6 +22,9 @@ class LegalBookController extends Controller
     {
         $condition = [['status', LegalBook::NORMAL], ['section_id', $section->id]];
         $book      = LegalBook::where($condition)->first();
+        if (empty($book)) {
+            return $this->success([]);
+        }
         return $this->success(new LegalBookResource($book));
     }
 }
