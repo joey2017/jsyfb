@@ -47,6 +47,7 @@ Route::group([
         'questions'                 => QuestionController::class,
         'notarys/consultants'       => ConsultantController::class,
         'notarys/advices'           => NotaryAdviceController::class,
+        'notarys/comments'          => NotaryOfficeCommentController::class,
         'notarys'                   => NotaryOfficeController::class,
         'wechat-attentions'         => WechatAttentionController::class,
         'goods'                     => GoodsController::class,

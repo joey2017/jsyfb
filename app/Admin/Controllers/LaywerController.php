@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Constant;
+use function App\Helpers\getAllBusinessCategoryIdAndTitle;
 use App\Models\Region\Province;
 use App\Models\BusinessCategory;
 use App\Models\Laywer;
@@ -74,7 +74,7 @@ class LaywerController extends AdminController
             });
 
             $filter->column(1 / 3, function ($filter) {
-                $filter->in('cate_id', trans('admin.category'))->select(Constant::CASE_TYPES);
+                $filter->in('cate_id', trans('admin.category'))->select(getAllBusinessCategoryIdAndTitle());
             });
 
         });

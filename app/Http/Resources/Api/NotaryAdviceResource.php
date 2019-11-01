@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use App\Constant;
+use function App\Helpers\getAllBusinessCategoryIdAndTitle;
 use App\Models\NotaryAdvice;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +25,7 @@ class NotaryAdviceResource extends JsonResource
             'username'    => $this->username,
             'sex'         => Constant::SEXS[$this->sex],
             'mobile'      => $this->mobile,
-            'type'        => Constant::CASE_TYPES[$this->type],
+            'type'        => (getAllBusinessCategoryIdAndTitle())[$this->type],
             'question'    => $this->question,
             'status'      => NotaryAdvice::getStatusName($this->status),
             'created_at'  => (string)$this->created_at,

@@ -3,14 +3,16 @@
 namespace App\Helpers;
 
 use App\Models\Article;
+use App\Models\BusinessCategory;
 use App\Models\Laywer;
+use App\Models\NotaryOffice;
 use App\Models\SystemConfig;
 use App\Models\User;
 
 if (!function_exists('getAllUsersIdAndNickname')) {
     function getAllUsersIdAndNickname()
     {
-        return User::where('status', 1)->pluck('nickname', 'id')->toArray();
+        return User::where('status', User::NORMAL)->pluck('nickname', 'id')->toArray();
     }
 }
 
@@ -24,13 +26,27 @@ if (!function_exists('getSystemConfigByKey')) {
 if (!function_exists('getAllArticlesIdAndTitle')) {
     function getAllArticlesIdAndTitle()
     {
-        return Article::where([['status', 1], ['is_deleted', 0]])->pluck('title', 'id')->toArray();
+        return Article::where([['status', Article::NORMAL]])->pluck('title', 'id')->toArray();
     }
 }
 
 if (!function_exists('getAllLaywersIdAndName')) {
     function getAllLaywersIdAndName()
     {
-        return Laywer::where([['status', 1], ['is_deleted', 0]])->pluck('name', 'id')->toArray();
+        return Laywer::where([['status', Laywer::NORMAL]])->pluck('name', 'id')->toArray();
+    }
+}
+
+if (!function_exists('getAllNotarysIdAndName')) {
+    function getAllNotarysIdAndName()
+    {
+        return NotaryOffice::where([['status', NotaryOffice::NORMAL]])->pluck('name', 'id')->toArray();
+    }
+}
+
+if (!function_exists('getAllBusinessCategoryIdAndTitle')) {
+    function getAllBusinessCategoryIdAndTitle()
+    {
+        return BusinessCategory::where([['status', BusinessCategory::NORMAL]])->pluck('title', 'id')->toArray();
     }
 }

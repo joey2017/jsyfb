@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Constant;
+use function App\Helpers\getAllBusinessCategoryIdAndTitle;
 use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\NotaryAdvice;
 use App\Models\User;
@@ -34,7 +35,7 @@ class NotaryAdviceController extends AdminController
         $grid->column('username', trans('admin.username'));
         $grid->column('sex', trans('admin.sex'))->using(Constant::SEXS);
         $grid->column('mobile', trans('admin.mobile'));
-        $grid->column('type', trans('admin.type'))->using(Constant::CASE_TYPES);
+        $grid->column('type', trans('admin.type'))->using(getAllBusinessCategoryIdAndTitle());
         $grid->column('question', trans('admin.question'));
         $grid->column('status', trans('admin.status'))->using(NotaryAdvice::STATUSES);
         $grid->column('created_at', trans('admin.created_at'));
@@ -70,7 +71,7 @@ class NotaryAdviceController extends AdminController
         $show->field('username', trans('admin.username'));
         $show->field('sex', trans('admin.sex'))->using(Constant::SEXS);
         $show->field('mobile', trans('admin.mobile'));
-        $show->field('type', trans('admin.type'))->using(Constant::CASE_TYPES);
+        $show->field('type', trans('admin.type'))->using(getAllBusinessCategoryIdAndTitle());
         $show->field('question', trans('admin.question'));
         $show->field('status', trans('admin.status'))->using(NotaryAdvice::STATUSES);
         $show->field('created_at', trans('admin.created_at'));
@@ -92,7 +93,7 @@ class NotaryAdviceController extends AdminController
         $form->text('username', trans('admin.username'))->required();
         $form->radio('sex', trans('admin.sex'))->options(Constant::SEXS)->required();
         $form->mobile('mobile', trans('admin.mobile'))->required();
-        $form->select('type', trans('admin.type'))->options(Constant::CASE_TYPES)->required();
+        $form->select('type', trans('admin.type'))->options(getAllBusinessCategoryIdAndTitle())->required();
         $form->textarea('question', trans('admin.question'))->required();
 
         return $form;

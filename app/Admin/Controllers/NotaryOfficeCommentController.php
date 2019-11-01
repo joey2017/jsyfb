@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use function App\Helpers\getAllNotarysIdAndName;
+use function App\Helpers\getAllUsersIdAndNickname;
 use App\Models\NotaryOfficeComment;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -27,8 +29,8 @@ class NotaryOfficeCommentController extends AdminController
         $grid = new Grid(new NotaryOfficeComment);
 
         $grid->column('id', __('Id'))->sortable();
-        $grid->column('notaryOffice.name', '公证处名称');
-        $grid->column('user.username','评论者');
+        $grid->column('office.name', '公证处名称');
+        $grid->column('user.username', '评论者');
         $grid->column('score', trans('admin.score'));
         $grid->column('content', trans('admin.content'));
         $grid->column('created_at', trans('admin.created_at'));
@@ -48,12 +50,19 @@ class NotaryOfficeCommentController extends AdminController
         $show = new Show(NotaryOfficeComment::findOrFail($id));
 
         $show->field('id', __('Id'));
-        //$show->field('notaryOffice.name', '公证处名称');
+        //$show->field('office.name', '公证处名称');
         //$show->field('user.username', '评论者');
-        $show->notaryOffice('公证处名称',function($office){
-             $office->setResource('/admin/users');
-             $office->name(trans('admin.name'));
-             $office->mobile(trans('admin.mobile'));
+        $show->office('公证处名称', function ($office) {
+            $office->setResource('/admin/notarys');
+            $office->name(trans('admin.name'));
+            $office->mobile(trans('admin.mobile'));
+            $office->picture(trans('admin.image'));
+            $office->summary(trans('admin.summary'));
+            $office->score(trans('admin.score'));
+            $office->province_code(trans('admin.province_code'));
+            $office->city_code(trans('admin.city_code'));
+            $office->district_code(trans('admin.district_code'));
+            $office->address(trans('admin.address'));
         });
         $show->field('score', trans('admin.score'));
         $show->field('content', trans('admin.content'));
@@ -72,9 +81,9 @@ class NotaryOfficeCommentController extends AdminController
     {
         $form = new Form(new NotaryOfficeComment);
 
-        $form->display('notaryOffice.name', '公证处名称');
-        $form->display('user.nickname', '评论者');
-        $form->number('score', trans('admin.score'));
+        $form->select('office_id', '公证处名称')->options(getAllNotarysIdAndName())->required();
+        $form->select('user_id', '评论者')->options(getAllUsersIdAndNickname())->required();
+        $form->number('score', trans('admin.score'))->required();
         $form->textarea('content', trans('admin.content'));
 
         return $form;
