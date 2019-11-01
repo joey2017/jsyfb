@@ -32,7 +32,7 @@ class RoleController extends EncoreRole
         $grid->column('updated_at', trans('admin.updated_at'));
 
         $grid->actions(function (Grid\Displayers\Actions $actions) {
-            if ($actions->row->slug == 'administrator') {
+            if ($actions->row->slug == 'administrator' || $actions->row->slug == 'laywer') {
                 $actions->disableDelete();
             }
         });
