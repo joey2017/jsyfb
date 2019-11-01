@@ -12,6 +12,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->resource('auth/users', AdminerController::class)->names('admin.auth.users');
+    $router->resource('auth/roles', RoleController::class)->names('admin.auth.roles');
 
     //公证处省市区筛选
     $router->get('notarys/provinces', 'NotaryOfficeController@provinces');
