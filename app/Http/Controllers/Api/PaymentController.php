@@ -98,15 +98,6 @@ class PaymentController extends Controller
     //微信支付回调通知
     public function notify()
     {
-        $receipt = $_REQUEST;
-        if ($receipt == null) {
-            $receipt = file_get_contents("php://input");
-            if ($receipt == null) {
-                $receipt = $GLOBALS['HTTP_RAW_POST_DATA'];
-            }
-        }
-
-        Log::notice('原始获取：', ['info' => $receipt]);
         $request = Request::createFromGlobals();
 
         try {
@@ -119,21 +110,17 @@ class PaymentController extends Controller
         }
 
         Log::info('laravel:', ['info' => $array]);
-        if (!is_array($request->getContent()) || empty($request->getContent())) {
-            throw new Exception('Invalid request XML.', 400);
-        }
-
-        //return new Collection($array);
-
 
         $pay = Pay::wechat();
 
-        Log::info('微信支付回调通知参数:', ['data' => $receipt]);
+        Log::info('微信支付回调通知参数:', ['data' => $pay]);
 
         //return $pay->success();// laravel 框架中请直接 `return $pay->success()`
 
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
+
+            Log::info('Paydata:', ['info' => $data]);
 
             $paymentInfo = $data->all();
 
