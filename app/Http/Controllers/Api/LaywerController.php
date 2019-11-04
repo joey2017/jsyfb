@@ -85,6 +85,13 @@ class LaywerController extends Controller
      */
     public function show(Laywer $laywer)
     {
+        //已关注列表
+        $attentions = Attention::where('user_id', Auth::guard('api')->id())->pluck('laywer_id')->toArray();
+        if (in_array($laywer->id, $attentions)) {
+            $laywer->is_attention = true;
+        } else {
+            $laywer->is_attention = false;
+        }
         return $this->success(new LaywerResource($laywer));
     }
 
