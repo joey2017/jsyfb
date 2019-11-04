@@ -13,7 +13,7 @@ class Site extends Form
      *
      * @var string
      */
-    public $title = '网站';
+    public $title = '公司信息';
 
     /**
      * Handle the form request.
@@ -25,9 +25,6 @@ class Site extends Form
     public function handle(Request $request)
     {
         foreach ($request->all() as $key => $value) {
-            /*if (is_object($value) && $value->isValid()) {
-                $value = 'images/' . $value->originalName;
-            }*/
             SystemConfig::updateOrCreate(['key' => $key], ['value' => $value]);
         }
 
@@ -41,15 +38,9 @@ class Site extends Form
      */
     public function form()
     {
-        //$this->text('website_title', '站点标题');
-        //$this->image('website_logo', '站点LOGO');
-        //$this->textarea('website_desc', '站点描述')->help('网站描述，有利于搜索引擎抓取相关信息');
-        //$this->text('website_copyright', '版权信息');
-        //$this->text('website_icp', '备案信息');
         $this->mobile('telephone', '公司电话');
         $this->text('address', '公司地址');
         $this->text('summary', '公司简介');
-        //$this->textarea('website_statistics', '网站统计代码')->help("网站统计代码，支持百度、Google、cnzz等");
     }
 
     /**

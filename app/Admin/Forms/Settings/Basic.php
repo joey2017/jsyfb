@@ -71,11 +71,8 @@ class Basic extends Form
      */
     public function data()
     {
-        $results    = IngotsConfig::all();
-        $vip_ingots = SystemConfig::where('key', 'vip_ingots')->first()->value ?? '';
-        $vip_money  = SystemConfig::where('key', 'vip_money')->first()->value ?? '';
-        //$config     = SystemConfig::where('key', 'vip_ingots')->orWhere('key', 'vip_money')->pluck('value', 'key')->toArray();
-        $data = ['vip_ingots' => $vip_ingots, 'vip_money' => $vip_money];
+        $results = IngotsConfig::all();
+        $data    = SystemConfig::where('key', 'vip_ingots')->orWhere('key', 'vip_money')->pluck('value', 'key')->toArray();
         foreach ($results as $v) {
             $data[$v['key']]                      = $v['value'];
             $data[$v['key'] . '_' . 'limitation'] = $v['limitation'];

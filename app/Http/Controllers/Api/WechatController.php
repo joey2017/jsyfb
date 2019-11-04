@@ -78,9 +78,8 @@ class WechatController extends Controller
         if (isset($userInfo['session_key'])) {
             try {
                 $decryData = $this->wxxcx->getUserInfo($encryptedData, $iv);
-                Log::info('用户解密数据为：', ['info' => $decryData]);
             } catch (\Exception $exception) {
-                Log::error('解密用户数据失败', ['error' => $exception->getMessage()]);
+                Log::error('解密用户数据失败', ['error' => $exception->getMessage(), 'info' => $decryData]);
             }
         } else {
             Log::error('获取session_key失败', $userInfo);
@@ -91,16 +90,13 @@ class WechatController extends Controller
 
         if ($icode !== '') {
             $inviter = User::where('invitation_code', $icode)->first();
-            Log::notice('inviter:'.$inviter);
         }
 
         if ($existUser = User::where('openid', $userInfo['openid'])->first()) {
             $token = auth('api')->login($existUser);
-            //$token = JWTAuth::fromUser($existUser);
             $statusCode = 200;
         } else {
             $token = auth('api')->login($this->createUser($request, $userInfo, $decryData['openId'] ? $decryData : $rawData, $inviter ? $inviter->id : 0));
-            //$token = JWTAuth::fromUser($this->createUser($request, $rowData, $inviter ? $inviter->id : 0));
             $statusCode = 201;
         }
 
@@ -126,7 +122,7 @@ class WechatController extends Controller
                 $this->notice->add('邀请好友注册获得法宝奖励', '邀请好友注册获得' . IngotsConfig::getConfigByKey('invite')->value . '法宝', $inviter->id, 2);
             }
             // 未读消息数量
-            $user->notices_count = Notice::where([['status', 0], ['user_id', $user->id]])->count();
+            $user->notices_count = Notice::where([['status', Notice::INVALID], ['user_id', $user->id]])->count();
             return $this->setStatusCode($statusCode)->success(['token' => 'Bearer ' . $token, 'user' => new UserResource($user)], 'success', '登录成功');
         }
         return $this->failed('登录失败,请稍后重试');

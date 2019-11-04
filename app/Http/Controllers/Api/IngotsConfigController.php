@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\IngotsConfigResource;
 use App\Models\IngotsConfig;
 use App\Models\SystemConfig;
-use Illuminate\Http\Request;
 
 class IngotsConfigController extends Controller
 {
@@ -36,7 +35,6 @@ class IngotsConfigController extends Controller
     public function show()
     {
         $config = SystemConfig::where('key', 'vip_ingots')->orWhere('key', 'vip_money')->pluck('value', 'key')->toArray();
-        //$vip_money  = SystemConfig::where('key', 'vip_money')->first()->value ?? 0;
         return $this->success($config);
     }
 }

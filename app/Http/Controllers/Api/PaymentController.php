@@ -74,16 +74,10 @@ class PaymentController extends Controller
             ];
 
             Unifiedorder::create($unified);
-            //$result = Pay::wechat()->mp($order);
-            //$result = Pay::wechat()->scan($order);
-            //$result = Pay::wechat()->app($order);
-            //$result = Pay::wechat()->wap($order);
-            //$result = Pay::wechat()->transfer($order);
             $result = Pay::wechat()->miniapp($order);
             return $this->success($result);
             // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
             // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
-            // 后续调用不在本文档讨论范围内，请自行参考官方文档。
         } catch (\Exception $e) {
             Log::error('微信支付失败：' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
         }
