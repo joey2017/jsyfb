@@ -64,6 +64,9 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
     //专属顾问列表
     Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
+    //小程序支付回调
+    Route::get('/payment/notify', 'PaymentController@notify')->name('payments.notify');
+
     Route::middleware('api.refresh')->group(function () {
         //用户留言
         Route::post('/messages', 'MessageController@store')->name('messages.store');
@@ -168,9 +171,6 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
 
         //微信支付接口
         Route::post('/payment/wechatpay','PaymentController@wechatpay')->name('payments.wechatpay');
-
-        //小程序支付回调
-        Route::get('/payment/notify', 'PaymentController@notify')->name('payments.notify');
 
     });
 });
