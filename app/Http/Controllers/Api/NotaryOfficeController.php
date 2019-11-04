@@ -42,8 +42,8 @@ class NotaryOfficeController extends Controller
 
         //测试
         empty($from) && $from = [
-            "lat" => 22.809098,
-            "lng" => 108.335280,
+            22.809098,
+            108.335280,
         ];
 
         if (count($from) < 2 || $from[0] == '' || $from[1] == '') {
