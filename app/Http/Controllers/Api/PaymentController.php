@@ -100,7 +100,7 @@ class PaymentController extends Controller
     {
         $pay = Pay::wechat(config('pay.wechat'));
 
-        Log::info('微信支付回调通知参数:', ['info' => $request->all()]);
+        Log::info('微信支付回调通知参数:', ['info' => $request->all(), 'data' => $GLOBALS['HTTP_RAW_POST_DATA']]);
 
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
