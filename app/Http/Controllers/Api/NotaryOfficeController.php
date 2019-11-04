@@ -34,10 +34,17 @@ class NotaryOfficeController extends Controller
         array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
         return $this->success($notarys);*/
 
-        $this->validate($request, [
-            'location' => ['required', 'string', 'regex:/^[0-9.,]+$/'],
-        ]);
+
+//        $this->validate($request, [
+//            'location' => ['required', 'string', 'regex:/^[0-9.,]+$/'],
+//        ]);
         $from = explode(',', $request->input('location'));
+
+        //测试
+        empty($from) && $from = implode(',', [
+            "lat" => 22.809098,
+            "lng" => 108.335280,
+        ]);
 
         if (count($from) < 2 || $from[0] == '' || $from[1] == '') {
             return $this->failed('位置信息错误，经纬度参数不全');
