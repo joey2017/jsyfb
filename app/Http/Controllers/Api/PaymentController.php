@@ -98,9 +98,16 @@ class PaymentController extends Controller
     //微信支付回调通知
     public function notify(Request $request)
     {
+        $receipt = $_REQUEST;
+        if ($receipt == null) {
+            $receipt = file_get_contents("php://input");
+            if ($receipt == null) {
+                $receipt = $GLOBALS['HTTP_RAW_POST_DATA'];
+            }
+        }
         $pay = Pay::wechat();
 
-        Log::info('微信支付回调通知参数:', ['info' => $request->all(), 'data' => $GLOBALS['HTTP_RAW_POST_DATA']]);
+        Log::info('微信支付回调通知参数:', ['info' => $request->all(), 'data' => $receipt]);
 
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
