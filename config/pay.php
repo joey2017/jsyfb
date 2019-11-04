@@ -15,7 +15,7 @@ return [
         'mch_id'      => env('WECHAT_MCH_ID', ''),
 
         // 微信支付异步通知地址
-        'notify_url'  => env('APP_URL') . '/payment/notify',
+        'notify_url'  => env('APP_URL') . '/' . env('API_PREFIX') . '/' . env('API_VERSION') . '/payment/notify',
 
         // 微信支付签名秘钥
         'key'         => env('WECHAT_KEY', ''),//微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置

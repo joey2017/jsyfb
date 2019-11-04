@@ -142,6 +142,9 @@ class PaymentController extends Controller
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
 
+            //校验订单金额
+
+
             DB::beginTransaction();
             //更新订单
             $order             = Unifiedorder::where('out_trade_no', $data->all()['out_trade_no'])->first();

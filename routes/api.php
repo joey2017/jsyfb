@@ -12,7 +12,7 @@
 */
 
 
-Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
+Route::namespace(env('API_PREFIX'))->prefix(env('API_VERSION'))->middleware('cors')->group(function () {
     Route::post('/login', 'UserController@login')->name('users.login');
 
     //小程序授权登录
@@ -63,9 +63,6 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
     //专属顾问列表
     Route::get('/customers', 'CustomerController@index')->name('customers.index');
-
-    //小程序支付回调
-    Route::get('/payment/notify','PaymentController@notify')->name('payments.notify');
 
     Route::middleware('api.refresh')->group(function () {
         //用户留言
@@ -171,6 +168,9 @@ Route::namespace('Api')->prefix('v1')->middleware('cors')->group(function () {
 
         //微信支付接口
         Route::post('/payment/wechatpay','PaymentController@wechatpay')->name('payments.wechatpay');
+
+        //小程序支付回调
+        Route::get('/payment/notify', 'PaymentController@notify')->name('payments.notify');
 
     });
 });
