@@ -98,7 +98,10 @@ class PaymentController extends Controller
     //微信支付回调通知
     public function notify(Request $request)
     {
+        $xml = $GLOBALS['HTTP_RAW_POST_DATA'];
         $pay = Pay::wechat(config('pay.wechat'));
+
+        Log::notice('微信支付回调通知参数：', ['info' => $xml]);
 
         Log::info('微信支付回调通知参数:', ['info' => $request->all()]);
 
