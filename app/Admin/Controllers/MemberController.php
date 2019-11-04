@@ -32,6 +32,7 @@ class MemberController extends AdminController
         $grid->column('id', __('Id'))->sortable();
         $grid->column('user.nickname', trans('admin.nickname'));
         $grid->column('cost', trans('admin.cost'));
+        $grid->column('type', trans('admin.type'))->using(Member::TYPES);
         $grid->column('status', trans('admin.status'))->using(Member::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -43,7 +44,12 @@ class MemberController extends AdminController
 
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
-            $filter->like('user.nickname', trans('admin.nickname'));
+            $filter->column(1 / 2, function ($filter) {
+                $filter->like('user.nickname', trans('admin.nickname'));
+            });
+            $filter->column(1 / 2, function ($filter) {
+                $filter->equal('type', trans('admin.type'))->select(Member::TYPES);
+            });
         });
 
         return $grid;
