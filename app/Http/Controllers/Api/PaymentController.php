@@ -149,28 +149,6 @@ class PaymentController extends Controller
         return $pay->success();// laravel 框架中请直接 `return $pay->success()`
     }
 
-    protected function queryOrderStatus($out_trade_no)
-    {
-        $url = 'https://api.mch.weixin.qq.com/pay/orderquery';
-
-        $data = [
-            'appid'        => env('WECHAT_MINIAPP_ID'),
-            'mch_id'       => env('WECHAT_MCH_ID'),
-            'out_trade_no' => $out_trade_no,
-            'nonce_str'    => uniqid(),
-            'sign'         => 'qian ming suan fa',
-            'sign_type'    => 'MD5',
-        ];
-
-        $client = new Client();
-        $result = $client->request('POST', $url, ['form_data' => $data]);
-        $info   = \GuzzleHttp\json_decode($result->getBody(), true);
-
-        if ($info['return_code'] == 'SUCCESS') {
-
-        }
-    }
-
     /**
      * @SWG\Post(
      *   path="/payment/ingotspay",
