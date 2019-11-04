@@ -3,6 +3,7 @@
 namespace App\Admin\Forms\Settings;
 
 use App\Models\IngotsConfig;
+use App\Models\SystemConfig;
 use Encore\Admin\Widgets\Form;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class Basic extends Form
      *
      * @var string
      */
-    public $title = '法宝获得配置';
+    public $title = '基本配置';
 
     /**
      * Handle the form request.
@@ -27,13 +28,16 @@ class Basic extends Form
 
         foreach ($request->all() as $key => $value) {
 
-            if (false !== strpos($key, '_')) {
+            if ($key == 'vip_ingots' || $key == 'vip_money') {
+                $config        = SystemConfig::firstOrCreate(['key' => $key], ['value' => $value]);
+                $config->value = $value;
+                $config->save();
+            } else if (false !== strpos($key, '_')) {
                 $result = explode('_', $key);
                 IngotsConfig::where('key', '=', $result[0])->update([$result[1] => $value]);
             } else {
                 IngotsConfig::where('key', '=', $key)->update(['value' => $value]);
             }
-            //IngotsConfig::updateOrCreate(['key' => $key],['value' => $value]);
         }
 
         admin_success('Processed successfully.');
@@ -56,7 +60,8 @@ class Basic extends Form
         $this->number('invite_limitation', '每天邀请好友获得法宝次数')->help('邀请好友获得法宝数量，0表示不限制');
         $this->number('verify', '实名认证获得法宝数量')->help('实名认证获得法宝数量，须为整数');
         $this->number('sign', '每日签到获得法宝数量')->help('每日签到获得法宝数量，须为整数');
-        //$this->number('limitation', '好文分享获得法宝数量')->help('须为整数');
+        $this->number('vip_ingots', 'VIP通道咨询专属法顾消耗法宝')->help('VIP通道咨询专属法顾消耗法宝，须为整数，单位个');
+        $this->number('vip_money', 'VIP通道咨询专属法顾消耗金额')->help('VIP通道咨询专属法顾消耗金额，单位元');
     }
 
     /**
@@ -66,11 +71,14 @@ class Basic extends Form
      */
     public function data()
     {
-        $results = IngotsConfig::all();
-        $data = [];
+        $results    = IngotsConfig::all();
+        $vip_ingots = SystemConfig::where('key', 'vip_ingots')->first()->value ?? '';
+        $vip_money  = SystemConfig::where('key', 'vip_money')->first()->value ?? '';
+        //$config     = SystemConfig::where('key', 'vip_ingots')->orWhere('key', 'vip_money')->pluck('value', 'key')->toArray();
+        $data = ['vip_ingots' => $vip_ingots, 'vip_money' => $vip_money];
         foreach ($results as $v) {
-            $data[$v['key']] = $v['value'];
-            $data[$v['key'].'_'.'limitation'] = $v['limitation'];
+            $data[$v['key']]                      = $v['value'];
+            $data[$v['key'] . '_' . 'limitation'] = $v['limitation'];
         }
         return $data;
     }

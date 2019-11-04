@@ -35,6 +35,8 @@ class IngotsConfigController extends Controller
      */
     public function show()
     {
-        return $this->success(SystemConfig::where('key', 'vip_ingots')->first()->value ?? 0);
+        $config = SystemConfig::where('key', 'vip_ingots')->orWhere('key', 'vip_money')->pluck('value', 'key')->toArray();
+        //$vip_money  = SystemConfig::where('key', 'vip_money')->first()->value ?? 0;
+        return $this->success($config);
     }
 }
