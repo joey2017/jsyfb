@@ -149,7 +149,7 @@ class PaymentController extends Controller
         $data = [
             'appid'        => env('WECHAT_MINIAPP_ID'),
             'mch_id'       => env('WECHAT_MCH_ID'),
-            'out_trade_no' => '',
+            'out_trade_no' => $out_trade_no,
             'nonce_str'    => uniqid(),
             'sign'         => 'qian ming suan fa',
             'sign_type'    => 'MD5',
@@ -159,6 +159,9 @@ class PaymentController extends Controller
         $result = $client->request('POST', $url, ['form_data' => $data]);
         $info   = \GuzzleHttp\json_decode($result->getBody(), true);
 
+        if ($info['return_code'] == 'SUCCESS') {
+
+        }
     }
 
     /**
