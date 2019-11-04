@@ -120,24 +120,24 @@ class PaymentController extends Controller
 
             $paymentInfo = $data->all();
 
-            Log::info('Paydata:', ['info' => $paymentInfo]);
+            Log::info('Paydata:', $paymentInfo);
 
             if ($paymentInfo['return_code'] == 'SUCCESS' && $paymentInfo['result_code'] == 'SUCCESS') {
-                $order = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first()->toArray();
+                $order = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
 
                 //校验状态,out_trade_no,app_id
                 // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号；
                 // 2、判断total_fee是否确实为该订单的实际金额（即商户订单创建时的金额）；
                 // 3、验证app_id是否为该商户本身。
-                if ($order['pay_status'] == Unifiedorder::SUCCESS ||
-                    $order['out_trade_no'] != $paymentInfo['out_trade_no'] || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')
+                if ($order->pay_status == Unifiedorder::SUCCESS ||
+                    $order->out_trade_no != $paymentInfo['out_trade_no'] || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')
                 ) {
                     return $pay->success();
                 }
 
                 DB::beginTransaction();
                 //校验订单金额
-                if ($order['total_fee'] <= $paymentInfo['total_fee']) {
+                if ($order->total_fee <= $paymentInfo['total_fee']) {
                     $order->pay_status = Unifiedorder::SUCCESS;
                 }
                 $order->transaction_id = $paymentInfo['transaction_id'];
