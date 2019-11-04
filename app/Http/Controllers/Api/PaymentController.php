@@ -98,8 +98,8 @@ class PaymentController extends Controller
     //微信支付回调通知
     public function notify()
     {
-        /*$request = Request::createFromGlobals();
-
+        /*
+        $request = Request::createFromGlobals();
         try {
             # 将XML转换为对象
             $obj = simplexml_load_string(strval($request->getContent()), 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -108,8 +108,7 @@ class PaymentController extends Controller
         } catch (\Throwable $e) {
             throw new Exception('Invalid request XML: ' . $e->getMessage(), 400);
         }
-
-        Log::info('laravel:', ['info' => $array]);*/
+        */
 
         //没有收到通知的情况下，建议商户主动调用微信支付【查询订单API】确认订单状态
 
@@ -119,8 +118,6 @@ class PaymentController extends Controller
             $data = $pay->verify(); // 是的，验签就这么简单！
 
             $paymentInfo = $data->all();
-
-            Log::info('Paydata:', $paymentInfo);
 
             if ($paymentInfo['return_code'] == 'SUCCESS' && $paymentInfo['result_code'] == 'SUCCESS') {
                 $order = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
@@ -148,6 +145,8 @@ class PaymentController extends Controller
                 $id && Member::create(['user_id' => $id, 'cost' => $paymentInfo['total_fee'] / 100, 'type' => Member::TYPE_MONEY]);
                 //发送消息
                 $id && $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', $id);
+            } else {
+                Log::info('微信支付回调通知结果失败:', $paymentInfo);
             }
 
         } catch (\Exception $e) {
