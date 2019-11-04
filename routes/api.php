@@ -65,7 +65,7 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
     Route::get('/customers', 'CustomerController@index')->name('customers.index');
 
     //小程序支付回调
-    Route::get('/payment/notify', 'PaymentController@notify')->name('payments.notify');
+    Route::any('/payment/notify', 'PaymentController@notify')->name('payments.notify');
 
     Route::middleware('api.refresh')->group(function () {
         //用户留言

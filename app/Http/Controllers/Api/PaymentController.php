@@ -8,11 +8,11 @@ use App\Models\SystemConfig;
 use App\Models\Unifiedorder;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use PHPUnit\Framework\Exception;
 use Yansongda\LaravelPay\Facades\Pay;
 
 class PaymentController extends Controller
@@ -96,7 +96,7 @@ class PaymentController extends Controller
     }
 
     //微信支付回调通知
-    public function notify(Request $request)
+    public function notify()
     {
         $receipt = $_REQUEST;
         if ($receipt == null) {
@@ -105,9 +105,32 @@ class PaymentController extends Controller
                 $receipt = $GLOBALS['HTTP_RAW_POST_DATA'];
             }
         }
+
+        Log::notice('原始获取：', ['info' => $receipt]);
+        $request = Request::createFromGlobals();
+
+        try {
+            # 将XML转换为对象
+            $obj = simplexml_load_string(strval($request->getContent()), 'SimpleXMLElement', LIBXML_NOCDATA);
+            # 将对象转换为数组
+            $array = get_object_vars($obj);
+        } catch (\Throwable $e) {
+            throw new Exception('Invalid request XML: ' . $e->getMessage(), 400);
+        }
+
+        Log::info('laravel:', ['info' => $array]);
+        if (!is_array($request->getContent()) || empty($request->getContent())) {
+            throw new Exception('Invalid request XML.', 400);
+        }
+
+        //return new Collection($array);
+
+
         $pay = Pay::wechat();
 
-        Log::info('微信支付回调通知参数:', ['info' => $request->all(), 'data' => $receipt]);
+        Log::info('微信支付回调通知参数:', ['data' => $receipt]);
+
+        //return $pay->success();// laravel 框架中请直接 `return $pay->success()`
 
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
