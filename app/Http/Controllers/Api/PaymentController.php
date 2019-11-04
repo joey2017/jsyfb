@@ -33,6 +33,16 @@ class PaymentController extends Controller
         $this->notice = $noticeService;
     }
 
+
+    /**
+     * @return string
+     */
+    protected function generateSn()
+    {
+        return date('Ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+    }
+
+
     /**
      * @SWG\Post(
      *   path="/payment/wechatpay",
@@ -84,14 +94,43 @@ class PaymentController extends Controller
 
     }
 
-    /**
-     * @return string
-     */
-    public function generateSn()
+    //微信支付回调通知
+    public function notify(Request $request)
     {
-        return date('Ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
-    }
+        $pay = Pay::wechat(config('pay.wechat'));
 
+        Log::info('微信支付回调通知参数:', ['info' => $request->all()]);
+
+        try {
+            $data = $pay->verify(); // 是的，验签就这么简单！
+
+            $paymentInfo = $data->all();
+            //校验订单金额
+
+
+            // 请自行对 trade_status 进行判断及其它逻辑进行判断，在支付宝的业务通知中，只有交易通知状态为 TRADE_SUCCESS 或 TRADE_FINISHED 时，支付宝才会认定为买家付款成功。
+            // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号；
+            // 2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额）；
+            // 3、验证app_id是否为该商户本身。
+            // 4、其它业务逻辑情况
+
+
+            DB::beginTransaction();
+            //更新订单
+            $order             = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
+            $order->pay_status = Unifiedorder::SUCCESS;
+            $order->save();
+            //发送消息
+            $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', Auth::guard('api')->id());
+
+            Log::debug('Wechat notify', $paymentInfo);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::warning('微信支付回调通知验证失败' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
+        }
+        DB::commit();
+        return $pay->success();// laravel 框架中请直接 `return $pay->success()`
+    }
 
     /**
      * @SWG\Post(
@@ -133,32 +172,4 @@ class PaymentController extends Controller
         return $this->created('支付成功');
     }
 
-
-    //微信支付回调通知
-    public function notify()
-    {
-        $pay = Pay::wechat(config('pay.wechat'));
-
-        try {
-            $data = $pay->verify(); // 是的，验签就这么简单！
-
-            //校验订单金额
-            
-
-            DB::beginTransaction();
-            //更新订单
-            $order             = Unifiedorder::where('out_trade_no', $data->all()['out_trade_no'])->first();
-            $order->pay_status = Unifiedorder::SUCCESS;
-            $order->save();
-            //发送消息
-            $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', Auth::guard('api')->id());
-
-            Log::debug('Wechat notify', $data->all());
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::warning('微信支付回调通知验证失败' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
-        }
-        DB::commit();
-        return $pay->success();// laravel 框架中请直接 `return $pay->success()`
-    }
 }
