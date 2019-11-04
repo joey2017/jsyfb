@@ -6,7 +6,6 @@ use App\Http\Resources\Api\NotaryOfficeResource;
 use App\Models\NotaryOffice;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class NotaryOfficeController extends Controller
@@ -25,14 +24,34 @@ class NotaryOfficeController extends Controller
      */
     public function index(Request $request)
     {
-        $from    = $request->input('location');
+
+        /*$from    = $request->input('location');
         $notarys = DB::table((new NotaryOffice)->getTable())->paginate(10)->toArray();
         foreach ($notarys['data'] as &$notary) {
             $notary->picture  = env('APP_UPLOAD_PATH') . '/' . $notary->picture;
             $notary->distance = $this->distance($from, [$notary->lat, $notary->lng]);
         }
         array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
+        return $this->success($notarys);*/
+
+        $this->validate($request, [
+            'location' => ['required', 'string', 'regex:/^[0-9.,]+$/'],
+        ]);
+        $from = explode(',', $request->input('location'));
+
+        if (count($from) < 2 || $from[0] == '' || $from[1] == '') {
+            return $this->failed('位置信息错误，经纬度参数不全');
+        }
+        $points  = $this->squarePoint($from[0], $from[1], 5);
+        $notarys = $this->query($points);
+
+        foreach ($notarys['data'] as &$notary) {
+            $notary['picture']  = env('APP_UPLOAD_PATH') . '/' . $notary['picture'];
+            $notary['distance'] = $this->getDistance($from[0], $from[1], $notary['lat'], $notary['lng']);
+        }
+        array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
         return $this->success($notarys);
+
     }
 
 
@@ -58,6 +77,7 @@ class NotaryOfficeController extends Controller
 
 
     /**
+     * 腾讯地图计算两点间驾车距离
      * @param $from
      * @param $to
      * @return bool|mixed
@@ -103,18 +123,18 @@ class NotaryOfficeController extends Controller
     {
         return NotaryOffice::whereBetween('lat', [$location['left-bottom']['lat'], $location['left-top']['lat']])
             ->whereBetween('lng', [$location['left-bottom']['lng'], $location['right-bottom']['lng']])
-            ->orderBy('lat', 'asc')->orderBy('lng', 'asc')->get();
+            ->orderBy('lat', 'asc')->orderBy('lng', 'asc')->paginate(10)->toArray();
     }
 
     /**
      * 计算某个经纬度的周围某段距离的正方形的四个点
-     * @param $lng  float 经度
      * @param $lat  float 纬度
+     * @param $lng  float 经度
      * @param int $distance 该点所在圆的半径，该圆与此正方形内切，默认值为1千米
      * @param int $radius 地球半径 平均6371km
-     * @return array         正方形的四个点的经纬度坐标
+     * @return array 正方形的四个点的经纬度坐标
      */
-    public function returnSquarePoint($lng, $lat, $distance = 1, $radius = 6371)
+    protected function squarePoint($lat, $lng, $distance = 1, $radius = 6371)
     {
         $dlng = 2 * asin(sin($distance / (2 * $radius)) / cos(deg2rad($lat)));
         $dlng = rad2deg($dlng);
@@ -143,6 +163,7 @@ class NotaryOfficeController extends Controller
     }
 
     /**
+     * 两点间直线距离计算
      * @param $lat1
      * @param $lng1
      * @param $lat2
