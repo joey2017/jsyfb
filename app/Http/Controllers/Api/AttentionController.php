@@ -50,10 +50,12 @@ class AttentionController extends Controller
      */
     public function store(Request $request)
     {
-        $laywer_id = $request->input('laywer_id','');
-        if ($laywer_id == '') {
-            return $this->failed('缺少律师id参数');
-        }
+        $this->validate($request, [
+            'laywer_id' => 'required|integer',
+        ]);
+
+        $laywer_id = $request->input('laywer_id', '');
+
         try {
             DB::beginTransaction();
             if (Attention::where([['user_id', Auth::guard('api')->id()], ['laywer_id', $laywer_id]])->exists()) {
@@ -72,6 +74,7 @@ class AttentionController extends Controller
     }
 
     //todo 204状态码没有返回
+
     /**
      *
      * @SWG\Delete(
@@ -98,7 +101,7 @@ class AttentionController extends Controller
         } catch (PDOException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
         }
-        return $result > 0 ? $this->setStatusCode(204)->success('','success','取消关注成功') : $this->failed('取消关注失败，请稍后重试');
+        return $result > 0 ? $this->setStatusCode(204)->success('', 'success', '取消关注成功') : $this->failed('取消关注失败，请稍后重试');
     }
 
 }

@@ -85,6 +85,7 @@ class LaywerController extends Controller
      */
     public function show(Laywer $laywer)
     {
+        dd(config('pay.wechat.notify_url'));
         //已关注列表
         $attentions = Attention::where('user_id', Auth::guard('api')->id())->pluck('laywer_id')->toArray();
         if (in_array($laywer->id, $attentions)) {

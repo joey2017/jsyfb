@@ -8,6 +8,7 @@ use App\Models\SystemConfig;
 use App\Models\Unifiedorder;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -105,7 +106,16 @@ class PaymentController extends Controller
             $data = $pay->verify(); // 是的，验签就这么简单！
 
             $paymentInfo = $data->all();
+
+            $order = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
+
+            //校验状态
+            if ($order['pay_status'] == Unifiedorder::SUCCESS) {
+                return $pay->success();
+            }
             //校验订单金额
+
+            //没有收到通知的情况下，建议商户主动调用微信支付【查询订单API】确认订单状态
 
 
             // 请自行对 trade_status 进行判断及其它逻辑进行判断，在支付宝的业务通知中，只有交易通知状态为 TRADE_SUCCESS 或 TRADE_FINISHED 时，支付宝才会认定为买家付款成功。
@@ -117,7 +127,6 @@ class PaymentController extends Controller
 
             DB::beginTransaction();
             //更新订单
-            $order                 = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
             $order->pay_status     = Unifiedorder::SUCCESS;
             $order->transaction_id = $paymentInfo['transaction_id'];
             $order->save();
@@ -131,6 +140,25 @@ class PaymentController extends Controller
         }
         DB::commit();
         return $pay->success();// laravel 框架中请直接 `return $pay->success()`
+    }
+
+    protected function queryOrderStatus($out_trade_no)
+    {
+        $url = 'https://api.mch.weixin.qq.com/pay/orderquery';
+
+        $data = [
+            'appid'        => env('WECHAT_MINIAPP_ID'),
+            'mch_id'       => env('WECHAT_MCH_ID'),
+            'out_trade_no' => '',
+            'nonce_str'    => uniqid(),
+            'sign'         => 'qian ming suan fa',
+            'sign_type'    => 'MD5',
+        ];
+
+        $client = new Client();
+        $result = $client->request('POST', $url, ['form_data' => $data]);
+        $info   = \GuzzleHttp\json_decode($result->getBody(), true);
+
     }
 
     /**
