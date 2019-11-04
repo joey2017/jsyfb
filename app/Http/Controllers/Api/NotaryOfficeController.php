@@ -41,7 +41,7 @@ class NotaryOfficeController extends Controller
         $from = explode(',', $request->input('location'));
 
         //测试
-        empty($from) && $from = [
+        empty($request->input('location')) && $from = [
             22.809098,
             108.335280,
         ];
