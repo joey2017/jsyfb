@@ -117,8 +117,9 @@ class PaymentController extends Controller
 
             DB::beginTransaction();
             //更新订单
-            $order             = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
-            $order->pay_status = Unifiedorder::SUCCESS;
+            $order                 = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
+            $order->pay_status     = Unifiedorder::SUCCESS;
+            $order->transaction_id = $paymentInfo['transaction_id'];
             $order->save();
             //发送消息
             $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', Auth::guard('api')->id());
