@@ -155,7 +155,7 @@ class PaymentController extends Controller
             Log::warning('微信支付回调通知验证失败' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
         }
         DB::commit();
-        return $pay->success();// laravel 框架中请直接 `return $pay->success()`
+        return $pay->success();
     }
 
     /**
