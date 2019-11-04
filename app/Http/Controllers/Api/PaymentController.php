@@ -129,9 +129,8 @@ class PaymentController extends Controller
                 // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号；
                 // 2、判断total_fee是否确实为该订单的实际金额（即商户订单创建时的金额）；
                 // 3、验证app_id是否为该商户本身。
-                if ($order->pay_status == Unifiedorder::SUCCESS ||
-                    $order->out_trade_no != $paymentInfo['out_trade_no'] || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')
-                ) {
+                if ($order->pay_status == Unifiedorder::SUCCESS || $order->out_trade_no != $paymentInfo['out_trade_no']
+                    || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')) {
                     return $pay->success();
                 }
 
@@ -143,7 +142,10 @@ class PaymentController extends Controller
                 $order->transaction_id = $paymentInfo['transaction_id'];
                 $order->pay_fee        = $paymentInfo['total_fee'];
                 $order->save();
+
                 $id = User::where('openid', $paymentInfo['openid'])->firstOrFail()->id ?? '';
+                //vip通道使用记录
+                $id && Member::create(['user_id' => $id, 'cost' => $paymentInfo['total_fee'] / 100, 'type' => Member::TYPE_MONEY]);
                 //发送消息
                 $id && $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', $id);
             }

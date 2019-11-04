@@ -45,6 +45,12 @@ class Member extends Model
 
     const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
 
+    // 类型
+    const TYPE_INGOTS = 1;
+    const TYPE_MONEY  = 2;
+
+    const TYPES = [self::TYPE_INGOTS => '法宝', self::TYPE_MONEY => '金钱'];
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

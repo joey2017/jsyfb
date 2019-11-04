@@ -1,0 +1,21 @@
+alter table jyfb_member add `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '类型：1法宝2金钱'
+
+
+CREATE TABLE `jyfb_unifiedorder` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `openid` varchar(64) DEFAULT NULL COMMENT 'openid',
+  `out_trade_no` varchar(32) DEFAULT NULL COMMENT '商户订单号',
+  `description` varchar(255) DEFAULT NULL COMMENT '商品描述',
+  `total_fee` decimal(10,2) DEFAULT NULL COMMENT '订单总金额（分）',
+  `pay_fee` decimal(10,2) DEFAULT NULL COMMENT '已支付金额（分）',
+  `transaction_id` varchar(50) DEFAULT NULL COMMENT '微信支付订单号',
+  `pay_status` tinyint(4) DEFAULT '0' COMMENT '支付状态：0待支付，1已支付，2已取消',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `unifiedorder-user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COMMENT='微信支付统一下单支付表'
+
+
+alter table jyfb_member modify `cost` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT '消费法宝（个）或金钱（元）'
