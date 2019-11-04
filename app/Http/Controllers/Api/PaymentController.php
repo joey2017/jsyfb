@@ -6,7 +6,6 @@ use App\Models\IngotsLog;
 use App\Models\Member;
 use App\Models\SystemConfig;
 use App\Models\Unifiedorder;
-use App\Models\User;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
@@ -45,28 +44,22 @@ class PaymentController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="fee", type="integer", required=true, in="formData", description="订单总金额，单位为分"),
-     *   @SWG\Parameter(name="quantity", type="integer", required=true, in="formData", description="购买法宝数量"),
+     *   @SWG\Parameter(name="fee", type="integer", required=true, in="formData", description="订单总金额，单位为元"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function wechatpay(Request $request)
     {
-        $fee    = $request->input('fee', '');
-        $ingots = $request->input('quantity', '');
+        $fee = $request->input('fee', '') * 100;
 
         if ($fee <= 0 || !is_numeric($fee) || strpos($fee, ".") !== false) {
-            return $this->failed('支付金额须大于0且为整数');
-        }
-
-        if ($ingots <= 0 || !is_numeric($fee)) {
-            return $this->failed('购买法宝数量须大于0且为整数');
+            return $this->failed('支付金额须大于0且仅保留2位小数');
         }
 
         try {
             $order = [
                 'out_trade_no' => 'CZ' . $this->generateSn(),
-                'body'         => '使用微信支付购买法宝，支付总金额' . $fee . '分',
+                'body'         => '在家有法宝小程序使用微信钱包支付总金额' . $fee / 100 . '元',
                 'total_fee'    => $fee,
                 'openid'       => Auth::guard('api')->user()->openid,
             ];
@@ -76,8 +69,8 @@ class PaymentController extends Controller
                 'out_trade_no' => $order['out_trade_no'],
                 'description'  => $order['body'],
                 'total_fee'    => $order['total_fee'],
-                'ingots'       => $ingots,
                 'pay_status'   => 0,
+                'openid'       => $order['openid'],
             ];
 
             Unifiedorder::create($unified);
@@ -160,10 +153,8 @@ class PaymentController extends Controller
             $order             = Unifiedorder::where('out_trade_no', $data->all()['out_trade_no'])->first();
             $order->pay_status = Unifiedorder::SUCCESS;
             $order->save();
-            //更新法宝
-            $this->ingots->update($order['ingots'], '微信钱包购买' . $order['ingots'] . '法宝', IngotsLog::TYPE_INCRE, User::findOrFail($order['user_id']));
             //发送消息
-            $this->notice->add('微信支付购买法宝', '您刚刚使用微信钱包支付' . ($order['total_fee'] / 100) . '元购买' . $order['ingots'] . '法宝');
+            $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', Auth::guard('api')->id());
 
             Log::debug('Wechat notify', $data->all());
         } catch (\Exception $e) {

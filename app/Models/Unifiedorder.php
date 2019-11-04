@@ -40,7 +40,7 @@ class Unifiedorder extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'out_trade_no', 'description', 'total_fee', 'ingots', 'pay_status'];
+    protected $fillable = ['user_id', 'out_trade_no', 'description', 'total_fee', 'openid', 'pay_status'];
 
     const PENDING  = 0;
     const SUCCESS  = 1;
