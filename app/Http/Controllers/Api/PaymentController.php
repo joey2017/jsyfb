@@ -6,13 +6,13 @@ use App\Models\IngotsLog;
 use App\Models\Member;
 use App\Models\SystemConfig;
 use App\Models\Unifiedorder;
+use App\Models\User;
 use App\Services\IngotsService;
 use App\Services\NoticeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use PHPUnit\Framework\Exception;
 use Yansongda\LaravelPay\Facades\Pay;
 
 class PaymentController extends Controller
@@ -98,7 +98,7 @@ class PaymentController extends Controller
     //微信支付回调通知
     public function notify()
     {
-        $request = Request::createFromGlobals();
+        /*$request = Request::createFromGlobals();
 
         try {
             # 将XML转换为对象
@@ -109,48 +109,45 @@ class PaymentController extends Controller
             throw new Exception('Invalid request XML: ' . $e->getMessage(), 400);
         }
 
-        Log::info('laravel:', ['info' => $array]);
+        Log::info('laravel:', ['info' => $array]);*/
+
+        //没有收到通知的情况下，建议商户主动调用微信支付【查询订单API】确认订单状态
 
         $pay = Pay::wechat();
-
-        Log::info('微信支付回调通知参数:', ['data' => $pay]);
-
-        //return $pay->success();// laravel 框架中请直接 `return $pay->success()`
 
         try {
             $data = $pay->verify(); // 是的，验签就这么简单！
 
-            Log::info('Paydata:', ['info' => $data]);
-
             $paymentInfo = $data->all();
 
-            $order = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first();
+            Log::info('Paydata:', ['info' => $paymentInfo]);
 
-            //校验状态
-            if ($order['pay_status'] == Unifiedorder::SUCCESS) {
-                return $pay->success();
+            if ($paymentInfo['return_code'] == 'SUCCESS' && $paymentInfo['result_code'] == 'SUCCESS') {
+                $order = Unifiedorder::where('out_trade_no', $paymentInfo['out_trade_no'])->first()->toArray();
+
+                //校验状态,out_trade_no,app_id
+                // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号；
+                // 2、判断total_fee是否确实为该订单的实际金额（即商户订单创建时的金额）；
+                // 3、验证app_id是否为该商户本身。
+                if ($order['pay_status'] == Unifiedorder::SUCCESS ||
+                    $order['out_trade_no'] != $paymentInfo['out_trade_no'] || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')
+                ) {
+                    return $pay->success();
+                }
+
+                DB::beginTransaction();
+                //校验订单金额
+                if ($order['total_fee'] <= $paymentInfo['total_fee']) {
+                    $order->pay_status = Unifiedorder::SUCCESS;
+                }
+                $order->transaction_id = $paymentInfo['transaction_id'];
+                $order->pay_fee        = $paymentInfo['total_fee'];
+                $order->save();
+                $id = User::where('openid', $paymentInfo['openid'])->firstOrFail()->id ?? '';
+                //发送消息
+                $id && $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', $id);
             }
-            //校验订单金额
 
-            //没有收到通知的情况下，建议商户主动调用微信支付【查询订单API】确认订单状态
-
-
-            // 请自行对 trade_status 进行判断及其它逻辑进行判断，在支付宝的业务通知中，只有交易通知状态为 TRADE_SUCCESS 或 TRADE_FINISHED 时，支付宝才会认定为买家付款成功。
-            // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号；
-            // 2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额）；
-            // 3、验证app_id是否为该商户本身。
-            // 4、其它业务逻辑情况
-
-
-            DB::beginTransaction();
-            //更新订单
-            $order->pay_status     = Unifiedorder::SUCCESS;
-            $order->transaction_id = $paymentInfo['transaction_id'];
-            $order->save();
-            //发送消息
-            $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', Auth::guard('api')->id());
-
-            Log::debug('Wechat notify', $paymentInfo);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::warning('微信支付回调通知验证失败' . $e->getMessage(), ['info' => $e->getTraceAsString()]);
