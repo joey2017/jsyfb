@@ -12,7 +12,7 @@
 */
 
 
-Route::namespace(env('API_PREFIX'))->prefix(env('API_VERSION'))->middleware('cors')->group(function () {
+Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middleware('cors')->group(function () {
     Route::post('/login', 'UserController@login')->name('users.login');
 
     //小程序授权登录

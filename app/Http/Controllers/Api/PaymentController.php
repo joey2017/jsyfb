@@ -143,7 +143,7 @@ class PaymentController extends Controller
             $data = $pay->verify(); // 是的，验签就这么简单！
 
             //校验订单金额
-
+            
 
             DB::beginTransaction();
             //更新订单
