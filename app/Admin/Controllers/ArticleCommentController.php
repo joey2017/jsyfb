@@ -44,9 +44,9 @@ class ArticleCommentController extends AdminController
             return $model->article()->first()->content ?? '';
         });
         $grid->column('laywer.name', trans('admin.laywer'));
-        $grid->column('interpretation', trans('admin.interpretation'));
-        $grid->column('measures', trans('admin.measures'));
-        $grid->column('content', trans('admin.comment_content'));
+        $grid->column('interpretation', trans('admin.interpretation'))->width(200);
+        $grid->column('measures', trans('admin.measures'))->width(200);
+        $grid->column('content', trans('admin.comment_content'))->width(500);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
