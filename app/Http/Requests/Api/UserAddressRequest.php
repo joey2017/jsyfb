@@ -15,12 +15,12 @@ class UserAddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'receiver'        => ['required|string'],
+            'receiver'        => 'required|string',
             'receiver_mobile' => ['required', 'regex:' . getMobileCheckRegex()],
-            'province'        => ['required|numeric'],
-            'city'            => ['required|numeric'],
-            'district'        => ['required|numeric'],
-            'address'         => ['required'],
+            'province'        => 'required|numeric',
+            'city'            => 'required|numeric',
+            'district'        => 'required|numeric',
+            'address'         => 'required',
         ];
     }
 
