@@ -17,6 +17,7 @@ class NotaryOfficeController extends Controller
      *   summary="公证处列表",
      *   description="公证处列表",
      *   @SWG\Parameter(in="query",name="location",type="string",description="纬度lat，经度lng坐标，用英文逗号分割(示例：lat,lng)",required=true),
+     *   @SWG\Parameter(in="query",name="radius",type="integer",description="附近公里数，默认为5",required=false),
      *   @SWG\Parameter(in="query",name="name",type="string",description="公证处名称",required=false),
      *   @SWG\Parameter(in="query",name="avg_point",type="string",description="服务评分",required=false),
      *   @SWG\Response(response=200,description="成功")
@@ -37,8 +38,10 @@ class NotaryOfficeController extends Controller
 
 //        $this->validate($request, [
 //            'location' => ['required', 'string', 'regex:/^[0-9.,]+$/'],
+//            'radius' => ['required', 'integer'],
 //        ]);
-        $from = explode(',', $request->input('location'));
+        $from   = explode(',', $request->input('location'));
+        $radius = $request->input('radius');
 
         Log::notice('location:', ['data' => $request->input('location')]);
 
@@ -52,7 +55,7 @@ class NotaryOfficeController extends Controller
             return $this->failed('位置信息错误，经纬度参数不全');
         }
 
-        $points  = $this->squarePoint($from[0], $from[1], 5);
+        $points  = $this->squarePoint($from[0], $from[1], $radius ?? 5);
         $notarys = $this->query($points);
 
         if (!empty($notarys['data'])) {
