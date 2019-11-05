@@ -35,9 +35,8 @@ class NotaryOfficeController extends Controller
         array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
         return $this->success($notarys);*/
 
-
         $this->validate($request, [
-            'location' => ['required', 'string'],
+            'location' => ['required', 'string', 'regex:/^([0-9]+(\.)?[0-9]+)[,]{1}([0-9]+(\.)?[0-9]+)$/'],
             'radius'   => ['integer'],
         ]);
 
