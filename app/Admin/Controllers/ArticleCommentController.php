@@ -38,7 +38,7 @@ class ArticleCommentController extends AdminController
         }
 
         $grid->column('id', __('Id'))->sortable();
-        $grid->column('article.title', trans('admin.title'));
+        $grid->column('article.title', trans('admin.title'))->width(200);
         $grid->column('article.images', trans('admin.image'))->lightbox(['width' => 50,'height' => 50]);
         $grid->column('content-hide', trans('admin.content'))->expand(function ($model) {
             return $model->article()->first()->content ?? '';
