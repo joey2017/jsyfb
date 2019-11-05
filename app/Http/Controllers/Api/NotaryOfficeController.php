@@ -36,14 +36,13 @@ class NotaryOfficeController extends Controller
         return $this->success($notarys);*/
 
 
-//        $this->validate($request, [
-//            'location' => ['required', 'string', 'regex:/^[0-9.,]+$/'],
-//            'radius' => ['required', 'integer'],
-//        ]);
+        $this->validate($request, [
+            'location' => ['required', 'string'],
+            'radius'   => ['integer'],
+        ]);
+
         $from   = explode(',', $request->input('location'));
         $radius = $request->input('radius');
-
-        Log::notice('location:', ['data' => $request->input('location')]);
 
         //测试
         empty($request->input('location')) && $from = [
@@ -65,7 +64,6 @@ class NotaryOfficeController extends Controller
             }
             array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
         }
-        Log::warning('notaryOffice:', ['data' => $notarys]);
         return $this->success($notarys ?? []);
 
     }
