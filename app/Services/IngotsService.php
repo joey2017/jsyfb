@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Ingots;
 use App\Models\IngotsConfig;
 use App\Models\IngotsLog;
+use App\Models\User;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ class IngotsService
      * @param $user
      * @throws \Throwable
      */
-    public function update($quantity, $descr, $type, $user)
+    public function update($quantity, $descr, $type, User $user)
     {
         try {
             DB::transaction(function () use ($quantity, $descr, $type, $user) {
