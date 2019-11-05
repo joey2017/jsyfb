@@ -320,7 +320,7 @@ return [
     | Whether to display the environment at the footer of each page
     |
     */
-    'show_environment' => false,
+    'show_environment'          => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -329,7 +329,7 @@ return [
     |
     | whether enable menu bind to a permission
     */
-    'menu_bind_permission' => true,
+    'menu_bind_permission'      => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -338,14 +338,14 @@ return [
     |
     | Whether enable default breadcrumb for every page content.
     */
-    'enable_default_breadcrumb' => true,
+    'enable_default_breadcrumb' => false,
 
     /*
     |--------------------------------------------------------------------------
     | Enable/Disable assets minify
     |--------------------------------------------------------------------------
     */
-    'minify_assets' => [
+    'minify_assets'             => [
 
         // Assets will not be minified.
         'excepts' => [
@@ -359,7 +359,7 @@ return [
     | Enable/Disable sidebar menu search
     |--------------------------------------------------------------------------
     */
-    'enable_menu_search' => true,
+    'enable_menu_search'        => true,
 
     /*
     |--------------------------------------------------------------------------

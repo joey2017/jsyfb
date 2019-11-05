@@ -36,6 +36,8 @@ Form::extend('jsonEditor', \Jxlwqq\JsonEditor\Editor::class);
 Form::extend('editor', WangEditor::class);
 
 Admin::css('/css/iconfont/iconfont.css');
+//自定义视图模板
+app('view')->prependNamespace('admin', resource_path('views/admin'));
 
 Column::extend('openMap', OpenMap::class);
 Column::extend('floatBar', FloatBar::class);
@@ -47,12 +49,6 @@ Column::extend('prependIcon', function ($value, $icon) {
 
 Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
     $navbar->right(Nav\Link::make('设置', 'forms/settings'));
-    //$navbar->right(Nav\Link::make('注册', 'forms/register', 'fa-user'));
     $navbar->right(new Nav\AutoRefresh())
         ->right(new Actions\ClearCache());
-        //->right(new Actions\Feedback())
-        //->right(new Actions\System());
-
-    //$navbar->left(view('admin.search-bar'));
-
 });
