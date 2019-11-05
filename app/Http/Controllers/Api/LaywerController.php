@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use function App\Helpers\isCreditNo;
 use App\Http\Resources\Api\LaywerResource;
 use App\Models\Attention;
 use App\Models\Laywer;

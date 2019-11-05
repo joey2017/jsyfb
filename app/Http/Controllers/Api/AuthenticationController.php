@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use function App\Helpers\isCreditNo;
 use App\Http\Requests\Api\AuthenticationRequest;
 use App\Http\Resources\Api\AuthenticationResource;
 use App\Models\Authentication;
@@ -56,6 +57,9 @@ class AuthenticationController extends Controller
      */
     public function store(AuthenticationRequest $request)
     {
+        if (!isCreditNo($request->input('identity_card'))) {
+            return $this->failed('身份证号码不正确');
+        }
         if (Authentication::where('user_id', Auth::guard('api')->id())->exists()) {
             return $this->failed('您的认证申请已提交，请耐心等待审核结果');
         }
