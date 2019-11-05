@@ -29,12 +29,12 @@ class LaywerController extends Controller
      */
     public function index(Request $request)
     {
-        $this->validate($request, [
+        //$this->validate($request, [
             //'cate_id'       => 'sometimes|integer',
-            'name'          => 'sometimes|required|string',
-            'province_code' => 'sometimes|required|string',
-            'city_code'     => 'sometimes|required|string',
-        ]);
+        //'name'          => 'sometimes|required|string',
+        //'province_code' => 'sometimes|required|string',
+        //'city_code'     => 'sometimes|required|string',
+        //]);
 
         $data  = $request->all();
         $model = DB::table((new Laywer())->getTable());
