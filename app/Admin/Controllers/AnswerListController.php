@@ -27,7 +27,7 @@ class AnswerListController extends AdminController
         $grid = new Grid(new AnswerList);
 
         $grid->column('id', __('Id'))->sortable();
-        $grid->column('title', '题目');
+        $grid->column('title', trans('admin.title_answer'))->width(500);
         $grid->column('A', trans('admin.A'));
         $grid->column('B', trans('admin.B'));
         $grid->column('C', trans('admin.C'));
@@ -63,7 +63,7 @@ class AnswerListController extends AdminController
         $show = new Show(AnswerList::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('title', trans('admin.title'));
+        $show->field('title', trans('admin.title_answer'));
         $show->field('A', trans('admin.A'));
         $show->field('B', trans('admin.B'));
         $show->field('C', trans('admin.C'));
@@ -85,7 +85,7 @@ class AnswerListController extends AdminController
     {
         $form = new Form(new AnswerList);
 
-        $form->text('title', trans('admin.title'))->required();
+        $form->text('title', trans('admin.title_answer'))->required();
         $form->text('A', trans('admin.A'))->required();
         $form->text('B', trans('admin.B'))->required();
         $form->text('C', trans('admin.C'))->required();
