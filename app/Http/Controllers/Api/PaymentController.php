@@ -55,12 +55,16 @@ class PaymentController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="fee", type="integer", required=true, in="formData", description="订单总金额，单位为元"),
+     *   @SWG\Parameter(name="fee", type="string", required=true, in="formData", description="订单总金额，单位为元"),
      *   @SWG\Response(response=200,description="成功")
      * )
      */
     public function wechatpay(Request $request)
     {
+        $this->validate($request, [
+            'fee' => 'required|numeric',
+        ]);
+
         $fee = $request->input('fee', '') * 100;
 
         if ($fee <= 0 || !is_numeric($fee) || strpos($fee, ".") !== false) {
@@ -176,11 +180,11 @@ class PaymentController extends Controller
      */
     public function ingotspay(Request $request)
     {
-        $ingots = $request->input('quantity', '');
+        $this->validate($request, [
+            'quantity' => 'required|integer',
+        ]);
 
-        if ($ingots < 0 || $ingots == '') {
-            return $this->failed('支付法宝数量不能为空或小于0');
-        }
+        $ingots = $request->input('quantity');
 
         if ($ingots != SystemConfig::where('key', 'vip_ingots')->first()->value ?? 0) {
             return $this->failed('法宝数量与系统设置值不相等');

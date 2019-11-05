@@ -98,8 +98,8 @@ class ExchangeController extends Controller
      *     @SWG\Parameter(name="receiver",in="formData",required=true,description="收货人",type="string"),
      *     @SWG\Parameter(name="receiver_mobile",in="formData",required=true,description="收货人手机",type="string"),
      *     @SWG\Parameter(name="address",in="formData",required=true,description="地址",type="string"),
-     *     @SWG\Parameter(name="ingots",in="formData",required=true,description="法宝数量",type="string"),
-     *     @SWG\Parameter(name="quantity",in="formData",required=true,description="兑换商品数量",type="string"),
+     *     @SWG\Parameter(name="ingots",in="formData",required=true,description="法宝数量",type="integer"),
+     *     @SWG\Parameter(name="quantity",in="formData",required=true,description="兑换商品数量",type="integer"),
      *     @SWG\Response(response=201,description="成功"),
      *     @SWG\Response(response=403,description="禁止访问"),
      *     @SWG\Response(response=500,description="服务器错误")
@@ -107,17 +107,22 @@ class ExchangeController extends Controller
      */
     public function store(Request $request)
     {
-        $quantity = $request->input('quantity', 0);
-        $goods_id = $request->input('goods_id', 0);
-        $address  = $request->input('address', '');
+        $this->validate($request, [
+            'goods_id'        => 'required|integer',
+            'receiver'        => 'required|string|min:2|max:10',
+            'receiver_mobile' => ['required', 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/'],
+            'address'         => 'required|string',
+            'ingots'          => 'required|integer',
+            'quantity'        => 'required|integer',
+        ]);
+
+        $quantity = $request->input('quantity');
+        $goods_id = $request->input('goods_id');
+        $address  = $request->input('address');
 
         $goods = Goods::findOrFail($goods_id);
 
         $ingots = $goods->exchange_price ?? $request->input('ingots', 0);
-
-        if ($ingots < 0 || $quantity <= 0) {
-            return $this->failed('参数错误', 400);
-        }
 
         if ($ingots > Auth::guard('api')->user()->ingots) {
             return $this->failed('法宝数量不足', 400);
@@ -125,10 +130,6 @@ class ExchangeController extends Controller
 
         if ($quantity > $goods->stock) {
             return $this->failed('商品数量不足', 400);
-        }
-
-        if ($address == '') {
-            return $this->failed('地址不能为空', 400);
         }
 
         $result = false;

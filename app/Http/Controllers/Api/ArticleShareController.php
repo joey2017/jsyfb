@@ -55,6 +55,10 @@ class ArticleShareController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'article_id' => 'required|integer',
+        ]);
+
         $article_id = $request->input('article_id', '');
 
         if (empty($article_id)) {

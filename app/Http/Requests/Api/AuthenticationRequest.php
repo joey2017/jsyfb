@@ -15,7 +15,7 @@ class AuthenticationRequest extends FormRequest
     {
         return [
             'realname'      => 'required|string',
-            'mobile'        => 'required|regex:/^1[345789][0-9]{9}$/',
+            'mobile'        => 'required|regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/',
             //'email'         => 'sometimes|required|email',
             'identity_card' => 'required|string',
             'hand_photo'    => 'required|string',

@@ -87,7 +87,6 @@
                 ],
                 "summary": "{\u7b54\u9898\u8bb0\u5f55\u4fdd\u5b58}",
                 "description": "\u6bcf\u65e5\u7b54\u9898\u8bb0\u5f55\u4fdd\u5b58",
-                "operationId": "answer-records.store",
                 "produces": [
                     "application/json"
                 ],
@@ -224,12 +223,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/articles/{id}": {
@@ -252,12 +246,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/articles/likes": {
@@ -521,12 +510,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/business/categories": {
@@ -549,12 +533,7 @@
                     "405": {
                         "description": "\u8bbf\u95ee\u65b9\u5f0f\u4e0d\u6b63\u786e"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/customers": {
@@ -568,12 +547,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/exchanges": {
@@ -612,6 +586,20 @@
                         "type": "integer"
                     },
                     {
+                      "name": "receiver",
+                      "in": "formData",
+                      "description": "\u6536\u8d27\u4eba",
+                      "required": true,
+                      "type": "string"
+                    },
+                  {
+                    "name": "receiver_mobile",
+                    "in": "formData",
+                    "description": "\u6536\u8d27\u4eba\u624b\u673a",
+                    "required": true,
+                    "type": "string"
+                  },
+                  {
                         "name": "address",
                         "in": "formData",
                         "description": "\u5730\u5740",
@@ -623,14 +611,14 @@
                         "in": "formData",
                         "description": "\u6cd5\u5b9d\u6570\u91cf",
                         "required": true,
-                        "type": "string"
+                      "type": "integer"
                     },
                     {
                         "name": "quantity",
                         "in": "formData",
                         "description": "\u5151\u6362\u5546\u54c1\u6570\u91cf",
                         "required": true,
-                        "type": "string"
+                      "type": "integer"
                     }
                 ],
                 "responses": {
@@ -815,7 +803,12 @@
                     "400": {
                         "description": "\u6587\u4ef6\u7c7b\u578b\u4e0d\u7b26\u6216\u4e0a\u4f20\u5931\u8d25"
                     }
+                },
+              "security": [
+                {
+                  "Bearer": []
                 }
+              ]
             }
         },
         "/ingots/config": {
@@ -829,12 +822,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/ingots/vip": {
@@ -848,12 +836,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/laywers": {
@@ -864,6 +847,13 @@
                 "summary": "\u5f8b\u5e08\u5217\u8868",
                 "parameters": [
                     {
+                      "name": "cate_id",
+                      "in": "query",
+                      "description": "\u64c5\u957f",
+                      "required": false,
+                      "type": "integer"
+                    },
+                  {
                         "name": "name",
                         "in": "query",
                         "description": "\u5f8b\u5e08\u540d\u79f0",
@@ -883,25 +873,13 @@
                         "description": "\u57ce\u5e02\u4ee3\u7801",
                         "required": false,
                         "type": "string"
-                    },
-                    {
-                        "name": "cate_id",
-                        "in": "query",
-                        "description": "\u64c5\u957f",
-                        "required": false,
-                        "type": "integer"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "\u83b7\u53d6\u5f8b\u5e08\u5217\u8868"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/laywers/{id}": {
@@ -943,12 +921,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/citys": {
@@ -971,12 +944,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/areas": {
@@ -999,12 +967,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/legal/categories": {
@@ -1018,12 +981,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/legal/categories/{id}": {
@@ -1054,12 +1012,7 @@
                     "405": {
                         "description": "\u8bbf\u95ee\u65b9\u5f0f\u4e0d\u6b63\u786e"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/legal/books/{id}": {
@@ -1082,12 +1035,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/legal/sections/{id}": {
@@ -1110,49 +1058,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/members": {
-            "post": {
-                "tags": [
-                    "MainPage"
-                ],
-                "summary": "VIP\u901a\u9053\u54a8\u8be2\u4e13\u5bb6\u6d88\u8d39\u6cd5\u5b9d",
-                "description": "VIP\u901a\u9053\u54a8\u8be2\u4e13\u5bb6\u6d88\u8d39\u6cd5\u5b9d",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "cost",
-                        "in": "formData",
-                        "description": "\u6d88\u8d39\u6cd5\u5b9d\u6570\u91cf",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "\u6210\u529f"
-                    },
-                    "401": {
-                        "description": "\u672a\u6388\u6743"
-                    },
-                    "500": {
-                        "description": "\u670d\u52a1\u5668\u9519\u8bef"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/messages": {
@@ -1309,6 +1215,13 @@
                         "type": "string"
                     },
                     {
+                      "name": "radius",
+                      "in": "query",
+                      "description": "\u9644\u8fd1\u516c\u91cc\u6570\uff0c\u9ed8\u8ba4\u4e3a5",
+                      "required": false,
+                      "type": "integer"
+                    },
+                  {
                         "name": "name",
                         "in": "query",
                         "description": "\u516c\u8bc1\u5904\u540d\u79f0",
@@ -1327,12 +1240,7 @@
                     "200": {
                         "description": "\u6210\u529f"
                     }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
+                }
             }
         },
         "/notarys/offices/{id}": {
@@ -1428,6 +1336,28 @@
                         "type": "integer"
                     }
                 ],
+              "responses": {
+                "200": {
+                  "description": "\u6210\u529f"
+                },
+                "403": {
+                  "description": "\u7981\u6b62\u8bbf\u95ee"
+                }
+              },
+              "security": [
+                {
+                  "Bearer": []
+                }
+              ]
+            }
+        },
+      "/notices/unread": {
+        "get": {
+          "tags": [
+            "MainPage"
+          ],
+          "summary": "\u672a\u8bfb\u6d88\u606f\u6570\u91cf",
+          "description": "\u672a\u8bfb\u6d88\u606f\u6570\u91cf",
                 "responses": {
                     "200": {
                         "description": "\u6210\u529f"
@@ -1454,9 +1384,9 @@
                     {
                         "name": "fee",
                         "in": "formData",
-                        "description": "\u8ba2\u5355\u603b\u91d1\u989d\uff0c\u5355\u4f4d\u4e3a\u5206",
+                      "description": "\u8ba2\u5355\u603b\u91d1\u989d\uff0c\u5355\u4f4d\u4e3a\u5143",
                         "required": true,
-                        "type": "integer"
+                      "type": "string"
                     }
                 ],
                 "responses": {
@@ -1487,80 +1417,6 @@
                         "type": "integer"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": "\u6210\u529f"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/questions/categories": {
-            "get": {
-                "tags": [
-                    "MainPage"
-                ],
-                "summary": "\u95ee\u9898\u5206\u7c7b\u5217\u8868",
-                "description": "\u95ee\u9898\u5206\u7c7b\u5217\u8868",
-                "responses": {
-                    "200": {
-                        "description": "\u6210\u529f"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/questions/categories/{id}": {
-            "get": {
-                "tags": [
-                    "MainPage"
-                ],
-                "summary": "\u95ee\u9898\u5206\u7c7b\u8be6\u60c5",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "\u95ee\u9898\u5206\u7c7bid",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "\u6210\u529f"
-                    },
-                    "401": {
-                        "description": "\u672a\u6388\u6743"
-                    },
-                    "405": {
-                        "description": "\u8bbf\u95ee\u65b9\u5f0f\u4e0d\u6b63\u786e"
-                    }
-                },
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ]
-            }
-        },
-        "/questions": {
-            "get": {
-                "tags": [
-                    "MainPage"
-                ],
-                "summary": "\u95ee\u9898\u5217\u8868",
-                "description": "\u95ee\u9898\u5217\u8868",
                 "responses": {
                     "200": {
                         "description": "\u6210\u529f"
@@ -1868,36 +1724,6 @@
                         "Bearer": []
                     }
                 ]
-            }
-        },
-        "/users": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "\u7528\u6237\u6ce8\u518c",
-                "description": "\u7528\u6237\u6ce8\u518c\u63a5\u53e3",
-                "parameters": [
-                    {
-                        "name": "username",
-                        "in": "formData",
-                        "description": "\u7528\u6237\u540d",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "formData",
-                        "description": "\u767b\u5f55\u5bc6\u7801",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "\u6210\u529f"
-                    }
-                }
             }
         },
         "/login": {

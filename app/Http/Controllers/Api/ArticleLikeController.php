@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class ArticleLikeController extends Controller
 {
@@ -34,16 +35,17 @@ class ArticleLikeController extends Controller
      */
     public function store(Request $request)
     {
-        $article_id = $request->input('article_id', '');
+        $this->validate($request, [
+            'article_id' => 'required|integer',
+            'cancel'     => Rule::in([0, 1]),
+        ]);
 
-        if (empty($article_id)) {
-            return $this->failed('点赞失败，参数有误',400);
-        }
+        $article_id = $request->input('article_id', '');
 
         $article = Article::findOrFail($article_id);
 
         //cancel=1取消点赞
-        $cancel = $request->input('cancel',0);
+        $cancel = $request->input('cancel', 0);
 
         if (!$cancel && ArticleLike::where([['user_id', Auth::guard('api')->id()], ['article_id', $article_id]])->exists()) {
             return $this->failed('请勿重复点赞', '406');
@@ -51,24 +53,24 @@ class ArticleLikeController extends Controller
 
         try {
             if ($cancel == 1) {
-                DB::transaction(function() use ($article){
+                DB::transaction(function () use ($article) {
                     ArticleLike::where([['user_id', Auth::guard('api')->id()], ['article_id', $article->id]])->delete();
                     $article->like_count -= 1;
                     $article->save();
                 });
 
-                return $this->setStatusCode(201)->success('','success','取消点赞成功');
+                return $this->setStatusCode(201)->success('', 'success', '取消点赞成功');
             }
-            DB::transaction(function() use ($article){
-                ArticleLike::create(['user_id' => Auth::guard('api')->id(),'article_id' => $article->id]);
+            DB::transaction(function () use ($article) {
+                ArticleLike::create(['user_id' => Auth::guard('api')->id(), 'article_id' => $article->id]);
                 $article->like_count += 1;
                 $article->save();
             });
 
         } catch (\PDOException $e) {
-            Log::channel('mysqllog')->error('mysql错误：',['msg' => $e->getMessage()]);
+            Log::channel('mysqllog')->error('mysql错误：', ['msg' => $e->getMessage()]);
         } catch (\Throwable $exception) {
-            Log::error('throwable错误：',['msg' => $exception->getMessage()]);
+            Log::error('throwable错误：', ['msg' => $exception->getMessage()]);
         }
 
         return $this->created('点赞成功');
