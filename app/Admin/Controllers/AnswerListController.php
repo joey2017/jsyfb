@@ -28,14 +28,12 @@ class AnswerListController extends AdminController
 
         $grid->column('id', __('Id'))->sortable();
         $grid->column('title', trans('admin.title_answer'))->width(500);
-        $grid->column('A', trans('admin.A'));
-        $grid->column('B', trans('admin.B'));
-        $grid->column('C', trans('admin.C'));
-        $grid->column('D', trans('admin.D'));
-        $grid->column('correct', trans('admin.correct'));
-        $grid->column('status', trans('admin.status'))->display(function($status){
-            return AnswerList::getStatusName($status);
-        })->label(['warning','primary']);
+        $grid->column('A', trans('admin.A'))->width(150);
+        $grid->column('B', trans('admin.B'))->width(150);
+        $grid->column('C', trans('admin.C'))->width(150);
+        $grid->column('D', trans('admin.D'))->width(150);
+        $grid->column('correct', trans('admin.correct'))->width(100);
+        $grid->column('status', trans('admin.status'))->using(AnswerList::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
