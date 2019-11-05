@@ -40,6 +40,8 @@ class NotaryOfficeController extends Controller
 //        ]);
         $from = explode(',', $request->input('location'));
 
+        Log::notice('location:', ['data' => $request->input('location')]);
+
         //测试
         empty($request->input('location')) && $from = [
             22.809098,
@@ -49,15 +51,19 @@ class NotaryOfficeController extends Controller
         if (count($from) < 2 || $from[0] == '' || $from[1] == '') {
             return $this->failed('位置信息错误，经纬度参数不全');
         }
+
         $points  = $this->squarePoint($from[0], $from[1], 5);
         $notarys = $this->query($points);
 
-        foreach ($notarys['data'] as &$notary) {
-            $notary['picture']  = env('APP_UPLOAD_PATH') . '/' . $notary['picture'];
-            $notary['distance'] = $this->getDistance($from[0], $from[1], $notary['lat'], $notary['lng']);
+        if (!empty($notarys['data'])) {
+            foreach ($notarys['data'] as &$notary) {
+                $notary['picture']  = env('APP_UPLOAD_PATH') . '/' . $notary['picture'];
+                $notary['distance'] = $this->getDistance($from[0], $from[1], $notary['lat'], $notary['lng']);
+            }
+            array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
         }
-        array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
-        return $this->success($notarys);
+        Log::warning('notaryOffice:', ['data' => $notarys]);
+        return $this->success($notarys ?? []);
 
     }
 
