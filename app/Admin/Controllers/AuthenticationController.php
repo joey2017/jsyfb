@@ -43,6 +43,8 @@ class AuthenticationController extends AdminController
     {
         $grid = new Grid(new Authentication);
 
+        $grid->disableCreateButton();
+
         $grid->tools(function (Grid\Tools $tools) {
             $tools->append(new ReportPost());
         });
@@ -112,13 +114,13 @@ class AuthenticationController extends AdminController
     {
         $form = new Form(new Authentication);
 
-        $form->text('user_id', trans('admin.user_id'));
-        $form->text('realname', trans('admin.realname'));
-        $form->mobile('mobile', trans('admin.mobile'));
-        $form->text('identity_card', trans('admin.identity_card'));
-        $form->image('hand_photo', trans('admin.hand_photo'));
+        $form->text('user_id', trans('admin.user_id'))->readonly();
+        $form->text('realname', trans('admin.realname'))->required();
+        $form->mobile('mobile', trans('admin.mobile'))->required();
+        $form->text('identity_card', trans('admin.identity_card'))->required();
+        $form->image('hand_photo', trans('admin.hand_photo'))->required();
         $form->text('remark', trans('admin.remark'));
-        $form->select('status', trans('admin.status'))->options(Authentication::STATUSES);
+        $form->select('status', trans('admin.status'))->options(Authentication::STATUSES)->required();
         $form->datetime('review_at', trans('admin.review_at'))->default(date('Y-m-d H:i:s'));
         $form->datetime('veritied_at', trans('admin.veritied_at'))->default(date('Y-m-d H:i:s'));
 
