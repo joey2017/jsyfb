@@ -75,6 +75,8 @@ class PaymentController extends Controller
                 'openid'       => Auth::guard('api')->user()->openid,
             ];
 
+            $result = Pay::wechat()->miniapp($order);
+
             $unified = [
                 'user_id'      => Auth::guard('api')->id(),
                 'out_trade_no' => $order['out_trade_no'],
@@ -82,10 +84,10 @@ class PaymentController extends Controller
                 'total_fee'    => $order['total_fee'],
                 'pay_status'   => 0,
                 'openid'       => $order['openid'],
+                'data'         => \GuzzleHttp\json_encode($result),
             ];
 
             Unifiedorder::create($unified);
-            $result = Pay::wechat()->miniapp($order);
             return $this->success($result);
             // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
             // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
@@ -126,8 +128,7 @@ class PaymentController extends Controller
                 // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号；
                 // 2、判断total_fee是否确实为该订单的实际金额（即商户订单创建时的金额）；
                 // 3、验证app_id是否为该商户本身。
-                if ($order->pay_status == Unifiedorder::SUCCESS || $order->out_trade_no != $paymentInfo['out_trade_no']
-                    || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')) {
+                if (empty($order) || $order->pay_status == Unifiedorder::SUCCESS || $paymentInfo['appid'] != env('WECHAT_MINIAPP_ID')) {
                     return $pay->success();
                 }
 
@@ -147,6 +148,7 @@ class PaymentController extends Controller
                 $id && $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', $id);
             } else {
                 Log::info('微信支付回调通知结果失败:', $paymentInfo);
+                return $pay->success();
             }
 
         } catch (\Exception $e) {
