@@ -10,6 +10,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use function foo\func;
 use Illuminate\Http\Request;
 
 class NotaryOfficeController extends AdminController
@@ -36,7 +37,9 @@ class NotaryOfficeController extends AdminController
         $grid->column('mobile', trans('admin.mobile'));
         $grid->column('telephone', trans('admin.telephone'));
         $grid->column('picture', trans('admin.image'))->lightbox(['width' => 50, 'height' => 50]);
-        $grid->column('summary', trans('admin.summary'));
+        $grid->column('summary-hide', trans('admin.summary'))->expand(function ($model) {
+            return $model->summary;
+        });
         $grid->column('comments_count', trans('admin.comments_count'));
         $grid->column('score', trans('admin.score'));
         $grid->column('province_code', trans('admin.province'))->display(function ($province_code) {
