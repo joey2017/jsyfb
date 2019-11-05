@@ -16,7 +16,7 @@ class AuthenticationRequest extends FormRequest
     {
         return [
             'realname'      => 'required|string',
-            'mobile'        => 'required|regex:' . getMobileCheckRegex(),
+            'mobile'        => ['required', 'regex:' . getMobileCheckRegex()],
             //'email'         => 'sometimes|required|email',
             'identity_card' => 'required|string',
             'hand_photo'    => 'required|string',
