@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
+use function App\Helpers\getMobileCheckRegex;
+
 class MessageRequest extends FormRequest
 {
 
@@ -14,7 +16,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'username' => ['max:10', 'min:2'],
-            'mobile'   => ['sometimes', 'required', 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/'],
+            'mobile'   => ['sometimes', 'required', 'regex:' . getMobileCheckRegex()],
             'content'  => ['required', 'min:10'],
         ];
     }

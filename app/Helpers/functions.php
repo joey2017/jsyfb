@@ -50,3 +50,10 @@ if (!function_exists('getAllBusinessCategoryIdAndTitle')) {
         return BusinessCategory::where([['status', BusinessCategory::NORMAL]])->pluck('title', 'id')->toArray();
     }
 }
+
+if (!function_exists('getMobileCheckRegex')) {
+    function getMobileCheckRegex()
+    {
+        return '/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/';
+    }
+}

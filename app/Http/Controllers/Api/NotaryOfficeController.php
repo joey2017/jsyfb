@@ -25,16 +25,6 @@ class NotaryOfficeController extends Controller
      */
     public function index(Request $request)
     {
-
-        /*$from    = $request->input('location');
-        $notarys = DB::table((new NotaryOffice)->getTable())->paginate(10)->toArray();
-        foreach ($notarys['data'] as &$notary) {
-            $notary->picture  = env('APP_UPLOAD_PATH') . '/' . $notary->picture;
-            $notary->distance = $this->distance($from, [$notary->lat, $notary->lng]);
-        }
-        array_multisort(array_column($notarys['data'], 'distance'), SORT_ASC, $notarys['data']);
-        return $this->success($notarys);*/
-
         $this->validate($request, [
             'location' => ['required', 'string', 'regex:/^([0-9]+(\.)?[0-9]+)[,]{1}([0-9]+(\.)?[0-9]+)$/'],
             'radius'   => ['integer'],

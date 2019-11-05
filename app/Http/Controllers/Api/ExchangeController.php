@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use function App\Helpers\getMobileCheckRegex;
 use App\Http\Resources\Api\ExchangeResource;
 use App\Models\Exchange;
 use App\Models\Goods;
@@ -110,7 +111,7 @@ class ExchangeController extends Controller
         $this->validate($request, [
             'goods_id'        => 'required|integer',
             'receiver'        => 'required|string|min:2|max:10',
-            'receiver_mobile' => ['required', 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/'],
+            'receiver_mobile' => ['required', 'regex:' . getMobileCheckRegex()],
             'address'         => 'required|string',
             'ingots'          => 'required|integer',
             'quantity'        => 'required|integer',

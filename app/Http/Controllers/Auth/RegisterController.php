@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use function App\Helpers\getMobileCheckRegex;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             //'email'    => ['required', 'string', 'email', 'max:255', 'unique:jsyfb_user'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'mobile'   => ['required', 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/'],
+            'mobile'   => ['required', 'regex:' . getMobileCheckRegex()],
         ]);
     }
 
@@ -68,7 +69,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd($this->_request->getClientIp());
         return User::create([
             'username'        => $data['username'],
             //'email'    => $data['email'],

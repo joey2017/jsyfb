@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
+use function App\Helpers\getMobileCheckRegex;
+
 class UserAddressRequest extends FormRequest
 {
 
@@ -14,7 +16,7 @@ class UserAddressRequest extends FormRequest
     {
         return [
             'receiver'        => ['required|string'],
-            'receiver_mobile' => ['required', 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/'],
+            'receiver_mobile' => ['required', 'regex:' . getMobileCheckRegex()],
             'province'        => ['required|numeric'],
             'city'            => ['required|numeric'],
             'district'        => ['required|numeric'],

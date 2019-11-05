@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use function App\Helpers\getMobileCheckRegex;
 use App\Http\Resources\Api\NotaryAdviceResource;
 use App\Models\NotaryAdvice;
 use Doctrine\DBAL\Driver\PDOException;
@@ -62,7 +63,7 @@ class NotaryAdviceController extends Controller
             'notary_id' => 'required|integer',
             'username'  => 'required|string|min:2|max:10',
             'sex'       => 'required|integer',
-            'mobile'    => ['required', 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\\d{8}$/'],
+            'mobile'    => ['required', 'regex:' . getMobileCheckRegex()],
             'type'      => 'required|integer',
             'question'  => 'required|string',
         ]);
