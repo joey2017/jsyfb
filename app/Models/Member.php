@@ -37,7 +37,7 @@ class Member extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'cost'];
+    protected $fillable = ['user_id', 'cost', 'type'];
 
     // 状态
     const INVALID = 0;
