@@ -45,7 +45,9 @@ class LaywerController extends AdminController
         $grid->column('province_code', trans('admin.province_code'));
         $grid->column('city_code', trans('admin.city_code'));
         $grid->column('expertise', trans('admin.expertise'));
-        $grid->column('summary', trans('admin.summary'))->width(300);
+        $grid->column('summary-hide', trans('admin.summary'))->expand(function ($model) {
+            return $model->summary;
+        });
         $grid->column('status', trans('admin.status'))->using(Laywer::STATUSES)->label(['warning', 'primary']);
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
@@ -134,7 +136,7 @@ class LaywerController extends AdminController
                 $value = $param;
             }
             if (Admin::user()->isRole('laywer') && ($value != Admin::user()->related_spec_id)) {
-                admin_error('查看失败','您无权限访问查看该律师');
+                admin_error('查看失败', '您无权限访问查看该律师');
                 return $form;
             }
         } else {
