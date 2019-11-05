@@ -37,8 +37,8 @@ class AnswerRecordController extends AdminController
         $grid->column('correct', trans('admin.correct'));
         $grid->column('score', trans('admin.answer_score'));
         $grid->column('date', trans('admin.date_of_answer'));
-        $grid->column('created_at', trans('admin.created_at'));
-        $grid->column('updated_at', trans('admin.updated_at'));
+        //$grid->column('created_at', trans('admin.created_at'));
+        //$grid->column('updated_at', trans('admin.updated_at'));
 
         $grid->actions(function ($actions) {
             $actions->disableEdit();
@@ -80,7 +80,7 @@ class AnswerRecordController extends AdminController
         $show->field('correct', trans('admin.correct'));
         $show->field('score', trans('admin.answer_score'));
         $show->field('created_at', trans('admin.created_at'));
-        $show->field('updated_at', trans('admin.updated_at'));
+        //$show->field('updated_at', trans('admin.updated_at'));
 
         return $show;
     }
