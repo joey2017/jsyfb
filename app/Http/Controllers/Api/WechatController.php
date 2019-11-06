@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\Api\UserResource;
+use App\Jobs\Api\SaveLastTokenJob;
 use App\Models\IngotsConfig;
 use App\Models\IngotsLog;
 use App\Models\Notice;
@@ -68,7 +69,7 @@ class WechatController extends Controller
         $icode         = $request->get('icode', '');
         $rawData       = json_decode($request->input('rawData', ''), true);
 
-        Log::info('icode:'.$icode);
+        Log::info('icode:' . $icode);
 
         //根据 code 获取用户 session_key 等信息, 返回用户openid 和 session_key
         $userInfo = $this->wxxcx->getLoginInfo($code);
@@ -93,10 +94,10 @@ class WechatController extends Controller
         }
 
         if ($existUser = User::where('openid', $userInfo['openid'])->first()) {
-            $token = auth('api')->login($existUser);
+            $token      = auth('api')->login($existUser);
             $statusCode = 200;
         } else {
-            $token = auth('api')->login($this->createUser($request, $userInfo, $decryData['openId'] ? $decryData : $rawData, $inviter ? $inviter->id : 0));
+            $token      = auth('api')->login($this->createUser($request, $userInfo, $decryData['openId'] ? $decryData : $rawData, $inviter ? $inviter->id : 0));
             $statusCode = 201;
         }
 
@@ -110,11 +111,13 @@ class WechatController extends Controller
                     //因为让一个过期的token再失效，会抛出异常，所以我们捕捉异常，不需要做任何处理
                 }
             }
-            $user->last_token      = $token;
+            //$user->last_token      = $token;
             $user->login_num       += 1;
             $user->last_login_ip   = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
+
+            SaveLastTokenJob::dispatch($user, $token);
 
             // 邀请人获得法宝
             if ($inviter && $statusCode == 201) {
