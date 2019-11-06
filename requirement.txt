@@ -1,1 +1,1 @@
-php扩展：php_fileinfo  redis 
+php扩展：php_fileinfo  redis  pcntl opcache

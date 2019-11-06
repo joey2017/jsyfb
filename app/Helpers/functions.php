@@ -89,3 +89,16 @@ if (!function_exists('isCreditNo')) {
         return true;
     }
 }
+
+
+/** 调试函数
+ * @param $model
+ */
+function dda($model)
+{
+    if (method_exists($model, 'toArray')) {
+        dd($model->toArray());
+    } else {
+        dd($model);
+    }
+}
