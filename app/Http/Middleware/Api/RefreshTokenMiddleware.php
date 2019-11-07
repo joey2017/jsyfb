@@ -45,7 +45,6 @@ class RefreshTokenMiddleware extends BaseMiddleware
                 $token = $this->auth->refresh();
                 // 使用一次性登录以保证此次请求的成功
                 Auth::guard('api')->onceUsingId($this->auth->manager()->getPayloadFactory()->buildClaimsCollection()->toPlainArray()['sub']);
-
                 $user = Auth::guard('api')->user();
                 Log::error('refresh_token_user:', ['user' => $user]);
                 SaveLastTokenJob::dispatch($user, $token);
