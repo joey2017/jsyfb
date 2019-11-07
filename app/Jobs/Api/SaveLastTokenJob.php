@@ -15,6 +15,10 @@ class SaveLastTokenJob implements ShouldQueue
     protected $model;
     protected $token;
 
+    public $tries = 3;
+
+    public $timeout = 30;
+
     /**
      * SaveLastTokenJob constructor.
      * @param $model
