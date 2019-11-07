@@ -28,6 +28,10 @@ class UploadsController extends AdminController
             for ($i = 0; $i <= $len; $i++) {
                 // $n 表示第几张图片
                 $n = $i + 1;
+                if ($file[$i]->getSize() > 2 * 1024 * 1024) {
+                    return response()->json(['ResultData' => 1, 'info' => '第' . $n . '张图片超过最大限制!<br/>' . '图片最大支持2M']);
+                }
+
                 if ($file[$i]->isValid()) {
                     if (in_array(strtolower($file[$i]->extension()), ['jpeg', 'jpg', 'gif', 'png'])) {
                         //$picname = $file[$i]->getClientOriginalName();//获取上传原文件名
@@ -45,8 +49,6 @@ class UploadsController extends AdminController
                     } else {
                         return response()->json(['ResultData' => 3, 'info' => '第' . $n . '张图片后缀名不合法!<br/>' . '只支持jpeg/jpg/png/gif格式']);
                     }
-                } else {
-                    return response()->json(['ResultData' => 1, 'info' => '第' . $n . '张图片超过最大限制!<br/>' . '图片最大支持2M']);
                 }
             }
         } else {
