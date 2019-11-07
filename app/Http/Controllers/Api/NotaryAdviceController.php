@@ -61,7 +61,7 @@ class NotaryAdviceController extends Controller
     {
         $this->validate($request, [
             'notary_id' => 'required|integer',
-            'username'  => 'required|string|min:2|max:10',
+            'username'  => 'required|string',
             'sex'       => 'required|integer',
             'mobile'    => ['required', 'regex:' . getMobileCheckRegex()],
             'type'      => 'required|integer',
