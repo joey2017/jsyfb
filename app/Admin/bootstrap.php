@@ -49,6 +49,5 @@ Column::extend('prependIcon', function ($value, $icon) {
 
 Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) {
     $navbar->right(Nav\Link::make('设置', 'forms/settings'));
-    $navbar->right(new Nav\AutoRefresh())
-        ->right(new Actions\ClearCache());
+    $navbar->right(new Nav\AutoRefresh());
 });
