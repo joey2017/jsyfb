@@ -14,6 +14,7 @@
         "encore/laravel-admin": "^1.7",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.8",
+      "intervention/image": "^2.5",
         "iwanli/wxxcx": "2.*",
         "james.xue/login-captcha": "^1.8",
         "laravel-admin-ext/api-tester": "dev-master",
