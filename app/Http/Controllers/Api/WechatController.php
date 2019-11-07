@@ -111,13 +111,13 @@ class WechatController extends Controller
                     //因为让一个过期的token再失效，会抛出异常，所以我们捕捉异常，不需要做任何处理
                 }
             }
-            $user->last_token      = $token;
+            //$user->last_token      = $token;
             $user->login_num       += 1;
             $user->last_login_ip   = $request->getClientIp();
             $user->last_login_time = date('Y-m-d H:i:s');
             $user->save();
 
-            //SaveLastTokenJob::dispatch($user, $token);
+            SaveLastTokenJob::dispatch($user, $token);
 
             // 邀请人获得法宝
             if ($inviter && $statusCode == 201) {
