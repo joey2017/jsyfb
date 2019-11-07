@@ -221,4 +221,5 @@ return [
     'comment_person'            => '评论者',
     'role_slug_must_not_edited' => '角色标识禁止修改',
     'title_answer'              => '题目',
+    'no_data_selected'          => '请选择数据 !',
 ];

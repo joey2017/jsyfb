@@ -75,4 +75,23 @@ class ReportPost extends BatchAction
     {
         return "<a class='report-posts btn btn-sm btn-info'>审核</a>";
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function actionScript()
+    {
+        $warning = trans('admin.no_data_selected');
+
+        return <<<SCRIPT
+        var key = $.admin.grid.selected();
+        
+        if (key.length === 0) {
+            $.admin.toastr.warning('{$warning}', '', {positionClass: 'toast-top-center'});
+            return ;
+        }
+        
+        Object.assign(data, {_key:key});
+SCRIPT;
+    }
 }
