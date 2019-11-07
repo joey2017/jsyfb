@@ -5,6 +5,7 @@ namespace App\Http\Middleware\Api;
 use App\Jobs\Api\SaveLastTokenJob;
 use Auth;
 use Closure;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
@@ -46,6 +47,7 @@ class RefreshTokenMiddleware extends BaseMiddleware
                 Auth::guard('api')->onceUsingId($this->auth->manager()->getPayloadFactory()->buildClaimsCollection()->toPlainArray()['sub']);
 
                 $user = Auth::guard('api')->user();
+                Log::error('refresh_token_user:', ['user' => $user]);
                 SaveLastTokenJob::dispatch($user, $token);
                 //$user->last_token = $token;
                 //$user->save();
