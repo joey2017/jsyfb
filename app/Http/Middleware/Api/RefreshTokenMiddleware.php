@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -45,6 +46,8 @@ class RefreshTokenMiddleware extends BaseMiddleware
                 $token = $this->auth->refresh();
                 // 使用一次性登录以保证此次请求的成功
                 Auth::guard('api')->onceUsingId($this->auth->manager()->getPayloadFactory()->buildClaimsCollection()->toPlainArray()['sub']);
+                Log::info('sub_onceUsingId:' . $this->auth->manager()->getPayloadFactory()->buildClaimsCollection()->toPlainArray()['sub']);
+                Log::info('sub_payload_get:' . JWTAuth::parseToken()->payload()->get('sub'));
                 $user = Auth::guard('api')->user();
                 SaveLastTokenJob::dispatch($user, $token);
                 //$user->last_token = $token;
