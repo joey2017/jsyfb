@@ -37,7 +37,6 @@ class SaveLastTokenJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->model->last_token = $this->token;
-        $this->model->save();
+        $this->model && $this->model->last_token = $this->token && $this->model->save();
     }
 }
