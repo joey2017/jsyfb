@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord whereScore($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord whereUserId($value)
+ * @property string|null $option 用户选项（A/B/C/D）
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AnswerRecord whereOption($value)
  */
 class AnswerRecord extends Model
 {

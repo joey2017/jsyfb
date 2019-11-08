@@ -52,7 +52,9 @@ class SpecialistAdviceController extends AdminController
         $grid->column('laywer.name', trans('admin.specialist'));
         $grid->column('username', trans('admin.username'));
         $grid->column('sex', trans('admin.sex'))->using(Constant::SEXS);
-        $grid->column('mobile', trans('admin.mobile'));
+        if (!Admin::user()->isRole('laywer')) {
+            $grid->column('mobile', trans('admin.mobile'));
+        }
         $grid->column('type', trans('admin.case_type'))->using(getAllBusinessCategoryIdAndTitle());
         $grid->column('question', trans('admin.question'));
         $grid->column('measures', trans('admin.measures'));
@@ -98,7 +100,9 @@ class SpecialistAdviceController extends AdminController
         });
         $show->field('username', trans('admin.username'));
         $show->field('sex', trans('admin.sex'))->using(Constant::SEXS);
-        $show->field('mobile', trans('admin.mobile'));
+        if (!Admin::user()->isRole('laywer')) {
+            $show->field('mobile', trans('admin.mobile'));
+        }
         $show->field('type', trans('admin.case_type'))->using(getAllBusinessCategoryIdAndTitle());
         $show->field('question', trans('admin.question'));
         $show->field('measures', trans('admin.measures'));

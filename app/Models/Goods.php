@@ -21,8 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $stock 库存
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
  * @property \Illuminate\Support\Carbon|null $updated_at 更新时间
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\GoodsAttr[] $goodsAttr
- * @property-read int|null $goods_attr_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Goods whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Goods whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Goods whereDetail($value)
@@ -45,12 +43,4 @@ class Goods extends Model
      * @var array
      */
     protected $fillable = ['goods_name', 'image', 'exchange_price', 'stock'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function goodsAttr()
-    {
-        return $this->hasMany(GoodsAttr::class);
-    }
 }

@@ -35,6 +35,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryAdvice whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryAdvice whereUsername($value)
  * @mixin \Eloquent
+ * @property int|null $payment_id 预约支付id
+ * @property-read \App\Models\ReservationPayment|null $payment
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\NotaryAdvice wherePaymentId($value)
  */
 class NotaryAdvice extends Model
 {
@@ -68,6 +71,14 @@ class NotaryAdvice extends Model
     public function notary()
     {
         return $this->belongsTo(NotaryOffice::class,'notary_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment()
+    {
+        return $this->belongsTo(ReservationPayment::class, 'payment_id');
     }
 
     /**

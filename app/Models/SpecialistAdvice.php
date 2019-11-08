@@ -42,6 +42,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice whereUsername($value)
  * @property int $laywer_id 律师或专家id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice whereLaywerId($value)
+ * @property int|null $payment_id 预约支付id
+ * @property-read \App\Models\ReservationPayment|null $payment
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice wherePaymentId($value)
  */
 class SpecialistAdvice extends Model
 {
@@ -53,10 +56,17 @@ class SpecialistAdvice extends Model
     protected $fillable = ['user_id', 'laywer_id', 'username', 'sex', 'mobile', 'type', 'question'];
 
     // 状态
-    const INVALID = 0;
-    const NORMAL  = 1;
+    const INVALID    = 0;
+    const PENDING    = 1;
+    const UNEVALUATE = 2;
+    const COMPLETED  = 3;
 
-    const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+    const STATUSES = [
+        self::INVALID    => '禁用',
+        self::PENDING    => '进行中',
+        self::UNEVALUATE => '待评价',
+        self::COMPLETED  => '已完成',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -66,10 +76,22 @@ class SpecialistAdvice extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function laywer()
     {
         return $this->belongsTo(Laywer::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment()
+    {
+        return $this->belongsTo(ReservationPayment::class, 'payment_id');
+    }
+
     /**
      * @param string $status
      * @return string

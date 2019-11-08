@@ -69,9 +69,9 @@ Route::group([
     $router->get('personnel/answers/records', 'AnswerRecordController@index');
     $router->delete('personnel/answers/records/{id}', 'AnswerRecordController@destroy');
 
-    //VIP通道
-    $router->get('personnel/members', 'MemberController@index');
-    $router->delete('personnel/members/{id}', 'MemberController@destroy');
+    //预约支付
+    $router->get('personnel/payments', 'ReservationPaymentController@index');
+    $router->delete('personnel/payments/{id}', 'ReservationPaymentController@destroy');
 
     //关注律师
     $router->get('personnel/attentions', 'AttentionController@index');

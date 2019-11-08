@@ -30,6 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\City whereSort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\City whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\City whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\City newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\City newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\City query()
  */
 class City extends Model
 {

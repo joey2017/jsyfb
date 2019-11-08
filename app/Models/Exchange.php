@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $address 地址
  * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereAddress($value)
+ * @property string|null $receiver 收货人
+ * @property string|null $receiver_mobile 收货人手机
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereReceiver($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Exchange whereReceiverMobile($value)
  */
 class Exchange extends Model
 {

@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\UserRequest;
+use App\Http\Requests\Api\AdviceCommentRequest;
 use App\Http\Resources\Api\AttentionResource;
 use App\Http\Resources\Api\BrowseHistoryResource;
 use App\Http\Resources\Api\IngotLogResource;
+use App\Http\Resources\Api\NotaryAdviceResource;
+use App\Http\Resources\Api\SpecialistAdviceResource;
 use App\Http\Resources\Api\UserResource;
 use App\Models\Attention;
 use App\Models\BrowseHistory;
 use App\Models\Ingots;
 use App\Models\IngotsLog;
+use App\Models\NotaryAdvice;
 use App\Models\Notice;
+use App\Models\SpecialistAdvice;
+use App\Models\SpecialistAdviceComment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -182,6 +187,56 @@ class UserController extends Controller
     {
         $ingots = Ingots::firstOrCreate(['user_id' => Auth::guard('api')->id()], ['quantity' => 0]);
         return $this->success(['quantity' => $ingots->quantity]);
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/users/services/notarys",
+     *   tags={"User"},
+     *   summary="公证处服务",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Response(response="200",description="公证处服务列表")
+     *
+     * )
+     */
+    public function notaryServices(Request $request)
+    {
+        $condition    = array_merge(['user_id' => Auth::guard('api')->id()], array_filter($request->all()));
+        $notaryAdvice = NotaryAdvice::where($condition)->paginate(10);
+        return $this->success(NotaryAdviceResource::collection($notaryAdvice));
+    }
+
+
+    /**
+     * @SWG\Get(
+     *   path="/users/services/specialists",
+     *   tags={"User"},
+     *   summary="专家服务",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="status", type="integer", required=true, in="path", description="服务状态"),
+     *   @SWG\Response(response="200",description="专家服务列表")
+     *
+     * )
+     */
+    public function specialistServices(Request $request)
+    {
+        $condition        = array_merge(['user_id' => Auth::guard('api')->id()], array_filter($request->all()));
+        $specialistAdvice = SpecialistAdvice::where($condition)->paginate(10);
+        return $this->success(SpecialistAdviceResource::collection($specialistAdvice));
+    }
+
+    public function adviceComment(AdviceCommentRequest $request)
+    {
+        SpecialistAdviceComment::create($request->all())->fillable(['user_id' => Auth::guard('api')->id()]);
     }
 
 }

@@ -30,6 +30,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Area whereSort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Area whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Area whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Area newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Area newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Area query()
  */
 class Area extends Model
 {

@@ -30,6 +30,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserAddress whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserAddress whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserAddress whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserAddress newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserAddress newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\UserAddress query()
+ * @mixin \Eloquent
  */
 class UserAddress extends Model
 {

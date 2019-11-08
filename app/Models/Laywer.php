@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Laywer
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer query()
- * @mixin \Eloquent
  * @property int $id
  * @property string|null $name 姓名
  * @property string|null $title 头衔
@@ -30,9 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $is_deleted 是否删除：0否1是
  * @property \Illuminate\Support\Carbon|null $created_at 创建时间
  * @property \Illuminate\Support\Carbon|null $updated_at 修改时间
- * @property-read \App\Models\BusinessCategory|null $businessCategory
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LaywerCategoryLink[] $link
- * @property-read int|null $link_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer whereAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer whereCateId($value)
@@ -52,6 +45,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer whereTelephone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer whereUpdatedAt($value)
+ * @property-read \App\Models\BusinessCategory|null $businessCategory
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Laywer query()
+ * @mixin \Eloquent
  */
 class Laywer extends Model
 {
@@ -73,12 +71,6 @@ class Laywer extends Model
     public function businessCategory()
     {
         return $this->belongsTo(BusinessCategory::class, 'cate_id');
-    }
-
-
-    public function link()
-    {
-        return $this->hasMany(LaywerCategoryLink::class);
     }
 
     /**

@@ -134,9 +134,6 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
         //意见反馈保存
         Route::post('/feedbacks', 'FeedbackController@store')->name('feedback.store');
 
-        //VIP通道咨询专家
-        Route::post('/members', 'MemberController@store')->name('members.store');
-
         //法宝兑换
         Route::post('/exchanges', 'ExchangeController@store')->name('exchanges.store');
         Route::get('/exchanges', 'ExchangeController@index')->name('exchanges.index');
@@ -161,7 +158,7 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
         Route::get('/users/ingots', 'UserController@ingots')->name('user.ingots');
 
         //法宝流水记录
-        Route::get('/users/ingots/log', 'UserController@ingotsLog')->name('users.ingotsLog');
+        Route::get('/users/ingots/log', 'UserController@ingotsLog')->name('users.ingotslog');
 
         //图片上传
         Route::post('/upload/image', 'ImageController@upload')->name('images.upload');
@@ -171,6 +168,12 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
 
         //微信支付接口
         Route::post('/payment/wechatpay','PaymentController@wechatpay')->name('payments.wechatpay');
+
+        //我的公证处咨询服务
+        Route::get('/users/services/notarys', 'UserController@notaryServices')->name('users.notaryservices');
+
+        //我的专家咨询服务
+        Route::get('users/services/specialists', 'UserController@specialistServices')->name('users.specialistservices');
 
     });
 });

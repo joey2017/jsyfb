@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\IngotsLog;
-use App\Models\Member;
+use App\Models\ReservationPayment;
 use App\Models\SystemConfig;
 use App\Models\Unifiedorder;
 use App\Models\User;
@@ -147,7 +147,7 @@ class PaymentController extends Controller
 
                 $id = User::where('openid', $paymentInfo['openid'])->firstOrFail()->id ?? '';
                 //vip通道使用记录
-                $id && Member::create(['user_id' => $id, 'cost' => $paymentInfo['total_fee'] / 100, 'type' => Member::TYPE_MONEY]);
+                $id && ReservationPayment::create(['user_id' => $id, 'cost' => $paymentInfo['total_fee'] / 100, 'type' => ReservationPayment::TYPE_MONEY]);
                 //发送消息
                 $id && $this->notice->add('微信支付成功', '您刚刚使用微信钱包支付了' . ($order['total_fee'] / 100) . '元', $id);
             } else {
@@ -192,7 +192,7 @@ class PaymentController extends Controller
 
         try {
             DB::beginTransaction();
-            Member::create(['cost' => $ingots, 'user_id' => Auth::guard('api')->id()]);
+            ReservationPayment::create(['cost' => $ingots, 'user_id' => Auth::guard('api')->id()]);
             $this->ingots->update($ingots, '咨询专属法顾消耗法宝', IngotsLog::TYPE_DECRE, Auth::guard('api')->user());
             $this->notice->add('咨询专属法顾消耗法宝', '咨询专属法顾消耗' . $ingots . '个法宝', Auth::guard('api')->id(), 2);
         } catch (\Exception $exception) {

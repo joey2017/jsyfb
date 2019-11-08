@@ -59,6 +59,11 @@ if (!function_exists('getMobileCheckRegex')) {
 }
 
 if (!function_exists('isCreditNo')) {
+
+    /**
+     * @param $vStr
+     * @return bool
+     */
     function isCreditNo($vStr)
     {
         $vCity = array('11', '12', '13', '14', '15', '21', '22', '23',
@@ -87,6 +92,32 @@ if (!function_exists('isCreditNo')) {
             if ($vSum % 11 != 1) return false;
         }
         return true;
+    }
+}
+
+
+if (!function_exists('isMatchPhone')) {
+    /**
+     * @param $string
+     * @param $type
+     * @return bool
+     */
+    function isMatchPhone($string, $type)
+    {
+        $regxArr = array(
+            'mobile' => '/^(\+?86-?)?(18|15|13|14|19)[0-9]{9}$/',
+            'tel'    => '/^(010|02\d{1}|0[3-9]\d{2})-\d{7,9}(-\d+)?$/',
+            '400'    => '/^400(-\d{3,4}){2}$/',
+        );
+        if ($type && isset($regxArr[$type])) {
+            return preg_match($regxArr[$type], $string) ? true : false;
+        }
+        foreach ($regxArr as $regx) {
+            if (preg_match($regx, $string)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

@@ -21,7 +21,7 @@ class AttentionController extends Controller
 
 
     /**
-     * MemberController constructor.
+     * AttentionController constructor.
      * @param NoticeService $noticeService
      */
     public function __construct(NoticeService $noticeService)

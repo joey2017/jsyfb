@@ -28,6 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereSort($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Region\Province query()
  */
 class Province extends Model
 {

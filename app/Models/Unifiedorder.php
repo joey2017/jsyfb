@@ -29,6 +29,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Unifiedorder whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Unifiedorder whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $openid openid
+ * @property string|null $data 支付数据签名
+ * @property float|null $pay_fee 已支付金额（分）
+ * @property string|null $transaction_id 微信支付订单号
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Unifiedorder whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Unifiedorder whereOpenid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Unifiedorder wherePayFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Unifiedorder whereTransactionId($value)
  */
 class Unifiedorder extends Model
 {
