@@ -47,7 +47,7 @@ class RefreshTokenMiddleware extends BaseMiddleware
                 // 使用一次性登录以保证此次请求的成功
                 Auth::guard('api')->onceUsingId($this->auth->manager()->getPayloadFactory()->buildClaimsCollection()->toPlainArray()['sub']);
                 Log::info('sub_onceUsingId:' . $this->auth->manager()->getPayloadFactory()->buildClaimsCollection()->toPlainArray()['sub']);
-                Log::info('sub_payload_get:' . JWTAuth::parseToken()->payload()->get('sub'));
+                Log::info('sub_payload_get:' . $this->auth->parseToken()->payload()->get('sub'));
                 $user = Auth::guard('api')->user();
                 SaveLastTokenJob::dispatch($user, $token);
                 //$user->last_token = $token;
