@@ -17,6 +17,8 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $verified_status = $this->authen->status ?? '';
+
         return [
             'id'                   => $this->id,
             'username'             => $this->username,
@@ -31,8 +33,8 @@ class UserResource extends JsonResource
             'login_num'            => $this->login_num,
             'last_login_time'      => (string)$this->last_login_time,
             'is_verified'          => $this->is_verified,
-            'verified_status'      => $this->authen->status ?? '',
-            'verified_status_text' => $this->authen->status === '' ? '暂未提交认证' : Authentication::getStatusName($this->authen->status),
+            'verified_status'      => $verified_status,
+            'verified_status_text' => $verified_status === '' ? '暂未提交认证' : Authentication::getStatusName($verified_status),
             'ingots'               => $this->ingots,
             'invitation_code'      => $this->invitation_code,
             'notices_count'        => $this->notices_count ?? '',
