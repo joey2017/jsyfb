@@ -170,10 +170,15 @@ Route::namespace(ucfirst(env('API_PREFIX')))->prefix(env('API_VERSION'))->middle
         Route::post('/payment/wechatpay','PaymentController@wechatpay')->name('payments.wechatpay');
 
         //我的公证处咨询服务
-        Route::get('/users/services/notarys', 'UserController@notaryServices')->name('users.notaryservices');
+        Route::get('/users/services/notarys', 'UserController@notaryServices')->name('users.notary-services');
 
         //我的专家咨询服务
-        Route::get('users/services/specialists', 'UserController@specialistServices')->name('users.specialistservices');
+        Route::get('users/services/specialists', 'UserController@specialistServices')->name('users.specialist-services');
+
+        //服务评价
+        Route::post('users/services/specialist-comments', 'UserController@specialistAdviceComment')->name('users.specialist-comments');
+        Route::post('users/services/notary-comments', 'UserController@notaryAdviceComment')->name('users.notary-comments');
+
 
     });
 });

@@ -14,6 +14,7 @@ use App\Models\BrowseHistory;
 use App\Models\Ingots;
 use App\Models\IngotsLog;
 use App\Models\NotaryAdvice;
+use App\Models\NotaryAdviceComment;
 use App\Models\Notice;
 use App\Models\SpecialistAdvice;
 use App\Models\SpecialistAdviceComment;
@@ -207,7 +208,13 @@ class UserController extends Controller
     public function notaryServices(Request $request)
     {
         $condition    = array_merge(['user_id' => Auth::guard('api')->id()], array_filter($request->all()));
-        $notaryAdvice = NotaryAdvice::where($condition)->paginate(10);
+        $notaryAdvice = NotaryAdvice::with([
+            'notary'     => function ($query) {
+                $query->select('id', 'name', 'city_code');
+            }, 'payment' => function ($query) {
+                $query->select('id', 'cost', 'type');
+            }
+        ])->where($condition)->paginate(10);
         return $this->success(NotaryAdviceResource::collection($notaryAdvice));
     }
 
@@ -222,7 +229,7 @@ class UserController extends Controller
      *          "Bearer":{}
      *      }
      *   },
-     *   @SWG\Parameter(name="status", type="integer", required=true, in="path", description="服务状态"),
+     *   @SWG\Parameter(name="status", type="integer", required=true, in="path", description="服务状态：0禁用1进行中2待评价3已完成"),
      *   @SWG\Response(response="200",description="专家服务列表")
      *
      * )
@@ -230,13 +237,74 @@ class UserController extends Controller
     public function specialistServices(Request $request)
     {
         $condition        = array_merge(['user_id' => Auth::guard('api')->id()], array_filter($request->all()));
-        $specialistAdvice = SpecialistAdvice::where($condition)->paginate(10);
+        $specialistAdvice = SpecialistAdvice::with([
+            'laywer'     => function ($query) {
+                $query->select('id', 'name', 'cate_id', 'company', 'city_code');
+            }, 'payment' => function ($query) {
+                $query->select('id', 'cost', 'type');
+            }
+        ])->where($condition)->paginate(10);
         return $this->success(SpecialistAdviceResource::collection($specialistAdvice));
     }
 
-    public function adviceComment(AdviceCommentRequest $request)
+    /**
+     * @SWG\Post(
+     *   path="/users/services/notary-comments",
+     *   tags={"User"},
+     *   summary="公证处服务评价",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="advice_id", type="integer", required=true, in="formData", description="咨询id"),
+     *   @SWG\Parameter(name="service_score", type="integer", required=true, in="formData", description="服务评分:0-5"),
+     *   @SWG\Parameter(name="profession_score", type="integer", required=true, in="formData", description="专业评分：0-5"),
+     *   @SWG\Parameter(name="is_solve", type="integer", required=true, in="formData", description="是否解决您的问题：是否解决：1未解决，2已解决"),
+     *   @SWG\Parameter(name="comment", type="integer", required=false, in="formData", description="评价内容")
+     *   @SWG\Response(response="201",description="服务评价添加成功"),
+     *   @SWG\Response(response="401",description="未授权"),
+     *   @SWG\Response(response="403",description="不允许评价"),
+     *   @SWG\Response(response="501",description="保存失败，请稍后重试"),
+     *
+     * )
+     */
+    public function notaryAdviceComment(AdviceCommentRequest $request)
     {
-        SpecialistAdviceComment::create($request->all())->fillable(['user_id' => Auth::guard('api')->id()]);
+        $comment = NotaryAdviceComment::create($request->all());
+        $comment->forceFill(['user_id' => Auth::guard('api')->id(), 'created_at' => date('Y-m-d H:i:s')]);
+        return $comment->save() ? $this->created('保存成功') : $this->failed('保存失败，请稍后重试', 501);
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="/users/services/specialist-comments",
+     *   tags={"User"},
+     *   summary="专家服务评价",
+     *   security={
+     *      {
+     *          "Bearer":{}
+     *      }
+     *   },
+     *   @SWG\Parameter(name="advice_id", type="integer", required=true, in="formData", description="咨询id"),
+     *   @SWG\Parameter(name="service_score", type="integer", required=true, in="formData", description="服务评分:0-5"),
+     *   @SWG\Parameter(name="profession_score", type="integer", required=true, in="formData", description="专业评分：0-5"),
+     *   @SWG\Parameter(name="is_solve", type="integer", required=true, in="formData", description="是否解决您的问题：是否解决：1未解决，2已解决"),
+     *   @SWG\Parameter(name="comment", type="integer", required=false, in="formData", description="评价内容"),
+     *   @SWG\Response(response="201",description="服务评价添加成功"),
+     *   @SWG\Response(response="401",description="未授权"),
+     *   @SWG\Response(response="403",description="不允许评价"),
+     *   @SWG\Response(response="501",description="保存失败，请稍后重试"),
+     *
+     * )
+     */
+    public function specialistAdviceComment(AdviceCommentRequest $request)
+    {
+        $comment = SpecialistAdviceComment::create($request->all());
+        $comment->forceFill(['user_id' => Auth::guard('api')->id(), 'created_at' => date('Y-m-d H:i:s')]);
+        //$comment->fillable(['user_id', 'created_at']);
+        //$comment->fill(['user_id' => Auth::guard('api')->id(), 'created_at' => date('Y-m-d H:i:s')]);
+        return $comment->save() ? $this->created('保存成功') : $this->failed('保存失败，请稍后重试', 501);
     }
 
 }

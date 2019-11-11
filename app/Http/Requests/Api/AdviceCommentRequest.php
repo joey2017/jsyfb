@@ -22,8 +22,8 @@ class AdviceCommentRequest extends FormRequest
     public function messages()
     {
         return [
-            'advice_id.required'        => '专家咨询id不能为空',
-            'advice_id.integer'         => '专家咨询id必须是整数',
+            'advice_id.required'        => '咨询id不能为空',
+            'advice_id.integer'         => '咨询id必须是整数',
             'service_score.required'    => '服务评分不能为空',
             'service_score.integer'     => '服务评分必须是整数',
             'profession_score.required' => '专业评分不能为空',

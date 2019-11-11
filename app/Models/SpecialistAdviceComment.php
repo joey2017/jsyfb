@@ -30,7 +30,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SpecialistAdviceComment extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'jyfb_specialist_advice_comment';
 
+    /**
+     * @var array
+     */
     protected $fillable = ['advice_id', 'service_score', 'profession_score', 'comment', 'is_solve'];
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 }
