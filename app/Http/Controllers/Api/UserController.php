@@ -261,7 +261,7 @@ class UserController extends Controller
      *   @SWG\Parameter(name="service_score", type="integer", required=true, in="formData", description="服务评分:0-5"),
      *   @SWG\Parameter(name="profession_score", type="integer", required=true, in="formData", description="专业评分：0-5"),
      *   @SWG\Parameter(name="is_solve", type="integer", required=true, in="formData", description="是否解决您的问题：是否解决：1未解决，2已解决"),
-     *   @SWG\Parameter(name="comment", type="integer", required=false, in="formData", description="评价内容")
+     *   @SWG\Parameter(name="comment", type="integer", required=false, in="formData", description="评价内容"),
      *   @SWG\Response(response="201",description="服务评价添加成功"),
      *   @SWG\Response(response="401",description="未授权"),
      *   @SWG\Response(response="403",description="不允许评价"),
