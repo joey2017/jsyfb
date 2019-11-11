@@ -125,7 +125,7 @@ class UserController extends Controller
         if (Auth::guard('api')->id() != $user->id) {
             return $this->failed('禁止访问', 403);
         }
-        $historys = BrowseHistory::where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
+        $historys = BrowseHistory::with('article:id,title,images,content,like_count,share_count')->where('user_id', $user->id)->orderBy('id', 'desc')->paginate(10);
         return $this->success(BrowseHistoryResource::collection($historys));
     }
 
@@ -146,7 +146,7 @@ class UserController extends Controller
      */
     public function attention()
     {
-        $attentions = Attention::where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
+        $attentions = Attention::with('laywer:id,name,avatar')->where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
         return $this->success(AttentionResource::collection($attentions));
     }
 
@@ -209,11 +209,14 @@ class UserController extends Controller
     {
         $condition    = array_merge(['user_id' => Auth::guard('api')->id()], array_filter($request->all()));
         $notaryAdvice = NotaryAdvice::with([
-            'notary'     => function ($query) {
+            'notary'         => function ($query) {
                 $query->select('id', 'name', 'city_code');
-            }, 'payment' => function ($query) {
+            }, 'payment'     => function ($query) {
                 $query->select('id', 'cost', 'type');
-            }
+            }, 'notary.city' => function ($query) {
+                $query->select('code', 'city_name');
+            },
+            'category'
         ])->where($condition)->paginate(10);
         return $this->success(NotaryAdviceResource::collection($notaryAdvice));
     }
@@ -238,11 +241,14 @@ class UserController extends Controller
     {
         $condition        = array_merge(['user_id' => Auth::guard('api')->id()], array_filter($request->all()));
         $specialistAdvice = SpecialistAdvice::with([
-            'laywer'     => function ($query) {
+            'laywer'         => function ($query) {
                 $query->select('id', 'name', 'cate_id', 'company', 'city_code');
-            }, 'payment' => function ($query) {
+            }, 'payment'     => function ($query) {
                 $query->select('id', 'cost', 'type');
-            }
+            }, 'laywer.city' => function ($query) {
+                $query->select('id', 'code', 'city_name');
+            },
+            'category'
         ])->where($condition)->paginate(10);
         return $this->success(SpecialistAdviceResource::collection($specialistAdvice));
     }

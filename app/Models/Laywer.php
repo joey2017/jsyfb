@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Region\City;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -80,6 +81,14 @@ class Laywer extends Model
     public static function getStatusName($status): string
     {
         return self::STATUSES[$status];
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_code', 'code');
     }
 
     /**

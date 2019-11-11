@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\Api\LegalBookSectionResource;
 use App\Models\LegalBookCategory;
 use App\Models\LegalBookSection;
-use Illuminate\Support\Facades\DB;
 
 class LegalBookSectionController extends Controller
 {
@@ -22,7 +21,7 @@ class LegalBookSectionController extends Controller
     public function show(LegalBookCategory $cate)
     {
         $condition = [['status', LegalBookSection::NORMAL], ['cate_id', $cate->id]];
-        $sections  = LegalBookSection::where($condition)->orderBy('id','desc')->paginate(10);
+        $sections  = LegalBookSection::with('category:id,title')->where($condition)->orderBy('id', 'desc')->paginate(10);
         return $this->success(LegalBookSectionResource::collection($sections));
     }
 }

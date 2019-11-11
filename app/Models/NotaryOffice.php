@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Region\City;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -65,6 +66,14 @@ class NotaryOffice extends Model
     const NORMAL  = 1;
 
     const STATUSES = [self::INVALID => '禁用', self::NORMAL => '正常'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_code', 'code');
+    }
 
     /**
      * @param string $status

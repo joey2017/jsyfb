@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\SpecialistAdvice
  *
- * @property-read \App\Models\Specialist $specialist
- * @property-read \App\Models\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SpecialistAdvice query()
  * @mixin \Eloquent
  * @property int $id
  * @property int $user_id 用户id
@@ -90,6 +85,14 @@ class SpecialistAdvice extends Model
     public function payment()
     {
         return $this->belongsTo(ReservationPayment::class, 'payment_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(BusinessCategory::class, 'type', 'id')->select('id', 'title');
     }
 
     /**

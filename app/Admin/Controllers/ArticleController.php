@@ -118,7 +118,6 @@ class ArticleController extends AdminController
         $form->text('title', trans('admin.title'))->required();
         $form->editor('content', trans('admin.content'));
         $form->image('images', trans('admin.image'))->required()->rules('required|dimensions:min_width=300,min_height=300;|max:2048');
-
         $form->saving(function (Form $form) {
             if ($form->content == '') {
                 $error = new MessageBag([

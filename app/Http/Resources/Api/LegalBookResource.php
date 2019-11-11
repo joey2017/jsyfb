@@ -18,7 +18,7 @@ class LegalBookResource extends JsonResource
         return [
             'id'            => $this->id,
             'section_id'    => $this->section_id,
-            'section_title' => $this->legalBookSection()->first()->title ?? '',
+            'section_title' => $this->legalBookSection->title ?? '',
             'detail'        => $this->detail,
             'status'        => LegalBook::getStatusName($this->status),
             'created_at'    => (string)$this->created_at,

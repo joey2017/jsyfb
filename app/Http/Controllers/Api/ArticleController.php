@@ -27,7 +27,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::where('status', Article::NORMAL)->orderBy('id', 'desc')->paginate(10);
+        $articles = Article::with('adminer:id,name')->withCount([
+            'likes' => function ($query) {
+                $query->where(['user_id' => Auth::guard('api')->id()]);
+            }
+        ])->where('status', Article::NORMAL)->orderBy('id', 'desc')->paginate(10);
         return $this->success(ArticleResource::collection($articles));
     }
 
@@ -68,7 +72,7 @@ class ArticleController extends Controller
         $comments['comments'] = [];
         $result               = ArticleComment::where('article_id', $article->id)->first();
         if ($result) {
-            $comments['comments'][]                = $result->toArray();
+            $comments['comments'][]                 = $result->toArray();
             $comments['comments'][0]['laywer_info'] = new LaywerResource(Laywer::findOrFail($comments['comments'][0]['laywer_id']));
         }
 

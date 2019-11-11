@@ -17,8 +17,8 @@ class AnswerScoreResource extends JsonResource
         return [
             'id'       => $this->id,
             'user_id'  => $this->user_id,
-            'nickname' => $this->user()->first()->nickname ?? '',
-            'avatar'   => $this->user()->first()->avatar ?? '',
+            'nickname' => $this->user->nickname ?? '',
+            'avatar'   => $this->user->avatar ?? '',
             'score'    => $this->score,
             'date'     => $this->date,
         ];

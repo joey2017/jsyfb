@@ -55,7 +55,7 @@ class ExchangeController extends Controller
      */
     public function index()
     {
-        $exchanges = Exchange::where([['user_id', Auth::guard('api')->id()], ['status', Exchange::NORMAL]])->paginate(10);
+        $exchanges = Exchange::with('goods:id,goods_name')->where([['user_id', Auth::guard('api')->id()], ['status', Exchange::NORMAL]])->paginate(10);
         return $this->success(ExchangeResource::collection($exchanges));
     }
 

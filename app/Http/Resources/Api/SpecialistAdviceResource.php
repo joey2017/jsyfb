@@ -3,8 +3,6 @@
 namespace App\Http\Resources\Api;
 
 use App\Constant;
-use function App\Helpers\getAllBusinessCategoryIdAndTitle;
-use App\Models\Region\City;
 use App\Models\ReservationPayment;
 use App\Models\SpecialistAdvice;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,7 +22,7 @@ class SpecialistAdviceResource extends JsonResource
             'user_id'       => $this->user_id,
             'laywer_id'     => $this->laywer_id,
             'laywer_name'   => $this->laywer->name ?? '',
-            'city_name'     => City::where('code', $this->laywer->city_code)->first()->city_name,
+            'city_name'     => $this->laywer->city->city_name ?? '',
             'payment_id'    => $this->payment_id,
             'pay_fee'       => $this->payment->cost ?? '',
             'pay_type'      => $this->payment->type ?? '',
@@ -32,7 +30,7 @@ class SpecialistAdviceResource extends JsonResource
             'username'      => $this->username,
             'sex'           => Constant::SEXS[$this->sex],
             'mobile'        => $this->mobile,
-            'type'          => (getAllBusinessCategoryIdAndTitle())[$this->type],
+            'type'          => $this->category->title,
             'question'      => $this->question,
             'status'        => SpecialistAdvice::getStatusName($this->status),
             'created_at'    => (string)$this->created_at,

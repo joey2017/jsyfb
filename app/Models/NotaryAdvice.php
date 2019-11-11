@@ -70,7 +70,7 @@ class NotaryAdvice extends Model
      */
     public function notary()
     {
-        return $this->belongsTo(NotaryOffice::class,'notary_id');
+        return $this->belongsTo(NotaryOffice::class, 'notary_id');
     }
 
     /**
@@ -79,6 +79,14 @@ class NotaryAdvice extends Model
     public function payment()
     {
         return $this->belongsTo(ReservationPayment::class, 'payment_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(BusinessCategory::class, 'type', 'id')->select('id', 'title');
     }
 
     /**

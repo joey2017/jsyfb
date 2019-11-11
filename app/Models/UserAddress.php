@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Region\Area;
+use App\Models\Region\City;
+use App\Models\Region\Province;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -61,6 +64,30 @@ class UserAddress extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function provinceName()
+    {
+        return $this->belongsTo(Province::class, 'province', 'code')->select('code', 'province_name');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cityName()
+    {
+        return $this->belongsTo(City::class, 'city', 'code')->select('code', 'city_name');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function areaName()
+    {
+        return $this->belongsTo(Area::class, 'district', 'code')->select('code', 'area_name');
     }
 
     /**

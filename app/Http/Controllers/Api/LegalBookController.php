@@ -21,7 +21,7 @@ class LegalBookController extends Controller
     public function show(LegalBookSection $section)
     {
         $condition = [['status', LegalBook::NORMAL], ['section_id', $section->id]];
-        $book      = LegalBook::where($condition)->first();
+        $book      = LegalBook::with('legalBookSection:id,title')->where($condition)->first();
         if (empty($book)) {
             return $this->success([]);
         }

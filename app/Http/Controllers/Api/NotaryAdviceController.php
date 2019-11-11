@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use function App\Helpers\getMobileCheckRegex;
-use App\Http\Resources\Api\NotaryAdviceResource;
 use App\Models\NotaryAdvice;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Http\Request;
@@ -13,26 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class NotaryAdviceController extends Controller
 {
-    /**
-     * @SWG\Get(
-     *   path="/notarys/advices",
-     *   tags={"Tool"},
-     *   summary="公证处咨询列表",
-     *   description="公证处咨询列表",
-     *   security={
-     *      {
-     *          "Bearer":{}
-     *      }
-     *   },
-     *   @SWG\Response(response=200,description="成功")
-     * )
-     */
-    public function index()
-    {
-        $advices = NotaryAdvice::orderBy('id', 'desc')->paginate(10);
-        return $this->success(NotaryAdviceResource::collection($advices));
-    }
-
     /**
      *
      * @SWG\Post(

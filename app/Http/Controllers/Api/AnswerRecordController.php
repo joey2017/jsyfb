@@ -123,7 +123,7 @@ class AnswerRecordController extends Controller
             $this->score->update($data['score'], Auth::guard('api')->user());
             $result = $this->ingots->limitation('game', '答题正确获得法宝');
             if (false !== $result) {
-               $this->notice->add('每日答题', '游戏闯关每日答题获得' . $this->ingots->getValueByKey('game')->value . '个法宝', Auth::guard('api')->id(), 2);
+                $this->notice->add('每日答题', '游戏闯关每日答题获得' . $this->ingots->getValueByKey('game')->value . '个法宝', Auth::guard('api')->id(), 2);
             }
         }
 
@@ -153,7 +153,7 @@ class AnswerRecordController extends Controller
      */
     public function ranking()
     {
-        $scores = AnswerScore::where('date', date('Y-m-d'))->orderBy('score', 'desc')->paginate(10);
+        $scores = AnswerScore::with('user:id,nickname,avatar')->orderBy('score', 'desc')->paginate(30);
         return $this->success(AnswerScoreResource::collection($scores));
     }
 

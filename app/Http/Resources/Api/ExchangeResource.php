@@ -18,7 +18,7 @@ class ExchangeResource extends JsonResource
         return [
             'id'         => $this->id,
             'goods_id'   => $this->goods_id,
-            'goods_name' => $this->goods()->first()->goods_name ?? '',
+            'goods_name' => $this->goods->goods_name ?? '',
             'ingots'     => $this->ingots,
             'status'     => Exchange::getStatusName($this->status),
             'created_at' => (string)$this->created_at,

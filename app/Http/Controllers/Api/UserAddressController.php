@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\UserAddressRequest;
 use App\Http\Resources\Api\UserAddressResource;
 use App\Models\UserAddress;
+use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -27,7 +28,11 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        $addresses = UserAddress::where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
+        $addresses = UserAddress::with([
+            'provinceName',
+            'cityName',
+            'areaName',
+        ])->where('user_id', Auth::guard('api')->id())->orderBy('id', 'desc')->paginate(10);
         return $this->success(UserAddressResource::collection($addresses));
     }
 
@@ -80,7 +85,7 @@ class UserAddressController extends Controller
      */
     public function store(UserAddressRequest $userAddressRequest)
     {
-        UserAddress::create(array_merge($userAddressRequest->all(),['user_id' => Auth::guard('api')->id()]));
+        UserAddress::create(array_merge($userAddressRequest->all(), ['user_id' => Auth::guard('api')->id()]));
         return $this->created('添加成功');
     }
 
@@ -164,7 +169,7 @@ class UserAddressController extends Controller
         } catch (PDOException $exception) {
             Log::channel('mysqllog')->error('mysql错误：' . $exception->getMessage(), ['info' => $exception->getTraceAsString()]);
         }
-        return $result > 0 ? $this->setStatusCode(204)->success('','success','删除成功') : $this->failed('删除失败，请稍后重试');
+        return $result > 0 ? $this->setStatusCode(204)->success('', 'success', '删除成功') : $this->failed('删除失败，请稍后重试');
     }
 
 }

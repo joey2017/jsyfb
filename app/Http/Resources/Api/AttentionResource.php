@@ -18,8 +18,8 @@ class AttentionResource extends JsonResource
             'id'          => $this->id,
             'user_id'     => $this->user_id,
             'laywer_id'   => $this->laywer_id,
-            'laywer_name' => $this->laywer()->first()->name ?? '',
-            'avatar'      => env('APP_UPLOAD_PATH').'/'.$this->laywer()->first()->avatar ?? '',
+            'laywer_name' => $this->laywer->name ?? '',
+            'avatar'      => env('APP_UPLOAD_PATH') . '/' . $this->laywer->avatar ?? '',
             'created_at'  => (string)$this->created_at,
         ];
     }
