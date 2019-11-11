@@ -31,7 +31,7 @@ class UserResource extends JsonResource
             'login_num'            => $this->login_num,
             'last_login_time'      => (string)$this->last_login_time,
             'is_verified'          => $this->is_verified,
-            'verified_status'      => $this->authen->status,
+            'verified_status'      => $this->authen->status ?? '',
             'verified_status_text' => $this->authen->status === '' ? '暂未提交认证' : Authentication::getStatusName($this->authen->status),
             'ingots'               => $this->ingots,
             'invitation_code'      => $this->invitation_code,
