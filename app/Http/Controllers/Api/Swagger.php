@@ -26,6 +26,7 @@
 423：Validation error，参数格式验证不通过 <br>
 410：Gone，用户请求的资源被永久删除，且不会再得到的。<br>
 500：Internal server error，服务器发生错误，用户将无法判断发出的请求是否成功<br>",
+501：Save error，数据保存发生错误<br>",
  *         @SWG\Contact(name="joey", email="zongjun.li@outlook.com"),
  *     ),
  *     @SWG\Tag(
