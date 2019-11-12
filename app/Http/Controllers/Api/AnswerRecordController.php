@@ -83,6 +83,7 @@ class AnswerRecordController extends Controller
      */
     public function show(AnswerRecord $record)
     {
+        $this->authorize('view', $record);
         return $this->success(new AnswerRecordResource($record));
     }
 
@@ -132,7 +133,6 @@ class AnswerRecordController extends Controller
             ['user_id' => Auth::guard('api')->id(), 'date' => Carbon::now()->toDateString()],
             $data
         ));
-
         return $this->setStatusCode(201)->success($answer->correct, 'success', '提交成功');
     }
 
