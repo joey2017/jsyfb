@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Jobs\Api\CloseOrderJob;
 use App\Models\IngotsLog;
 use App\Models\ReservationPayment;
 use App\Models\SystemConfig;
@@ -91,7 +92,9 @@ class PaymentController extends Controller
                 'data'         => \GuzzleHttp\json_encode($result),
             ];
 
-            Unifiedorder::create($unified);
+            $unifiedorder = Unifiedorder::create($unified);
+            // 分配队列关闭未支付订单
+            $this->dispatch(new CloseOrderJob($unifiedorder, config('app.order_ttl')));
             return $this->success($result);
             // 返回 Collection 实例。包含了调用 JSAPI 的所有参数，如appId，timeStamp，nonceStr，package，signType，paySign 等；
             // 可直接通过 $result->appId, $result->timeStamp 获取相关值。
