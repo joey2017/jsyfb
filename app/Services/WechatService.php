@@ -29,8 +29,6 @@ class WechatService
      */
     public function request($curl, $https = true, $method = 'GET', $data = null)
     {
-        return file_get_contents($curl);
-
         // 创建一个新cURL资源
         $ch = curl_init();
 
