@@ -89,6 +89,3 @@ Route::group([
     $router->get('/admin/logs/{file}/tail', 'Encore\Admin\LogViewer\LogController@tail')->name('log-viewer-tail');
 
 });
-
-Route::get('messages/create', 'MessageController@create');
-Route::post('messages', 'MessageController@store');
