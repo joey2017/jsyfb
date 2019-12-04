@@ -23,7 +23,8 @@ class ReportPost extends BatchAction
 //        $collection->each->delete();
         $data = $request->all();
         try {
-            foreach (is_array($data['_key']) ? $data['_key'] : [$data['_key']] as $val) {
+            $ids = explode(',',$data['_key']);
+            foreach ($ids as $val) {
                 $result              = Authentication::findOrFail($val);
                 $result->status      = $data['status'];
                 $result->remark      = $data['remark'];
